@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KI-Führerschein · GSIS</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gsis-green:#008445; --gsis-green-deep:#006B37;
+  --ink:#16181D; --muted:#616B78; --bg:#F5F6F8; --card:#FFFFFF;
+  --line:#E5E8ED; --line-strong:#CDD3DB;
+  --good:#1F9D6B; --good-bg:#E7F6EF; --bad:#D64545; --bad-bg:#FBEAEA; --gold:#C9A227;
+  --k05:#1FA37A; --k06:#2F7DC2; --k07:#7A5CC0; --k08:#D98324; --k09:#C0563E;
+  --radius:16px;
+  --shadow:0 1px 2px rgba(20,24,33,.04),0 8px 24px rgba(20,24,33,.06);
+  --shadow-lg:0 12px 40px rgba(20,24,33,.12);
+  --font-display:'Space Grotesk',system-ui,sans-serif; --font-body:'Inter',system-ui,sans-serif;
+  --maxw:980px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+:focus-visible{outline:3px solid var(--gsis-green);outline-offset:2px;border-radius:6px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+h1,h2,h3{font-family:var(--font-display);letter-spacing:-.01em;line-height:1.15}
+#app{min-height:100vh;display:flex;flex-direction:column}
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;gap:14px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;cursor:pointer}
+.logo-mark{width:38px;height:38px;border-radius:9px;background:var(--gsis-green);color:#fff;display:grid;place-items:center;font-family:var(--font-display);font-weight:700;font-size:14px;flex:none}
+.brand-txt{font-family:var(--font-display);font-weight:600;font-size:16px;line-height:1.1}
+.brand-txt small{display:block;font-weight:500;font-size:11px;color:var(--muted)}
+.crumb{color:var(--muted);font-size:13px;font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.crumb b{color:var(--ink)}
+.nav-actions{display:flex;align-items:center;gap:8px}
+.iconbtn{display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:var(--card);font-size:13px;font-weight:600;color:var(--ink);position:relative}
+.iconbtn:hover{border-color:var(--line-strong)}
+.iconbtn .dot{position:absolute;top:-6px;right:-6px;min-width:18px;height:18px;padding:0 4px;background:var(--gsis-green);color:#fff;border-radius:9px;font-size:11px;display:grid;place-items:center;font-weight:700}
+.lang-toggle{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;height:38px}
+.lang-toggle button{padding:0 11px;font-size:12px;font-weight:700;color:var(--muted);background:var(--card)}
+.lang-toggle button.on{background:var(--ink);color:#fff}
+@media(max-width:680px){.nav-actions .label,.crumb{display:none}}
+main{flex:1;padding:34px 0 70px}
+.view{animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.eyebrow{font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gsis-green)}
+.lead{color:var(--muted);font-size:16px;max-width:60ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:50px;padding:0 26px;border-radius:12px;background:var(--gsis-green);color:#fff;font-family:var(--font-display);font-weight:600;font-size:16px;transition:transform .12s,background .12s}
+.btn:hover{background:var(--gsis-green-deep)}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line-strong)}
+.btn.ghost:hover{background:#fff;border-color:var(--ink)}
+.btn.sm{height:42px;padding:0 18px;font-size:14px}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+.hero{padding:40px 0 10px;position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+@media(max-width:820px){.hero-grid{grid-template-columns:1fr;gap:28px}}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:700;margin:14px 0 16px}
+.hero h1 .hl{color:var(--gsis-green)}
+.hero .lead{font-size:18px;margin-bottom:26px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.seal{width:min(340px,80%);aspect-ratio:1;margin:0 auto;position:relative;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 50% 38%,#fff 0 38%,transparent 38%),conic-gradient(from 0deg,var(--gsis-green),#13A05E 25%,var(--gsis-green) 50%,#13A05E 75%,var(--gsis-green));box-shadow:var(--shadow-lg)}
+.seal::before{content:"";position:absolute;inset:14px;border-radius:50%;border:2px dashed rgba(255,255,255,.7)}
+.seal-core{width:64%;aspect-ratio:1;border-radius:50%;background:var(--card);display:grid;place-items:center;text-align:center;box-shadow:inset 0 0 0 6px rgba(0,132,69,.1)}
+.seal-core .ki{font-family:var(--font-display);font-weight:700;font-size:46px;color:var(--gsis-green);line-height:1}
+.seal-core small{display:block;font-family:var(--font-display);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.hero-strands{display:flex;gap:8px;flex-wrap:wrap;margin-top:28px}
+.strand-chip{font-size:12px;font-weight:600;padding:6px 12px;border-radius:20px;background:var(--card);border:1px solid var(--line);color:var(--muted)}
+.section-head{margin-bottom:22px}
+.section-head h2{font-size:clamp(24px,3.5vw,32px);margin:8px 0 6px}
+.grades{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.gcard{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);transition:transform .14s,box-shadow .14s,border-color .14s;text-align:left;display:flex;flex-direction:column;gap:12px;min-height:182px;border-top:4px solid var(--accent,var(--gsis-green))}
+.gcard.open:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--accent)}
+.gcard.locked{opacity:.72;cursor:not-allowed}
+.gcard-top{display:flex;align-items:center;justify-content:space-between}
+.gbadge{font-family:var(--font-display);font-weight:700;font-size:22px;color:var(--accent)}
+.glevel{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--bg);padding:4px 9px;border-radius:20px}
+.gcard h3{font-size:18px}
+.gcard p{font-size:13.5px;color:var(--muted);flex:1}
+.gprog{height:8px;border-radius:8px;background:var(--line);overflow:hidden}
+.gprog>i{display:block;height:100%;background:var(--accent);border-radius:8px;transition:width .5s}
+.gmeta{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--muted);font-weight:600}
+.lock-pill{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--muted)}
+.seal-mini{font-size:20px}
+.ov-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:20px}
+.ov-title h2{font-size:clamp(24px,3.5vw,32px)}
+.ov-stats{display:flex;gap:10px;flex-wrap:wrap}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 16px;text-align:center;min-width:92px}
+.stat b{display:block;font-family:var(--font-display);font-size:22px}
+.stat span{font-size:11px;color:var(--muted);font-weight:600}
+.modlist{display:flex;flex-direction:column;gap:12px}
+.mod{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow);transition:border-color .12s,transform .12s;text-align:left;width:100%}
+.mod:hover{border-color:var(--accent);transform:translateX(2px)}
+.mod.done{border-color:var(--good)}
+.mod-ic{width:46px;height:46px;border-radius:12px;background:var(--bg);display:grid;place-items:center;font-size:22px;flex:none;border:1px solid var(--line)}
+.mod.done .mod-ic{background:var(--good-bg);border-color:transparent}
+.mod-body{flex:1;min-width:0}
+.mod-body h4{font-size:16px;font-family:var(--font-display);font-weight:600}
+.mod-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:5px}
+.tag{font-size:11px;font-weight:600;padding:3px 8px;border-radius:6px;background:var(--bg);color:var(--muted)}
+.tag.komp{background:rgba(0,132,69,.08);color:var(--gsis-green)}
+.mod-right{display:flex;align-items:center;gap:10px;flex:none}
+.check{width:26px;height:26px;border-radius:50%;border:2px solid var(--line-strong);display:grid;place-items:center;color:#fff;font-size:14px}
+.mod.done .check{background:var(--good);border-color:var(--good)}
+.exam-card{margin-top:18px;border:2px dashed var(--accent);border-radius:16px;padding:20px;text-align:center}
+.exam-card h3{font-size:20px;margin-bottom:6px}
+.exam-card p{color:var(--muted);font-size:14px;margin-bottom:14px}
+.runner{max-width:720px;margin:0 auto}
+.progressbar{height:8px;background:var(--line);border-radius:8px;overflow:hidden;margin-bottom:8px}
+.progressbar>i{display:block;height:100%;background:var(--accent,var(--gsis-green));transition:width .35s}
+.run-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);font-weight:600;margin-bottom:24px}
+.task{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow)}
+.task .ttype{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent,var(--gsis-green))}
+.task h3{font-size:21px;margin:8px 0 16px}
+.infobox{background:var(--bg);border-radius:12px;padding:18px;font-size:15.5px;border:1px solid var(--line)}
+.infobox p{margin-bottom:10px}.infobox p:last-child{margin-bottom:0}
+.keyterms{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.kt{font-size:13px;font-weight:600;background:#fff;border:1px solid var(--line);padding:6px 11px;border-radius:8px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;padding:14px 16px;border:1.5px solid var(--line);border-radius:12px;background:var(--card);font-size:15px;font-weight:500;text-align:left;transition:.12s}
+.opt:hover:not(.locked){border-color:var(--accent)}
+.opt .mark{width:24px;height:24px;border-radius:7px;border:2px solid var(--line-strong);flex:none;display:grid;place-items:center;font-size:13px;color:#fff}
+.opt.sel{border-color:var(--accent)}.opt.sel .mark{background:var(--accent);border-color:var(--accent)}
+.opt.correct{border-color:var(--good);background:var(--good-bg)}.opt.correct .mark{background:var(--good);border-color:var(--good)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-bg)}.opt.wrong .mark{background:var(--bad);border-color:var(--bad)}
+.opt.locked{cursor:default}
+.match-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.match-col h5{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:8px;font-weight:700}
+.mitem{display:block;width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:11px;background:var(--card);font-size:14.5px;font-weight:500;text-align:left;margin-bottom:9px;transition:.12s}
+.mitem:hover:not(.matched):not(.locked){border-color:var(--accent)}
+.mitem.active{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,132,69,.12)}
+.mitem.locked{cursor:default}
+.mitem .pairnum{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;color:#fff;margin-right:8px;vertical-align:middle}
+.mitem.ok{border-color:var(--good);background:var(--good-bg)}.mitem.no{border-color:var(--bad);background:var(--bad-bg)}
+.pool{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:16px;min-height:20px}
+.chip{padding:10px 14px;border:1.5px solid var(--line);border-radius:11px;background:var(--card);font-size:14px;font-weight:500;transition:.12s}
+.chip:hover:not(.placed){border-color:var(--accent)}
+.chip.active{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,132,69,.12)}
+.chip.ok{border-color:var(--good);background:var(--good-bg)}.chip.no{border-color:var(--bad);background:var(--bad-bg)}
+.buckets{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.bucket{border:1.5px dashed var(--line-strong);border-radius:14px;padding:14px;min-height:120px;background:var(--bg)}
+.bucket.target{border-color:var(--accent);background:rgba(0,132,69,.04)}
+.bucket h5{font-size:14px;font-weight:700;margin-bottom:10px;text-align:center}
+.bucket .drop{display:flex;flex-wrap:wrap;gap:8px}
+.cloze{font-size:17px;line-height:2.1}
+.cloze select{font-family:inherit;font-size:15px;padding:6px 8px;border:1.5px solid var(--line-strong);border-radius:8px;background:#fff;color:var(--ink);margin:0 3px}
+.cloze select.ok{border-color:var(--good);background:var(--good-bg)}.cloze select.no{border-color:var(--bad);background:var(--bad-bg)}
+.reflect textarea{width:100%;min-height:120px;border:1.5px solid var(--line);border-radius:12px;padding:14px;font-family:inherit;font-size:15px;resize:vertical;color:var(--ink)}
+.reflect textarea:focus{border-color:var(--accent);outline:none}
+.reflect .hint{font-size:12px;color:var(--muted);margin-top:8px}
+.cl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.cl-card{border:1.5px solid var(--line);border-radius:14px;padding:14px 12px;text-align:center;background:var(--card);transition:.12s}
+.cl-card.ok{border-color:var(--good);background:var(--good-bg)}
+.cl-card.no{border-color:var(--bad);background:var(--bad-bg)}
+.cl-ic{width:46px;height:46px;margin:0 auto 8px;color:var(--ink)}
+.cl-ic svg{width:100%;height:100%}
+.cl-label{font-size:13.5px;font-weight:600;margin-bottom:10px;min-height:34px;display:flex;align-items:center;justify-content:center}
+.cl-choices{display:flex;gap:6px;justify-content:center}
+.cl-choices button{flex:1;font-size:12px;font-weight:700;padding:7px 4px;border-radius:8px;border:1.5px solid var(--line);background:#fff;color:var(--muted)}
+.cl-choices button.sel{color:#fff}
+.cl-choices button.sel.ai{background:var(--gsis-green);border-color:var(--gsis-green)}
+.cl-choices button.sel.no{background:var(--muted);border-color:var(--muted)}
+.feedback{margin-top:18px;padding:14px 16px;border-radius:12px;font-size:14.5px;display:none}
+.feedback.show{display:block}
+.feedback.good{background:var(--good-bg);color:#13724e}
+.feedback.bad{background:var(--bad-bg);color:#a82f2f}
+.task-foot{display:flex;justify-content:space-between;align-items:center;margin-top:22px;gap:12px}
+.streakpill{font-size:13px;font-weight:600;color:var(--muted)}.streakpill b{color:var(--gsis-green)}
+.result{max-width:560px;margin:10px auto;text-align:center}
+.badge-pop{width:130px;height:130px;margin:8px auto 18px;border-radius:50%;background:radial-gradient(circle at 50% 35%,#fff 0 40%,transparent 40%),var(--accent);display:grid;place-items:center;box-shadow:var(--shadow-lg);animation:pop .5s ease}
+@keyframes pop{0%{transform:scale(.4);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+.badge-pop span{font-size:54px}
+.result h2{font-size:28px;margin-bottom:8px}
+.result .scoreline{font-size:16px;color:var(--muted);margin-bottom:6px}
+.result-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+.dash-id{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding:14px 18px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+.dash-id .av{width:46px;height:46px;border-radius:50%;background:var(--gsis-green);color:#fff;display:grid;place-items:center;font-family:var(--font-display);font-weight:700;font-size:18px;flex:none}
+.dash-id .who b{font-family:var(--font-display);font-size:18px}
+.dash-id .who span{display:block;font-size:13px;color:var(--muted);font-weight:600}
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:24px}
+.dcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow)}
+.dcard .k{font-size:12px;color:var(--muted);font-weight:600}
+.dcard .v{font-family:var(--font-display);font-size:30px;font-weight:700;margin-top:4px}
+.dcard .v small{font-size:14px;color:var(--muted);font-weight:600}
+.rank-card{grid-column:1/-1;display:flex;align-items:center;gap:18px;background:linear-gradient(120deg,var(--ink),#2a2f3c);color:#fff}
+.rank-card .v{color:#fff}.rank-ic{font-size:40px}
+.rank-bar{flex:1;height:10px;background:rgba(255,255,255,.18);border-radius:8px;overflow:hidden;margin-top:8px}
+.rank-bar>i{display:block;height:100%;background:var(--gold)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow);margin-bottom:18px}
+.panel h3{font-size:18px;margin-bottom:14px}
+.badge-row{display:flex;flex-wrap:wrap;gap:12px}
+.bchip{display:flex;flex-direction:column;align-items:center;gap:4px;width:84px;text-align:center}
+.bchip .ic{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-size:26px;background:var(--accent2,var(--bg));border:1px solid var(--line)}
+.bchip.earned .ic{background:var(--accent2);color:#fff;border-color:transparent}
+.bchip.locked .ic{opacity:.4;filter:grayscale(1)}
+.bchip span{font-size:11px;font-weight:600;color:var(--muted);line-height:1.2}
+.bars{display:flex;flex-direction:column;gap:12px}
+.bar-row{display:grid;grid-template-columns:140px 1fr 46px;gap:10px;align-items:center;font-size:13px}
+.bar-track{height:14px;background:var(--line);border-radius:8px;overflow:hidden}
+.bar-track>i{display:block;height:100%;border-radius:8px;background:var(--accent,var(--gsis-green))}
+.bar-row .pct{font-weight:700;text-align:right}
+.empty{color:var(--muted);font-size:14px;text-align:center;padding:14px}
+.errlist{display:flex;flex-direction:column;gap:10px}
+.erritem{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:11px}
+.erritem .q{flex:1;font-size:14px}.erritem .src{font-size:11px;color:var(--muted);font-weight:600}
+.cert-wrap{max-width:640px;margin:0 auto}
+.cert{background:#fff;border-radius:18px;padding:38px 34px;position:relative;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-lg)}
+.cert::before{content:"";position:absolute;inset:10px;border:2px solid var(--gsis-green);border-radius:12px;opacity:.18;pointer-events:none}
+.cert-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.cert-head .logo-mark{width:44px;height:44px}
+.cert-school{font-family:var(--font-display);font-weight:600;font-size:13px;text-align:right;line-height:1.3}
+.cert-school small{color:var(--muted);display:block;font-weight:500}
+.cert h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--gsis-green);text-align:center}
+.cert .name{font-family:var(--font-display);font-size:34px;font-weight:700;text-align:center;margin:14px 0 2px}
+.cert .klasse{text-align:center;font-size:15px;font-weight:600;color:var(--gsis-green);margin-bottom:6px}
+.cert .sub{text-align:center;color:var(--muted);font-size:15px;margin-bottom:22px}
+.cert .sub b{color:var(--ink)}
+.cert-seal{width:96px;height:96px;margin:0 auto 18px;border-radius:50%;background:radial-gradient(circle at 50% 36%,#fff 0 38%,transparent 38%),var(--gsis-green);display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,132,69,.3)}
+.cert-seal span{font-size:38px}
+.cert-strands{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-bottom:20px}
+.cert-foot{display:flex;justify-content:space-between;align-items:flex-end;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+.cert-foot .sig{font-family:var(--font-display);border-top:1.5px solid var(--ink);padding-top:4px;color:var(--ink);min-width:140px;text-align:center}
+.modal-bg{position:fixed;inset:0;background:rgba(15,18,24,.5);display:none;place-items:center;z-index:100;padding:20px}
+.modal-bg.show{display:grid;animation:fade .2s}
+.modal{background:var(--card);border-radius:18px;padding:28px;width:100%;max-width:460px;box-shadow:var(--shadow-lg)}
+.modal h3{font-size:21px;margin-bottom:6px}
+.modal p{color:var(--muted);font-size:14px;margin-bottom:18px}
+.field{width:100%;height:48px;border:1.5px solid var(--line);border-radius:11px;padding:0 14px;font-family:inherit;font-size:15px;margin-bottom:14px}
+.field:focus{border-color:var(--gsis-green);outline:none}
+.flabel{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:5px;display:block}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+.codebox{background:var(--bg);border:1px dashed var(--line-strong);border-radius:10px;padding:12px;font-family:ui-monospace,monospace;font-size:12px;word-break:break-all;margin-bottom:14px;max-height:120px;overflow:auto}
+.t-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+footer.foot{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:12.5px;text-align:center}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;background:var(--ink);color:#fff;padding:12px 20px;border-radius:12px;font-size:14px;font-weight:600;z-index:200;transition:.25s;pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+</style>
+</head>
+<body>
+<div id="app">
+  <nav class="nav"><div class="wrap nav-inner">
+    <button class="brand" onclick="go('grades')" aria-label="Startseite">
+      <div class="logo-mark">GSIS</div>
+      <div class="brand-txt">KI-Führerschein<small>German International Stream</small></div>
+    </button>
+    <div class="crumb" id="crumb"></div>
+    <div class="nav-actions">
+      <button class="iconbtn" onclick="go('dashboard')"><span>📊</span><span class="label" id="lblOverview">Übersicht</span></button>
+      <button class="iconbtn" onclick="go('errors')"><span>🔁</span><span class="label" id="lblErrors">Fehlerspeicher</span><span class="dot" id="errDot" style="display:none">0</span></button>
+      <div class="lang-toggle" role="group" aria-label="Sprache">
+        <button id="langDe" class="on" onclick="setLang('de')">DE</button>
+        <button id="langEn" onclick="setLang('en')">EN</button>
+      </div>
+      <button class="iconbtn" onclick="openTeacher()" title="Lehrkraft">🔑</button>
+    </div>
+  </div></nav>
+  <main><div class="wrap" id="view"></div></main>
+  <footer class="foot"><div class="wrap" id="footLine"></div></footer>
+</div>
+<div class="modal-bg" id="modalBg"><div class="modal" id="modalBox"></div></div>
+<div class="toast" id="toast"></div>
+<script>
+/* ===== 1) Speicher (localStorage + In-Memory-Fallback) ===== */
+const Store=(()=>{let ok=false,mem={};try{const k='__t';localStorage.setItem(k,'1');localStorage.removeItem(k);ok=true;}catch(e){ok=false;}
+  return{get(k){try{return ok?localStorage.getItem(k):(mem[k]??null);}catch(e){return mem[k]??null;}},
+         set(k,v){try{ok?localStorage.setItem(k,v):(mem[k]=v);}catch(e){mem[k]=v;}}};})();
+/* ===== 2) Zustand ===== */
+const SKEY='gsis_ki_v1';
+const DEFAULT_STATE={name:'',klasse:'',lang:'de',unlocked:['K05'],done:{},fuehrerschein:{},
+  points:0,streak:0,bestStreak:0,errors:[],teacher:false};
+let STATE=loadState();
+function loadState(){try{return Object.assign({},DEFAULT_STATE,JSON.parse(Store.get(SKEY)||'{}'));}catch(e){return JSON.parse(JSON.stringify(DEFAULT_STATE));}}
+function save(){Store.set(SKEY,JSON.stringify(STATE));}
+/* ===== 3) i18n ===== */
+const T={
+ de:{start:'Jetzt starten',heroEy:'KI-Kompetenz für die Klassen 5–9',heroTitle:['Dein ','KI-Führerschein',''],
+  heroLead:'Verstehen, anwenden, hinterfragen und mitgestalten. Sammle Module, knacke Level und hol dir Stufe für Stufe deinen Führerschein.',
+  chooseGrade:'Wähle deinen Jahrgang',chooseGradeLead:'Du arbeitest in deinem Jahrgang. Höhere Jahrgänge öffnen sich, sobald du den Führerschein der Stufe davor hast.',
+  gradeEy:'Jahrgang',locked:'Gesperrt',completed:'Geschafft',modules:'Module',module:'Modul',overviewOf:'Übersicht',points:'Punkte',streak:'Serie',
+  exam:'Abschlusstest',examLead:'Schließe zuerst alle Module ab. Im Abschlusstest wird dein gesamtes Wissen des Jahrgangs gebündelt geprüft.',
+  startExam:'Abschlusstest starten',examLocked:'Erst alle Module abschließen',back:'Zurück',check:'Prüfen',next:'Weiter',skipInfo:'Verstanden, weiter',
+  correct:'Richtig!',wrong:'Noch nicht ganz.',yourStreak:'Serie:',saved:'Gespeichert',moduleDone:'Modul geschafft!',examPassed:'Führerschein erhalten!',examFailed:'Knapp daneben',
+  scoreOf:'von',toOverview:'Zur Jahrgangsübersicht',retry:'Nochmal üben',viewCert:'Zertifikat ansehen',yourOverview:'Deine Übersicht',rank:'Rang',badges:'Abzeichen',analytics:'Auswertung deiner Module',
+  noData:'Noch keine Daten – leg in einem Modul los!',mistakes:'Fehlerspeicher',noMistakes:'Kein Fehler gespeichert. Stark!',exportPng:'Als PNG speichern',
+  certTitle:'KI-Führerschein',awarded:'verliehen an',forGrade:'für den erfolgreichen Abschluss von',date:'Datum',signature:'Lernbegleitung',
+  nameTitle:'Erzähl uns kurz von dir',nameLead:'Name und Klasse erscheinen auf deinem Führerschein-Zertifikat.',namePh:'Vorname Nachname',klassePh:'z. B. 5a',klasseLabel:'Deine Klasse',nameLabel:'Dein Name',klasse:'Klasse',
+  save:'Speichern',teacherTitle:'Lehrkraft-Bereich',teacherLead:'Mit dem Lehrkraft-Code schaltest du alle Jahrgänge frei und siehst die Auswertung.',
+  codePh:'Lehrkraft-Code',unlock:'Freischalten',unlockAll:'Alle Jahrgänge freigeschaltet',exportProg:'Fortschritt exportieren',importProg:'Fortschritt importieren',resetProg:'Fortschritt zurücksetzen',
+  pastePh:'Fortschritts-Code einfügen',resetConfirm:'Wirklich allen Fortschritt löschen?',close:'Schließen',niveau:'Niveaustufe',
+  reflectHint:'Diese Antwort wird gespeichert und kann von deiner Lehrkraft gesehen werden.',submitWork:'Antwort abgeben',
+  dragHint:'Tippe ein Element an, dann den passenden Korb.',matchHint:'Tippe links ein Element, dann rechts die passende Antwort.',
+  classifyHint:'Ist das KI oder nicht? Entscheide für jedes Beispiel.',isAI:'KI',notAI:'keine KI',of:'/',overview:'Übersicht',errorsNav:'Fehlerspeicher',
+  foot:'KI-Führerschein · Spiralcurriculum K05–K09 · German Swiss International School'},
+ en:{start:'Start now',heroEy:'AI literacy for grades 5–9',heroTitle:['Your ','AI Driving Licence',''],
+  heroLead:'Understand, apply, question and co-create. Collect modules, clear levels and earn your licence step by step.',
+  chooseGrade:'Choose your grade',chooseGradeLead:'You work in your own grade. Higher grades unlock once you hold the licence of the level before.',
+  gradeEy:'Grade',locked:'Locked',completed:'Done',modules:'modules',module:'Module',overviewOf:'Overview',points:'Points',streak:'Streak',
+  exam:'Final test',examLead:'Finish all modules first. The final test bundles everything you learned this grade into one challenge.',
+  startExam:'Start final test',examLocked:'Finish all modules first',back:'Back',check:'Check',next:'Next',skipInfo:'Got it, next',
+  correct:'Correct!',wrong:'Not quite yet.',yourStreak:'Streak:',saved:'Saved',moduleDone:'Module complete!',examPassed:'Licence earned!',examFailed:'So close',
+  scoreOf:'of',toOverview:'Back to grade overview',retry:'Practise again',viewCert:'View certificate',yourOverview:'Your overview',rank:'Rank',badges:'Badges',analytics:'Your module results',
+  noData:'No data yet – start a module!',mistakes:'Mistakes',noMistakes:'No mistakes stored. Nice!',exportPng:'Save as PNG',
+  certTitle:'AI Driving Licence',awarded:'awarded to',forGrade:'for successfully completing',date:'Date',signature:'Teacher',
+  nameTitle:'Tell us a bit about you',nameLead:'Your name and class appear on your licence certificate.',namePh:'First Last',klassePh:'e.g. 5a',klasseLabel:'Your class',nameLabel:'Your name',klasse:'Class',
+  save:'Save',teacherTitle:'Teacher area',teacherLead:'The teacher code unlocks all grades and shows analytics.',
+  codePh:'Teacher code',unlock:'Unlock',unlockAll:'All grades unlocked',exportProg:'Export progress',importProg:'Import progress',resetProg:'Reset progress',
+  pastePh:'Paste progress code',resetConfirm:'Really delete all progress?',close:'Close',niveau:'Level',
+  reflectHint:'This answer is saved and can be seen by your teacher.',submitWork:'Submit answer',
+  dragHint:'Tap an item, then the matching bin.',matchHint:'Tap an item on the left, then its match on the right.',
+  classifyHint:'Is this AI or not? Decide for each example.',isAI:'AI',notAI:'not AI',of:'/',overview:'Overview',errorsNav:'Mistakes',
+  foot:'AI Driving Licence · Spiral curriculum G5–G9 · German Swiss International School'}
+};
+const L=()=>STATE.lang, t=k=>(T[L()][k]??k), tx=o=>(o&&(o[L()]??o.de))||'';
+/* ===== 4) Konfig ===== */
+const TEACHER_CODE='gsis-ki-2026';
+const PASS=0.7;
+const KOMP={V:{de:'Verstehen',en:'Understand'},A:{de:'Anwenden',en:'Apply'},R:{de:'Reflektieren',en:'Reflect'},M:{de:'Mitgestalten',en:'Co-create'}};
+const RANKS=[{p:0,ic:'🌱',de:'Einsteiger:in',en:'Beginner'},{p:140,ic:'🔍',de:'Entdecker:in',en:'Explorer'},
+ {p:340,ic:'🧭',de:'Kenner:in',en:'Navigator'},{p:620,ic:'⚙️',de:'Profi',en:'Pro'},{p:950,ic:'🏆',de:'Expert:in',en:'Expert'}];
+function rankFor(p){let r=RANKS[0];for(const x of RANKS)if(p>=x.p)r=x;return r;}
+function nextRank(p){return RANKS.find(x=>x.p>p)||null;}
+const GRADES=[
+ {id:'K05',accent:'var(--k05)',niveau:'I',title:{de:'Klasse 5',en:'Grade 5'},focus:{de:'Was ist KI? Erste Begriffe, KI im Alltag, Mensch & Maschine, KI braucht Energie.',en:'What is AI? First terms, AI in daily life, humans & machines, AI needs energy.'}},
+ {id:'K06',accent:'var(--k06)',niveau:'I→II',title:{de:'Klasse 6',en:'Grade 6'},focus:{de:'Auffrischung + wie KI „lernt", Empfehlungen, gute Prompts, prüfen.',en:'Refresher + how AI "learns", recommendations, good prompts, checking.'}},
+ {id:'K07',accent:'var(--k07)',niveau:'II',title:{de:'Klasse 7',en:'Grade 7'},focus:{de:'Auffrischung + Bias & Fairness, Halluzinationen, mit KI gestalten, Quellen.',en:'Refresher + bias & fairness, hallucinations, creating with AI, sources.'}},
+ {id:'K08',accent:'var(--k08)',niveau:'II→III',title:{de:'Klasse 8',en:'Grade 8'},focus:{de:'Auffrischung + Aufgaben teilen, ko-konstruieren, Grenzen & Datenschutz.',en:'Refresher + dividing tasks, co-creating, limits & data protection.'}},
+ {id:'K09',accent:'var(--k09)',niveau:'III',title:{de:'Klasse 9',en:'Grade 9'},focus:{de:'Auffrischung + KI bewerten, Daten & Bias gestalten, Ethik & eigenes Projekt.',en:'Refresher + evaluating AI, shaping data & bias, ethics & own project.'}}
+];
+const gradeById=id=>GRADES.find(g=>g.id===id);
+/* ===== 5) SVG-Icons (lizenzfrei, offline) ===== */
+const SVG_ICONS={
+ speaker:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="6" y="3" width="12" height="18" rx="4"/><circle cx="12" cy="14" r="3.2"/><circle cx="12" cy="6.5" r="1"/></svg>',
+ feed:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M7 9h6M7 13h10M7 17h7"/><circle cx="17.5" cy="8.5" r="1.6"/></svg>',
+ translate:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h8M8 3v2M6 5c0 4-1.5 6-4 7M4 9c1 2.5 3 3.5 5 4"/><path d="M13 21l4-9 4 9M14.5 17h5"/></svg>',
+ face:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><circle cx="9.5" cy="11" r="1"/><circle cx="14.5" cy="11" r="1"/><path d="M9.5 15c1.5 1.2 3.5 1.2 5 0"/></svg>',
+ maps:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3 3 5v16l6-2 6 2 6-2V3l-6 2z"/><path d="M9 3v16M15 5v16"/></svg>',
+ calc:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h0M12 11h0M16 11h0M8 15h0M12 15h0M16 15h0M8 18h0M12 18h0"/></svg>',
+ book:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6C9 3.5 5 4 4 5v13c1-1 5-1.5 8 1 3-2.5 7-2 8-1V5c-1-1-5-1.5-8 1z"/><path d="M12 6v13"/></svg>',
+ bike:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="17" r="3.2"/><circle cx="18" cy="17" r="3.2"/><path d="M6 17 10 8h5l3 9M9 8h5l1.5 4"/></svg>',
+ switch:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2"/><rect x="10" y="6" width="4" height="6" rx="1"/></svg>'
+};
+const icon=k=>`<div class="cl-ic">${SVG_ICONS[k]||''}</div>`;
+/* ===== 6) INHALTE — Module je Jahrgang (Distraktoren = plausible Fehlvorstellungen) ===== */
+const CONTENT={
+ K05:[
+  {id:'K05-M1',icon:'🤖',komp:'V',niveau:'I',title:{de:'Was ist KI?',en:'What is AI?'},tasks:[
+    {type:'info',title:{de:'Künstliche Intelligenz – ganz einfach',en:'Artificial Intelligence – made simple'},
+     body:{de:'<p><strong>Künstliche Intelligenz (KI)</strong> ist eine Technologie, die so tut, als wäre sie schlau. Sie kann Texte schreiben, Bilder erkennen oder Fragen beantworten.</p><p>Ein <strong>Mensch denkt</strong> – eine <strong>KI rechnet</strong>. Sie lernt aus vielen Beispielen (das nennt man <strong>Training</strong>) und sagt dann voraus, was wohl als Nächstes passt.</p>',
+           en:'<p><strong>Artificial Intelligence (AI)</strong> is technology that acts as if it were smart. It can write text, recognise images or answer questions.</p><p>A <strong>human thinks</strong> – an <strong>AI calculates</strong>. It learns from many examples (called <strong>training</strong>) and then predicts what probably comes next.</p>'},
+     terms:[{de:'Daten',en:'Data'},{de:'Algorithmus',en:'Algorithm'},{de:'Training',en:'Training'},{de:'Modell',en:'Model'},{de:'Prompt',en:'Prompt'}]},
+    {type:'classify',q:{de:'Wo steckt KI drin? Entscheide für jedes Beispiel.',en:'Where is AI involved? Decide for each example.'},
+     items:[{ic:'speaker',label:{de:'Sprachassistent',en:'Voice assistant'},ai:true},
+       {ic:'feed',label:{de:'Video-Empfehlungen',en:'Video recommendations'},ai:true},
+       {ic:'translate',label:{de:'Übersetzungs-App',en:'Translation app'},ai:true},
+       {ic:'face',label:{de:'Gesichtserkennung',en:'Face recognition'},ai:true},
+       {ic:'calc',label:{de:'Taschenrechner',en:'Calculator'},ai:false},
+       {ic:'switch',label:{de:'Lichtschalter',en:'Light switch'},ai:false},
+       {ic:'book',label:{de:'Gedrucktes Buch',en:'Printed book'},ai:false},
+       {ic:'bike',label:{de:'Fahrrad',en:'Bicycle'},ai:false}],
+     explain:{de:'Ein Taschenrechner folgt festen Regeln – das ist keine KI. KI erkennt Muster und sagt voraus.',en:'A calculator follows fixed rules – that is not AI. AI recognises patterns and predicts.'}},
+    {type:'quiz',q:{de:'Was beschreibt KI am besten?',en:'Which best describes AI?'},
+     options:[{de:'Eine Technologie, die schlaues Verhalten nachahmt',en:'Technology that imitates smart behaviour'},
+              {de:'Ein Computer, der genau wie ein Mensch denkt und fühlt',en:'A computer that thinks and feels exactly like a human'},
+              {de:'Eine Sammlung fester Regeln, die nie dazulernt',en:'A set of fixed rules that never learns'}],
+     correct:0,explain:{de:'KI ahmt schlaues Verhalten nach – sie denkt und fühlt aber nicht wie ein Mensch.',en:'AI imitates smart behaviour – but it does not think or feel like a human.'}},
+    {type:'match',q:{de:'Verbinde den Begriff mit der Erklärung.',en:'Match the term to its meaning.'},
+     pairs:[{left:{de:'Daten',en:'Data'},right:{de:'die Beispiele, aus denen KI lernt',en:'the examples an AI learns from'}},
+            {left:{de:'Prompt',en:'Prompt'},right:{de:'die Eingabe / Frage an die KI',en:'the input / question you give the AI'}},
+            {left:{de:'Modell',en:'Model'},right:{de:'das „Gehirn", das beim Training entsteht',en:'the "brain" created during training'}}]},
+    {type:'reflect',q:{de:'Nenne ein KI-Beispiel aus deinem Alltag – und wobei es dir hilft.',en:'Name one AI example from your daily life – and what it helps you with.'},
+     placeholder:{de:'z. B. Sprachassistent, Videovorschläge, Übersetzer …',en:'e.g. voice assistant, video suggestions, translator …'}}
+  ]},
+  {id:'K05-M2',icon:'🔎',komp:'R',niveau:'I',title:{de:'KI ist nicht perfekt',en:'AI is not perfect'},tasks:[
+    {type:'info',title:{de:'Warum KI Fehler macht',en:'Why AI makes mistakes'},
+     body:{de:'<p>Eine KI kennt keine „Wahrheit". Sie sagt das <strong>wahrscheinlichste nächste Wort</strong> voraus – das klingt oft richtig, ist es aber nicht immer.</p><p>Manchmal erfindet sie etwas, das gar nicht stimmt. Darum gilt: <strong>KI-Antworten immer prüfen.</strong></p>',
+           en:'<p>An AI does not know the "truth". It predicts the <strong>most likely next word</strong> – that often sounds right, but is not always correct.</p><p>Sometimes it makes things up. So: <strong>always check AI answers.</strong></p>'}},
+    {type:'quiz',q:{de:'Warum kann eine KI eine falsche Antwort geben?',en:'Why can an AI give a wrong answer?'},
+     options:[{de:'Sie sagt nur voraus, was wahrscheinlich passt – das ist nicht immer wahr',en:'It only predicts what probably fits – that is not always true'},
+              {de:'Sie ist absichtlich gemein',en:'It is being mean on purpose'},
+              {de:'Sie hat schlechte Laune',en:'It is in a bad mood'}],
+     correct:0,explain:{de:'Genau – KI rät das Wahrscheinliche, nicht das Wahre. Gefühle oder Absicht hat sie nicht.',en:'Right – AI guesses what is likely, not what is true. It has no moods or intent.'}},
+    {type:'cloze',q:{de:'Fülle die Lücken sinnvoll.',en:'Fill the gaps sensibly.'},
+     segments:[{de:'Eine KI lernt aus vielen ',en:'An AI learns from many '},{blank:0},
+               {de:'. Ist sie sich unsicher, kann sie etwas ',en:'. If it is unsure, it can output something '},{blank:1},{de:'.',en:'.'}],
+     blanks:[{options:[{de:'Beispielen',en:'examples'},{de:'Meinungen',en:'opinions'}],correct:0},
+             {options:[{de:'Erfundenes',en:'made-up'},{de:'immer Richtiges',en:'always correct'}],correct:0}]},
+    {type:'multi',q:{de:'Eine KI-Antwort klingt komisch. Was sind gute Reaktionen? (Mehrere)',en:'An AI answer sounds odd. Which are good reactions? (Several)'},
+     options:[{de:'Mit einer anderen Quelle vergleichen',en:'Compare with another source'},
+              {de:'Eine Lehrkraft oder Erwachsene fragen',en:'Ask a teacher or adult'},
+              {de:'Nochmal anders nachfragen',en:'Ask again differently'},
+              {de:'Sofort glauben und abschreiben',en:'Believe immediately and copy'}],
+     correct:[0,1,2],explain:{de:'Prüfen, nachfragen, vergleichen – nur blindes Übernehmen ist keine gute Idee.',en:'Check, ask, compare – only blindly copying is a bad idea.'}}
+  ]},
+  {id:'K05-M3',icon:'🧠',komp:'R',niveau:'I',title:{de:'Mensch, Maschine – und kein Freund',en:'Human, machine – and no friend'},tasks:[
+    {type:'info',title:{de:'Was Menschen besonders macht',en:'What makes humans special'},
+     body:{de:'<p>Eine KI rechnet schnell, hat aber <strong>keine echten Gefühle</strong> und kein eigenes Erleben. Ein Chatbot kann freundlich klingen – er ist trotzdem <strong>kein Freund</strong>.</p><p>Bei echten Sorgen helfen <strong>echte Menschen</strong>: Familie, Freundinnen und Freunde, Lehrkräfte.</p>',
+           en:'<p>An AI calculates fast but has <strong>no real feelings</strong> and no experience of its own. A chatbot can sound friendly – it is still <strong>not a friend</strong>.</p><p>For real worries, <strong>real people</strong> help: family, friends, teachers.</p>'}},
+    {type:'sort',q:{de:'Eher Mensch oder eher KI?',en:'More human or more AI?'},
+     buckets:[{de:'eher Mensch 🧑',en:'more human 🧑'},{de:'eher KI 🤖',en:'more AI 🤖'}],
+     items:[{text:{de:'kreativ etwas ganz Neues erfinden',en:'inventing something truly new'},bucket:0},
+            {text:{de:'in Sekunden 1000 Bilder durchsuchen',en:'searching 1000 images in seconds'},bucket:1},
+            {text:{de:'eine Freundin wirklich trösten',en:'truly comforting a friend'},bucket:0},
+            {text:{de:'ohne Pause immer gleich arbeiten',en:'working the same way without breaks'},bucket:1}]},
+    {type:'quiz',q:{de:'Ein Chatbot schreibt: „Ich bin dein bester Freund." Was stimmt?',en:'A chatbot writes: "I am your best friend." What is true?'},
+     options:[{de:'Die KI hat keine echten Gefühle und ist kein Freund',en:'The AI has no real feelings and is not a friend'},
+              {de:'Die KI mag mich wirklich und denkt an mich',en:'The AI really likes me and thinks about me'},
+              {de:'Ich sollte ihr meine Geheimnisse erzählen',en:'I should tell it my secrets'}],
+     correct:0,explain:{de:'Der Chatbot klingt nett, fühlt aber nichts. Geheimnisse und Sorgen gehören zu echten Menschen.',en:'The chatbot sounds nice but feels nothing. Secrets and worries belong with real people.'}},
+    {type:'quiz',q:{de:'Du bist richtig traurig. Wer hilft am besten?',en:'You feel really sad. Who helps best?'},
+     options:[{de:'Eine vertraute Person: Familie, Freund:in, Lehrkraft',en:'A trusted person: family, friend, teacher'},
+              {de:'Nur der Chatbot, ganz allein',en:'Only the chatbot, all alone'},
+              {de:'Niemand – das muss ich allein schaffen',en:'Nobody – I must manage alone'}],
+     correct:0,explain:{de:'Bei echten Gefühlen sind echte Menschen wichtig. Du musst nichts allein schaffen.',en:'For real feelings, real people matter. You do not have to manage alone.'}}
+  ]},
+  {id:'K05-M4',icon:'🌱',komp:'R',niveau:'I',title:{de:'KI braucht Energie',en:'AI needs energy'},tasks:[
+    {type:'info',title:{de:'KI und die Umwelt',en:'AI and the environment'},
+     body:{de:'<p>KI läuft auf vielen Computern in großen <strong>Rechenzentren</strong>. Die brauchen viel <strong>Strom</strong> und <strong>Wasser</strong> zum Kühlen.</p><p>Darum ist eine gute Frage: <strong>Brauche ich hier wirklich KI – oder geht es auch einfacher?</strong></p>',
+           en:'<p>AI runs on many computers in large <strong>data centres</strong>. They need a lot of <strong>electricity</strong> and <strong>water</strong> for cooling.</p><p>So a good question is: <strong>Do I really need AI here – or is there a simpler way?</strong></p>'}},
+    {type:'quiz',q:{de:'Warum hat KI mit der Umwelt zu tun?',en:'Why does AI relate to the environment?'},
+     options:[{de:'Rechenzentren brauchen viel Strom und Wasser',en:'Data centres need lots of electricity and water'},
+              {de:'KI besteht aus Plastik, das im Meer landet',en:'AI is made of plastic that ends up in the sea'},
+              {de:'KI atmet wie Menschen und Tiere',en:'AI breathes like humans and animals'}],
+     correct:0,explain:{de:'Der Stromhunger der Rechenzentren ist der Punkt – nicht Plastik oder Atmen.',en:'The electricity demand of data centres is the point – not plastic or breathing.'}},
+    {type:'sort',q:{de:'Wann lohnt sich KI – und wann geht es einfach so?',en:'When is AI worth it – and when is it fine without?'},
+     buckets:[{de:'KI kann sinnvoll sein',en:'AI can make sense'},{de:'geht gut ohne KI',en:'fine without AI'}],
+     items:[{text:{de:'1000 Fotos nach Katzen durchsuchen',en:'searching 1000 photos for cats'},bucket:0},
+            {text:{de:'2 + 2 ausrechnen',en:'working out 2 + 2'},bucket:1},
+            {text:{de:'einen langen Text in viele Sprachen übersetzen',en:'translating a long text into many languages'},bucket:0},
+            {text:{de:'deiner Freundin „Hallo" schreiben',en:'writing "hi" to your friend'},bucket:1}]},
+    {type:'reflect',q:{de:'Nenne eine Sache, bei der du KI NICHT brauchst und die auch ohne gut klappt.',en:'Name one thing where you do NOT need AI and that works fine without it.'},
+     placeholder:{de:'z. B. einfache Rechnungen, kurze Nachrichten …',en:'e.g. simple sums, short messages …'}}
+  ]}
+ ],
+ K06:[
+  {id:'K06-M1',icon:'🔄',komp:'V',niveau:'I',title:{de:'Auffrischung Klasse 5',en:'Refresher Grade 5'},tasks:[
+    {type:'quiz',q:{de:'Was stimmt über KI?',en:'What is true about AI?'},
+     options:[{de:'Sie ahmt schlaues Verhalten nach und kann Fehler machen',en:'It imitates smart behaviour and can make mistakes'},
+              {de:'Sie weiß immer die Wahrheit',en:'It always knows the truth'},{de:'Sie hat echte Gefühle',en:'It has real feelings'}],
+     correct:0,explain:{de:'KI ahmt nach, irrt sich manchmal und fühlt nichts.',en:'AI imitates, sometimes errs and feels nothing.'}},
+    {type:'sort',q:{de:'Stärke von Mensch oder KI?',en:'Strength of human or AI?'},
+     buckets:[{de:'Mensch',en:'Human'},{de:'KI',en:'AI'}],
+     items:[{text:{de:'Mitgefühl zeigen',en:'showing compassion'},bucket:0},
+            {text:{de:'riesige Datenmengen durchsuchen',en:'searching huge amounts of data'},bucket:1},
+            {text:{de:'eine eigene Idee entwickeln',en:'developing an own idea'},bucket:0}]}
+  ]},
+  {id:'K06-M2',icon:'⚙️',komp:'V',niveau:'I→II',title:{de:'Wie „lernt" eine KI?',en:'How does AI "learn"?'},tasks:[
+    {type:'info',title:{de:'Regeln oder Beispiele',en:'Rules or examples'},
+     body:{de:'<p>Manche Technik folgt <strong>festen Regeln</strong> (z. B. ein Taschenrechner). KI lernt anders: Sie bekommt <strong>viele Beispiele</strong> und erkennt darin <strong>Muster</strong>.</p><p>Gute Beispiele → bessere KI. Schlechte oder einseitige Beispiele → schlechtere KI.</p>',
+           en:'<p>Some technology follows <strong>fixed rules</strong> (e.g. a calculator). AI learns differently: it gets <strong>many examples</strong> and finds <strong>patterns</strong> in them.</p><p>Good examples → better AI. Poor or one-sided examples → worse AI.</p>'}},
+    {type:'quiz',q:{de:'Worin unterscheidet sich KI von einem Taschenrechner?',en:'How does AI differ from a calculator?'},
+     options:[{de:'KI lernt aus Beispielen, der Rechner folgt festen Regeln',en:'AI learns from examples, the calculator follows fixed rules'},
+              {de:'KI ist immer schneller',en:'AI is always faster'},{de:'Es gibt keinen Unterschied',en:'There is no difference'}],
+     correct:0,explain:{de:'Der Kern: Regeln (Rechner) vs. Muster aus Beispielen lernen (KI).',en:'The core: rules (calculator) vs learning patterns from examples (AI).'}},
+    {type:'quiz',q:{de:'Eine KI erkennt Katzen schlecht, weil sie nur Hunde-Bilder zum Üben hatte. Warum?',en:'An AI recognises cats poorly because it only had dog images to train on. Why?'},
+     options:[{de:'Die Beispiele waren einseitig – sie hat Katzen kaum gesehen',en:'The examples were one-sided – it barely saw cats'},
+              {de:'Katzen sind zu schnell für KI',en:'Cats are too fast for AI'},{de:'KI mag keine Katzen',en:'AI dislikes cats'}],
+     correct:0,explain:{de:'KI ist nur so gut wie ihre Beispiele. Fehlen Katzen, kann sie sie kaum erkennen.',en:'AI is only as good as its examples. Without cats, it can barely recognise them.'}}
+  ]},
+  {id:'K06-M3',icon:'📱',komp:'R',niveau:'II',title:{de:'Empfehlungen & „Für dich"',en:'Recommendations & "For you"'},tasks:[
+    {type:'info',title:{de:'Warum dir Apps Dinge vorschlagen',en:'Why apps suggest things to you'},
+     body:{de:'<p>Viele Apps nutzen KI, die <strong>vorhersagt</strong>, was dir gefällt – auf Basis dessen, was du schon angeschaut hast.</p><p>Das ist praktisch, kann dich aber in eine <strong>Blase</strong> bringen: Du siehst immer mehr vom Gleichen und kaum Neues.</p>',
+           en:'<p>Many apps use AI that <strong>predicts</strong> what you like – based on what you already watched.</p><p>Handy, but it can put you in a <strong>bubble</strong>: you see more of the same and little that is new.</p>'}},
+    {type:'quiz',q:{de:'Eine App zeigt dir immer ähnliche Videos. Was ist ein Nachteil?',en:'An app keeps showing you similar videos. What is a drawback?'},
+     options:[{de:'Du entdeckst kaum noch etwas Neues',en:'You barely discover anything new'},
+              {de:'Die Videos werden schwarz-weiß',en:'The videos turn black and white'},{de:'Dein Akku hält länger',en:'Your battery lasts longer'}],
+     correct:0,explain:{de:'Empfehlungen können einengen – man bleibt in der „Blase".',en:'Recommendations can narrow things – you stay in the "bubble".'}},
+    {type:'multi',q:{de:'Wie behältst du den Überblick? (Mehrere)',en:'How do you stay in control? (Several)'},
+     options:[{de:'Bewusst auch andere Themen suchen',en:'Deliberately search other topics too'},
+              {de:'Mir klarmachen, dass eine KI die Vorschläge macht',en:'Remind myself an AI makes the suggestions'},
+              {de:'Auch Quellen außerhalb der App nutzen',en:'Use sources outside the app too'},
+              {de:'Einfach immer nur dem ersten Vorschlag folgen',en:'Just always follow the first suggestion'}],
+     correct:[0,1,2],explain:{de:'Aktiv breit suchen und die KI-Rolle kennen hilft – blind folgen nicht.',en:'Actively broadening and knowing the AI role helps – blindly following does not.'}}
+  ]},
+  {id:'K06-M4',icon:'💬',komp:'A',niveau:'II',title:{de:'Gute Prompts schreiben',en:'Writing good prompts'},tasks:[
+    {type:'info',title:{de:'Klar fragen, bessere Antwort',en:'Ask clearly, get a better answer'},
+     body:{de:'<p>Ein <strong>Prompt</strong> ist deine Eingabe an die KI. Klar + mit <strong>Kontext</strong> = bessere Antwort.</p><p>Vergleiche: „Schreib was über Hunde" vs. „Erkläre einem 10-Jährigen in 3 Sätzen, warum Hunde gut hören."</p>',
+           en:'<p>A <strong>prompt</strong> is your input to the AI. Clear + with <strong>context</strong> = better answer.</p><p>Compare: "Write about dogs" vs "Explain to a 10-year-old in 3 sentences why dogs hear well."</p>'}},
+    {type:'quiz',q:{de:'Welcher Prompt ist besser?',en:'Which prompt is better?'},
+     options:[{de:'„Erkläre mir in 3 einfachen Sätzen, wie Regen entsteht."',en:'"Explain to me in 3 simple sentences how rain forms."'},
+              {de:'„Wetter."',en:'"Weather."'},{de:'„Schreib irgendwas."',en:'"Write something."'}],
+     correct:0,explain:{de:'Konkret, mit Format und Kontext – das führt zu nützlichen Antworten.',en:'Specific, with format and context – that leads to useful answers.'}},
+    {type:'cloze',q:{de:'Was macht einen guten Prompt aus?',en:'What makes a good prompt?'},
+     segments:[{de:'Ein guter Prompt ist ',en:'A good prompt is '},{blank:0},{de:' und gibt ',en:' and gives '},{blank:1},{de:'.',en:'.'}],
+     blanks:[{options:[{de:'klar',en:'clear'},{de:'geheim',en:'secret'}],correct:0},
+             {options:[{de:'Kontext',en:'context'},{de:'Geld',en:'money'}],correct:0}]},
+    {type:'quiz',q:{de:'Die KI antwortet daneben. Was tust du zuerst?',en:'The AI answers off-target. What do you do first?'},
+     options:[{de:'Den Prompt genauer und klarer formulieren',en:'Make the prompt more precise and clear'},
+              {de:'Die App löschen',en:'Delete the app'},{de:'Die Antwort einfach übernehmen',en:'Just use the answer anyway'}],
+     correct:0,explain:{de:'Erst den Prompt verbessern – oft liegt es an der Frage, nicht an dir.',en:'Improve the prompt first – often it is the question, not you.'}}
+  ]}
+ ],
+ K07:[
+  {id:'K07-M1',icon:'🔄',komp:'V',niveau:'II',title:{de:'Auffrischung Klasse 6',en:'Refresher Grade 6'},tasks:[
+    {type:'quiz',q:{de:'Warum erkennt eine KI manche Dinge schlecht?',en:'Why does an AI recognise some things poorly?'},
+     options:[{de:'Ihre Trainingsbeispiele waren einseitig',en:'Its training examples were one-sided'},
+              {de:'Sie ist müde',en:'It is tired'},{de:'Sie hat keine Lust',en:'It cannot be bothered'}],
+     correct:0,explain:{de:'Einseitige Beispiele → einseitige KI.',en:'One-sided examples → one-sided AI.'}},
+    {type:'quiz',q:{de:'Was macht einen guten Prompt aus?',en:'What makes a good prompt?'},
+     options:[{de:'Klar, konkret und mit Kontext',en:'Clear, specific and with context'},
+              {de:'So kurz wie möglich, egal wie unklar',en:'As short as possible, no matter how unclear'},
+              {de:'Möglichst viele schwierige Wörter',en:'As many difficult words as possible'}],
+     correct:0,explain:{de:'Klarheit und Kontext schlagen Kürze um jeden Preis.',en:'Clarity and context beat shortness at all cost.'}}
+  ]},
+  {id:'K07-M2',icon:'⚖️',komp:'R',niveau:'II',title:{de:'Bias & Fairness',en:'Bias & fairness'},tasks:[
+    {type:'info',title:{de:'Wenn KI unfair wird',en:'When AI becomes unfair'},
+     body:{de:'<p>KI lernt aus Daten aus der echten Welt. Sind die Daten <strong>einseitig</strong>, übernimmt die KI diese Einseitigkeit – das nennt man <strong>Bias</strong>.</p><p>Beispiel: Eine Gesichtserkennung funktioniert schlechter bei Gruppen, die in den Trainingsdaten kaum vorkamen. Das kann <strong>unfaire Folgen</strong> haben.</p>',
+           en:'<p>AI learns from real-world data. If the data is <strong>one-sided</strong>, the AI adopts that bias – this is called <strong>bias</strong>.</p><p>Example: face recognition works worse for groups barely present in the training data. This can have <strong>unfair consequences</strong>.</p>'}},
+    {type:'quiz',q:{de:'Woher kommt Bias in einer KI vor allem?',en:'Where does bias in an AI mainly come from?'},
+     options:[{de:'Aus einseitigen Trainingsdaten und Entscheidungen von Menschen',en:'From one-sided training data and human decisions'},
+              {de:'Daraus, dass KI selbst Meinungen hat',en:'From AI having opinions of its own'},
+              {de:'Aus zu schnellem Internet',en:'From internet that is too fast'}],
+     correct:0,explain:{de:'Bias steckt in den Daten und im Design – nicht in „Meinungen" der KI.',en:'Bias sits in the data and design – not in AI "opinions".'}},
+    {type:'quiz',q:{de:'Eine Bewerbungs-KI bevorzugt Männer, weil sie aus alten Daten lernte. Das ist …',en:'A hiring AI favours men because it learned from old data. That is …'},
+     options:[{de:'… ein Bias mit unfairen Folgen für eine Gruppe',en:'… a bias with unfair consequences for a group'},
+              {de:'… reiner Zufall ohne Bedeutung',en:'… pure chance without meaning'},
+              {de:'… ein Zeichen, dass die KI klug ist',en:'… a sign the AI is clever'}],
+     correct:0,explain:{de:'Alte, einseitige Daten führen zu unfairer Behandlung – ein klassischer Bias.',en:'Old, one-sided data leads to unfair treatment – a classic bias.'}},
+    {type:'reflect',q:{de:'Wo könnte unfaire KI im Alltag Probleme machen? Nenne ein Beispiel.',en:'Where could unfair AI cause problems in daily life? Name one example.'},
+     placeholder:{de:'z. B. Empfehlungen, Bewerbungen, Erkennung …',en:'e.g. recommendations, job applications, recognition …'}}
+  ]},
+  {id:'K07-M3',icon:'🕵️',komp:'R',niveau:'II',title:{de:'Halluzinationen & Desinformation',en:'Hallucinations & disinformation'},tasks:[
+    {type:'info',title:{de:'Wenn KI etwas erfindet',en:'When AI makes things up'},
+     body:{de:'<p>Eine <strong>Halluzination</strong> ist eine erfundene KI-Antwort, die echt klingt. Dazu kommt <strong>Desinformation</strong>: absichtlich falsche Inhalte, z. B. <strong>Deepfakes</strong>.</p><p>Schutz: gegen <strong>vertrauenswürdige Quellen</strong> prüfen. Und: selbst <strong>keine</strong> Fälschungen erstellen, die anderen schaden.</p>',
+           en:'<p>A <strong>hallucination</strong> is a made-up AI answer that sounds real. On top of that: <strong>disinformation</strong> – deliberately false content, e.g. <strong>deepfakes</strong>.</p><p>Protection: check against <strong>trusted sources</strong>. And: do not create fakes yourself that harm others.</p>'}},
+    {type:'quiz',q:{de:'Was ist eine „Halluzination" bei KI?',en:'What is an AI "hallucination"?'},
+     options:[{de:'Eine erfundene Antwort, die echt klingt',en:'A made-up answer that sounds real'},
+              {de:'Ein Bild, das flackert',en:'An image that flickers'},{de:'Ein Computervirus',en:'A computer virus'}],
+     correct:0,explain:{de:'Klingt überzeugend, ist aber frei erfunden – deshalb prüfen.',en:'Sounds convincing but is invented – so check.'}},
+    {type:'quiz',q:{de:'Wie prüfst du eine überraschende KI-Behauptung am besten?',en:'How do you best check a surprising AI claim?'},
+     options:[{de:'Gegen mehrere vertrauenswürdige Quellen abgleichen',en:'Cross-check against several trusted sources'},
+              {de:'Die KI nochmal genau dasselbe fragen',en:'Ask the AI the exact same thing again'},
+              {de:'Glauben, weil es sicher klingt',en:'Believe it because it sounds confident'}],
+     correct:0,explain:{de:'Mehrere unabhängige Quellen schlagen eine selbstsichere KI-Stimme.',en:'Several independent sources beat a confident AI voice.'}},
+    {type:'quiz',q:{de:'Ein Freund will mit KI ein gefälschtes Video einer Mitschülerin machen. Richtig ist:',en:'A friend wants to make a fake video of a classmate with AI. The right move is:'},
+     options:[{de:'Nicht mitmachen – das schadet ihr und ist nicht okay',en:'Do not join – it harms her and is not okay'},
+              {de:'Mitmachen, ist ja nur Spaß',en:'Join in, it is just fun'},{de:'Heimlich teilen',en:'Share it secretly'}],
+     correct:0,explain:{de:'Deepfakes von echten Personen können verletzen – das macht man nicht.',en:'Deepfakes of real people can hurt – you do not do that.'}}
+  ]},
+  {id:'K07-M4',icon:'🎨',komp:'A',niveau:'II',title:{de:'Mit KI gestalten & Quellen',en:'Creating with AI & sources'},tasks:[
+    {type:'info',title:{de:'KI als Ideen-Partner – ehrlich bleiben',en:'AI as an idea partner – stay honest'},
+     body:{de:'<p>KI kann beim <strong>Ideen sammeln</strong> helfen. Gut ist: <strong>erst selbst denken</strong>, dann mit KI vergleichen.</p><p>Wenn du KI nutzt, <strong>kennzeichne es ehrlich</strong> – z. B.: <em>„Erstellt mit Hilfe von [KI-Tool]. Prompt: …"</em></p>',
+           en:'<p>AI can help <strong>brainstorm</strong>. Best practice: <strong>think for yourself first</strong>, then compare with AI.</p><p>If you use AI, <strong>label it honestly</strong> – e.g.: <em>"Created with help of [AI tool]. Prompt: …"</em></p>'}},
+    {type:'quiz',q:{de:'Du sammelst Ideen für ein Plakat. Wie nutzt du KI sinnvoll?',en:'You brainstorm ideas for a poster. How do you use AI well?'},
+     options:[{de:'Erst eigene Ideen, dann mit KI-Vorschlägen vergleichen',en:'Own ideas first, then compare with AI suggestions'},
+              {de:'Nur die KI machen lassen, ohne eigenes Denken',en:'Let the AI do it all, no own thinking'},
+              {de:'KI nutzen und so tun, als wäre alles von mir',en:'Use AI and pretend it was all me'}],
+     correct:0,explain:{de:'Eigenes Denken zuerst, KI als Partner, ehrlich kennzeichnen.',en:'Own thinking first, AI as partner, label honestly.'}},
+    {type:'quiz',q:{de:'Du hast ein KI-Bild für dein Referat benutzt. Was ist fair?',en:'You used an AI image for your talk. What is fair?'},
+     options:[{de:'KI-Einsatz kennzeichnen',en:'Mark that AI was used'},
+              {de:'So tun, als hättest du es selbst gemalt',en:'Pretend you painted it yourself'},
+              {de:'Behaupten, es sei ein Foto',en:'Claim it is a photo'}],
+     correct:0,explain:{de:'Ehrliche Kennzeichnung schützt dich und ist fair gegenüber anderen.',en:'Honest labelling protects you and is fair to others.'}},
+    {type:'match',q:{de:'Ordne zu: Was gehört zur ehrlichen KI-Nutzung?',en:'Match: what belongs to honest AI use?'},
+     pairs:[{left:{de:'Kennzeichnen',en:'Label'},right:{de:'angeben, welches Tool & welcher Prompt',en:'state which tool & prompt'}},
+            {left:{de:'Prüfen',en:'Check'},right:{de:'Inhalte gegen Quellen abgleichen',en:'cross-check content with sources'}},
+            {left:{de:'Eigenleistung',en:'Own work'},right:{de:'erst selbst denken, dann KI nutzen',en:'think first, then use AI'}}]}
+  ]}
+ ],
+ K08:[
+  {id:'K08-M1',icon:'🔄',komp:'V',niveau:'II',title:{de:'Auffrischung Klasse 7',en:'Refresher Grade 7'},tasks:[
+    {type:'quiz',q:{de:'Was ist Bias bei KI?',en:'What is bias in AI?'},
+     options:[{de:'Eine systematische Einseitigkeit aus Daten oder Design',en:'A systematic one-sidedness from data or design'},
+              {de:'Ein technischer Defekt am Bildschirm',en:'A technical screen defect'},{de:'Eine Meinung der KI',en:'An opinion of the AI'}],
+     correct:0,explain:{de:'Bias = systematische Einseitigkeit, meist aus den Daten.',en:'Bias = systematic one-sidedness, mostly from the data.'}},
+    {type:'quiz',q:{de:'Wie nutzt du KI ehrlich beim Gestalten?',en:'How do you use AI honestly when creating?'},
+     options:[{de:'Einsatz kennzeichnen und prüfen',en:'Label the use and check'},
+              {de:'Als komplett eigene Arbeit ausgeben',en:'Pass it off as fully my own work'},{de:'Quellen verschweigen',en:'Hide the sources'}],
+     correct:0,explain:{de:'Kennzeichnen + prüfen = ehrliche Nutzung.',en:'Label + check = honest use.'}}
+  ]},
+  {id:'K08-M2',icon:'🧩',komp:'A',niveau:'II→III',title:{de:'Aufgaben teilen: Mensch oder KI?',en:'Dividing tasks: human or AI?'},tasks:[
+    {type:'info',title:{de:'Klug aufteilen',en:'Divide wisely'},
+     body:{de:'<p>Eine große Aufgabe besteht aus Schritten. Frage bei jedem Schritt: <strong>Was kann KI gut – und wo braucht es meine eigene Stimme und mein Urteil?</strong></p><p>Beispiel Aufsatz: KI kann beim <em>Brainstorming</em> helfen, aber <strong>Meinung, Argumente und Schreibstil</strong> bleiben bei dir.</p>',
+           en:'<p>A big task has steps. For each step ask: <strong>What is AI good at – and where do I need my own voice and judgement?</strong></p><p>Essay example: AI can help <em>brainstorm</em>, but <strong>opinion, arguments and style</strong> stay with you.</p>'}},
+    {type:'sort',q:{de:'Aufsatz schreiben: eher KI oder eher du selbst?',en:'Writing an essay: more AI or more you?'},
+     buckets:[{de:'KI kann unterstützen',en:'AI can support'},{de:'lieber selbst',en:'better yourself'}],
+     items:[{text:{de:'erste Ideen sammeln',en:'gathering first ideas'},bucket:0},
+            {text:{de:'deine eigene Meinung formulieren',en:'forming your own opinion'},bucket:1},
+            {text:{de:'Rechtschreibung gegenlesen',en:'proofreading spelling'},bucket:0},
+            {text:{de:'die Hauptargumente auswählen',en:'choosing the main arguments'},bucket:1}]},
+    {type:'quiz',q:{de:'Wofür sollte beim Aufsatz deine eigene Stimme entscheiden?',en:'What in the essay should your own voice decide?'},
+     options:[{de:'Meinung, Argumente und Schreibstil',en:'Opinion, arguments and writing style'},
+              {de:'Nur die Schriftgröße',en:'Only the font size'},{de:'Gar nichts, das macht alles die KI',en:'Nothing, the AI does it all'}],
+     correct:0,explain:{de:'Das Denken bleibt bei dir – KI hilft nur an passenden Stellen.',en:'The thinking stays yours – AI only helps where it fits.'},prod:true}
+  ]},
+  {id:'K08-M3',icon:'🤝',komp:'A',niveau:'III',title:{de:'Mit KI ko-konstruieren',en:'Co-creating with AI'},tasks:[
+    {type:'info',title:{de:'In Schleifen besser werden',en:'Improving in loops'},
+     body:{de:'<p>Gute KI-Nutzung ist ein <strong>Hin und Her</strong>: Idee → KI-Feedback → du entscheidest, was du übernimmst → verbessern.</p><p>Halte fest, <strong>was von der KI kam</strong> und was dein eigenes Denken war.</p>',
+           en:'<p>Good AI use is a <strong>back and forth</strong>: idea → AI feedback → you decide what to keep → improve.</p><p>Track <strong>what came from the AI</strong> and what was your own thinking.</p>'}},
+    {type:'quiz',q:{de:'Was beschreibt „ko-konstruieren" mit KI am besten?',en:'What best describes "co-creating" with AI?'},
+     options:[{de:'Abwechselnd: ich, KI-Feedback, ich entscheide, verbessern',en:'Taking turns: me, AI feedback, I decide, improve'},
+              {de:'Die KI macht alles, ich schaue zu',en:'The AI does everything, I watch'},{de:'Ich ignoriere jedes Feedback',en:'I ignore all feedback'}],
+     correct:0,explain:{de:'Ko-konstruieren = gemeinsames Verbessern, du behältst die Kontrolle.',en:'Co-creating = improving together, you stay in control.'}},
+    {type:'quiz',q:{de:'Warum solltest du markieren, was von der KI stammt?',en:'Why should you mark what came from the AI?'},
+     options:[{de:'Ehrlichkeit und um die eigene Leistung zu erkennen',en:'Honesty and to recognise your own contribution'},
+              {de:'Damit es schwieriger aussieht',en:'To make it look harder'},{de:'Aus keinem Grund',en:'For no reason'}],
+     correct:0,explain:{de:'Transparenz zeigt, was du selbst geleistet hast.',en:'Transparency shows what you achieved yourself.'},prod:true}
+  ]},
+  {id:'K08-M4',icon:'🛡️',komp:'R',niveau:'III',title:{de:'Grenzen, Risiken & Datenschutz',en:'Limits, risks & data protection'},tasks:[
+    {type:'info',title:{de:'Sicher und überlegt',en:'Safe and considered'},
+     body:{de:'<p>Achte auf: <strong>Datenschutz</strong> (keine privaten Daten von dir oder anderen eingeben), <strong>Urheberrecht</strong>, <strong>Umwelt</strong> und <strong>Überabhängigkeit</strong> – wer alles der KI überlässt, lernt selbst weniger.</p><p>KI ist nie deine <strong>einzige</strong> Quelle.</p>',
+           en:'<p>Watch out for: <strong>privacy</strong> (do not enter private data about you or others), <strong>copyright</strong>, <strong>environment</strong> and <strong>overreliance</strong> – relying on AI for everything means learning less yourself.</p><p>AI is never your <strong>only</strong> source.</p>'}},
+    {type:'multi',q:{de:'Was solltest du einer KI NICHT geben? (Mehrere)',en:'What should you NOT give an AI? (Several)'},
+     options:[{de:'Deine Adresse und Telefonnummer',en:'Your address and phone number'},
+              {de:'Passwörter',en:'Passwords'},
+              {de:'Private Daten von Mitschüler:innen',en:'Private data of classmates'},
+              {de:'Eine allgemeine Frage zum Schulthema',en:'A general question about a school topic'}],
+     correct:[0,1,2],explain:{de:'Persönliche/private Daten gehören nicht in die KI – allgemeine Fragen sind okay.',en:'Personal/private data does not belong in AI – general questions are fine.'}},
+    {type:'quiz',q:{de:'Was bedeutet „Überabhängigkeit" von KI?',en:'What does "overreliance" on AI mean?'},
+     options:[{de:'Alles der KI überlassen und selbst kaum noch nachdenken',en:'Leaving everything to AI and barely thinking yourself'},
+              {de:'KI nur einmal pro Woche nutzen',en:'Using AI only once a week'},{de:'KI gar nicht mögen',en:'Disliking AI'}],
+     correct:0,explain:{de:'Wer nicht mehr selbst denkt, lernt weniger – das ist das Risiko.',en:'Stopping your own thinking means learning less – that is the risk.'}}
+  ]}
+ ],
+ K09:[
+  {id:'K09-M1',icon:'🔄',komp:'V',niveau:'III',title:{de:'Auffrischung Klasse 8',en:'Refresher Grade 8'},tasks:[
+    {type:'quiz',q:{de:'Was ist beim Teilen von Aufgaben mit KI klug?',en:'What is smart when dividing tasks with AI?'},
+     options:[{de:'KI für Passendes nutzen, eigenes Urteil behalten',en:'Use AI where it fits, keep your own judgement'},
+              {de:'Immer alles der KI geben',en:'Always give everything to AI'},{de:'KI nie nutzen',en:'Never use AI'}],
+     correct:0,explain:{de:'Bewusst aufteilen – Mensch und KI je nach Stärke.',en:'Divide deliberately – human and AI by strength.'}},
+    {type:'quiz',q:{de:'Was gehört NICHT in eine KI?',en:'What does NOT belong in an AI?'},
+     options:[{de:'Private Daten und Passwörter',en:'Private data and passwords'},
+              {de:'Eine Frage zum Unterricht',en:'A question about the lesson'},{de:'Eine Idee zum Brainstorming',en:'An idea for brainstorming'}],
+     correct:0,explain:{de:'Private Daten schützt man immer.',en:'Always protect private data.'}}
+  ]},
+  {id:'K09-M2',icon:'🔬',komp:'R',niveau:'III',title:{de:'KI bewerten & vergleichen',en:'Evaluating & comparing AI'},tasks:[
+    {type:'info',title:{de:'Nicht jede KI passt zu jeder Aufgabe',en:'Not every AI fits every task'},
+     body:{de:'<p>Bewerte ein KI-System nach: <strong>Zweck</strong> (wofür gemacht?), <strong>Nutzer</strong> (für wen?), <strong>Grenzen</strong> (was kann es nicht?) und <strong>Folgen</strong> (wer profitiert, wer nicht?).</p><p>Oft lohnt sich der <strong>Vergleich</strong> mehrerer Werkzeuge – oder die Entscheidung, gar keine KI zu nutzen.</p>',
+           en:'<p>Evaluate an AI system by: <strong>purpose</strong> (made for what?), <strong>users</strong> (for whom?), <strong>limits</strong> (what can it not do?) and <strong>impact</strong> (who benefits, who not?).</p><p>Often it pays to <strong>compare</strong> several tools – or decide to use no AI at all.</p>'}},
+    {type:'quiz',q:{de:'Welche Frage hilft am besten, ein KI-Tool zu bewerten?',en:'Which question best helps to evaluate an AI tool?'},
+     options:[{de:'Wofür wurde es gemacht und wo sind seine Grenzen?',en:'What was it made for and where are its limits?'},
+              {de:'Welche Farbe hat das Logo?',en:'What colour is the logo?'},{de:'Wie viele nutzen es?',en:'How many people use it?'}],
+     correct:0,explain:{de:'Zweck und Grenzen sind entscheidend – nicht Aussehen oder Beliebtheit.',en:'Purpose and limits are decisive – not looks or popularity.'}},
+    {type:'multi',q:{de:'Wonach beurteilst du ein KI-System fair? (Mehrere)',en:'By what do you judge an AI system fairly? (Several)'},
+     options:[{de:'Zweck und Zielgruppe',en:'Purpose and target users'},
+              {de:'Grenzen und mögliche Fehler',en:'Limits and possible errors'},
+              {de:'Wer profitiert, wer wird benachteiligt',en:'Who benefits, who is disadvantaged'},
+              {de:'Nur wie cool es aussieht',en:'Only how cool it looks'}],
+     correct:[0,1,2],explain:{de:'Zweck, Grenzen, Folgen – das zählt. Aussehen allein nicht.',en:'Purpose, limits, impact – that counts. Looks alone do not.'}}
+  ]},
+  {id:'K09-M3',icon:'🧪',komp:'M',niveau:'III',title:{de:'KI mitgestalten — Daten & Bias',en:'Shaping AI — data & bias'},tasks:[
+    {type:'info',title:{de:'Daten formen das Verhalten',en:'Data shapes behaviour'},
+     body:{de:'<p>Wer eine KI baut, wählt <strong>Daten</strong> aus – und diese Auswahl prägt, wie die KI sich verhält. Einseitige Daten → einseitige KI.</p><p>Mitgestalten heißt: bewusst auf <strong>ausgewogene Daten</strong> achten und das Ergebnis <strong>testen</strong>.</p>',
+           en:'<p>Whoever builds an AI selects <strong>data</strong> – and that selection shapes how the AI behaves. One-sided data → one-sided AI.</p><p>Shaping means: deliberately aim for <strong>balanced data</strong> and <strong>test</strong> the result.</p>'}},
+    {type:'quiz',q:{de:'Du trainierst eine KI, die Äpfel und Tomaten erkennt. Was ist wichtig?',en:'You train an AI to recognise apples and tomatoes. What matters?'},
+     options:[{de:'Viele ausgewogene Beispiele von beiden',en:'Many balanced examples of both'},
+              {de:'Nur rote Äpfel, keine grünen',en:'Only red apples, no green ones'},{de:'Möglichst wenige Beispiele',en:'As few examples as possible'}],
+     correct:0,explain:{de:'Ausgewogene, vielfältige Daten → faires, zuverlässiges Modell.',en:'Balanced, diverse data → fair, reliable model.'}},
+    {type:'quiz',q:{de:'Dein Modell verwechselt grüne Äpfel mit Tomaten. Beste Erklärung?',en:'Your model confuses green apples with tomatoes. Best explanation?'},
+     options:[{de:'Im Training fehlten grüne Äpfel – die Daten waren einseitig',en:'Green apples were missing in training – the data was one-sided'},
+              {de:'Das Modell mag kein Grün',en:'The model dislikes green'},{de:'Tomaten sind klüger',en:'Tomatoes are smarter'}],
+     correct:0,explain:{de:'Lücken in den Daten zeigen sich direkt im Verhalten der KI.',en:'Gaps in the data show up directly in the AI behaviour.'},prod:true}
+  ]},
+  {id:'K09-M4',icon:'🌍',komp:'M',niveau:'III',title:{de:'Ethik, Gesellschaft & dein Projekt',en:'Ethics, society & your project'},tasks:[
+    {type:'info',title:{de:'KI verantwortungsvoll mitgestalten',en:'Shaping AI responsibly'},
+     body:{de:'<p>KI wirkt auf <strong>Gesellschaft</strong>: Sie kann informieren – oder mit Desinformation der <strong>Demokratie</strong> schaden. Frage immer: <strong>Wer profitiert, wer wird benachteiligt?</strong></p><p>Zum Abschluss entwickelst du eine Idee, wie KI <strong>für den Menschen</strong> verbessert werden könnte, und reflektierst deinen KI-Einsatz.</p>',
+           en:'<p>AI affects <strong>society</strong>: it can inform – or harm <strong>democracy</strong> through disinformation. Always ask: <strong>who benefits, who is disadvantaged?</strong></p><p>To finish, you develop an idea how AI could be improved <strong>for people</strong>, and reflect on your AI use.</p>'}},
+    {type:'quiz',q:{de:'Warum ist KI-Desinformation für die Demokratie gefährlich?',en:'Why is AI disinformation dangerous for democracy?'},
+     options:[{de:'Sie kann täuschen und Meinungen unfair beeinflussen',en:'It can deceive and unfairly influence opinions'},
+              {de:'Sie macht das Internet langsamer',en:'It slows the internet'},{de:'Sie ist immer leicht zu erkennen',en:'It is always easy to spot'}],
+     correct:0,explain:{de:'Überzeugende Fälschungen können Wahlen und Meinungen verzerren.',en:'Convincing fakes can distort elections and opinions.'}},
+    {type:'quiz',q:{de:'Was ist die Leitfrage beim ethischen Mitgestalten von KI?',en:'What is the guiding question when shaping AI ethically?'},
+     options:[{de:'Wer profitiert – und wer wird benachteiligt?',en:'Who benefits – and who is disadvantaged?'},
+              {de:'Wie werde ich am schnellsten fertig?',en:'How do I finish fastest?'},{de:'Wie sieht es am coolsten aus?',en:'How does it look coolest?'}],
+     correct:0,explain:{de:'Nutzen und Schaden für Menschen abwägen – das ist der Kern.',en:'Weighing benefit and harm for people – that is the core.'}},
+    {type:'reflect',q:{de:'Projekt: Beschreibe kurz eine KI-Idee, die Menschen wirklich helfen würde – und einen Risiko-Punkt, auf den du achten würdest.',en:'Project: briefly describe an AI idea that would truly help people – and one risk you would watch for.'},
+     placeholder:{de:'Idee … / Risiko …',en:'Idea … / Risk …'},prod:true}
+  ]}
+ ]
+};
+/* ===== 6b) Abschlusstests — eigene, bündelnde Aufgaben (KEINE Kopien) ===== */
+const EXAM={
+ K05:[
+  {type:'quiz',q:{de:'Lena fragt einen Chatbot nach einem Fakt für ihr Referat. Was ist der beste Plan?',en:'Lena asks a chatbot for a fact for her talk. What is the best plan?'},
+   options:[{de:'Die Antwort mit einer zweiten Quelle prüfen, bevor sie sie nutzt',en:'Check the answer with a second source before using it'},
+            {de:'Sofort alles übernehmen – KI weiß alles',en:'Use everything at once – AI knows everything'},
+            {de:'Den Chatbot fragen, ob er sich sicher fühlt',en:'Ask the chatbot whether it feels sure'}],
+   correct:0,explain:{de:'KI kann sich irren – immer mit einer echten Quelle gegenprüfen.',en:'AI can be wrong – always verify with a real source.'}},
+  {type:'multi',q:{de:'Was stimmt über KI? Wähle ALLE richtigen.',en:'What is true about AI? Select ALL correct.'},
+   options:[{de:'Sie kann Fehler machen',en:'It can make mistakes'},{de:'Sie hat keine echten Gefühle',en:'It has no real feelings'},
+            {de:'Sie braucht Energie aus Rechenzentren',en:'It needs energy from data centres'},{de:'Sie hat immer recht',en:'It is always right'}],
+   correct:[0,1,2],explain:{de:'KI irrt, fühlt nichts und verbraucht Energie – „immer recht" ist falsch.',en:'AI errs, feels nothing and uses energy – "always right" is false.'}},
+  {type:'classify',q:{de:'Schnell-Check: KI oder keine KI?',en:'Quick check: AI or not AI?'},
+   items:[{ic:'face',label:{de:'Gesichtserkennung',en:'Face recognition'},ai:true},{ic:'translate',label:{de:'Übersetzungs-App',en:'Translation app'},ai:true},
+          {ic:'calc',label:{de:'Taschenrechner',en:'Calculator'},ai:false},{ic:'book',label:{de:'Buch',en:'Book'},ai:false}],
+   explain:{de:'KI erkennt Muster; Taschenrechner und Buch folgen festen Regeln bzw. sind gar keine Technik.',en:'AI recognises patterns; calculator and book follow fixed rules or are no tech at all.'}},
+  {type:'quiz',q:{de:'Ein Chatbot sagt: „Erzähl mir dein Geheimnis, ich bin dein Freund." Beste Reaktion?',en:'A chatbot says: "Tell me your secret, I am your friend." Best reaction?'},
+   options:[{de:'Nicht teilen – die KI ist kein Freund und fühlt nichts',en:'Do not share – the AI is no friend and feels nothing'},
+            {de:'Alles erzählen, sie versteht mich',en:'Tell it everything, it understands me'},{de:'Meine Adresse schicken',en:'Send my address'}],
+   correct:0,explain:{de:'Persönliches gehört zu echten Menschen, nicht in einen Chatbot.',en:'Personal things belong with real people, not a chatbot.'}},
+  {type:'quiz',q:{de:'Wann ist KI eher überflüssig?',en:'When is AI rather unnecessary?'},
+   options:[{de:'Beim Ausrechnen von 3 + 4',en:'For working out 3 + 4'},{de:'Beim Durchsuchen von 1000 Fotos',en:'For searching 1000 photos'},
+            {de:'Beim Übersetzen in viele Sprachen',en:'For translating into many languages'}],
+   correct:0,explain:{de:'Für einfache Dinge braucht es keine energiehungrige KI.',en:'Simple things do not need an energy-hungry AI.'}},
+  {type:'quiz',q:{de:'Worin ist der Mensch der KI voraus?',en:'Where is the human ahead of AI?'},
+   options:[{de:'Echte Gefühle und wirklich Neues erfinden',en:'Real feelings and inventing truly new things'},
+            {de:'Sehr schnell rechnen',en:'Calculating very fast'},{de:'Ohne Pause arbeiten',en:'Working without breaks'}],
+   correct:0,explain:{de:'Gefühle und echte Kreativität sind menschliche Stärken.',en:'Feelings and true creativity are human strengths.'}}
+ ],
+ K06:[
+  {type:'quiz',q:{de:'Warum erkennt eine Bild-KI manche Tiere schlecht?',en:'Why does an image AI recognise some animals poorly?'},
+   options:[{de:'Im Training fehlten Beispiele dieser Tiere',en:'Examples of those animals were missing in training'},
+            {de:'Die Tiere sind zu klein',en:'The animals are too small'},{de:'KI mag diese Tiere nicht',en:'AI dislikes those animals'}],
+   correct:0,explain:{de:'Fehlen Beispiele, fehlt das Muster – die KI erkennt schlechter.',en:'Missing examples means missing patterns – worse recognition.'}},
+  {type:'quiz',q:{de:'Welcher Prompt liefert am ehesten eine nützliche Antwort?',en:'Which prompt most likely gives a useful answer?'},
+   options:[{de:'„Erkläre in 3 einfachen Sätzen, wie ein Vulkan ausbricht."',en:'"Explain in 3 simple sentences how a volcano erupts."'},
+            {de:'„Vulkan?"',en:'"Volcano?"'},{de:'„Schreib was."',en:'"Write something."'}],
+   correct:0,explain:{de:'Klar, mit Format und Kontext – das macht den Unterschied.',en:'Clear, with format and context – that makes the difference.'}},
+  {type:'multi',q:{de:'Du nutzt eine App mit „Für dich"-Vorschlägen. Was ist klug? (Mehrere)',en:'You use an app with "For you" suggestions. What is smart? (Several)'},
+   options:[{de:'Bewusst auch andere Themen suchen',en:'Deliberately search other topics too'},{de:'Wissen, dass eine KI die Vorschläge macht',en:'Know an AI makes the suggestions'},
+            {de:'Auch andere Quellen nutzen',en:'Use other sources too'},{de:'Nur dem ersten Vorschlag folgen',en:'Only follow the first suggestion'}],
+   correct:[0,1,2],explain:{de:'Aktiv breit bleiben statt in der Blase zu landen.',en:'Stay deliberately broad instead of landing in the bubble.'}},
+  {type:'quiz',q:{de:'Wie unterscheidet sich KI grundsätzlich von einem Taschenrechner?',en:'How does AI fundamentally differ from a calculator?'},
+   options:[{de:'KI lernt Muster aus Beispielen, der Rechner folgt festen Regeln',en:'AI learns patterns from examples, the calculator follows fixed rules'},
+            {de:'KI ist immer billiger',en:'AI is always cheaper'},{de:'Gar nicht',en:'Not at all'}],
+   correct:0,explain:{de:'Regeln vs. Lernen aus Daten – der zentrale Unterschied.',en:'Rules vs learning from data – the key difference.'}},
+  {type:'quiz',q:{de:'Die KI antwortet unpassend. Was ist der erste sinnvolle Schritt?',en:'The AI answers off-target. What is the first sensible step?'},
+   options:[{de:'Den Prompt klarer formulieren',en:'Make the prompt clearer'},{de:'Die Antwort trotzdem übernehmen',en:'Use the answer anyway'},{de:'Aufgeben',en:'Give up'}],
+   correct:0,explain:{de:'Oft liegt es am Prompt – also zuerst die Frage verbessern.',en:'Often it is the prompt – so improve the question first.'}}
+ ],
+ K07:[
+  {type:'quiz',q:{de:'Eine Gesichtserkennung funktioniert bei einer Gruppe schlecht. Wahrscheinlichste Ursache?',en:'Face recognition works poorly for one group. Most likely cause?'},
+   options:[{de:'Diese Gruppe war in den Trainingsdaten kaum vertreten',en:'That group was barely present in the training data'},
+            {de:'Die Kamera ist kaputt',en:'The camera is broken'},{de:'Die KI hat eine Meinung',en:'The AI has an opinion'}],
+   correct:0,explain:{de:'Einseitige Daten erzeugen Bias mit unfairen Folgen.',en:'One-sided data creates bias with unfair consequences.'}},
+  {type:'quiz',q:{de:'Eine KI nennt selbstsicher eine Quelle, die es nicht gibt. Das ist …',en:'An AI confidently names a source that does not exist. That is …'},
+   options:[{de:'… eine Halluzination – erfunden, klingt aber echt',en:'… a hallucination – made up, but sounds real'},
+            {de:'… ein Beweis, dass sie recht hat',en:'… proof that it is right'},{de:'… ein Virus',en:'… a virus'}],
+   correct:0,explain:{de:'Erfundene, überzeugend klingende Inhalte = Halluzination. Prüfen!',en:'Invented, convincing content = hallucination. Check it!'}},
+  {type:'multi',q:{de:'Du erstellst ein Plakat mit KI-Hilfe. Was ist fair & verantwortungsvoll? (Mehrere)',en:'You make a poster with AI help. What is fair & responsible? (Several)'},
+   options:[{de:'Erst eigene Ideen, dann mit KI vergleichen',en:'Own ideas first, then compare with AI'},{de:'KI-Einsatz kennzeichnen',en:'Label the AI use'},
+            {de:'Inhalte gegen Quellen prüfen',en:'Check content against sources'},{de:'So tun, als sei alles allein von mir',en:'Pretend it was all me alone'}],
+   correct:[0,1,2],explain:{de:'Eigenleistung, Kennzeichnung, Prüfung – nur Täuschung ist nicht okay.',en:'Own work, labelling, checking – only deceiving is not okay.'}},
+  {type:'quiz',q:{de:'Jemand will ein gefälschtes Video einer echten Person mit KI erstellen. Richtig ist:',en:'Someone wants to create a fake video of a real person with AI. The right move is:'},
+   options:[{de:'Nicht mitmachen – Deepfakes echter Personen können verletzen',en:'Do not join – deepfakes of real people can hurt'},
+            {de:'Mitmachen, ist nur Spaß',en:'Join in, it is just fun'},{de:'Es heimlich verbreiten',en:'Spread it secretly'}],
+   correct:0,explain:{de:'Fälschungen über echte Menschen schaden – das macht man nicht.',en:'Fakes about real people cause harm – you do not do that.'}},
+  {type:'quiz',q:{de:'Beste Methode, eine überraschende KI-Behauptung zu prüfen?',en:'Best method to check a surprising AI claim?'},
+   options:[{de:'Mit mehreren vertrauenswürdigen Quellen abgleichen',en:'Cross-check with several trusted sources'},
+            {de:'Der KI glauben, weil sie sicher klingt',en:'Believe the AI because it sounds sure'},{de:'Dieselbe Frage doppelt stellen',en:'Ask the same question twice'}],
+   correct:0,explain:{de:'Unabhängige Quellen schlagen eine selbstsichere KI.',en:'Independent sources beat a confident AI.'}}
+ ],
+ K08:[
+  {type:'sort',q:{de:'Projekt-Aufsatz: Wo kann KI unterstützen, wo entscheidest du selbst?',en:'Project essay: where can AI support, where do you decide yourself?'},
+   buckets:[{de:'KI kann unterstützen',en:'AI can support'},{de:'lieber selbst',en:'better yourself'}],
+   items:[{text:{de:'Ideen sammeln',en:'gathering ideas'},bucket:0},{text:{de:'eigene Meinung & Argumente',en:'own opinion & arguments'},bucket:1},
+          {text:{de:'Rechtschreibung prüfen',en:'checking spelling'},bucket:0},{text:{de:'Schreibstil & Schluss',en:'writing style & conclusion'},bucket:1}]},
+  {type:'multi',q:{de:'Was gibst du einer KI NICHT? (Mehrere)',en:'What do you NOT give an AI? (Several)'},
+   options:[{de:'Passwörter',en:'Passwords'},{de:'Private Daten anderer',en:'Private data of others'},
+            {de:'Deine Wohnadresse',en:'Your home address'},{de:'Eine Sachfrage zum Thema',en:'A factual question on the topic'}],
+   correct:[0,1,2],explain:{de:'Private/persönliche Daten schützen – Sachfragen sind okay.',en:'Protect private/personal data – factual questions are fine.'}},
+  {type:'quiz',q:{de:'Was beschreibt gutes „Ko-Konstruieren" mit KI?',en:'What describes good "co-creating" with AI?'},
+   options:[{de:'Idee → KI-Feedback → ich entscheide → verbessern',en:'Idea → AI feedback → I decide → improve'},
+            {de:'KI macht alles allein',en:'AI does it all alone'},{de:'Ich ignoriere Feedback',en:'I ignore feedback'}],
+   correct:0,explain:{de:'Du behältst die Kontrolle und verbesserst in Schleifen.',en:'You stay in control and improve in loops.'}},
+  {type:'quiz',q:{de:'Was ist das Risiko von Überabhängigkeit?',en:'What is the risk of overreliance?'},
+   options:[{de:'Man denkt selbst kaum noch nach und lernt weniger',en:'You barely think yourself and learn less'},
+            {de:'Der Akku wird heiß',en:'The battery gets hot'},{de:'Die KI wird langsamer',en:'The AI gets slower'}],
+   correct:0,explain:{de:'Eigenes Denken bleibt wichtig – sonst sinkt der Lernerfolg.',en:'Own thinking stays important – otherwise learning drops.'}},
+  {type:'quiz',q:{de:'Warum kennzeichnest du, was von der KI kam?',en:'Why do you label what came from the AI?'},
+   options:[{de:'Ehrlichkeit und Sichtbarkeit deiner Eigenleistung',en:'Honesty and visibility of your own contribution'},
+            {de:'Damit es länger aussieht',en:'To make it look longer'},{de:'Aus keinem Grund',en:'For no reason'}],
+   correct:0,explain:{de:'Transparenz ist fair und zeigt deine Leistung.',en:'Transparency is fair and shows your work.'}}
+ ],
+ K09:[
+  {type:'multi',q:{de:'Wonach bewertest du ein KI-System fair? (Mehrere)',en:'By what do you fairly evaluate an AI system? (Several)'},
+   options:[{de:'Zweck und Zielgruppe',en:'Purpose and target users'},{de:'Grenzen und mögliche Fehler',en:'Limits and possible errors'},
+            {de:'Wer profitiert / wird benachteiligt',en:'Who benefits / is disadvantaged'},{de:'Nur das Aussehen',en:'Only the looks'}],
+   correct:[0,1,2],explain:{de:'Zweck, Grenzen, Folgen – nicht das Aussehen.',en:'Purpose, limits, impact – not the looks.'}},
+  {type:'quiz',q:{de:'Dein selbst trainiertes Modell verwechselt grüne Äpfel mit Tomaten. Ursache?',en:'Your self-trained model confuses green apples with tomatoes. Cause?'},
+   options:[{de:'Einseitige Daten – grüne Äpfel fehlten im Training',en:'One-sided data – green apples were missing in training'},
+            {de:'Das Modell mag kein Grün',en:'The model dislikes green'},{de:'Zufall',en:'Coincidence'}],
+   correct:0,explain:{de:'Datenlücken zeigen sich direkt im Verhalten – Daten ergänzen.',en:'Data gaps show in behaviour – add data.'}},
+  {type:'quiz',q:{de:'Warum ist KI-Desinformation eine Gefahr für die Demokratie?',en:'Why is AI disinformation a danger to democracy?'},
+   options:[{de:'Überzeugende Fälschungen können Meinungen unfair beeinflussen',en:'Convincing fakes can unfairly influence opinions'},
+            {de:'Sie macht Webseiten bunter',en:'It makes websites more colourful'},{de:'Sie ist immer leicht erkennbar',en:'It is always easy to spot'}],
+   correct:0,explain:{de:'Manipulation durch Fälschungen untergräbt freie Meinungsbildung.',en:'Manipulation through fakes undermines free opinion forming.'}},
+  {type:'quiz',q:{de:'Leitfrage beim verantwortungsvollen Mitgestalten von KI?',en:'Guiding question when shaping AI responsibly?'},
+   options:[{de:'Wer profitiert – und wer wird benachteiligt?',en:'Who benefits – and who is disadvantaged?'},
+            {de:'Wie sieht es am coolsten aus?',en:'How does it look coolest?'},{de:'Wie werde ich am schnellsten fertig?',en:'How do I finish fastest?'}],
+   correct:0,explain:{de:'Nutzen und Schaden für Menschen abwägen ist der Kern.',en:'Weighing benefit and harm for people is the core.'}},
+  {type:'quiz',q:{de:'Was macht KI grundsätzlich anders als ein Mensch?',en:'What does AI fundamentally do differently from a human?'},
+   options:[{de:'Sie erzeugt Ausgaben aus Wahrscheinlichkeiten, ohne echtes Verstehen',en:'It produces outputs from probabilities, without real understanding'},
+            {de:'Sie hat ein Gewissen',en:'It has a conscience'},{de:'Sie erlebt die Welt wie wir',en:'It experiences the world like us'}],
+   correct:0,explain:{de:'Statistische Vorhersage statt echtem Verstehen – das bleibt der Kern.',en:'Statistical prediction instead of real understanding – that stays the core.'}}
+ ]
+};
+function modulesOf(g){return CONTENT[g]||[];}
+function gradeComplete(g){const m=modulesOf(g);return m.length>0&&m.every(x=>STATE.done[x.id]);}
+function gradeProgress(g){const m=modulesOf(g);if(!m.length)return 0;return Math.round(m.filter(x=>STATE.done[x.id]).length/m.length*100);}
+function isUnlocked(g){return STATE.teacher||STATE.unlocked.includes(g);}
+/* ===== 7) Router ===== */
+let CURRENT={grade:null,module:null,exam:false};
+const view=()=>document.getElementById('view');
+function go(where,o={}){window.scrollTo(0,0);
+  if(where==='landing')renderLanding();else if(where==='grades')renderGrades();
+  else if(where==='overview')renderOverview(o.grade);else if(where==='module')renderRunner(o.grade,o.module,false);
+  else if(where==='exam')renderRunner(o.grade,null,true);else if(where==='dashboard')renderDashboard();
+  else if(where==='errors')renderErrors();else if(where==='cert')renderCert(o.grade);updateChrome();}
+function updateChrome(){
+  document.getElementById('lblOverview').textContent=t('overview');
+  document.getElementById('lblErrors').textContent=t('errorsNav');
+  document.getElementById('footLine').textContent=t('foot');
+  const n=STATE.errors.length,dot=document.getElementById('errDot');dot.style.display=n?'grid':'none';dot.textContent=n;
+  document.getElementById('langDe').classList.toggle('on',L()==='de');
+  document.getElementById('langEn').classList.toggle('on',L()==='en');document.documentElement.lang=L();}
+function setCrumb(p){document.getElementById('crumb').innerHTML=p.join(' &nbsp;›&nbsp; ');}
+function renderLanding(){setCrumb([]);const ht=t('heroTitle');
+  view().innerHTML=`<section class="view hero"><div class="hero-grid"><div>
+      <img src="gsis-logo.png" alt="GSIS" style="height:42px;margin-bottom:20px;display:block" onerror="this.style.display='none'">
+      <div class="eyebrow">${t('heroEy')}</div>
+      <h1>${ht[0]}<span class="hl">${ht[1]}</span>${ht[2]}</h1>
+      <p class="lead">${t('heroLead')}</p>
+      <div class="hero-cta"><button class="btn" onclick="beginStart()">${t('start')} →</button></div>
+      <div class="hero-strands"><span class="strand-chip">🧩 ${tx(KOMP.V)}</span><span class="strand-chip">🛠️ ${tx(KOMP.A)}</span>
+        <span class="strand-chip">🔍 ${tx(KOMP.R)}</span><span class="strand-chip">✨ ${tx(KOMP.M)}</span></div>
+    </div><div><div class="seal"><div class="seal-core"><div><div class="ki">KI</div><small>Führerschein</small></div></div></div></div>
+  </div></section>`;}
+function beginStart(){if(!STATE.name)openName(()=>go('grades'));else go('grades');}
+function renderGrades(){setCrumb([`<b>${t('chooseGrade')}</b>`]);
+  const cards=GRADES.map(g=>{const open=isUnlocked(g.id),prog=gradeProgress(g.id),got=STATE.fuehrerschein[g.id],ms=modulesOf(g.id).length;
+    return `<button class="gcard ${open?'open':'locked'}" style="--accent:${g.accent}" ${open?`onclick="go('overview',{grade:'${g.id}'})"`:'aria-disabled="true"'}>
+      <div class="gcard-top"><span class="gbadge">${g.id}</span><span class="glevel">${t('niveau')} ${g.niveau}</span></div>
+      <h3>${tx(g.title)}</h3><p>${tx(g.focus)}</p><div class="gprog"><i style="width:${prog}%"></i></div>
+      <div class="gmeta"><span>${ms?`${ms} ${t('modules')}`:'—'}</span>
+        ${got?`<span class="seal-mini">🎖️ ${t('completed')}</span>`:open?`<span>${prog}%</span>`:`<span class="lock-pill">🔒 ${t('locked')}</span>`}</div>
+    </button>`;}).join('');
+  view().innerHTML=`<section class="view"><div class="section-head"><div class="eyebrow">${t('gradeEy')} K05–K09</div>
+    <h2>${t('chooseGrade')}</h2><p class="lead">${t('chooseGradeLead')}</p></div><div class="grades">${cards}</div></section>`;}
+function renderOverview(grade){if(!isUnlocked(grade))return go('grades');
+  const g=gradeById(grade);CURRENT.grade=grade;setCrumb([`${t('gradeEy')} ${grade}`,`<b>${t('overviewOf')}</b>`]);
+  const ms=modulesOf(grade);
+  const modsHtml=ms.length?ms.map((m,i)=>{const done=STATE.done[m.id];
+    return `<button class="mod ${done?'done':''}" style="--accent:${g.accent}" onclick="go('module',{grade:'${grade}',module:'${m.id}'})">
+      <div class="mod-ic">${m.icon}</div><div class="mod-body"><h4>${t('module')} ${i+1} · ${tx(m.title)}</h4>
+      <div class="mod-tags"><span class="tag komp">${tx(KOMP[m.komp])}</span><span class="tag">${t('niveau')} ${m.niveau}</span>${done?`<span class="tag">${done.score}/${done.total} ✓</span>`:''}</div>
+      </div><div class="mod-right"><div class="check">✓</div></div></button>`;}).join(''):`<div class="empty">—</div>`;
+  const complete=gradeComplete(grade),got=STATE.fuehrerschein[grade];
+  const examHtml=ms.length?`<div class="exam-card" style="--accent:${g.accent}"><h3>🏁 ${t('exam')} ${grade}</h3><p>${t('examLead')}</p>
+      ${got?`<div class="result-actions" style="justify-content:center"><button class="btn sm" onclick="go('cert',{grade:'${grade}'})">${t('viewCert')}</button></div>`
+        :`<button class="btn ${complete?'':'ghost'}" ${complete?`onclick="go('exam',{grade:'${grade}'})"`:'disabled'}>${complete?t('startExam'):'🔒 '+t('examLocked')}</button>`}</div>`:'';
+  view().innerHTML=`<section class="view"><div class="ov-head">
+    <div class="ov-title"><div class="eyebrow" style="color:${g.accent}">${t('gradeEy')} ${grade} · ${t('niveau')} ${g.niveau}</div><h2>${tx(g.title)}</h2></div>
+    <div class="ov-stats"><div class="stat"><b>${gradeProgress(grade)}%</b><span>${t('completed')}</span></div>
+      <div class="stat"><b>${STATE.points}</b><span>${t('points')}</span></div><div class="stat"><b>${STATE.bestStreak}</b><span>${t('streak')}</span></div></div>
+    </div><div class="modlist">${modsHtml}</div>${examHtml}
+    <div style="margin-top:22px"><button class="btn ghost sm" onclick="go('grades')">← ${t('back')}</button></div></section>`;}
+/* ===== 8) Runner ===== */
+let RUN=null;
+function buildExamTasks(grade){const pool=(EXAM[grade]||[]).map(x=>({...x}));
+  for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}return pool;}
+function renderRunner(grade,moduleId,exam){if(!isUnlocked(grade))return go('grades');
+  const g=gradeById(grade);let tasks,label;
+  if(exam){tasks=buildExamTasks(grade);label=`🏁 ${t('exam')}`;CURRENT.exam=true;CURRENT.module=null;}
+  else{const m=modulesOf(grade).find(x=>x.id===moduleId);tasks=m.tasks;label=tx(m.title);CURRENT.exam=false;CURRENT.module=moduleId;}
+  CURRENT.grade=grade;RUN={grade,moduleId,exam,tasks,idx:0,score:0,gradeable:0,accent:g.accent,label};
+  setCrumb([`${t('gradeEy')} ${grade}`,`<b>${label}</b>`]);drawTask();}
+function drawTask(){const{tasks,idx,accent,label}=RUN,task=tasks[idx],pct=Math.round(idx/tasks.length*100);
+  view().innerHTML=`<section class="view runner" style="--accent:${accent}">
+    <div class="progressbar"><i style="width:${pct}%"></i></div>
+    <div class="run-meta"><span>${label}</span><span>${idx+1} ${t('of')} ${tasks.length}</span></div>
+    <div class="task" id="taskCard"></div></section>`;
+  RENDERERS[task.type](document.getElementById('taskCard'),task);}
+function taskFoot(label,showStreak=true){return `<div class="task-foot">
+  <span class="streakpill">${showStreak?`${t('yourStreak')} <b>🔥 ${STATE.streak}</b>`:''}</span>
+  <button class="btn" id="primaryBtn">${label}</button></div>`;}
+function bindPrimary(fn){document.getElementById('primaryBtn').onclick=fn;}
+const feedbackEl=()=>`<div class="feedback" id="fb"></div>`;
+function showFeedback(ok,msg){const fb=document.getElementById('fb');fb.className='feedback show '+(ok?'good':'bad');fb.innerHTML=`<b>${ok?t('correct'):t('wrong')}</b> ${msg||''}`;}
+function scoreTask(ok,task){RUN.gradeable++;if(ok){RUN.score++;STATE.points+=10;STATE.streak++;STATE.bestStreak=Math.max(STATE.bestStreak,STATE.streak);}else{STATE.streak=0;pushError(task);}save();updateChrome();}
+function pushError(task){const id=(RUN.moduleId||RUN.grade)+'-'+RUN.idx;if(STATE.errors.some(e=>e.id===id))return;STATE.errors.push({id,q:tx(task.q||task.title||{de:'Aufgabe',en:'Task'}),src:RUN.label});}
+function advance(){RUN.idx++;if(RUN.idx>=RUN.tasks.length)finishRun();else drawTask();}
+const RENDERERS={
+ info(h,task){h.innerHTML=`<div class="ttype">ℹ️ Info</div><h3>${tx(task.title)}</h3>
+   <div class="infobox">${tx(task.body)}${task.terms?`<div class="keyterms">${task.terms.map(x=>`<span class="kt">${tx(x)}</span>`).join('')}</div>`:''}</div>
+   ${taskFoot(t('skipInfo')+' →',false)}`;bindPrimary(()=>advance());},
+ quiz(h,task){let ch=null,locked=false;
+   h.innerHTML=`<div class="ttype">❓ Quiz</div><h3>${tx(task.q)}</h3>
+     <div class="opts">${task.options.map((o,i)=>`<button class="opt" data-i="${i}"><span class="mark"></span><span>${tx(o)}</span></button>`).join('')}</div>
+     ${feedbackEl()}${taskFoot(t('check'))}`;
+   h.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(locked)return;h.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');ch=+b.dataset.i;});
+   bindPrimary(()=>{if(ch===null)return toast(L()==='de'?'Bitte wähle eine Antwort':'Please pick an answer');if(locked)return advance();locked=true;
+     h.querySelectorAll('.opt').forEach((x,i)=>{x.classList.add('locked');if(i===task.correct)x.classList.add('correct');else if(i===ch)x.classList.add('wrong');});
+     const ok=ch===task.correct;scoreTask(ok,task);showFeedback(ok,tx(task.explain||{de:'',en:''}));document.getElementById('primaryBtn').textContent=t('next')+' →';});},
+ multi(h,task){let ch=new Set(),locked=false;
+   h.innerHTML=`<div class="ttype">☑️ ${L()==='de'?'Mehrfachauswahl':'Multiple select'}</div><h3>${tx(task.q)}</h3>
+     <div class="opts">${task.options.map((o,i)=>`<button class="opt" data-i="${i}"><span class="mark"></span><span>${tx(o)}</span></button>`).join('')}</div>
+     ${feedbackEl()}${taskFoot(t('check'))}`;
+   h.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(locked)return;const i=+b.dataset.i;if(ch.has(i)){ch.delete(i);b.classList.remove('sel');}else{ch.add(i);b.classList.add('sel');}});
+   bindPrimary(()=>{if(locked)return advance();if(!ch.size)return toast(L()==='de'?'Bitte wähle aus':'Please select');locked=true;
+     const cor=new Set(task.correct);h.querySelectorAll('.opt').forEach((x,i)=>{x.classList.add('locked');if(cor.has(i))x.classList.add('correct');else if(ch.has(i))x.classList.add('wrong');});
+     const ok=ch.size===cor.size&&[...ch].every(i=>cor.has(i));scoreTask(ok,task);showFeedback(ok,tx(task.explain||{de:'',en:''}));document.getElementById('primaryBtn').textContent=t('next')+' →';});},
+ classify(h,task){let locked=false;const st={};
+   h.innerHTML=`<div class="ttype">🖼️ ${L()==='de'?'KI erkennen':'Spot the AI'}</div><h3>${tx(task.q)}</h3>
+     <p style="font-size:13px;color:var(--muted);margin-bottom:14px">${t('classifyHint')}</p>
+     <div class="cl-grid">${task.items.map((it,i)=>`<div class="cl-card" data-i="${i}">${icon(it.ic)}<div class="cl-label">${tx(it.label)}</div>
+       <div class="cl-choices"><button data-c="ai">${t('isAI')}</button><button data-c="no">${t('notAI')}</button></div></div>`).join('')}</div>
+     ${feedbackEl()}${taskFoot(t('check'))}`;
+   h.querySelectorAll('.cl-card').forEach((card,i)=>{card.querySelectorAll('.cl-choices button').forEach(btn=>btn.onclick=()=>{if(locked)return;
+     const c=btn.dataset.c;st[i]=c;card.querySelectorAll('.cl-choices button').forEach(b=>b.classList.remove('sel','ai','no'));btn.classList.add('sel',c);});});
+   bindPrimary(()=>{if(locked)return advance();if(Object.keys(st).length<task.items.length)return toast(L()==='de'?'Entscheide für jedes Beispiel':'Decide for each example');
+     locked=true;let allOk=true;task.items.forEach((it,i)=>{const ok=(st[i]==='ai')===it.ai;if(!ok)allOk=false;h.querySelector(`.cl-card[data-i="${i}"]`).classList.add(ok?'ok':'no');});
+     scoreTask(allOk,task);showFeedback(allOk,tx(task.explain||{de:'',en:''}));document.getElementById('primaryBtn').textContent=t('next')+' →';});},
+ match(h,task){const rights=task.pairs.map((p,i)=>({txt:p.right,idx:i}));
+   for(let i=rights.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[rights[i],rights[j]]=[rights[j],rights[i]];}
+   let act=null,pairs={},locked=false;const cols=['#1FA37A','#2F7DC2','#7A5CC0','#D98324','#C0563E'];
+   h.innerHTML=`<div class="ttype">🔗 ${L()==='de'?'Zuordnung':'Matching'}</div><h3>${tx(task.q)}</h3>
+     <p style="font-size:13px;color:var(--muted);margin-bottom:14px">${t('matchHint')}</p>
+     <div class="match-cols"><div class="match-col"><h5>A</h5>${task.pairs.map((p,i)=>`<button class="mitem" data-l="${i}">${tx(p.left)}</button>`).join('')}</div>
+     <div class="match-col"><h5>B</h5>${rights.map(r=>`<button class="mitem" data-r="${r.idx}">${tx(r.txt)}</button>`).join('')}</div></div>
+     ${feedbackEl()}${taskFoot(t('check'))}`;
+   const ls=h.querySelectorAll('[data-l]'),rs=h.querySelectorAll('[data-r]');
+   ls.forEach(b=>b.onclick=()=>{if(locked||b.classList.contains('matched'))return;ls.forEach(x=>x.classList.remove('active'));b.classList.add('active');act=+b.dataset.l;});
+   rs.forEach(b=>b.onclick=()=>{if(locked||act===null||b.classList.contains('matched'))return;const c=cols[act%cols.length],num=act+1;pairs[act]=+b.dataset.r;
+     const lb=h.querySelector(`[data-l="${act}"]`);[lb,b].forEach(el=>{el.classList.add('matched');el.classList.remove('active');el.insertAdjacentHTML('afterbegin',`<span class="pairnum" style="background:${c}">${num}</span>`);});act=null;});
+   bindPrimary(()=>{if(locked)return advance();if(Object.keys(pairs).length<task.pairs.length)return toast(L()==='de'?'Ordne alle zu':'Match them all');
+     locked=true;let allOk=true;task.pairs.forEach((p,i)=>{const ok=pairs[i]===i;if(!ok)allOk=false;
+       h.querySelector(`[data-l="${i}"]`).classList.add(ok?'ok':'no');const rb=h.querySelector(`[data-r="${pairs[i]}"]`);if(rb)rb.classList.add(ok?'ok':'no');});
+     scoreTask(allOk,task);showFeedback(allOk,allOk?'':(L()==='de'?'Schau dir die roten Paare nochmal an.':'Look at the red pairs again.'));document.getElementById('primaryBtn').textContent=t('next')+' →';});},
+ sort(h,task){const items=task.items.map((it,i)=>({...it,i}));
+   for(let i=items.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[items[i],items[j]]=[items[j],items[i]];}
+   let act=null,placed={},locked=false;
+   h.innerHTML=`<div class="ttype">🗂️ ${L()==='de'?'Sortieren':'Sorting'}</div><h3>${tx(task.q)}</h3>
+     <p style="font-size:13px;color:var(--muted);margin-bottom:14px">${t('dragHint')}</p>
+     <div class="pool">${items.map(it=>`<button class="chip" data-i="${it.i}">${tx(it.text)}</button>`).join('')}</div>
+     <div class="buckets">${task.buckets.map((b,bi)=>`<div class="bucket" data-b="${bi}"><h5>${tx(b)}</h5><div class="drop"></div></div>`).join('')}</div>
+     ${feedbackEl()}${taskFoot(t('check'))}`;
+   const chips=()=>h.querySelectorAll('.chip');
+   chips().forEach(c=>c.onclick=()=>{if(locked||c.classList.contains('placed'))return;chips().forEach(x=>x.classList.remove('active'));c.classList.add('active');act=+c.dataset.i;h.querySelectorAll('.bucket').forEach(b=>b.classList.add('target'));});
+   h.querySelectorAll('.bucket').forEach(b=>b.onclick=()=>{if(locked||act===null)return;placed[act]=+b.dataset.b;const chip=h.querySelector(`.chip[data-i="${act}"]`);chip.classList.add('placed');chip.classList.remove('active');b.querySelector('.drop').appendChild(chip);h.querySelectorAll('.bucket').forEach(x=>x.classList.remove('target'));act=null;});
+   bindPrimary(()=>{if(locked)return advance();if(Object.keys(placed).length<items.length)return toast(L()==='de'?'Ordne alle ein':'Place them all');
+     locked=true;let allOk=true;items.forEach(it=>{const ok=placed[it.i]===it.bucket;if(!ok)allOk=false;h.querySelector(`.chip[data-i="${it.i}"]`).classList.add(ok?'ok':'no');});
+     scoreTask(allOk,task);showFeedback(allOk,allOk?'':(L()==='de'?'Die roten Elemente gehören in den anderen Korb.':'Red items belong in the other bin.'));document.getElementById('primaryBtn').textContent=t('next')+' →';});},
+ cloze(h,task){let locked=false;
+   const html=task.segments.map(s=>{if(s.blank!==undefined){const b=task.blanks[s.blank];return `<select data-b="${s.blank}"><option value="">…</option>${b.options.map((o,i)=>`<option value="${i}">${tx(o)}</option>`).join('')}</select>`;}return tx(s);}).join('');
+   h.innerHTML=`<div class="ttype">✏️ ${L()==='de'?'Lückentext':'Fill the gap'}</div><h3>${tx(task.q)}</h3><div class="cloze">${html}</div>${feedbackEl()}${taskFoot(t('check'))}`;
+   bindPrimary(()=>{if(locked)return advance();const sels=[...h.querySelectorAll('select')];if(sels.some(s=>s.value===''))return toast(L()==='de'?'Fülle alle Lücken':'Fill all gaps');
+     locked=true;let allOk=true;sels.forEach(s=>{const ok=(+s.value)===task.blanks[+s.dataset.b].correct;if(!ok)allOk=false;s.classList.add(ok?'ok':'no');s.disabled=true;});
+     scoreTask(allOk,task);showFeedback(allOk,'');document.getElementById('primaryBtn').textContent=t('next')+' →';});},
+ reflect(h,task){const key='reflect_'+(RUN.moduleId||RUN.grade)+'_'+RUN.idx,prev=Store.get(key)||'';
+   h.innerHTML=`<div class="ttype">💬 ${tx(KOMP.R)}${task.prod?' · '+(L()==='de'?'Einreichung':'Submission'):''}</div><h3>${tx(task.q)}</h3>
+     <div class="reflect"><textarea id="refl" placeholder="${tx(task.placeholder||{de:'',en:''})}">${prev}</textarea><div class="hint">${t('reflectHint')}</div></div>
+     ${taskFoot(t('submitWork')+' →',false)}`;
+   bindPrimary(()=>{const v=document.getElementById('refl').value.trim();if(v.length<3)return toast(L()==='de'?'Schreib kurz etwas':'Write something short');Store.set(key,v);toast(t('saved'));advance();});}
+};
+function finishRun(){const{grade,moduleId,exam,score,gradeable,accent}=RUN;
+  if(exam){const ratio=gradeable?score/gradeable:0,passed=ratio>=PASS;
+    if(passed){STATE.fuehrerschein[grade]={ts:Date.now(),score:Math.round(ratio*100)};
+      const idx=GRADES.findIndex(x=>x.id===grade),nxt=GRADES[idx+1];if(nxt&&!STATE.unlocked.includes(nxt.id))STATE.unlocked.push(nxt.id);save();}
+    renderRunResult({exam:true,passed,score,total:gradeable,grade,accent});}
+  else{STATE.done[moduleId]={score,total:gradeable,ts:Date.now()};save();renderRunResult({exam:false,score,total:gradeable,grade,moduleId,accent});}
+  updateChrome();}
+function renderRunResult(r){setCrumb([`${t('gradeEy')} ${r.grade}`,`<b>✓</b>`]);let ic,head,sub,actions;
+  if(r.exam){ic=r.passed?'🎖️':'🔁';head=r.passed?t('examPassed'):t('examFailed');sub=`${r.score} ${t('scoreOf')} ${r.total}`;
+    actions=r.passed?`<button class="btn" onclick="go('cert',{grade:'${r.grade}'})">${t('viewCert')} →</button><button class="btn ghost" onclick="go('overview',{grade:'${r.grade}'})">${t('toOverview')}</button>`
+      :`<button class="btn" onclick="go('exam',{grade:'${r.grade}'})">${t('retry')}</button><button class="btn ghost" onclick="go('overview',{grade:'${r.grade}'})">${t('toOverview')}</button>`;}
+  else{ic='🏅';head=t('moduleDone');sub=`${r.score} ${t('scoreOf')} ${r.total}`;
+    actions=`<button class="btn" onclick="go('overview',{grade:'${r.grade}'})">${t('toOverview')} →</button><button class="btn ghost" onclick="go('module',{grade:'${r.grade}',module:'${r.moduleId}'})">${t('retry')}</button>`;}
+  view().innerHTML=`<section class="view result" style="--accent:${r.accent}"><div class="badge-pop"><span>${ic}</span></div>
+    <h2>${head}</h2><div class="scoreline">${sub}</div><div class="scoreline">+${r.score*10} ${t('points')} · 🔥 ${STATE.bestStreak}</div>
+    <div class="result-actions">${actions}</div></section>`;}
+/* ===== 9) Dashboard (Name + Klasse im PNG-Export) ===== */
+function renderDashboard(){setCrumb([`<b>${t('yourOverview')}</b>`]);
+  const rank=rankFor(STATE.points),nxt=nextRank(STATE.points),rankPct=nxt?Math.round((STATE.points-rank.p)/(nxt.p-rank.p)*100):100;
+  const totalMods=GRADES.reduce((a,g)=>a+modulesOf(g.id).length,0),doneMods=Object.keys(STATE.done).length,lic=Object.keys(STATE.fuehrerschein).length;
+  const initials=(STATE.name||'?').trim().split(/\s+/).map(s=>s[0]).slice(0,2).join('').toUpperCase();
+  const badgeHtml=GRADES.map(g=>{const ms=modulesOf(g.id);if(!ms.length)return'';
+    const inner=ms.map((m,i)=>`<div class="bchip ${STATE.done[m.id]?'earned':'locked'}" style="--accent2:${g.accent}"><div class="ic">${m.icon}</div><span>${g.id}·M${i+1}</span></div>`).join('');
+    return inner+`<div class="bchip ${STATE.fuehrerschein[g.id]?'earned':'locked'}" style="--accent2:${g.accent}"><div class="ic">🎖️</div><span>${g.id}</span></div>`;}).join('');
+  const rows=Object.entries(STATE.done).map(([id,d])=>{let title=id;GRADES.forEach(g=>modulesOf(g.id).forEach(m=>{if(m.id===id)title=tx(m.title);}));
+    const pct=d.total?Math.round(d.score/d.total*100):0;return `<div class="bar-row"><span>${title}</span><div class="bar-track"><i style="width:${pct}%"></i></div><span class="pct">${pct}%</span></div>`;}).join('')||`<div class="empty">${t('noData')}</div>`;
+  view().innerHTML=`<section class="view"><div class="section-head"><div class="eyebrow">${t('yourOverview')}</div><h2>${t('yourOverview')}</h2></div>
+    <div id="dashExport">
+      <div class="dash-id"><div class="av">${initials}</div><div class="who"><b>${STATE.name||'—'}</b><span>${t('klasse')}: ${STATE.klasse||'—'}</span></div></div>
+      <div class="dash-grid">
+        <div class="dcard rank-card"><div class="rank-ic">${rank.ic}</div><div style="flex:1"><div class="k" style="color:rgba(255,255,255,.7)">${t('rank')}</div><div class="v">${rank[L()]}</div><div class="rank-bar"><i style="width:${rankPct}%"></i></div></div></div>
+        <div class="dcard"><div class="k">${t('points')}</div><div class="v">${STATE.points}</div></div>
+        <div class="dcard"><div class="k">🔥 ${t('streak')}</div><div class="v">${STATE.bestStreak}</div></div>
+        <div class="dcard"><div class="k">${t('modules')}</div><div class="v">${doneMods}<small> ${t('of')} ${totalMods}</small></div></div>
+        <div class="dcard"><div class="k">🎖️ ${t('certTitle')}</div><div class="v">${lic}<small> ${t('of')} ${GRADES.length}</small></div></div>
+      </div>
+      <div class="panel"><h3>${t('badges')}</h3><div class="badge-row">${badgeHtml||`<div class="empty">${t('noData')}</div>`}</div></div>
+      <div class="panel"><h3>${t('analytics')}</h3><div class="bars">${rows}</div></div>
+    </div>
+    <div class="result-actions" style="justify-content:flex-start">
+      <button class="btn sm" onclick="exportPNG('dashExport','KI-Uebersicht')">⬇️ ${t('exportPng')}</button>
+      <button class="btn ghost sm" onclick="go('grades')">← ${t('back')}</button></div></section>`;}
+function renderErrors(){setCrumb([`<b>${t('mistakes')}</b>`]);
+  const list=STATE.errors.length?`<div class="errlist">${STATE.errors.map(e=>`<div class="erritem"><span style="font-size:18px">🔁</span><div class="q">${e.q}<div class="src">${e.src}</div></div></div>`).join('')}</div>`:`<div class="empty">${t('noMistakes')}</div>`;
+  view().innerHTML=`<section class="view"><div class="section-head"><div class="eyebrow">🔁</div><h2>${t('mistakes')}</h2></div>${list}
+    <div style="margin-top:20px"><button class="btn ghost sm" onclick="go('grades')">← ${t('back')}</button></div></section>`;}
+/* ===== 10) Zertifikat (Name + Klasse) ===== */
+function renderCert(grade){const g=gradeById(grade),fs=STATE.fuehrerschein[grade];if(!fs)return go('overview',{grade});
+  const d=new Date(fs.ts).toLocaleDateString(L()==='de'?'de-DE':'en-GB');setCrumb([`${t('gradeEy')} ${grade}`,`<b>${t('certTitle')}</b>`]);
+  view().innerHTML=`<section class="view cert-wrap"><div class="cert" id="certCard" style="--accent:${g.accent}">
+      <div class="cert-head"><img class="cert-logo-img" src="gsis-logo.png" alt="GSIS" style="height:46px" onerror="this.style.display='none'">
+        <div class="cert-school">German Swiss International School<small>German International Stream</small></div></div>
+      <h2>${t('certTitle')}</h2><div class="cert-seal"><span>🎖️</span></div>
+      <div class="name">${STATE.name||'—'}</div><div class="klasse">${t('klasse')}: ${STATE.klasse||'—'}</div>
+      <div class="sub">${t('awarded')} · ${t('forGrade')} <b>${tx(g.title)} (${grade})</b></div>
+      <div class="cert-strands"><span class="strand-chip">🧩 ${tx(KOMP.V)}</span><span class="strand-chip">🛠️ ${tx(KOMP.A)}</span><span class="strand-chip">🔍 ${tx(KOMP.R)}</span><span class="strand-chip">✨ ${tx(KOMP.M)}</span></div>
+      <div class="cert-foot"><div>${t('date')}: <b style="color:var(--ink)">${d}</b><br>${t('niveau')} ${g.niveau} · ${fs.score}%</div><div class="sig">${t('signature')}</div></div>
+    </div>
+    <div class="result-actions" style="justify-content:center;margin-top:20px">
+      <button class="btn sm" onclick="exportPNG('certCard','KI-Fuehrerschein-${grade}')">⬇️ ${t('exportPng')}</button>
+      <button class="btn ghost sm" onclick="go('overview',{grade:'${grade}'})">← ${t('back')}</button></div></section>`;}
+function exportPNG(id,fn){const el=document.getElementById(id);if(!el||typeof html2canvas==='undefined'){toast(L()==='de'?'Export nicht verfügbar':'Export unavailable');return;}
+  toast(L()==='de'?'Bild wird erstellt …':'Creating image …');
+  html2canvas(el,{backgroundColor:'#ffffff',scale:2,useCORS:true}).then(c=>{const a=document.createElement('a');a.download=fn+'.png';a.href=c.toDataURL('image/png');a.click();}).catch(()=>toast(L()==='de'?'Export fehlgeschlagen':'Export failed'));}
+/* ===== 11) Modals ===== */
+function modal(html){document.getElementById('modalBox').innerHTML=html;document.getElementById('modalBg').classList.add('show');}
+function closeModal(){document.getElementById('modalBg').classList.remove('show');}
+document.getElementById('modalBg').addEventListener('click',e=>{if(e.target.id==='modalBg')closeModal();});
+function openName(after){modal(`<h3>${t('nameTitle')}</h3><p>${t('nameLead')}</p>
+   <label class="flabel">${t('nameLabel')}</label><input class="field" id="nameIn" placeholder="${t('namePh')}" value="${STATE.name||''}">
+   <label class="flabel">${t('klasseLabel')}</label><input class="field" id="klasseIn" placeholder="${t('klassePh')}" value="${STATE.klasse||''}">
+   <div class="modal-actions"><button class="btn" id="nameSave">${t('save')}</button></div>`);
+  document.getElementById('nameIn').focus();
+  document.getElementById('nameSave').onclick=()=>{const v=document.getElementById('nameIn').value.trim();STATE.klasse=document.getElementById('klasseIn').value.trim();if(v)STATE.name=v;save();closeModal();updateChrome();if(after)after();};}
+function openTeacher(){if(STATE.teacher)return teacherPanel();
+  modal(`<h3>${t('teacherTitle')}</h3><p>${t('teacherLead')}</p><input class="field" id="tcode" type="password" placeholder="${t('codePh')}">
+    <div class="modal-actions"><button class="btn ghost" onclick="closeModal()">${t('close')}</button><button class="btn" id="tUnlock">${t('unlock')}</button></div>`);
+  document.getElementById('tUnlock').onclick=()=>{if(document.getElementById('tcode').value.trim()===TEACHER_CODE){STATE.teacher=true;save();teacherPanel();toast(t('unlockAll'));}else toast(L()==='de'?'Code falsch':'Wrong code');};}
+function teacherPanel(){const code=btoa(unescape(encodeURIComponent(JSON.stringify(STATE))));
+  modal(`<h3>${t('teacherTitle')} 🔑</h3><p>${L()==='de'?'Alle Jahrgänge sind freigeschaltet.':'All grades unlocked.'}</p>
+    <div class="t-row"><button class="btn sm" onclick="go('dashboard');closeModal()">📊 ${t('overview')}</button><button class="btn sm ghost" id="expBtn">⬇️ ${t('exportProg')}</button></div>
+    <div class="codebox">${code}</div><input class="field" id="impCode" placeholder="${t('pastePh')}">
+    <div class="t-row"><button class="btn sm" onclick="importProg()">⬆️ ${t('importProg')}</button>
+      <button class="btn sm ghost" onclick="resetProg()" style="border-color:var(--bad);color:var(--bad)">🗑️ ${t('resetProg')}</button></div>
+    <div class="modal-actions"><button class="btn" onclick="closeModal()">${t('close')}</button></div>`);
+  document.getElementById('expBtn').onclick=()=>{if(navigator.clipboard)navigator.clipboard.writeText(code).then(()=>toast(L()==='de'?'Code kopiert':'Code copied'),()=>{});};}
+function importProg(){try{const v=document.getElementById('impCode').value.trim();if(!v)return;const data=JSON.parse(decodeURIComponent(escape(atob(v))));STATE=Object.assign({},DEFAULT_STATE,data);save();closeModal();updateChrome();go('grades');toast(L()==='de'?'Fortschritt geladen':'Progress loaded');}catch(e){toast(L()==='de'?'Code ungültig':'Invalid code');}}
+function resetProg(){if(!confirm(t('resetConfirm')))return;STATE=JSON.parse(JSON.stringify(DEFAULT_STATE));save();closeModal();updateChrome();go('landing');}
+/* ===== 12) Sprache + Toast + Init ===== */
+function setLang(l){STATE.lang=l;save();updateChrome();rerender();}
+function rerender(){const v=view();
+  if(RUN&&document.querySelector('.runner'))drawTask();
+  else if(document.querySelector('.cert-wrap'))renderCert(CURRENT.grade);
+  else if(v.querySelector('.hero'))renderLanding();
+  else if(v.querySelector('.grades'))renderGrades();
+  else if(v.querySelector('.modlist'))renderOverview(CURRENT.grade);
+  else if(v.querySelector('.dash-grid'))renderDashboard();
+  else if(v.querySelector('.errlist'))renderErrors();
+  else renderGrades();updateChrome();}
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),1800);}
+(function init(){updateChrome();if(STATE.name)go('grades');else renderLanding();})();
+</script>
+</body>
+</html>
