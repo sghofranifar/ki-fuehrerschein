@@ -368,7 +368,7 @@ const CONTENT={
      options:[{de:'Eine Technologie, die schlaues Verhalten nachahmt',en:'Technology that imitates smart behaviour'},
               {de:'Ein Computer, der genau wie ein Mensch denkt und fühlt',en:'A computer that thinks and feels exactly like a human'},
               {de:'Eine Sammlung fester Regeln, die nie dazulernt',en:'A set of fixed rules that never learns'}],
-     correct:0,explain:{de:'KI ahmt schlaues Verhalten nach – sie denkt und fühlt aber nicht wie ein Mensch.',en:'AI imitates smart behaviour – but it does not think or feel like a human.'}},
+     correct:0,explain:{de:'KI ahmt schlaues Verhalten nach – sie denkt und fühlt aber nicht wie ein Mensch. Und sie folgt auch keinen starren Regeln, die nie dazulernen: Sie lernt ja gerade aus Beispielen.',en:'AI imitates smart behaviour – but it does not think or feel like a human. And it is not a set of rigid rules that never learns either: it actually learns from examples.'}},
     {type:'match',q:{de:'Verbinde den Begriff mit der Erklärung.',en:'Match the term to its meaning.'},
      pairs:[{left:{de:'Daten',en:'Data'},right:{de:'die Beispiele, aus denen KI lernt',en:'the examples an AI learns from'}},
             {left:{de:'Prompt',en:'Prompt'},right:{de:'die Eingabe / Frage an die KI',en:'the input / question you give the AI'}},
@@ -383,13 +383,14 @@ const CONTENT={
     {type:'quiz',q:{de:'Warum kann eine KI eine falsche Antwort geben?',en:'Why can an AI give a wrong answer?'},
      options:[{de:'Sie sagt nur voraus, was wahrscheinlich passt – das ist nicht immer wahr',en:'It only predicts what probably fits – that is not always true'},
               {de:'Sie ist absichtlich gemein',en:'It is being mean on purpose'},
-              {de:'Sie hat schlechte Laune',en:'It is in a bad mood'}],
-     correct:0,explain:{de:'Genau – KI rät das Wahrscheinliche, nicht das Wahre. Gefühle oder Absicht hat sie nicht.',en:'Right – AI guesses what is likely, not what is true. It has no moods or intent.'}},
+              {de:'Sie sucht die Antwort im Internet und kopiert sie 1:1',en:'It looks the answer up on the internet and copies it exactly'}],
+     correct:0,explain:{de:'Genau – KI rät das Wahrscheinliche, nicht das Wahre. Sie kopiert nicht einfach Sätze aus dem Internet, und Gefühle oder Absicht hat sie auch nicht.',en:'Right – AI guesses what is likely, not what is true. It does not simply copy sentences from the internet, and it has no feelings or intent either.'}},
     {type:'cloze',q:{de:'Fülle die Lücken sinnvoll.',en:'Fill the gaps sensibly.'},
      segments:[{de:'Eine KI lernt aus vielen ',en:'An AI learns from many '},{blank:0},
                {de:'. Ist sie sich unsicher, kann sie etwas ',en:'. If it is unsure, it can output something '},{blank:1},{de:'.',en:'.'}],
      blanks:[{options:[{de:'Beispielen',en:'examples'},{de:'Meinungen',en:'opinions'}],correct:0},
-             {options:[{de:'Erfundenes',en:'made-up'},{de:'immer Richtiges',en:'always correct'}],correct:0}]},
+             {options:[{de:'Erfundenes',en:'made-up'},{de:'immer Richtiges',en:'always correct'}],correct:0}],
+     explain:{de:'KI braucht viele echte Beispiele zum Lernen – und kann bei Unsicherheit etwas erfinden, statt zuzugeben, dass sie es nicht weiß.',en:'AI needs many real examples to learn – and when unsure, it can make something up instead of admitting it does not know.'}},
     {type:'multi',q:{de:'Eine KI-Antwort klingt komisch. Was sind gute Reaktionen? (Mehrere)',en:'An AI answer sounds odd. Which are good reactions? (Several)'},
      options:[{de:'Mit einer anderen Quelle vergleichen',en:'Compare with another source'},
               {de:'Eine Lehrkraft oder Erwachsene fragen',en:'Ask a teacher or adult'},
@@ -456,7 +457,7 @@ const CONTENT={
     {type:'quiz',q:{de:'Worin unterscheidet sich KI von einem Taschenrechner?',en:'How does AI differ from a calculator?'},
      options:[{de:'KI lernt aus Beispielen, der Rechner folgt festen Regeln',en:'AI learns from examples, the calculator follows fixed rules'},
               {de:'KI ist immer schneller',en:'AI is always faster'},{de:'Es gibt keinen Unterschied',en:'There is no difference'}],
-     correct:0,explain:{de:'Der Kern: Regeln (Rechner) vs. Muster aus Beispielen lernen (KI).',en:'The core: rules (calculator) vs learning patterns from examples (AI).'}},
+     correct:0,explain:{de:'Der Kern: Regeln (Rechner) vs. Muster aus Beispielen lernen (KI). Schneller ist KI dabei nicht automatisch – der Unterschied liegt darin, wie sie zur Antwort kommt.',en:'The core: rules (calculator) vs learning patterns from examples (AI). AI is not automatically faster – the difference is in how it arrives at an answer.'}},
     {type:'quiz',q:{de:'Eine KI erkennt Katzen schlecht, weil sie nur Hunde-Bilder zum Üben hatte. Warum?',en:'An AI recognises cats poorly because it only had dog images to train on. Why?'},
      options:[{de:'Die Beispiele waren einseitig – sie hat Katzen kaum gesehen',en:'The examples were one-sided – it barely saw cats'},
               {de:'Katzen sind zu schnell für KI',en:'Cats are too fast for AI'},{de:'KI mag keine Katzen',en:'AI dislikes cats'}],
@@ -468,8 +469,8 @@ const CONTENT={
            en:'<p>Many apps use AI that <strong>predicts</strong> what you like – based on what you already watched.</p><p>Handy, but it can put you in a <strong>bubble</strong>: you see more of the same and little that is new.</p>'}},
     {type:'quiz',q:{de:'Eine App zeigt dir immer ähnliche Videos. Was ist ein Nachteil?',en:'An app keeps showing you similar videos. What is a drawback?'},
      options:[{de:'Du entdeckst kaum noch etwas Neues',en:'You barely discover anything new'},
-              {de:'Die Videos werden schwarz-weiß',en:'The videos turn black and white'},{de:'Dein Akku hält länger',en:'Your battery lasts longer'}],
-     correct:0,explain:{de:'Empfehlungen können einengen – man bleibt in der „Blase".',en:'Recommendations can narrow things – you stay in the "bubble".'}},
+              {de:'Du bekommst weniger Werbung, weil die App genau weiß, was dir gefällt',en:'You get less advertising because the app knows exactly what you like'},{de:'Die App braucht dann weniger Internet',en:'The app then needs less internet data'}],
+     correct:0,explain:{de:'Empfehlungen können einengen – man bleibt in der „Blase". Das hat nichts mit Werbung oder Datenverbrauch zu tun.',en:'Recommendations can narrow things – you stay in the "bubble". This has nothing to do with ads or data usage.'}},
     {type:'multi',q:{de:'Wie behältst du den Überblick? (Mehrere)',en:'How do you stay in control? (Several)'},
      options:[{de:'Bewusst auch andere Themen suchen',en:'Deliberately search other topics too'},
               {de:'Mir klarmachen, dass eine KI die Vorschläge macht',en:'Remind myself an AI makes the suggestions'},
@@ -488,7 +489,8 @@ const CONTENT={
     {type:'cloze',q:{de:'Was macht einen guten Prompt aus?',en:'What makes a good prompt?'},
      segments:[{de:'Ein guter Prompt ist ',en:'A good prompt is '},{blank:0},{de:' und gibt ',en:' and gives '},{blank:1},{de:'.',en:'.'}],
      blanks:[{options:[{de:'klar',en:'clear'},{de:'geheim',en:'secret'}],correct:0},
-             {options:[{de:'Kontext',en:'context'},{de:'Geld',en:'money'}],correct:0}]},
+             {options:[{de:'Kontext',en:'context'},{de:'Geld',en:'money'}],correct:0}],
+     explain:{de:'Klare Formulierung plus Kontext helfen der KI, deine Absicht zu verstehen – das führt zu besseren Antworten.',en:'Clear wording plus context help the AI understand your intent – that leads to better answers.'}},
     {type:'quiz',q:{de:'Die KI antwortet daneben. Was tust du zuerst?',en:'The AI answers off-target. What do you do first?'},
      options:[{de:'Den Prompt genauer und klarer formulieren',en:'Make the prompt more precise and clear'},
               {de:'Die App löschen',en:'Delete the app'},{de:'Die Antwort einfach übernehmen',en:'Just use the answer anyway'}],
@@ -499,8 +501,8 @@ const CONTENT={
   {id:'K07-M1',icon:'🔄',komp:'V',niveau:'II',title:{de:'Auffrischung Klasse 6',en:'Refresher Grade 6'},tasks:[
     {type:'quiz',q:{de:'Warum erkennt eine KI manche Dinge schlecht?',en:'Why does an AI recognise some things poorly?'},
      options:[{de:'Ihre Trainingsbeispiele waren einseitig',en:'Its training examples were one-sided'},
-              {de:'Sie ist müde',en:'It is tired'},{de:'Sie hat keine Lust',en:'It cannot be bothered'}],
-     correct:0,explain:{de:'Einseitige Beispiele → einseitige KI.',en:'One-sided examples → one-sided AI.'}},
+              {de:'Der Computer dahinter ist nicht schnell genug',en:'The computer behind it is not fast enough'},{de:'Sie ist noch neu und existiert noch nicht lange',en:'It is still new and has not existed for long'}],
+     correct:0,explain:{de:'Einseitige Beispiele → einseitige KI. Es liegt nicht an der Rechenleistung oder daran, wie neu die KI ist.',en:'One-sided examples → one-sided AI. It is not about computing power or how new the AI is.'}},
     {type:'quiz',q:{de:'Was macht einen guten Prompt aus?',en:'What makes a good prompt?'},
      options:[{de:'Klar, konkret und mit Kontext',en:'Clear, specific and with context'},
               {de:'So kurz wie möglich, egal wie unklar',en:'As short as possible, no matter how unclear'},
@@ -515,7 +517,7 @@ const CONTENT={
      options:[{de:'Aus einseitigen Trainingsdaten und Entscheidungen von Menschen',en:'From one-sided training data and human decisions'},
               {de:'Daraus, dass KI selbst Meinungen hat',en:'From AI having opinions of its own'},
               {de:'Aus zu schnellem Internet',en:'From internet that is too fast'}],
-     correct:0,explain:{de:'Bias steckt in den Daten und im Design – nicht in „Meinungen" der KI.',en:'Bias sits in the data and design – not in AI "opinions".'}},
+     correct:0,explain:{de:'Bias steckt in den Daten und im Design – nicht in „Meinungen" der KI und auch nicht an der Geschwindigkeit des Internets.',en:'Bias sits in the data and design – not in AI "opinions", and not in how fast the internet is.'}},
     {type:'quiz',q:{de:'Eine Bewerbungs-KI bevorzugt Männer, weil sie aus alten Daten lernte. Das ist …',en:'A hiring AI favours men because it learned from old data. That is …'},
      options:[{de:'… ein Bias mit unfairen Folgen für eine Gruppe',en:'… a bias with unfair consequences for a group'},
               {de:'… reiner Zufall ohne Bedeutung',en:'… pure chance without meaning'},
@@ -653,8 +655,8 @@ const CONTENT={
      correct:0,explain:{de:'Ausgewogene, vielfältige Daten → faires, zuverlässiges Modell.',en:'Balanced, diverse data → fair, reliable model.'}},
     {type:'quiz',q:{de:'Dein Modell verwechselt grüne Äpfel mit Tomaten. Beste Erklärung?',en:'Your model confuses green apples with tomatoes. Best explanation?'},
      options:[{de:'Im Training fehlten grüne Äpfel – die Daten waren einseitig',en:'Green apples were missing in training – the data was one-sided'},
-              {de:'Das Modell mag kein Grün',en:'The model dislikes green'},{de:'Tomaten sind klüger',en:'Tomatoes are smarter'}],
-     correct:0,explain:{de:'Lücken in den Daten zeigen sich direkt im Verhalten der KI.',en:'Gaps in the data show up directly in the AI behaviour.'},prod:true}
+              {de:'Grüne Äpfel sehen Tomaten einfach zu ähnlich, egal welche Daten man nutzt',en:'Green apples simply look too similar to tomatoes, no matter what data you use'},{de:'Tomaten sind klüger',en:'Tomatoes are smarter'}],
+     correct:0,explain:{de:'Lücken in den Daten zeigen sich direkt im Verhalten der KI – nicht die „Ähnlichkeit" der Früchte allein entscheidet.',en:'Gaps in the data show up directly in the AI behaviour – it is not just how similar the fruits look.'},prod:true}
   ]},
   {id:'K09-M4',icon:'🌍',komp:'M',niveau:'III',title:{de:'Ethik, Gesellschaft & dein Projekt',en:'Ethics, society & your project'},tasks:[
     {type:'info',title:{de:'KI verantwortungsvoll mitgestalten',en:'Shaping AI responsibly'},
@@ -760,8 +762,8 @@ const EXAM={
    correct:0,explain:{de:'Du behältst die Kontrolle und verbesserst in Schleifen.',en:'You stay in control and improve in loops.'}},
   {type:'quiz',q:{de:'Was ist das Risiko von Überabhängigkeit?',en:'What is the risk of overreliance?'},
    options:[{de:'Man denkt selbst kaum noch nach und lernt weniger',en:'You barely think yourself and learn less'},
-            {de:'Der Akku wird heiß',en:'The battery gets hot'},{de:'Die KI wird langsamer',en:'The AI gets slower'}],
-   correct:0,explain:{de:'Eigenes Denken bleibt wichtig – sonst sinkt der Lernerfolg.',en:'Own thinking stays important – otherwise learning drops.'}},
+            {de:'Man bekommt schlechtere Noten, weil die Lehrkraft es merkt',en:'You get worse grades because the teacher notices'},{de:'Man wird abhängig vom Internet',en:'You become dependent on the internet'}],
+   correct:0,explain:{de:'Eigenes Denken bleibt wichtig – sonst sinkt der Lernerfolg. Es geht nicht ums Erwischtwerden oder um die Internetverbindung.',en:'Own thinking stays important – otherwise learning drops. It is not about getting caught or about the internet connection.'}},
   {type:'quiz',q:{de:'Warum kennzeichnest du, was von der KI kam?',en:'Why do you label what came from the AI?'},
    options:[{de:'Ehrlichkeit und Sichtbarkeit deiner Eigenleistung',en:'Honesty and visibility of your own contribution'},
             {de:'Damit es länger aussieht',en:'To make it look longer'},{de:'Aus keinem Grund',en:'For no reason'}],
@@ -774,8 +776,8 @@ const EXAM={
    correct:[0,1,2],explain:{de:'Zweck, Grenzen, Folgen – nicht das Aussehen.',en:'Purpose, limits, impact – not the looks.'}},
   {type:'quiz',q:{de:'Dein selbst trainiertes Modell verwechselt grüne Äpfel mit Tomaten. Ursache?',en:'Your self-trained model confuses green apples with tomatoes. Cause?'},
    options:[{de:'Einseitige Daten – grüne Äpfel fehlten im Training',en:'One-sided data – green apples were missing in training'},
-            {de:'Das Modell mag kein Grün',en:'The model dislikes green'},{de:'Zufall',en:'Coincidence'}],
-   correct:0,explain:{de:'Datenlücken zeigen sich direkt im Verhalten – Daten ergänzen.',en:'Data gaps show in behaviour – add data.'}},
+            {de:'Die Kamera hat die Farbe nicht richtig erkannt',en:'The camera did not detect the colour correctly'},{de:'Zufall',en:'Coincidence'}],
+   correct:0,explain:{de:'Datenlücken zeigen sich direkt im Verhalten – nicht an der Kamera oder am Zufall liegt\'s.',en:'Data gaps show directly in behaviour – it is not about the camera or coincidence.'}},
   {type:'quiz',q:{de:'Warum ist KI-Desinformation eine Gefahr für die Demokratie?',en:'Why is AI disinformation a danger to democracy?'},
    options:[{de:'Überzeugende Fälschungen können Meinungen unfair beeinflussen',en:'Convincing fakes can unfairly influence opinions'},
             {de:'Sie macht Webseiten bunter',en:'It makes websites more colourful'},{de:'Sie ist immer leicht erkennbar',en:'It is always easy to spot'}],
@@ -870,7 +872,7 @@ function taskFoot(label,showStreak=true){return `<div class="task-foot">
   <span class="streakpill">${showStreak?`${t('yourStreak')} <b>🔥 ${STATE.streak}</b>`:''}</span>
   <button class="btn" id="primaryBtn">${label}</button></div>`;}
 function bindPrimary(fn){document.getElementById('primaryBtn').onclick=fn;}
-const feedbackEl=()=>`<div class="feedback" id="fb"></div>`;
+const feedbackEl=()=>`<div class="feedback" id="fb" aria-live="polite"></div>`;
 function showFeedback(ok,msg){const fb=document.getElementById('fb');fb.className='feedback show '+(ok?'good':'bad');fb.innerHTML=`<b>${ok?t('correct'):t('wrong')}</b> ${msg||''}`;}
 function scoreTask(ok,task){RUN.gradeable++;if(ok){RUN.score++;STATE.points+=10;STATE.streak++;STATE.bestStreak=Math.max(STATE.bestStreak,STATE.streak);}else{STATE.streak=0;pushError(task);}save();updateChrome();}
 function pushError(task){const id=(RUN.moduleId||RUN.grade)+'-'+RUN.idx;if(STATE.errors.some(e=>e.id===id))return;STATE.errors.push({id,q:tx(task.q||task.title||{de:'Aufgabe',en:'Task'}),src:RUN.label});}
@@ -885,7 +887,9 @@ const RENDERERS={
      ${feedbackEl()}${taskFoot(t('check'))}`;
    h.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(locked)return;h.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');ch=+b.dataset.i;});
    bindPrimary(()=>{if(ch===null)return toast(L()==='de'?'Bitte wähle eine Antwort':'Please pick an answer');if(locked)return advance();locked=true;
-     h.querySelectorAll('.opt').forEach((x,i)=>{x.classList.add('locked');if(i===task.correct)x.classList.add('correct');else if(i===ch)x.classList.add('wrong');});
+     h.querySelectorAll('.opt').forEach((x,i)=>{x.classList.add('locked');
+       if(i===task.correct){x.classList.add('correct');x.querySelector('.mark').textContent='✓';}
+       else if(i===ch){x.classList.add('wrong');x.querySelector('.mark').textContent='✗';}});
      const ok=ch===task.correct;scoreTask(ok,task);showFeedback(ok,tx(task.explain||{de:'',en:''}));document.getElementById('primaryBtn').textContent=t('next')+' →';});},
  multi(h,task){let ch=new Set(),locked=false;
    h.innerHTML=`<div class="ttype">☑️ ${L()==='de'?'Mehrfachauswahl':'Multiple select'}</div><h3>${tx(task.q)}</h3>
@@ -893,7 +897,9 @@ const RENDERERS={
      ${feedbackEl()}${taskFoot(t('check'))}`;
    h.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(locked)return;const i=+b.dataset.i;if(ch.has(i)){ch.delete(i);b.classList.remove('sel');}else{ch.add(i);b.classList.add('sel');}});
    bindPrimary(()=>{if(locked)return advance();if(!ch.size)return toast(L()==='de'?'Bitte wähle aus':'Please select');locked=true;
-     const cor=new Set(task.correct);h.querySelectorAll('.opt').forEach((x,i)=>{x.classList.add('locked');if(cor.has(i))x.classList.add('correct');else if(ch.has(i))x.classList.add('wrong');});
+     const cor=new Set(task.correct);h.querySelectorAll('.opt').forEach((x,i)=>{x.classList.add('locked');
+       if(cor.has(i)){x.classList.add('correct');x.querySelector('.mark').textContent='✓';}
+       else if(ch.has(i)){x.classList.add('wrong');x.querySelector('.mark').textContent='✗';}});
      const ok=ch.size===cor.size&&[...ch].every(i=>cor.has(i));scoreTask(ok,task);showFeedback(ok,tx(task.explain||{de:'',en:''}));document.getElementById('primaryBtn').textContent=t('next')+' →';});},
  classify(h,task){let locked=false;const st={};
    h.innerHTML=`<div class="ttype">🖼️ ${L()==='de'?'KI erkennen':'Spot the AI'}</div><h3>${tx(task.q)}</h3>
@@ -904,7 +910,9 @@ const RENDERERS={
    h.querySelectorAll('.cl-card').forEach((card,i)=>{card.querySelectorAll('.cl-choices button').forEach(btn=>btn.onclick=()=>{if(locked)return;
      const c=btn.dataset.c;st[i]=c;card.querySelectorAll('.cl-choices button').forEach(b=>b.classList.remove('sel','ai','no'));btn.classList.add('sel',c);});});
    bindPrimary(()=>{if(locked)return advance();if(Object.keys(st).length<task.items.length)return toast(L()==='de'?'Entscheide für jedes Beispiel':'Decide for each example');
-     locked=true;let allOk=true;task.items.forEach((it,i)=>{const ok=(st[i]==='ai')===it.ai;if(!ok)allOk=false;h.querySelector(`.cl-card[data-i="${i}"]`).classList.add(ok?'ok':'no');});
+     locked=true;let allOk=true;task.items.forEach((it,i)=>{const ok=(st[i]==='ai')===it.ai;if(!ok)allOk=false;
+       const card=h.querySelector(`.cl-card[data-i="${i}"]`);card.classList.add(ok?'ok':'no');
+       const sel=card.querySelector('.cl-choices button.sel');if(sel)sel.insertAdjacentHTML('afterbegin',ok?'✓ ':'✗ ');});
      scoreTask(allOk,task);showFeedback(allOk,tx(task.explain||{de:'',en:''}));document.getElementById('primaryBtn').textContent=t('next')+' →';});},
  match(h,task){const rights=task.pairs.map((p,i)=>({txt:p.right,idx:i}));
    for(let i=rights.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[rights[i],rights[j]]=[rights[j],rights[i]];}
@@ -920,7 +928,8 @@ const RENDERERS={
      const lb=h.querySelector(`[data-l="${act}"]`);[lb,b].forEach(el=>{el.classList.add('matched');el.classList.remove('active');el.insertAdjacentHTML('afterbegin',`<span class="pairnum" style="background:${c}">${num}</span>`);});act=null;});
    bindPrimary(()=>{if(locked)return advance();if(Object.keys(pairs).length<task.pairs.length)return toast(L()==='de'?'Ordne alle zu':'Match them all');
      locked=true;let allOk=true;task.pairs.forEach((p,i)=>{const ok=pairs[i]===i;if(!ok)allOk=false;
-       h.querySelector(`[data-l="${i}"]`).classList.add(ok?'ok':'no');const rb=h.querySelector(`[data-r="${pairs[i]}"]`);if(rb)rb.classList.add(ok?'ok':'no');});
+       const lb=h.querySelector(`[data-l="${i}"]`);lb.classList.add(ok?'ok':'no');lb.insertAdjacentHTML('beforeend',ok?' ✓':' ✗');
+       const rb=h.querySelector(`[data-r="${pairs[i]}"]`);if(rb){rb.classList.add(ok?'ok':'no');rb.insertAdjacentHTML('beforeend',ok?' ✓':' ✗');}});
      scoreTask(allOk,task);showFeedback(allOk,allOk?'':(L()==='de'?'Schau dir die roten Paare nochmal an.':'Look at the red pairs again.'));document.getElementById('primaryBtn').textContent=t('next')+' →';});},
  sort(h,task){const items=task.items.map((it,i)=>({...it,i}));
    for(let i=items.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[items[i],items[j]]=[items[j],items[i]];}
@@ -934,14 +943,15 @@ const RENDERERS={
    chips().forEach(c=>c.onclick=()=>{if(locked||c.classList.contains('placed'))return;chips().forEach(x=>x.classList.remove('active'));c.classList.add('active');act=+c.dataset.i;h.querySelectorAll('.bucket').forEach(b=>b.classList.add('target'));});
    h.querySelectorAll('.bucket').forEach(b=>b.onclick=()=>{if(locked||act===null)return;placed[act]=+b.dataset.b;const chip=h.querySelector(`.chip[data-i="${act}"]`);chip.classList.add('placed');chip.classList.remove('active');b.querySelector('.drop').appendChild(chip);h.querySelectorAll('.bucket').forEach(x=>x.classList.remove('target'));act=null;});
    bindPrimary(()=>{if(locked)return advance();if(Object.keys(placed).length<items.length)return toast(L()==='de'?'Ordne alle ein':'Place them all');
-     locked=true;let allOk=true;items.forEach(it=>{const ok=placed[it.i]===it.bucket;if(!ok)allOk=false;h.querySelector(`.chip[data-i="${it.i}"]`).classList.add(ok?'ok':'no');});
+     locked=true;let allOk=true;items.forEach(it=>{const ok=placed[it.i]===it.bucket;if(!ok)allOk=false;
+       const chip=h.querySelector(`.chip[data-i="${it.i}"]`);chip.classList.add(ok?'ok':'no');chip.insertAdjacentHTML('beforeend',ok?' ✓':' ✗');});
      scoreTask(allOk,task);showFeedback(allOk,allOk?'':(L()==='de'?'Die roten Elemente gehören in den anderen Korb.':'Red items belong in the other bin.'));document.getElementById('primaryBtn').textContent=t('next')+' →';});},
  cloze(h,task){let locked=false;
    const html=task.segments.map(s=>{if(s.blank!==undefined){const b=task.blanks[s.blank];return `<select data-b="${s.blank}"><option value="">…</option>${b.options.map((o,i)=>`<option value="${i}">${tx(o)}</option>`).join('')}</select>`;}return tx(s);}).join('');
    h.innerHTML=`<div class="ttype">✏️ ${L()==='de'?'Lückentext':'Fill the gap'}</div><h3>${tx(task.q)}</h3><div class="cloze">${html}</div>${feedbackEl()}${taskFoot(t('check'))}`;
    bindPrimary(()=>{if(locked)return advance();const sels=[...h.querySelectorAll('select')];if(sels.some(s=>s.value===''))return toast(L()==='de'?'Fülle alle Lücken':'Fill all gaps');
      locked=true;let allOk=true;sels.forEach(s=>{const ok=(+s.value)===task.blanks[+s.dataset.b].correct;if(!ok)allOk=false;s.classList.add(ok?'ok':'no');s.disabled=true;});
-     scoreTask(allOk,task);showFeedback(allOk,'');document.getElementById('primaryBtn').textContent=t('next')+' →';});},
+     scoreTask(allOk,task);showFeedback(allOk,tx(task.explain||{de:'',en:''}));document.getElementById('primaryBtn').textContent=t('next')+' →';});},
  reflect(h,task){const key='reflect_'+(RUN.moduleId||RUN.grade)+'_'+RUN.idx,prev=Store.get(key)||'';
    h.innerHTML=`<div class="ttype">💬 ${tx(KOMP.R)}${task.prod?' · '+(L()==='de'?'Einreichung':'Submission'):''}</div><h3>${tx(task.q)}</h3>
      <div class="reflect"><textarea id="refl" placeholder="${tx(task.placeholder||{de:'',en:''})}">${prev}</textarea><div class="hint">${t('reflectHint')}</div></div>
