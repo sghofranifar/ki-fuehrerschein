@@ -10,13 +10,15 @@ Klassen **K05–K09** (German International Stream, DIA/Abitur-Pfad) an der
 (Punkte, Streak, Ränge, Fehlerspeicher, PNG-Zertifikate).
 
 ## Wichtigste Datei
-- `ki-fuehrerschein.html` — die komplette App (HTML + CSS + JS in **einer** Datei).
+- `index.html` — die komplette App (HTML + CSS + JS in **einer** Datei). Heißt bewusst
+  `index.html` (nicht mehr `ki-fuehrerschein.html`), damit GitHub Pages sie automatisch
+  unter der Root-URL ausliefert.
 - `gsis-logo.png` — muss **neben** der HTML liegen (relativ verlinkt, blendet sich sonst aus).
 
 ## Technik
 - Reines HTML/CSS/JS, **keine Build-Tools, keine Frameworks**.
 - Fortschritt in `localStorage` (Key `gsis_ki_v1`), mit In-Memory-Fallback.
-- **Offline-first**; Deployment als statische Seite (Netlify).
+- **Offline-first**; Deployment als statische Seite über **GitHub Pages** (Root braucht `index.html`).
 - Export/Import des Fortschritts per Base64-Code (Lehrkraft-Panel).
 - PNG-Export von Zertifikat und Dashboard via `html2canvas` (CDN).
 - **Hongkong-Hinweis:** Anthropic-API / Claude.ai sind in HK teils gesperrt. Die App
@@ -40,6 +42,10 @@ Klassen **K05–K09** (German International Stream, DIA/Abitur-Pfad) an der
 - Zertifikat + Dashboard zeigen **Name und Klasse**.
 - Inhalts-Backbone: KI-Kompetenzen (Verstehen/Anwenden/Reflektieren/Mitgestalten) +
   AILit-Framework (OECD/EU): Engage → Create/Manage → Shape.
+- Zusatzbereich **„Oberstufe · Projekttag"** (`CONTENT.OB`): immer sichtbare Kachel,
+  unabhängig von der K05–K09-Freischalt-Kette, eigener Zugangscode (`SENIOR_CODE`),
+  kein Abschlusstest/Zertifikat. 5 Blöcke zu wissenschaftlichem Arbeiten, Prüfungsregeln,
+  Eigenständigkeit und Quellenkritik/Plagiat für die Qualifikationsphase.
 
 ## Konventionen (bitte einhalten)
 - Alles **zweisprachig** pflegen: Textobjekte `{de:'…', en:'…'}`.
@@ -51,6 +57,8 @@ Klassen **K05–K09** (German International Stream, DIA/Abitur-Pfad) an der
 
 ## Wichtige Konstanten (im JS, oben)
 - `TEACHER_CODE = 'gsis-ki-2026'` — **noch auf echten Code ändern**.
+- `SENIOR_CODE = 'gsis-oberstufe-2026'` — Zugangscode für „Oberstufe · Projekttag",
+  **noch auf echten Code ändern**.
 - `PASS = 0.7`.
 
 ## Arbeitsweise mit mir
