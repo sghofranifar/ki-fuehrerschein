@@ -14,7 +14,7 @@
   --ink:#16181D; --muted:#616B78; --bg:#F5F6F8; --card:#FFFFFF;
   --line:#E5E8ED; --line-strong:#CDD3DB;
   --good:#1F9D6B; --good-bg:#E7F6EF; --bad:#D64545; --bad-bg:#FBEAEA; --gold:#C9A227;
-  --k05:#1FA37A; --k06:#2F7DC2; --k07:#7A5CC0; --k08:#D98324; --k09:#C0563E;
+  --k05:#1FA37A; --k06:#2F7DC2; --k07:#7A5CC0; --k08:#D98324; --k09:#C0563E; --ob:#3B4B8C;
   --radius:16px;
   --shadow:0 1px 2px rgba(20,24,33,.04),0 8px 24px rgba(20,24,33,.06);
   --shadow-lg:0 12px 40px rgba(20,24,33,.12);
@@ -273,7 +273,7 @@ const Store=(()=>{let ok=false,mem={};try{const k='__t';localStorage.setItem(k,'
 /* ===== 2) Zustand ===== */
 const SKEY='gsis_ki_v1';
 const DEFAULT_STATE={name:'',klasse:'',lang:'de',unlocked:['K05'],done:{},fuehrerschein:{},
-  points:0,streak:0,bestStreak:0,errors:[],teacher:false};
+  points:0,streak:0,bestStreak:0,errors:[],teacher:false,seniorUnlocked:false};
 let STATE=loadState();
 function loadState(){try{return Object.assign({},DEFAULT_STATE,JSON.parse(Store.get(SKEY)||'{}'));}catch(e){return JSON.parse(JSON.stringify(DEFAULT_STATE));}}
 function save(){Store.set(SKEY,JSON.stringify(STATE));}
@@ -296,6 +296,7 @@ const T={
   reflectHint:'Diese Antwort wird gespeichert und kann von deiner Lehrkraft gesehen werden.',submitWork:'Antwort abgeben',
   dragHint:'Tippe ein Element an, dann den passenden Korb.',matchHint:'Tippe links ein Element, dann rechts die passende Antwort.',
   classifyHint:'Ist das KI oder nicht? Entscheide für jedes Beispiel.',isAI:'KI',notAI:'keine KI',of:'/',overview:'Übersicht',errorsNav:'Fehlerspeicher',
+  obEy:'Zusatzangebot',obCodeTitle:'Zugangscode für die Oberstufe',obCodeLead:'Dieser Bereich ist für die Qualifikationsphase gedacht. Frag deine Kurslehrkraft nach dem Code.',obCodePh:'Zugangscode',
   foot:'KI-Führerschein · Spiralcurriculum K05–K09 · German Swiss International School'},
  en:{start:'Start now',heroEy:'AI literacy for grades 5–9',heroTitle:['Your ','AI Driving Licence',''],
   heroLead:'Understand, apply, question and co-create. Collect modules, clear levels and earn your licence step by step.',
@@ -314,11 +315,13 @@ const T={
   reflectHint:'This answer is saved and can be seen by your teacher.',submitWork:'Submit answer',
   dragHint:'Tap an item, then the matching bin.',matchHint:'Tap an item on the left, then its match on the right.',
   classifyHint:'Is this AI or not? Decide for each example.',isAI:'AI',notAI:'not AI',of:'/',overview:'Overview',errorsNav:'Mistakes',
+  obEy:'Extra',obCodeTitle:'Access code for senior years',obCodeLead:'This section is for the qualification phase. Ask your course teacher for the code.',obCodePh:'Access code',
   foot:'AI Driving Licence · Spiral curriculum G5–G9 · German Swiss International School'}
 };
 const L=()=>STATE.lang, t=k=>(T[L()][k]??k), tx=o=>(o&&(o[L()]??o.de))||'';
 /* ===== 4) Konfig ===== */
 const TEACHER_CODE='gsis-ki-2026';
+const SENIOR_CODE='gsis-oberstufe-2026';
 const PASS=0.7;
 const KOMP={V:{de:'Verstehen',en:'Understand'},A:{de:'Anwenden',en:'Apply'},R:{de:'Reflektieren',en:'Reflect'},M:{de:'Mitgestalten',en:'Co-create'}};
 const RANKS=[{p:0,ic:'🌱',de:'Einsteiger:in',en:'Beginner'},{p:140,ic:'🔍',de:'Entdecker:in',en:'Explorer'},
@@ -332,7 +335,10 @@ const GRADES=[
  {id:'K08',accent:'var(--k08)',niveau:'II→III',title:{de:'Klasse 8',en:'Grade 8'},focus:{de:'Auffrischung + Aufgaben teilen, ko-konstruieren, Grenzen & Datenschutz.',en:'Refresher + dividing tasks, co-creating, limits & data protection.'}},
  {id:'K09',accent:'var(--k09)',niveau:'III',title:{de:'Klasse 9',en:'Grade 9'},focus:{de:'Auffrischung + KI bewerten, Daten & Bias gestalten, Ethik & eigenes Projekt.',en:'Refresher + evaluating AI, shaping data & bias, ethics & own project.'}}
 ];
-const gradeById=id=>GRADES.find(g=>g.id===id);
+const OB_META={id:'OB',accent:'var(--ob)',
+ title:{de:'Oberstufe · Projekttag',en:'Senior years · Project day'},
+ focus:{de:'Wissenschaftliches Arbeiten, Quellenkritik und Verantwortung beim KI-Einsatz in der Qualifikationsphase.',en:'Academic work, source criticism and responsible AI use in the qualification phase.'}};
+const gradeById=id=>GRADES.find(g=>g.id===id)||(id==='OB'?OB_META:undefined);
 /* ===== 5) SVG-Icons (lizenzfrei, offline) ===== */
 const SVG_ICONS={
  speaker:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="6" y="3" width="12" height="18" rx="4"/><circle cx="12" cy="14" r="3.2"/><circle cx="12" cy="6.5" r="1"/></svg>',
@@ -675,6 +681,79 @@ const CONTENT={
   ]}
  ]
 };
+/* ===== 6a-2) Oberstufe · Projekttag (kein Abschlusstest, kein Zertifikat – eigenständiger Zusatzbereich) ===== */
+CONTENT.OB=[
+ {id:'OB-1',icon:'🔎',komp:'V',title:{de:'KI als Recherche- und Antwortmaschine',en:'AI as a research and answer engine'},tasks:[
+   {type:'info',title:{de:'Chatbot oder Antwortmaschine?',en:'Chatbot or answer engine?'},
+    body:{de:'<p>Klassische Chatbots wie ChatGPT oder Gemini erzeugen Text aus Wahrscheinlichkeiten – ohne automatisch Belege zu liefern. <strong>KI-Antwortmaschinen</strong> wie <strong>Perplexity</strong> kombinieren das mit einer Websuche und geben zu jeder Aussage <strong>Quellenlinks</strong> an.</p><p>Das ist praktisch für den Einstieg in ein Thema – ersetzt aber nicht das genaue Lesen und Bewerten der Originalquelle.</p>',
+          en:'<p>Classic chatbots such as ChatGPT or Gemini generate text from probabilities – without automatically providing evidence. <strong>AI answer engines</strong> such as <strong>Perplexity</strong> combine this with a web search and give <strong>source links</strong> for each claim.</p><p>That is useful to get started on a topic – but it does not replace actually reading and evaluating the original source.</p>'},
+    terms:[{de:'Antwortmaschine',en:'Answer engine'},{de:'Quellenlink',en:'Source link'},{de:'Wissenschaftliches Arbeiten',en:'Academic work'}]},
+   {type:'quiz',q:{de:'Was unterscheidet eine KI-Antwortmaschine wie Perplexity von einem klassischen Chatbot?',en:'What sets an AI answer engine like Perplexity apart from a classic chatbot?'},
+    options:[{de:'Sie durchsucht das Web und verlinkt ihre Quellen direkt bei der Antwort',en:'It searches the web and links its sources directly with the answer'},
+             {de:'Sie ist grundsätzlich fehlerfrei, weil sie Quellen nennt',en:'It is fundamentally error-free because it names sources'},
+             {de:'Sie funktioniert komplett ohne Training mit Daten',en:'It works entirely without being trained on data'}],
+    correct:0,explain:{de:'Der Kern ist die Verknüpfung von Websuche und Quellenangabe. Fehlerfrei ist sie dadurch nicht – auch genannte Quellen musst du selbst prüfen.',en:'The core is combining web search with source citation. That does not make it error-free – even cited sources need to be checked yourself.'}},
+   {type:'reflect',q:{de:'Probiere eine KI-Antwortmaschine (z. B. Perplexity) für eine Frage aus deinem Fach aus. Was fällt dir im Vergleich zu einer normalen Suchmaschine auf?',en:'Try an AI answer engine (e.g. Perplexity) for a question from one of your subjects. What stands out compared to a normal search engine?'},
+    placeholder:{de:'z. B. Antwortstruktur, Quellenauswahl, Grenzen …',en:'e.g. answer structure, source selection, limitations …'},prod:true}
+ ]},
+ {id:'OB-2',icon:'🧭',komp:'A',title:{de:'Themenfindung, Recherche & Strukturierung mit KI',en:'Finding topics, research & structuring with AI'},tasks:[
+   {type:'info',title:{de:'KI im Arbeitsprozess einer Facharbeit',en:'AI in the process of an extended essay'},
+    body:{de:'<p>KI kann in mehreren Phasen einer wissenschaftlichen Arbeit unterstützen: beim <strong>Brainstorming</strong> möglicher Themen, beim <strong>Einstieg in die Recherche</strong> und bei <strong>Gliederungsvorschlägen</strong>.</p><p>Nicht abnehmen kann sie dir: die <strong>eigene Fragestellung</strong> schärfen, Quellen <strong>kritisch bewerten</strong> und deine <strong>Argumentation</strong> entwickeln – das bleibt deine Eigenleistung.</p>',
+          en:'<p>AI can support several phases of an academic paper: <strong>brainstorming</strong> possible topics, an <strong>entry point into research</strong>, and suggesting an <strong>outline</strong>.</p><p>What it cannot do for you: sharpening your <strong>own research question</strong>, <strong>critically evaluating</strong> sources, and developing your <strong>argument</strong> – that stays your own work.</p>'}},
+   {type:'sort',q:{de:'Facharbeit/Praxisprojekt: Wo kann KI unterstützen, wo bist du gefragt?',en:'Extended essay/project: where can AI support you, where are you needed?'},
+    buckets:[{de:'KI kann unterstützen',en:'AI can support'},{de:'braucht deine eigene Leistung',en:'needs your own work'}],
+    items:[{text:{de:'erste Themen sammeln',en:'gathering first topic ideas'},bucket:0},
+           {text:{de:'die eigene Fragestellung präzisieren',en:'sharpening your own research question'},bucket:1},
+           {text:{de:'einen Gliederungsentwurf vorschlagen',en:'suggesting a draft outline'},bucket:0},
+           {text:{de:'Quellen kritisch bewerten und gewichten',en:'critically evaluating and weighing sources'},bucket:1},
+           {text:{de:'die eigene Argumentation entwickeln',en:'developing your own argument'},bucket:1}]},
+   {type:'reflect',q:{de:'Wende das auf ein eigenes Thema an (Facharbeit, Praxisprojekt o. Ä.): Wo würdest du KI konkret einsetzen – und wo bewusst nicht?',en:'Apply this to a topic of your own (extended essay, project etc.): where would you specifically use AI – and where deliberately not?'},
+    placeholder:{de:'Einsatz … / bewusst nicht …',en:'Use … / deliberately not …'},prod:true}
+ ]},
+ {id:'OB-3',icon:'📋',komp:'R',title:{de:'Spielregeln – KI bei Hausaufgaben, Prüfungen & Qualifikationsphase',en:'Ground rules – AI in homework, exams & the qualification phase'},tasks:[
+   {type:'info',title:{de:'Regeln kennen, bevor du KI einsetzt',en:'Know the rules before you use AI'},
+    body:{de:'<p>Ob und wie du KI nutzen darfst, hängt vom <strong>Format</strong> ab: Hausaufgabe, Klassenarbeit, Facharbeit, Abiturprüfung im 4./5. Fach oder ein bewertetes Lernprodukt in der Qualifikationsphase – überall gelten <strong>unterschiedliche Regeln</strong>.</p><p><strong>[Platzhalter – von der Schule zu ergänzen]:</strong> Hier trägt eure Schule die aktuell gültigen Regelungen für Hausaufgaben, die Abiturprüfung im 4./5. Fach im DIA sowie für Lernprodukte in der Qualifikationsphase ein.</p><p>Grundregel, die immer gilt: <strong>im Zweifel vorher fragen</strong> – nicht nachträglich rechtfertigen.</p>',
+          en:'<p>Whether and how you may use AI depends on the <strong>format</strong>: homework, class test, extended essay, the Abitur exam in the 4th/5th subject, or a graded learning product in the qualification phase – <strong>different rules</strong> apply everywhere.</p><p><strong>[Placeholder – to be completed by the school]:</strong> Your school fills in the currently valid rules here for homework, the Abitur exam in the 4th/5th DIA subject, and learning products in the qualification phase.</p><p>The rule that always applies: <strong>when in doubt, ask first</strong> – do not justify it afterwards.</p>'}},
+   {type:'quiz',q:{de:'Warum können sich die Regeln zum KI-Einsatz zwischen Hausaufgabe und Abiturprüfung unterscheiden?',en:'Why can the rules for AI use differ between homework and the Abitur exam?'},
+    options:[{de:'Weil bei Prüfungen die eigene, unter Aufsicht erbrachte Leistung bewertet wird, bei Hausaufgaben eher der Lernprozess',en:'Because exams assess your own performance under supervision, while homework is more about the learning process'},
+             {de:'Weil KI bei Prüfungen technisch nicht funktioniert',en:'Because AI technically does not work during exams'},
+             {de:'Es gibt keinen sinnvollen Grund für den Unterschied',en:'There is no sensible reason for the difference'}],
+    correct:0,explain:{de:'Prüfungen sollen deine eigene Leistung unter vergleichbaren Bedingungen zeigen – deshalb sind die Regeln dort strenger als bei Übungsformaten.',en:'Exams are meant to show your own performance under comparable conditions – that is why the rules there are stricter than for practice formats.'}},
+   {type:'reflect',q:{de:'Für welches Fach/Format bist du dir aktuell unsicher, was erlaubt ist? Formuliere eine konkrete Frage, die du deiner Kurslehrkraft stellen willst.',en:'For which subject/format are you currently unsure what is allowed? Formulate a concrete question you want to ask your course teacher.'},
+    placeholder:{de:'z. B. Fach, Situation, konkrete Frage …',en:'e.g. subject, situation, specific question …'},prod:true}
+ ]},
+ {id:'OB-4',icon:'✍️',komp:'M',title:{de:'Eigenständiges Arbeiten mit KI-Unterstützung',en:'Working independently with AI support'},tasks:[
+   {type:'info',title:{de:'Was „geistige Eigenleistung" bedeutet',en:'What "own intellectual work" means'},
+    body:{de:'<p>Eine KI-unterstützte Arbeit bleibt deine eigene, wenn <strong>die Fragestellung, die Bewertung der Ergebnisse und die endgültige Argumentation von dir stammen</strong>. KI darf <strong>Sparringspartner</strong> sein – nicht Autor:in.</p><p>Wichtig: <strong>Dokumentiere</strong>, wo und wie du KI genutzt hast. Das schützt dich und zeigt Transparenz.</p>',
+          en:'<p>An AI-supported piece of work remains your own if <strong>the research question, the evaluation of results and the final argument come from you</strong>. AI may be a <strong>sparring partner</strong> – not the author.</p><p>Important: <strong>document</strong> where and how you used AI. That protects you and shows transparency.</p>'}},
+   {type:'multi',q:{de:'Was gehört zu eigenständigem, redlichem Arbeiten mit KI-Unterstützung? (Mehrere)',en:'What belongs to independent, honest work with AI support? (Several)'},
+    options:[{de:'Die eigene Fragestellung selbst entwickeln',en:'Developing your own research question yourself'},
+             {de:'Dokumentieren, wo KI genutzt wurde',en:'Documenting where AI was used'},
+             {de:'KI-Vorschläge kritisch prüfen, bevor du sie übernimmst',en:'Critically checking AI suggestions before adopting them'},
+             {de:'KI-Text unverändert als eigenen Text abgeben',en:'Submitting AI text unchanged as your own'}],
+    correct:[0,1,2],explain:{de:'Eigene Fragestellung, Dokumentation und kritische Prüfung sichern deine Eigenleistung – unverändert übernommener KI-Text tut das Gegenteil.',en:'Your own question, documentation and critical checking safeguard your own contribution – submitting AI text unchanged does the opposite.'}},
+   {type:'reflect',q:{de:'Beschreibe ein Beispiel (real oder geplant), wie du KI eigenständig und redlich in einer Arbeit einsetzt.',en:'Describe an example (real or planned) of how you use AI independently and honestly in a piece of work.'},
+    placeholder:{de:'Fach, Aufgabe, konkreter KI-Einsatz …',en:'Subject, task, specific AI use …'},prod:true}
+ ]},
+ {id:'OB-5',icon:'🧐',komp:'R',title:{de:'Quellenkritik & Plagiatsproblematik',en:'Source criticism & plagiarism issues'},tasks:[
+   {type:'info',title:{de:'Wenn KI Quellen erfindet',en:'When AI invents sources'},
+    body:{de:'<p>KI-Systeme können <strong>Zitate, Studien oder Quellenangaben erfinden</strong>, die überzeugend klingen, aber nicht existieren. Jede von einer KI genannte Quelle musst du <strong>selbst suchen und verifizieren</strong>, bevor du sie verwendest.</p><p><strong>Plagiat</strong> bedeutet, fremde (auch KI-generierte) Formulierungen oder Ideen als eigene auszugeben. Nutzt du KI-Text, musst du das <strong>kenntlich machen</strong> – genau wie ein Zitat.</p>',
+          en:'<p>AI systems can <strong>invent quotes, studies or references</strong> that sound convincing but do not exist. Every source an AI names must be <strong>found and verified by you</strong> before you use it.</p><p><strong>Plagiarism</strong> means presenting someone else\'s (including AI-generated) wording or ideas as your own. If you use AI text, you must <strong>mark it as such</strong> – just like a quotation.</p>'}},
+   {type:'quiz',q:{de:'Eine KI nennt dir eine Studie mit Autor:in, Jahr und Titel als Beleg. Was tust du?',en:'An AI gives you a study with author, year and title as evidence. What do you do?'},
+    options:[{de:'Ich suche die Studie eigenständig und prüfe, ob sie wirklich existiert',en:'I look up the study myself and check whether it really exists'},
+             {de:'Ich übernehme den Beleg, die Angaben klingen genau genug',en:'I use the reference as is, the details sound precise enough'},
+             {de:'Ich frage die KI nochmal, ob sie sich sicher ist',en:'I ask the AI again whether it is sure'}],
+    correct:0,explain:{de:'KI kann täuschend genaue, aber frei erfundene Quellen nennen. Nur eine eigenständige Prüfung schützt dich vor einem Fake-Beleg.',en:'AI can name deceptively precise but entirely invented sources. Only checking it yourself protects you from a fake reference.'}},
+   {type:'multi',q:{de:'Was zählt im KI-Kontext als Plagiat? (Mehrere)',en:'What counts as plagiarism in an AI context? (Several)'},
+    options:[{de:'KI-generierten Text unverändert ohne Kennzeichnung abgeben',en:'Submitting AI-generated text unchanged without labelling it'},
+             {de:'Eine von der KI vorgeschlagene Formulierung übernehmen, ohne es zu vermerken',en:'Adopting a wording suggested by AI without noting it'},
+             {de:'Mit KI brainstormen und danach selbst schreiben',en:'Brainstorming with AI and then writing it yourself'},
+             {de:'Eine KI-Quelle nennen, ohne sie geprüft zu haben',en:'Citing an AI-given source without having checked it'}],
+    correct:[0,1,3],explain:{de:'Selbst geschriebene Texte nach KI-Brainstorming sind kein Plagiat. Unmarkierte Übernahme von KI-Formulierungen und ungeprüfte KI-Quellen sind es – bzw. ein Beleg-Problem.',en:'Text you write yourself after AI brainstorming is not plagiarism. Unmarked use of AI wording and unchecked AI sources are – or at least a serious sourcing problem.'}},
+   {type:'reflect',q:{de:'Formuliere 3 eigene Leitlinien, wie du KI in deiner Qualifikationsphase eigenständig, redlich und verantwortungsvoll nutzen willst.',en:'Formulate 3 personal guidelines for using AI independently, honestly and responsibly during your qualification phase.'},
+    placeholder:{de:'1. … 2. … 3. …',en:'1. … 2. … 3. …'},prod:true}
+ ]}
+];
 /* ===== 6b) Abschlusstests — eigene, bündelnde Aufgaben (KEINE Kopien) ===== */
 const EXAM={
  K05:[
@@ -795,7 +874,7 @@ const EXAM={
 function modulesOf(g){return CONTENT[g]||[];}
 function gradeComplete(g){const m=modulesOf(g);return m.length>0&&m.every(x=>STATE.done[x.id]);}
 function gradeProgress(g){const m=modulesOf(g);if(!m.length)return 0;return Math.round(m.filter(x=>STATE.done[x.id]).length/m.length*100);}
-function isUnlocked(g){return STATE.teacher||STATE.unlocked.includes(g);}
+function isUnlocked(g){if(g==='OB')return STATE.teacher||STATE.seniorUnlocked;return STATE.teacher||STATE.unlocked.includes(g);}
 /* ===== 7) Router ===== */
 let CURRENT={grade:null,module:null,exam:false};
 const view=()=>document.getElementById('view');
@@ -803,7 +882,8 @@ function go(where,o={}){window.scrollTo(0,0);
   if(where==='landing')renderLanding();else if(where==='grades')renderGrades();
   else if(where==='overview')renderOverview(o.grade);else if(where==='module')renderRunner(o.grade,o.module,false);
   else if(where==='exam')renderRunner(o.grade,null,true);else if(where==='dashboard')renderDashboard();
-  else if(where==='errors')renderErrors();else if(where==='cert')renderCert(o.grade);updateChrome();}
+  else if(where==='errors')renderErrors();else if(where==='cert')renderCert(o.grade);
+  else if(where==='senior')renderSeniorOverview();updateChrome();}
 function updateChrome(){
   document.getElementById('lblOverview').textContent=t('overview');
   document.getElementById('lblErrors').textContent=t('errorsNav');
@@ -832,8 +912,16 @@ function renderGrades(){setCrumb([`<b>${t('chooseGrade')}</b>`]);
       <div class="gmeta"><span>${ms?`${ms} ${t('modules')}`:'—'}</span>
         ${got?`<span class="seal-mini">🎖️ ${t('completed')}</span>`:open?`<span>${prog}%</span>`:`<span class="lock-pill">🔒 ${t('locked')}</span>`}</div>
     </button>`;}).join('');
+  const obOpen=isUnlocked('OB');
+  const obCard=`<button class="gcard open" style="--accent:${OB_META.accent}" onclick="${obOpen?"go('senior')":'openSenior()'}">
+      <div class="gcard-top"><span class="gbadge">${L()==='de'?'Oberstufe':'Senior years'}</span>${obOpen?'':'<span class="glevel">🔒</span>'}</div>
+      <h3>${tx(OB_META.title)}</h3><p>${tx(OB_META.focus)}</p>
+      <div class="gmeta"><span>${modulesOf('OB').length} ${t('modules')}</span>${obOpen?`<span>${gradeProgress('OB')}%</span>`:`<span class="lock-pill">🔒 ${t('obCodeTitle')}</span>`}</div>
+    </button>`;
   view().innerHTML=`<section class="view"><div class="section-head"><div class="eyebrow">${t('gradeEy')} K05–K09</div>
-    <h2>${t('chooseGrade')}</h2><p class="lead">${t('chooseGradeLead')}</p></div><div class="grades">${cards}</div></section>`;}
+    <h2>${t('chooseGrade')}</h2><p class="lead">${t('chooseGradeLead')}</p></div><div class="grades">${cards}</div>
+    <div class="section-head" style="margin-top:34px"><div class="eyebrow">${t('obEy')}</div></div>
+    <div class="grades">${obCard}</div></section>`;}
 function renderOverview(grade){if(!isUnlocked(grade))return go('grades');
   const g=gradeById(grade);CURRENT.grade=grade;setCrumb([`${t('gradeEy')} ${grade}`,`<b>${t('overviewOf')}</b>`]);
   const ms=modulesOf(grade);
@@ -852,6 +940,17 @@ function renderOverview(grade){if(!isUnlocked(grade))return go('grades');
       <div class="stat"><b>${STATE.points}</b><span>${t('points')}</span></div><div class="stat"><b>${STATE.bestStreak}</b><span>${t('streak')}</span></div></div>
     </div><div class="modlist">${modsHtml}</div>${examHtml}
     <div style="margin-top:22px"><button class="btn ghost sm" onclick="go('grades')">← ${t('back')}</button></div></section>`;}
+function renderSeniorOverview(){if(!isUnlocked('OB'))return go('grades');
+  setCrumb([`<b>${tx(OB_META.title)}</b>`]);const ms=modulesOf('OB');
+  const modsHtml=ms.length?ms.map((m,i)=>{const done=STATE.done[m.id];
+    return `<button class="mod ${done?'done':''}" style="--accent:${OB_META.accent}" onclick="go('module',{grade:'OB',module:'${m.id}'})">
+      <div class="mod-ic">${m.icon}</div><div class="mod-body"><h4>${i+1} · ${tx(m.title)}</h4>
+      <div class="mod-tags"><span class="tag komp">${tx(KOMP[m.komp])}</span>${done?`<span class="tag">${done.score}/${done.total} ✓</span>`:''}</div>
+      </div><div class="mod-right"><div class="check">✓</div></div></button>`;}).join(''):`<div class="empty">—</div>`;
+  view().innerHTML=`<section class="view"><div class="ov-head">
+    <div class="ov-title"><div class="eyebrow" style="color:${OB_META.accent}">${t('obEy')}</div><h2>${tx(OB_META.title)}</h2><p class="lead">${tx(OB_META.focus)}</p></div>
+    </div><div class="modlist">${modsHtml}</div>
+    <div style="margin-top:22px"><button class="btn ghost sm" onclick="go('grades')">← ${t('back')}</button></div></section>`;}
 /* ===== 8) Runner ===== */
 let RUN=null;
 function buildExamTasks(grade){const pool=(EXAM[grade]||[]).map(x=>({...x}));
@@ -861,7 +960,7 @@ function renderRunner(grade,moduleId,exam){if(!isUnlocked(grade))return go('grad
   if(exam){tasks=buildExamTasks(grade);label=`🏁 ${t('exam')}`;CURRENT.exam=true;CURRENT.module=null;}
   else{const m=modulesOf(grade).find(x=>x.id===moduleId);tasks=m.tasks;label=tx(m.title);CURRENT.exam=false;CURRENT.module=moduleId;}
   CURRENT.grade=grade;RUN={grade,moduleId,exam,tasks,idx:0,score:0,gradeable:0,accent:g.accent,label};
-  setCrumb([`${t('gradeEy')} ${grade}`,`<b>${label}</b>`]);drawTask();}
+  setCrumb([grade==='OB'?tx(OB_META.title):`${t('gradeEy')} ${grade}`,`<b>${label}</b>`]);drawTask();}
 function drawTask(){const{tasks,idx,accent,label}=RUN,task=tasks[idx],pct=Math.round(idx/tasks.length*100);
   view().innerHTML=`<section class="view runner" style="--accent:${accent}">
     <div class="progressbar"><i style="width:${pct}%"></i></div>
@@ -965,12 +1064,13 @@ function finishRun(){const{grade,moduleId,exam,score,gradeable,accent}=RUN;
     renderRunResult({exam:true,passed,score,total:gradeable,grade,accent});}
   else{STATE.done[moduleId]={score,total:gradeable,ts:Date.now()};save();renderRunResult({exam:false,score,total:gradeable,grade,moduleId,accent});}
   updateChrome();}
-function renderRunResult(r){setCrumb([`${t('gradeEy')} ${r.grade}`,`<b>✓</b>`]);let ic,head,sub,actions;
+function renderRunResult(r){setCrumb([r.grade==='OB'?tx(OB_META.title):`${t('gradeEy')} ${r.grade}`,`<b>✓</b>`]);let ic,head,sub,actions;
   if(r.exam){ic=r.passed?'🎖️':'🔁';head=r.passed?t('examPassed'):t('examFailed');sub=`${r.score} ${t('scoreOf')} ${r.total}`;
     actions=r.passed?`<button class="btn" onclick="go('cert',{grade:'${r.grade}'})">${t('viewCert')} →</button><button class="btn ghost" onclick="go('overview',{grade:'${r.grade}'})">${t('toOverview')}</button>`
       :`<button class="btn" onclick="go('exam',{grade:'${r.grade}'})">${t('retry')}</button><button class="btn ghost" onclick="go('overview',{grade:'${r.grade}'})">${t('toOverview')}</button>`;}
   else{ic='🏅';head=t('moduleDone');sub=`${r.score} ${t('scoreOf')} ${r.total}`;
-    actions=`<button class="btn" onclick="go('overview',{grade:'${r.grade}'})">${t('toOverview')} →</button><button class="btn ghost" onclick="go('module',{grade:'${r.grade}',module:'${r.moduleId}'})">${t('retry')}</button>`;}
+    const backTarget=r.grade==='OB'?"go('senior')":`go('overview',{grade:'${r.grade}'})`;
+    actions=`<button class="btn" onclick="${backTarget}">${t('toOverview')} →</button><button class="btn ghost" onclick="go('module',{grade:'${r.grade}',module:'${r.moduleId}'})">${t('retry')}</button>`;}
   view().innerHTML=`<section class="view result" style="--accent:${r.accent}"><div class="badge-pop"><span>${ic}</span></div>
     <h2>${head}</h2><div class="scoreline">${sub}</div><div class="scoreline">+${r.score*10} ${t('points')} · 🔥 ${STATE.bestStreak}</div>
     <div class="result-actions">${actions}</div></section>`;}
@@ -983,6 +1083,7 @@ function renderDashboard(){setCrumb([`<b>${t('yourOverview')}</b>`]);
     const inner=ms.map((m,i)=>`<div class="bchip ${STATE.done[m.id]?'earned':'locked'}" style="--accent2:${g.accent}"><div class="ic">${m.icon}</div><span>${g.id}·M${i+1}</span></div>`).join('');
     return inner+`<div class="bchip ${STATE.fuehrerschein[g.id]?'earned':'locked'}" style="--accent2:${g.accent}"><div class="ic">🎖️</div><span>${g.id}</span></div>`;}).join('');
   const rows=Object.entries(STATE.done).map(([id,d])=>{let title=id;GRADES.forEach(g=>modulesOf(g.id).forEach(m=>{if(m.id===id)title=tx(m.title);}));
+    modulesOf('OB').forEach(m=>{if(m.id===id)title=tx(m.title);});
     const pct=d.total?Math.round(d.score/d.total*100):0;return `<div class="bar-row"><span>${title}</span><div class="bar-track"><i style="width:${pct}%"></i></div><span class="pct">${pct}%</span></div>`;}).join('')||`<div class="empty">${t('noData')}</div>`;
   view().innerHTML=`<section class="view"><div class="section-head"><div class="eyebrow">${t('yourOverview')}</div><h2>${t('yourOverview')}</h2></div>
     <div id="dashExport">
@@ -1032,6 +1133,9 @@ function openName(after){modal(`<h3>${t('nameTitle')}</h3><p>${t('nameLead')}</p
    <div class="modal-actions"><button class="btn" id="nameSave">${t('save')}</button></div>`);
   document.getElementById('nameIn').focus();
   document.getElementById('nameSave').onclick=()=>{const v=document.getElementById('nameIn').value.trim();STATE.klasse=document.getElementById('klasseIn').value.trim();if(v)STATE.name=v;save();closeModal();updateChrome();if(after)after();};}
+function openSenior(){modal(`<h3>${t('obCodeTitle')}</h3><p>${t('obCodeLead')}</p><input class="field" id="obcode" type="password" placeholder="${t('obCodePh')}">
+    <div class="modal-actions"><button class="btn ghost" onclick="closeModal()">${t('close')}</button><button class="btn" id="obUnlockBtn">${t('unlock')}</button></div>`);
+  document.getElementById('obUnlockBtn').onclick=()=>{if(document.getElementById('obcode').value.trim()===SENIOR_CODE){STATE.seniorUnlocked=true;save();closeModal();go('senior');}else toast(L()==='de'?'Code falsch':'Wrong code');};}
 function openTeacher(){if(STATE.teacher)return teacherPanel();
   modal(`<h3>${t('teacherTitle')}</h3><p>${t('teacherLead')}</p><input class="field" id="tcode" type="password" placeholder="${t('codePh')}">
     <div class="modal-actions"><button class="btn ghost" onclick="closeModal()">${t('close')}</button><button class="btn" id="tUnlock">${t('unlock')}</button></div>`);
