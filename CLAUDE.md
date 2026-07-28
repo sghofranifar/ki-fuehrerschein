@@ -46,7 +46,9 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
 - Aufgabentypen: `info | quiz | multi | match | sort | cloze | reflect | classify`.
   `classify` = visuelle „Ist das KI?"-Aufgabe mit eingebetteten SVG-Icons.
 - Pro Jahrgang ein eigener **Abschlusstest** (`EXAM[grade]`) — bündelnde Aufgaben,
-  **keine** Modul-Kopien. Bestehensschwelle `PASS = 0.7`.
+  **keine** Modul-Kopien. Bestehensschwelle `PASS = 0.75`, gilt **auch für einzelne
+  Module** (nicht nur den Abschlusstest): Unter 75% richtig wird das Modul nicht als
+  „done" gespeichert, die Aufgaben müssen wiederholt werden (siehe `finishRun()`).
 - Zertifikat + Dashboard zeigen **Name und Klasse**.
 - Inhalts-Backbone: KI-Kompetenzen (Verstehen/Anwenden/Reflektieren/Mitgestalten) +
   AILit-Framework (OECD/EU): Engage → Create/Manage → Shape.
@@ -75,7 +77,7 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
 - `GRADE_CODES` — je ein Direktzugangs-Code pro Jahrgang (K05–K10), **noch auf echte
   Codes ändern**: K05 `gsis-k05-2026`, K06 `gsis-k06-2026`, K07 `gsis-k07-2026`,
   K08 `gsis-k08-2026`, K09 `gsis-k09-2026`, K10 `gsis-k10-2026`.
-- `PASS = 0.7`.
+- `PASS = 0.75` — gilt einheitlich für Module und Abschlusstests.
 
 ## Arbeitsweise mit mir
 - Erst kurz sagen, was du vorhast, dann ändern — nicht alles auf einmal.

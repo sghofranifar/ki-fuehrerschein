@@ -288,7 +288,7 @@ const T={
   gradeEy:'Jahrgang',locked:'Gesperrt',completed:'Geschafft',modules:'Module',module:'Modul',overviewOf:'Übersicht',points:'Punkte',streak:'Serie',
   exam:'Abschlusstest',examLead:'Schließe zuerst alle Module ab. Im Abschlusstest wird dein gesamtes Wissen des Jahrgangs gebündelt geprüft.',
   startExam:'Abschlusstest starten',examLocked:'Erst alle Module abschließen',back:'Zurück',check:'Prüfen',next:'Weiter',skipInfo:'Verstanden, weiter',
-  correct:'Richtig!',wrong:'Noch nicht ganz.',yourStreak:'Serie:',saved:'Gespeichert',moduleDone:'Modul geschafft!',examPassed:'Führerschein erhalten!',examFailed:'Knapp daneben',
+  correct:'Richtig!',wrong:'Noch nicht ganz.',yourStreak:'Serie:',saved:'Gespeichert',moduleDone:'Modul geschafft!',moduleRetry:'Noch nicht ganz – wiederhole das Modul',examPassed:'Führerschein erhalten!',examFailed:'Knapp daneben',needPassHint:'Für den Abschluss sind mindestens 75% richtige Antworten nötig.',
   scoreOf:'von',toOverview:'Zur Jahrgangsübersicht',retry:'Nochmal üben',viewCert:'Zertifikat ansehen',yourOverview:'Deine Übersicht',rank:'Rang',badges:'Abzeichen',analytics:'Auswertung deiner Module',
   noData:'Noch keine Daten – leg in einem Modul los!',mistakes:'Fehlerspeicher',noMistakes:'Kein Fehler gespeichert. Stark!',exportPng:'Als PNG speichern',
   certTitle:'KI-Führerschein',awarded:'verliehen an',forGrade:'für den erfolgreichen Abschluss von',date:'Datum',signature:'Lernbegleitung',
@@ -309,7 +309,7 @@ const T={
   gradeEy:'Grade',locked:'Locked',completed:'Done',modules:'modules',module:'Module',overviewOf:'Overview',points:'Points',streak:'Streak',
   exam:'Final test',examLead:'Finish all modules first. The final test bundles everything you learned this grade into one challenge.',
   startExam:'Start final test',examLocked:'Finish all modules first',back:'Back',check:'Check',next:'Next',skipInfo:'Got it, next',
-  correct:'Correct!',wrong:'Not quite yet.',yourStreak:'Streak:',saved:'Saved',moduleDone:'Module complete!',examPassed:'Licence earned!',examFailed:'So close',
+  correct:'Correct!',wrong:'Not quite yet.',yourStreak:'Streak:',saved:'Saved',moduleDone:'Module complete!',moduleRetry:'Not quite yet – repeat the module',examPassed:'Licence earned!',examFailed:'So close',needPassHint:'You need at least 75% correct answers to complete this.',
   scoreOf:'of',toOverview:'Back to grade overview',retry:'Practise again',viewCert:'View certificate',yourOverview:'Your overview',rank:'Rank',badges:'Badges',analytics:'Your module results',
   noData:'No data yet – start a module!',mistakes:'Mistakes',noMistakes:'No mistakes stored. Nice!',exportPng:'Save as PNG',
   certTitle:'AI Driving Licence',awarded:'awarded to',forGrade:'for successfully completing',date:'Date',signature:'Teacher',
@@ -330,7 +330,7 @@ const L=()=>STATE.lang, t=k=>(T[L()][k]??k), tx=o=>(o&&(o[L()]??o.de))||'';
 const TEACHER_CODE='gsis-ki-2026';
 const SENIOR_CODE='gsis-oberstufe-2026';
 const GRADE_CODES={K05:'gsis-k05-2026',K06:'gsis-k06-2026',K07:'gsis-k07-2026',K08:'gsis-k08-2026',K09:'gsis-k09-2026',K10:'gsis-k10-2026'};
-const PASS=0.7;
+const PASS=0.75;
 const KOMP={V:{de:'Verstehen',en:'Understand'},A:{de:'Anwenden',en:'Apply'},R:{de:'Reflektieren',en:'Reflect'},M:{de:'Mitgestalten',en:'Co-create'}};
 const RANKS=[{p:0,ic:'🌱',de:'Einsteiger:in',en:'Beginner'},{p:140,ic:'🔍',de:'Entdecker:in',en:'Explorer'},
  {p:340,ic:'🧭',de:'Kenner:in',en:'Navigator'},{p:620,ic:'⚙️',de:'Profi',en:'Pro'},{p:950,ic:'🏆',de:'Expert:in',en:'Expert'}];
@@ -1160,21 +1160,25 @@ const RENDERERS={
    bindPrimary(()=>{const v=document.getElementById('refl').value.trim();if(v.length<3)return toast(L()==='de'?'Schreib kurz etwas':'Write something short');Store.set(key,v);toast(t('saved'));advance();});}
 };
 function finishRun(){const{grade,moduleId,exam,score,gradeable,accent}=RUN;
-  if(exam){const ratio=gradeable?score/gradeable:0,passed=ratio>=PASS;
+  const ratio=gradeable?score/gradeable:1,passed=ratio>=PASS;
+  if(exam){
     if(passed){STATE.fuehrerschein[grade]={ts:Date.now(),score:Math.round(ratio*100)};
       const idx=GRADES.findIndex(x=>x.id===grade),nxt=GRADES[idx+1];if(nxt&&!STATE.unlocked.includes(nxt.id))STATE.unlocked.push(nxt.id);save();}
     renderRunResult({exam:true,passed,score,total:gradeable,grade,accent});}
-  else{STATE.done[moduleId]={score,total:gradeable,ts:Date.now()};save();renderRunResult({exam:false,score,total:gradeable,grade,moduleId,accent});}
+  else{
+    if(passed){STATE.done[moduleId]={score,total:gradeable,ts:Date.now()};save();}
+    renderRunResult({exam:false,passed,score,total:gradeable,grade,moduleId,accent});}
   updateChrome();}
 function renderRunResult(r){setCrumb([r.grade==='OB'?tx(OB_META.title):`${t('gradeEy')} ${r.grade}`,`<b>✓</b>`]);let ic,head,sub,actions;
   if(r.exam){ic=r.passed?'🎖️':'🔁';head=r.passed?t('examPassed'):t('examFailed');sub=`${r.score} ${t('scoreOf')} ${r.total}`;
     actions=r.passed?`<button class="btn" onclick="go('cert',{grade:'${r.grade}'})">${t('viewCert')} →</button><button class="btn ghost" onclick="go('overview',{grade:'${r.grade}'})">${t('toOverview')}</button>`
       :`<button class="btn" onclick="go('exam',{grade:'${r.grade}'})">${t('retry')}</button><button class="btn ghost" onclick="go('overview',{grade:'${r.grade}'})">${t('toOverview')}</button>`;}
-  else{ic='🏅';head=t('moduleDone');sub=`${r.score} ${t('scoreOf')} ${r.total}`;
+  else{ic=r.passed?'🏅':'🔁';head=r.passed?t('moduleDone'):t('moduleRetry');sub=`${r.score} ${t('scoreOf')} ${r.total}`;
     const backTarget=r.grade==='OB'?"go('senior')":`go('overview',{grade:'${r.grade}'})`;
-    actions=`<button class="btn" onclick="${backTarget}">${t('toOverview')} →</button><button class="btn ghost" onclick="go('module',{grade:'${r.grade}',module:'${r.moduleId}'})">${t('retry')}</button>`;}
+    actions=r.passed?`<button class="btn" onclick="${backTarget}">${t('toOverview')} →</button><button class="btn ghost" onclick="go('module',{grade:'${r.grade}',module:'${r.moduleId}'})">${t('retry')}</button>`
+      :`<button class="btn" onclick="go('module',{grade:'${r.grade}',module:'${r.moduleId}'})">${t('retry')} →</button><button class="btn ghost" onclick="${backTarget}">${t('toOverview')}</button>`;}
   view().innerHTML=`<section class="view result" style="--accent:${r.accent}"><div class="badge-pop"><span>${ic}</span></div>
-    <h2>${head}</h2><div class="scoreline">${sub}</div><div class="scoreline">+${r.score*10} ${t('points')} · 🔥 ${STATE.bestStreak}</div>
+    <h2>${head}</h2><div class="scoreline">${sub}</div>${!r.passed?`<div class="scoreline">${t('needPassHint')}</div>`:''}<div class="scoreline">+${r.score*10} ${t('points')} · 🔥 ${STATE.bestStreak}</div>
     <div class="result-actions">${actions}</div></section>`;}
 /* ===== 9) Dashboard (Name + Klasse im PNG-Export) ===== */
 function renderDashboard(){setCrumb([`<b>${t('yourOverview')}</b>`]);
