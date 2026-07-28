@@ -14,7 +14,7 @@
   --ink:#16181D; --muted:#616B78; --bg:#F5F6F8; --card:#FFFFFF;
   --line:#E5E8ED; --line-strong:#CDD3DB;
   --good:#1F9D6B; --good-bg:#E7F6EF; --bad:#D64545; --bad-bg:#FBEAEA; --gold:#C9A227;
-  --k05:#1FA37A; --k06:#2F7DC2; --k07:#7A5CC0; --k08:#D98324; --k09:#C0563E; --ob:#3B4B8C;
+  --k05:#1FA37A; --k06:#2F7DC2; --k07:#7A5CC0; --k08:#D98324; --k09:#C0563E; --k10:#A67C27; --ob:#3B4B8C;
   --radius:16px;
   --shadow:0 1px 2px rgba(20,24,33,.04),0 8px 24px rgba(20,24,33,.06);
   --shadow-lg:0 12px 40px rgba(20,24,33,.12);
@@ -301,7 +301,7 @@ const T={
   classifyHint:'Ist das KI oder nicht? Entscheide für jedes Beispiel.',isAI:'KI',notAI:'keine KI',of:'/',overview:'Übersicht',errorsNav:'Fehlerspeicher',
   obEy:'Zusatzangebot',obCodeTitle:'Zugangscode für die Oberstufe',obCodeLead:'Dieser Bereich ist für die Qualifikationsphase gedacht. Frag deine Kurslehrkraft nach dem Code.',obCodePh:'Zugangscode',
   impressum:'Impressum',privacy:'Datenschutz',privacyNote:'Deine Daten bleiben auf diesem Gerät – nichts wird an einen Server gesendet.',
-  foot:'KI-Führerschein · Spiralcurriculum K05–K09 · German Swiss International School'},
+  foot:'KI-Führerschein · Spiralcurriculum K05–K10 · German Swiss International School'},
  en:{start:'Start now',heroEy:'AI literacy for grades 5–9',heroTitle:['Your ','AI Driving Licence',''],
   heroLead:'Understand, apply, question and co-create. Collect modules, clear levels and earn your licence step by step.',
   chooseGrade:'Choose your grade',chooseGradeLead:'You work in your own grade. Higher grades unlock once you hold the licence of the level before.',
@@ -321,7 +321,7 @@ const T={
   classifyHint:'Is this AI or not? Decide for each example.',isAI:'AI',notAI:'not AI',of:'/',overview:'Overview',errorsNav:'Mistakes',
   obEy:'Extra',obCodeTitle:'Access code for senior years',obCodeLead:'This section is for the qualification phase. Ask your course teacher for the code.',obCodePh:'Access code',
   impressum:'Legal notice',privacy:'Privacy',privacyNote:'Your data stays on this device – nothing is sent to a server.',
-  foot:'AI Driving Licence · Spiral curriculum G5–G9 · German Swiss International School'}
+  foot:'AI Driving Licence · Spiral curriculum G5–G10 · German Swiss International School'}
 };
 const L=()=>STATE.lang, t=k=>(T[L()][k]??k), tx=o=>(o&&(o[L()]??o.de))||'';
 /* ===== 4) Konfig ===== */
@@ -338,7 +338,8 @@ const GRADES=[
  {id:'K06',accent:'var(--k06)',niveau:'I→II',title:{de:'Klasse 6',en:'Grade 6'},focus:{de:'Auffrischung + wie KI „lernt", Empfehlungen, gute Prompts, prüfen.',en:'Refresher + how AI "learns", recommendations, good prompts, checking.'}},
  {id:'K07',accent:'var(--k07)',niveau:'II',title:{de:'Klasse 7',en:'Grade 7'},focus:{de:'Auffrischung + Bias & Fairness, Halluzinationen, mit KI gestalten, Quellen.',en:'Refresher + bias & fairness, hallucinations, creating with AI, sources.'}},
  {id:'K08',accent:'var(--k08)',niveau:'II→III',title:{de:'Klasse 8',en:'Grade 8'},focus:{de:'Auffrischung + Aufgaben teilen, ko-konstruieren, Grenzen & Datenschutz.',en:'Refresher + dividing tasks, co-creating, limits & data protection.'}},
- {id:'K09',accent:'var(--k09)',niveau:'III',title:{de:'Klasse 9',en:'Grade 9'},focus:{de:'Auffrischung + KI bewerten, Daten & Bias gestalten, Ethik & eigenes Projekt.',en:'Refresher + evaluating AI, shaping data & bias, ethics & own project.'}}
+ {id:'K09',accent:'var(--k09)',niveau:'III',title:{de:'Klasse 9',en:'Grade 9'},focus:{de:'Auffrischung + KI bewerten, Daten & Bias gestalten, Ethik & eigenes Projekt.',en:'Refresher + evaluating AI, shaping data & bias, ethics & own project.'}},
+ {id:'K10',accent:'var(--k10)',niveau:'III',title:{de:'Klasse 10',en:'Grade 10'},focus:{de:'Auffrischung + KI & Zukunft der Arbeit, eigene KI-Workflows gestalten, KI-gestützt vs. klassisch vergleichen, über KI kommunizieren.',en:'Refresher + AI & the future of work, designing your own AI workflows, comparing AI-assisted vs classic approaches, communicating about AI.'}}
 ];
 const OB_META={id:'OB',accent:'var(--ob)',
  title:{de:'Oberstufe · Projekttag',en:'Senior years · Project day'},
@@ -684,6 +685,71 @@ const CONTENT={
     {type:'reflect',q:{de:'Projekt: Beschreibe kurz eine KI-Idee, die Menschen wirklich helfen würde – und einen Risiko-Punkt, auf den du achten würdest.',en:'Project: briefly describe an AI idea that would truly help people – and one risk you would watch for.'},
      placeholder:{de:'Idee … / Risiko …',en:'Idea … / Risk …'},prod:true}
   ]}
+ ],
+ K10:[
+  {id:'K10-M1',icon:'🔄',komp:'V',niveau:'III',title:{de:'Auffrischung Klasse 9',en:'Refresher Grade 9'},tasks:[
+    {type:'quiz',q:{de:'Warum lohnt sich oft ein Vergleich mehrerer KI-Werkzeuge, statt einfach das bekannteste zu nehmen?',en:'Why is it often worth comparing several AI tools instead of just picking the most well-known one?'},
+     options:[{de:'Zweck, Grenzen und Zielgruppe unterscheiden sich von Tool zu Tool',en:'Purpose, limits and target users differ from tool to tool'},
+              {de:'Das teuerste Tool ist immer automatisch am besten',en:'The most expensive tool is always automatically the best'},
+              {de:'Neuere Tools sind grundsätzlich fehlerfrei',en:'Newer tools are fundamentally error-free'}],
+     correct:0,explain:{de:'Zweck, Grenzen und Zielgruppe entscheiden – nicht Preis oder Alter des Tools.',en:'Purpose, limits and target users decide – not price or how new a tool is.'}},
+    {type:'quiz',q:{de:'Ein Modell erkennt eine bestimmte Gruppe von Bildern durchgehend schlecht. Woran liegt das meistens?',en:'A model consistently recognises a certain group of images poorly. What is usually the cause?'},
+     options:[{de:'An Lücken oder Einseitigkeit in den Trainingsdaten',en:'Gaps or one-sidedness in the training data'},
+              {de:'An reinem Zufall ohne erkennbaren Grund',en:'Pure chance with no identifiable reason'},
+              {de:'Daran, dass das Modell „keine Lust" hat',en:'The model "cannot be bothered"'}],
+     correct:0,explain:{de:'Systematische Schwächen zeigen fast immer auf Lücken in den Trainingsdaten – nicht auf Zufall oder Stimmung.',en:'Systematic weaknesses almost always point to gaps in training data – not chance or mood.'}}
+  ]},
+  {id:'K10-M2',icon:'🧑‍💻',komp:'R',niveau:'III',title:{de:'KI und meine Zukunft',en:'AI and my future'},tasks:[
+    {type:'info',title:{de:'KI und die Arbeitswelt von morgen',en:'AI and tomorrow’s world of work'},
+     body:{de:'<p>KI verändert, welche Fähigkeiten in vielen Berufen gefragt sind: Routineaufgaben werden häufiger von KI unterstützt, während menschliche Stärken wie <strong>Urteilsvermögen</strong>, <strong>Kreativität</strong> und <strong>zwischenmenschliche Fähigkeiten</strong> an Bedeutung gewinnen.</p><p>Das betrifft auch dich: In fast jedem Berufsfeld wird ein bewusster, kritischer Umgang mit KI zunehmend Teil der Grundausstattung.</p>',
+           en:'<p>AI is changing which skills matter in many jobs: routine tasks are increasingly supported by AI, while human strengths such as <strong>judgement</strong>, <strong>creativity</strong> and <strong>interpersonal skills</strong> become more important.</p><p>This affects you too: in almost every career field, a conscious, critical approach to AI is becoming part of the basic toolkit.</p>'}},
+    {type:'sort',q:{de:'Wo bleibt der Mensch in vielen Berufen zentral, wo kann KI stark unterstützen?',en:'Where does the human stay central in many jobs, where can AI support strongly?'},
+     buckets:[{de:'Mensch bleibt zentral',en:'Human stays central'},{de:'KI kann stark unterstützen',en:'AI can support strongly'}],
+     items:[{text:{de:'ein Team motivieren und führen',en:'motivating and leading a team'},bucket:0},
+            {text:{de:'große Datenmengen strukturieren',en:'structuring large amounts of data'},bucket:1},
+            {text:{de:'eine schwierige ethische Entscheidung verantworten',en:'taking responsibility for a difficult ethical decision'},bucket:0},
+            {text:{de:'erste Textentwürfe erstellen',en:'creating first drafts of a text'},bucket:1},
+            {text:{de:'Vertrauen zu Kund:innen aufbauen',en:'building trust with clients'},bucket:0}]},
+    {type:'reflect',q:{de:'In welchem Bereich möchtest du später einmal arbeiten oder studieren – und wie könnte KI dort eine Rolle spielen (Chance und Risiko)?',en:'What field would you like to work or study in one day – and what role could AI play there (opportunity and risk)?'},
+     placeholder:{de:'Bereich … / Chance … / Risiko …',en:'Field … / Opportunity … / Risk …'},prod:true}
+  ]},
+  {id:'K10-M3',icon:'🛠️',komp:'A',niveau:'III',title:{de:'Einen KI-Workflow gestalten',en:'Designing an AI workflow'},tasks:[
+    {type:'info',title:{de:'Vom einzelnen Prompt zum Workflow',en:'From a single prompt to a workflow'},
+     body:{de:'<p>Für größere Aufgaben reicht selten ein einzelner Prompt. Ein <strong>Workflow</strong> ist eine geplante Abfolge aus Schritten: die Aufgabe zerlegen, pro Schritt das passende Vorgehen wählen, Zwischenergebnisse <strong>prüfen</strong> und bei Bedarf <strong>anpassen</strong>.</p><p>Das geht über das einfache Nachbessern einer einzelnen Antwort hinaus – du planst den ganzen Weg zum Ziel.</p>',
+           en:'<p>Bigger tasks rarely work with a single prompt. A <strong>workflow</strong> is a planned sequence of steps: break the task down, choose the right approach for each step, <strong>check</strong> intermediate results and <strong>adjust</strong> where needed.</p><p>This goes beyond simply refining one answer – you plan the whole path to the goal.</p>'}},
+    {type:'match',q:{de:'Ordne jeder Workflow-Phase zu, was dort passiert.',en:'Match each workflow phase to what happens in it.'},
+     pairs:[{left:{de:'Planen',en:'Plan'},right:{de:'die Aufgabe in Teilschritte zerlegen',en:'breaking the task down into sub-steps'}},
+            {left:{de:'Ausführen',en:'Do'},right:{de:'pro Schritt das passende Vorgehen oder Werkzeug wählen',en:'choosing the right approach or tool for each step'}},
+            {left:{de:'Prüfen',en:'Check'},right:{de:'Zwischenergebnisse kritisch bewerten',en:'critically evaluating intermediate results'}},
+            {left:{de:'Anpassen',en:'Adjust'},right:{de:'Prompt oder Vorgehen verbessern',en:'improving the prompt or approach'}}]},
+    {type:'reflect',q:{de:'Plane einen mehrstufigen KI-Workflow für eine reale Aufgabe (z. B. ein Referat oder Projekt): Welche Schritte, welche Prüfpunkte?',en:'Plan a multi-step AI workflow for a real task (e.g. a presentation or project): what steps, what checkpoints?'},
+     placeholder:{de:'Schritt 1 … / Prüfpunkt … / Schritt 2 …',en:'Step 1 … / Checkpoint … / Step 2 …'},prod:true}
+  ]},
+  {id:'K10-M4',icon:'🆚',komp:'R',niveau:'III',title:{de:'KI-gestützt oder klassisch? Ergebnisse vergleichen',en:'AI-assisted or classic? Comparing results'},tasks:[
+    {type:'info',title:{de:'Zwei Wege, ein Ziel',en:'Two paths, one goal'},
+     body:{de:'<p>Eine Aufgabe einmal mit und einmal ohne KI-Unterstützung zu lösen, zeigt dir, ob sich der KI-Einsatz wirklich gelohnt hat. Vergleiche dabei: <strong>Qualität</strong>, <strong>Zeitaufwand</strong> und <strong>eigenen Lernertrag</strong>.</p><p>Manchmal gewinnt KI klar, manchmal der klassische Weg – erst der Vergleich zeigt es.</p>',
+           en:'<p>Solving a task once with and once without AI support shows you whether using AI was really worth it. Compare: <strong>quality</strong>, <strong>time spent</strong> and your <strong>own learning gain</strong>.</p><p>Sometimes AI clearly wins, sometimes the classic way does – only the comparison shows it.</p>'}},
+    {type:'multi',q:{de:'Woran erkennst du, ob sich der KI-Einsatz bei einer Aufgabe wirklich gelohnt hat? (Mehrere)',en:'How do you tell whether using AI for a task was really worth it? (Several)'},
+     options:[{de:'Das Ergebnis ist mindestens so gut wie ohne KI',en:'The result is at least as good as without AI'},
+              {de:'Du hast Zeit gespart, ohne an Qualität zu verlieren',en:'You saved time without losing quality'},
+              {de:'Du kannst das Ergebnis erklären und vertreten',en:'You can explain and stand behind the result'},
+              {de:'Es sah einfach beeindruckender aus',en:'It simply looked more impressive'}],
+     correct:[0,1,2],explain:{de:'Qualität, Zeitgewinn und eigene Nachvollziehbarkeit zählen – reiner Eindruck nicht.',en:'Quality, time saved and being able to explain it count – mere impression does not.'}},
+    {type:'reflect',q:{de:'Bearbeite eine kleine Aufgabe aus deinem Unterricht einmal mit und einmal ohne KI-Unterstützung. Vergleiche Qualität, Zeit und eigenen Lernertrag. Was ist dein Fazit?',en:'Do a small task from your lessons once with and once without AI support. Compare quality, time and your own learning gain. What is your conclusion?'},
+     placeholder:{de:'Mit KI … / Ohne KI … / Fazit …',en:'With AI … / Without AI … / Conclusion …'},prod:true}
+  ]},
+  {id:'K10-M5',icon:'📣',komp:'M',niveau:'III',title:{de:'Über KI kommunizieren',en:'Communicating about AI'},tasks:[
+    {type:'info',title:{de:'KI-Wissen weitergeben',en:'Sharing what you know about AI'},
+     body:{de:'<p>Ein KI-Thema so zu erklären, dass es andere wirklich verstehen, vertieft dein eigenes Verständnis noch einmal – und trägt dazu bei, dass richtige statt falsche Informationen über KI verbreitet werden.</p><p>Deine Zielgruppe kann jüngere Mitschüler:innen sein oder die Schulgemeinschaft, z. B. über den Schulnewsletter.</p>',
+           en:'<p>Explaining an AI topic so others truly understand it deepens your own understanding once more – and helps spread accurate rather than false information about AI.</p><p>Your audience can be younger students or the wider school community, e.g. via the school newsletter.</p>'}},
+    {type:'quiz',q:{de:'Was macht eine Erklärung über KI für andere besonders gut verständlich?',en:'What makes an explanation about AI especially easy for others to understand?'},
+     options:[{de:'Konkrete Alltagsbeispiele statt nur Fachbegriffe',en:'Concrete everyday examples instead of just technical terms'},
+              {de:'Möglichst viele Fachbegriffe ohne Erklärung',en:'As many technical terms as possible without explanation'},
+              {de:'Ein möglichst langer, abstrakter Text',en:'As long and abstract a text as possible'}],
+     correct:0,explain:{de:'Konkrete Beispiele aus dem Alltag machen abstrakte KI-Konzepte greifbar.',en:'Concrete everyday examples make abstract AI concepts tangible.'}},
+    {type:'reflect',q:{de:'Erkläre einer jüngeren Mitschüler:in (z. B. aus Klasse 6 oder 7) ein KI-Thema deiner Wahl in einfachen Worten, oder bereite einen kurzen Beitrag für die Schulgemeinschaft vor. Fasse hier zusammen, was du erklärt oder geschrieben hast.',en:'Explain an AI topic of your choice to a younger student (e.g. from Grade 6 or 7) in simple words, or prepare a short piece for the school community. Summarise here what you explained or wrote.'},
+     placeholder:{de:'Zielgruppe … / Thema … / Kernaussage …',en:'Audience … / Topic … / Key message …'},prod:true}
+  ]}
  ]
 };
 /* ===== 6a-2) Oberstufe · Projekttag (kein Abschlusstest, kein Zertifikat – eigenständiger Zusatzbereich) ===== */
@@ -874,6 +940,34 @@ const EXAM={
    options:[{de:'Sie erzeugt Ausgaben aus Wahrscheinlichkeiten, ohne echtes Verstehen',en:'It produces outputs from probabilities, without real understanding'},
             {de:'Sie hat ein Gewissen',en:'It has a conscience'},{de:'Sie erlebt die Welt wie wir',en:'It experiences the world like us'}],
    correct:0,explain:{de:'Statistische Vorhersage statt echtem Verstehen – das bleibt der Kern.',en:'Statistical prediction instead of real understanding – that stays the core.'}}
+ ],
+ K10:[
+  {type:'quiz',q:{de:'Warum lohnt es sich, eine Aufgabe einmal mit und einmal ohne KI zu lösen und zu vergleichen?',en:'Why is it worth solving a task once with and once without AI, and comparing?'},
+   options:[{de:'So siehst du, ob sich der KI-Einsatz für Qualität und Zeit wirklich gelohnt hat',en:'That way you see whether using AI was really worth it for quality and time'},
+            {de:'Das Ergebnis wird dadurch garantiert besser',en:'The result is guaranteed to be better this way'},
+            {de:'KI lernt dadurch automatisch schneller',en:'AI automatically learns faster this way'}],
+   correct:0,explain:{de:'Nur der Vergleich zeigt, ob KI hier wirklich einen Vorteil gebracht hat – eine Garantie gibt es nicht.',en:'Only the comparison shows whether AI really brought an advantage here – there is no guarantee.'}},
+  {type:'multi',q:{de:'Was gehört zu einem gut geplanten KI-Workflow für eine größere Aufgabe? (Mehrere)',en:'What belongs to a well-planned AI workflow for a bigger task? (Several)'},
+   options:[{de:'Die Aufgabe in Teilschritte zerlegen',en:'Breaking the task down into sub-steps'},
+            {de:'Zwischenergebnisse kritisch prüfen',en:'Critically checking intermediate results'},
+            {de:'Bei Bedarf Prompt oder Vorgehen anpassen',en:'Adjusting the prompt or approach when needed'},
+            {de:'Alles in einem einzigen Prompt erledigen',en:'Getting everything done in a single prompt'}],
+   correct:[0,1,2],explain:{de:'Zerlegen, prüfen, anpassen – ein einzelner Prompt ersetzt bei größeren Aufgaben keinen Workflow.',en:'Break down, check, adjust – a single prompt does not replace a workflow for bigger tasks.'}},
+  {type:'quiz',q:{de:'Wie verändert KI viele Berufsfelder vor allem?',en:'How is AI mainly changing many career fields?'},
+   options:[{de:'Menschliche Stärken wie Urteilsvermögen und Kreativität gewinnen an Bedeutung, KI unterstützt Routineaufgaben',en:'Human strengths like judgement and creativity become more important, AI supports routine tasks'},
+            {de:'KI ersetzt automatisch jede Tätigkeit vollständig',en:'AI automatically replaces every activity completely'},
+            {de:'Berufe verändern sich dadurch überhaupt nicht',en:'Careers do not change because of it at all'}],
+   correct:0,explain:{de:'Der Wandel betrifft, welche Fähigkeiten gefragt sind – nicht die vollständige oder ausbleibende Ersetzung von Berufen.',en:'The change is about which skills are in demand – not complete replacement or no change at all.'}},
+  {type:'quiz',q:{de:'Was macht eine Erklärung über ein KI-Thema für andere gut nachvollziehbar?',en:'What makes an explanation of an AI topic easy for others to follow?'},
+   options:[{de:'Konkrete, alltagsnahe Beispiele',en:'Concrete, everyday examples'},
+            {de:'Möglichst komplizierte Fachsprache',en:'As complicated technical language as possible'},
+            {de:'Ein Thema nur abstrakt ohne Beispiel beschreiben',en:'Describing a topic only abstractly, without an example'}],
+   correct:0,explain:{de:'Alltagsnahe Beispiele machen abstrakte Konzepte für andere greifbar.',en:'Everyday examples make abstract concepts tangible for others.'}},
+  {type:'quiz',q:{de:'Was bleibt über alle Jahrgänge hinweg die wichtigste Regel im Umgang mit KI?',en:'What remains the most important rule for using AI across all grades?'},
+   options:[{de:'KI-Antworten und Ergebnisse kritisch prüfen statt sie blind zu übernehmen',en:'Critically checking AI answers and results instead of blindly copying them'},
+            {de:'Möglichst jede Aufgabe komplett der KI überlassen',en:'Leaving as many tasks as possible entirely to AI'},
+            {de:'KI nur nutzen, wenn eine Lehrkraft direkt danebensteht',en:'Only using AI when a teacher is standing right next to you'}],
+   correct:0,explain:{de:'Kritisches Prüfen zieht sich durch alle Jahrgänge – vom ersten Beispiel in K05 bis zum Workflow in K10.',en:'Critical checking runs through every grade – from the first example in K05 to the workflow in K10.'}}
  ]
 };
 function modulesOf(g){return CONTENT[g]||[];}
@@ -923,7 +1017,7 @@ function renderGrades(){setCrumb([`<b>${t('chooseGrade')}</b>`]);
       <h3>${tx(OB_META.title)}</h3><p>${tx(OB_META.focus)}</p>
       <div class="gmeta"><span>${modulesOf('OB').length} ${t('modules')}</span>${obOpen?`<span>${gradeProgress('OB')}%</span>`:`<span class="lock-pill">🔒 ${t('obCodeTitle')}</span>`}</div>
     </button>`;
-  view().innerHTML=`<section class="view"><div class="section-head"><div class="eyebrow">${t('gradeEy')} K05–K09</div>
+  view().innerHTML=`<section class="view"><div class="section-head"><div class="eyebrow">${t('gradeEy')} K05–K10</div>
     <h2>${t('chooseGrade')}</h2><p class="lead">${t('chooseGradeLead')}</p></div><div class="grades">${cards}</div>
     <div class="section-head" style="margin-top:34px"><div class="eyebrow">${t('obEy')}</div></div>
     <div class="grades">${obCard}</div></section>`;}

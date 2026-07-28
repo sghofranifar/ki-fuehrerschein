@@ -5,7 +5,7 @@
 
 ## Was das ist
 Bilinguale (DE/EN), gamifizierte **Single-File-Web-App** zur KI-Kompetenz für die
-Klassen **K05–K09** (German International Stream, DIA/Abitur-Pfad) an der
+Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
 **German Swiss International School (GSIS), Hongkong**. Vorbild-Mechanik: basiswissen-ki.de
 (Punkte, Streak, Ränge, Fehlerspeicher, PNG-Zertifikate).
 
@@ -30,11 +30,13 @@ Klassen **K05–K09** (German International Stream, DIA/Abitur-Pfad) an der
 ## Design / Marke
 - **GSIS-Grün `#008445`** (Pantone 348C) ist die zentrale Markenfarbe — alle Farben
   liegen als CSS-Variablen in `:root`. Tiefes Grün: `#006B37`.
-- Jahrgangs-Akzente: K05 `#1FA37A`, K06 `#2F7DC2`, K07 `#7A5CC0`, K08 `#D98324`, K09 `#C0563E`.
+- Jahrgangs-Akzente: K05 `#1FA37A`, K06 `#2F7DC2`, K07 `#7A5CC0`, K08 `#D98324`, K09 `#C0563E`, K10 `#A67C27`.
 - Schriften: Space Grotesk (Display) + Inter (Body).
 
 ## Aufbau der App
-- Navigation **nach Jahrgang** (K05–K09), nicht nach Kompetenzbereich.
+- Navigation **nach Jahrgang** (K05–K10), nicht nach Kompetenzbereich. K10 ist das
+  Abschlussmodul der Mittelstufe (Level III): Auffrischung + KI & Zukunft der Arbeit,
+  KI-Workflows gestalten, KI-gestützt vs. klassisch vergleichen, über KI kommunizieren.
 - Freischalt-Logik: nur K05 offen; höhere Stufen öffnen sich mit dem Führerschein der
   Vorstufe. Lehrkraft-Code öffnet alles.
 - Aufgabentypen: `info | quiz | multi | match | sort | cloze | reflect | classify`.
@@ -45,7 +47,7 @@ Klassen **K05–K09** (German International Stream, DIA/Abitur-Pfad) an der
 - Inhalts-Backbone: KI-Kompetenzen (Verstehen/Anwenden/Reflektieren/Mitgestalten) +
   AILit-Framework (OECD/EU): Engage → Create/Manage → Shape.
 - Zusatzbereich **„Oberstufe · Projekttag"** (`CONTENT.OB`): immer sichtbare Kachel,
-  unabhängig von der K05–K09-Freischalt-Kette, eigener Zugangscode (`SENIOR_CODE`),
+  unabhängig von der K05–K10-Freischalt-Kette, eigener Zugangscode (`SENIOR_CODE`),
   kein Abschlusstest/Zertifikat. 5 Blöcke zu wissenschaftlichem Arbeiten, Prüfungsregeln,
   Eigenständigkeit und Quellenkritik/Plagiat für die Qualifikationsphase.
 - **Impressum & Datenschutz** über Fußzeile erreichbar (`openImpressum()`/`openPrivacy()`):
