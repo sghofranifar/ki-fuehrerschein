@@ -14,6 +14,8 @@ Klassen **K05–K09** (German International Stream, DIA/Abitur-Pfad) an der
   `index.html` (nicht mehr `ki-fuehrerschein.html`), damit GitHub Pages sie automatisch
   unter der Root-URL ausliefert.
 - `gsis-logo.png` — muss **neben** der HTML liegen (relativ verlinkt, blendet sich sonst aus).
+- `gsis-icon.png` — aus `gsis-logo.png` freigestelltes „GSIS"-Icon (ohne Schriftzug/chinesische
+  Zeichen), wird im Header (Nav) verwendet, da dort nur wenig Platz ist.
 
 ## Technik
 - Reines HTML/CSS/JS, **keine Build-Tools, keine Frameworks**.
@@ -46,6 +48,11 @@ Klassen **K05–K09** (German International Stream, DIA/Abitur-Pfad) an der
   unabhängig von der K05–K09-Freischalt-Kette, eigener Zugangscode (`SENIOR_CODE`),
   kein Abschlusstest/Zertifikat. 5 Blöcke zu wissenschaftlichem Arbeiten, Prüfungsregeln,
   Eigenständigkeit und Quellenkritik/Plagiat für die Qualifikationsphase.
+- **Impressum & Datenschutz** über Fußzeile erreichbar (`openImpressum()`/`openPrivacy()`):
+  Herausgeber Sebastian Ghofranifar (Koordinator digitale Unterrichtsentwicklung, GSIS
+  Hongkong, sghofranifar@gsis.edu.hk), verantwortliche Institution GSIS. Lizenz **CC BY-NC 4.0**.
+  Datenschutz-Kernaussage: keine Server-Erhebung, alles nur lokal in `localStorage`;
+  kurzer Hinweis dazu auch im Namens-Modal beim ersten Start.
 
 ## Konventionen (bitte einhalten)
 - Alles **zweisprachig** pflegen: Textobjekte `{de:'…', en:'…'}`.

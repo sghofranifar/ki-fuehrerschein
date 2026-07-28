@@ -33,7 +33,8 @@ h1,h2,h3{font-family:var(--font-display);letter-spacing:-.01em;line-height:1.15}
 .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .nav-inner{display:flex;align-items:center;gap:14px;height:64px}
 .brand{display:flex;align-items:center;gap:10px;cursor:pointer}
-.logo-mark{width:38px;height:38px;border-radius:9px;background:var(--gsis-green);color:#fff;display:grid;place-items:center;font-family:var(--font-display);font-weight:700;font-size:14px;flex:none}
+.logo-mark{height:34px;flex:none;display:flex;align-items:center}
+.logo-mark img{height:100%;width:auto;display:block}
 .brand-txt{font-family:var(--font-display);font-weight:600;font-size:16px;line-height:1.1}
 .brand-txt small{display:block;font-weight:500;font-size:11px;color:var(--muted)}
 .crumb{color:var(--muted);font-size:13px;font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -45,7 +46,7 @@ h1,h2,h3{font-family:var(--font-display);letter-spacing:-.01em;line-height:1.15}
 .lang-toggle{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;height:38px}
 .lang-toggle button{padding:0 11px;font-size:12px;font-weight:700;color:var(--muted);background:var(--card)}
 .lang-toggle button.on{background:var(--ink);color:#fff}
-@media(max-width:680px){.nav-actions .label,.crumb{display:none}}
+@media(max-width:680px){.nav-actions .label,.crumb{display:none}.nav .wrap{padding:0 12px}.nav-inner{gap:6px}.nav-actions{gap:6px}.brand{gap:6px}.logo-mark{height:18px}.brand-txt{font-size:14px}.brand-txt small{display:none}.iconbtn{padding:0 8px}.lang-toggle button{padding:0 8px}}
 main{flex:1;padding:34px 0 70px}
 .view{animation:fade .35s ease}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -238,6 +239,8 @@ main{flex:1;padding:34px 0 70px}
 .codebox{background:var(--bg);border:1px dashed var(--line-strong);border-radius:10px;padding:12px;font-family:ui-monospace,monospace;font-size:12px;word-break:break-all;margin-bottom:14px;max-height:120px;overflow:auto}
 .t-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
 footer.foot{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:12.5px;text-align:center}
+.footlink{color:var(--muted);text-decoration:underline;font:inherit;font-size:inherit}
+.footlink:hover{color:var(--ink)}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;background:var(--ink);color:#fff;padding:12px 20px;border-radius:12px;font-size:14px;font-weight:600;z-index:200;transition:.25s;pointer-events:none}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 </style>
@@ -246,7 +249,7 @@ footer.foot{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);f
 <div id="app">
   <nav class="nav"><div class="wrap nav-inner">
     <button class="brand" onclick="go('grades')" aria-label="Startseite">
-      <div class="logo-mark">GSIS</div>
+      <div class="logo-mark"><img src="gsis-icon.png" alt="GSIS" onerror="this.parentElement.textContent='GSIS'"></div>
       <div class="brand-txt">KI-Führerschein<small>German International Stream</small></div>
     </button>
     <div class="crumb" id="crumb"></div>
@@ -297,6 +300,7 @@ const T={
   dragHint:'Tippe ein Element an, dann den passenden Korb.',matchHint:'Tippe links ein Element, dann rechts die passende Antwort.',
   classifyHint:'Ist das KI oder nicht? Entscheide für jedes Beispiel.',isAI:'KI',notAI:'keine KI',of:'/',overview:'Übersicht',errorsNav:'Fehlerspeicher',
   obEy:'Zusatzangebot',obCodeTitle:'Zugangscode für die Oberstufe',obCodeLead:'Dieser Bereich ist für die Qualifikationsphase gedacht. Frag deine Kurslehrkraft nach dem Code.',obCodePh:'Zugangscode',
+  impressum:'Impressum',privacy:'Datenschutz',privacyNote:'Deine Daten bleiben auf diesem Gerät – nichts wird an einen Server gesendet.',
   foot:'KI-Führerschein · Spiralcurriculum K05–K09 · German Swiss International School'},
  en:{start:'Start now',heroEy:'AI literacy for grades 5–9',heroTitle:['Your ','AI Driving Licence',''],
   heroLead:'Understand, apply, question and co-create. Collect modules, clear levels and earn your licence step by step.',
@@ -316,6 +320,7 @@ const T={
   dragHint:'Tap an item, then the matching bin.',matchHint:'Tap an item on the left, then its match on the right.',
   classifyHint:'Is this AI or not? Decide for each example.',isAI:'AI',notAI:'not AI',of:'/',overview:'Overview',errorsNav:'Mistakes',
   obEy:'Extra',obCodeTitle:'Access code for senior years',obCodeLead:'This section is for the qualification phase. Ask your course teacher for the code.',obCodePh:'Access code',
+  impressum:'Legal notice',privacy:'Privacy',privacyNote:'Your data stays on this device – nothing is sent to a server.',
   foot:'AI Driving Licence · Spiral curriculum G5–G9 · German Swiss International School'}
 };
 const L=()=>STATE.lang, t=k=>(T[L()][k]??k), tx=o=>(o&&(o[L()]??o.de))||'';
@@ -887,7 +892,7 @@ function go(where,o={}){window.scrollTo(0,0);
 function updateChrome(){
   document.getElementById('lblOverview').textContent=t('overview');
   document.getElementById('lblErrors').textContent=t('errorsNav');
-  document.getElementById('footLine').textContent=t('foot');
+  document.getElementById('footLine').innerHTML=`${t('foot')} · <button class="footlink" onclick="openImpressum()">${t('impressum')}</button> · <button class="footlink" onclick="openPrivacy()">${t('privacy')}</button>`;
   const n=STATE.errors.length,dot=document.getElementById('errDot');dot.style.display=n?'grid':'none';dot.textContent=n;
   document.getElementById('langDe').classList.toggle('on',L()==='de');
   document.getElementById('langEn').classList.toggle('on',L()==='en');document.documentElement.lang=L();}
@@ -1130,12 +1135,35 @@ document.getElementById('modalBg').addEventListener('click',e=>{if(e.target.id==
 function openName(after){modal(`<h3>${t('nameTitle')}</h3><p>${t('nameLead')}</p>
    <label class="flabel">${t('nameLabel')}</label><input class="field" id="nameIn" placeholder="${t('namePh')}" value="${STATE.name||''}">
    <label class="flabel">${t('klasseLabel')}</label><input class="field" id="klasseIn" placeholder="${t('klassePh')}" value="${STATE.klasse||''}">
+   <p style="font-size:12.5px;color:var(--muted);margin:-6px 0 14px">🔒 ${t('privacyNote')} <button class="footlink" onclick="openPrivacy()">${t('privacy')}</button></p>
    <div class="modal-actions"><button class="btn" id="nameSave">${t('save')}</button></div>`);
   document.getElementById('nameIn').focus();
   document.getElementById('nameSave').onclick=()=>{const v=document.getElementById('nameIn').value.trim();STATE.klasse=document.getElementById('klasseIn').value.trim();if(v)STATE.name=v;save();closeModal();updateChrome();if(after)after();};}
 function openSenior(){modal(`<h3>${t('obCodeTitle')}</h3><p>${t('obCodeLead')}</p><input class="field" id="obcode" type="password" placeholder="${t('obCodePh')}">
     <div class="modal-actions"><button class="btn ghost" onclick="closeModal()">${t('close')}</button><button class="btn" id="obUnlockBtn">${t('unlock')}</button></div>`);
   document.getElementById('obUnlockBtn').onclick=()=>{if(document.getElementById('obcode').value.trim()===SENIOR_CODE){STATE.seniorUnlocked=true;save();closeModal();go('senior');}else toast(L()==='de'?'Code falsch':'Wrong code');};}
+function openImpressum(){modal(`<h3>${t('impressum')}</h3>
+   <div style="max-height:60vh;overflow:auto;font-size:14px;line-height:1.6">${tx({
+     de:`<p><strong>Herausgeber:in</strong><br>Sebastian Ghofranifar<br>Koordinator digitale Unterrichtsentwicklung<br>German Swiss International School (GSIS), Hongkong<br>E-Mail: <a href="mailto:sghofranifar@gsis.edu.hk">sghofranifar@gsis.edu.hk</a></p>
+       <p><strong>Verantwortliche Institution</strong><br>German Swiss International School (GSIS), Hongkong</p>
+       <p><strong>Lizenz</strong><br>Diese App steht unter <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.de" target="_blank" rel="noopener">CC BY-NC 4.0</a> (Namensnennung – nicht kommerziell). Weitergabe und Bearbeitung sind unter Nennung der Urheber:innen für nicht-kommerzielle Zwecke erlaubt.</p>`,
+     en:`<p><strong>Publisher</strong><br>Sebastian Ghofranifar<br>Coordinator of Digital Teaching Development<br>German Swiss International School (GSIS), Hong Kong<br>Email: <a href="mailto:sghofranifar@gsis.edu.hk">sghofranifar@gsis.edu.hk</a></p>
+       <p><strong>Responsible institution</strong><br>German Swiss International School (GSIS), Hong Kong</p>
+       <p><strong>Licence</strong><br>This app is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a> (Attribution – NonCommercial). Sharing and adapting is allowed for non-commercial purposes with attribution.</p>`})}</div>
+   <div class="modal-actions"><button class="btn" onclick="closeModal()">${t('close')}</button></div>`);}
+function openPrivacy(){modal(`<h3>${t('privacy')}</h3>
+   <div style="max-height:60vh;overflow:auto;font-size:14px;line-height:1.6">${tx({
+     de:`<p>Diese App läuft komplett in deinem Browser – es gibt keinen Server, der deine Eingaben empfängt.</p>
+       <p><strong>Was gespeichert wird:</strong> Dein Name, deine Klasse, deine Antworten, Punkte und dein Fortschritt werden ausschließlich lokal auf diesem Gerät gespeichert (im „localStorage" deines Browsers).</p>
+       <p><strong>Was NICHT passiert:</strong> Diese Daten werden nicht automatisch an einen Server, an die Schule oder an Dritte gesendet. Sie bleiben, bis du sie selbst löschst (z. B. über „Fortschritt zurücksetzen" oder Löschen der Browserdaten) oder aktiv teilst.</p>
+       <p><strong>Wenn du sie teilst:</strong> Über den Lehrkraft-Bereich kannst du deinen Fortschritt als Code exportieren. Das passiert nur, wenn du selbst auf „Fortschritt exportieren" tippst und den Code z. B. weitergibst – die App selbst verschickt nichts von sich aus.</p>
+       <p><strong>Technischer Hinweis:</strong> Für Schriftarten (Google Fonts) und den Bild-Export (html2canvas) lädt die App Ressourcen von externen Anbietern. Dabei können – wie bei den meisten Webseiten – technische Angaben wie deine IP-Adresse an diese Anbieter übertragen werden. Deine Antworten, dein Name oder dein Fortschritt werden dabei nicht übertragen.</p>`,
+     en:`<p>This app runs entirely in your browser – there is no server that receives your input.</p>
+       <p><strong>What is stored:</strong> Your name, class, answers, points and progress are stored only locally on this device (in your browser's "localStorage").</p>
+       <p><strong>What does NOT happen:</strong> This data is not automatically sent to any server, to the school, or to third parties. It stays until you delete it yourself (e.g. via "Reset progress" or clearing browser data) or actively share it.</p>
+       <p><strong>If you share it:</strong> The teacher area lets you export your progress as a code. That only happens when you tap "Export progress" yourself and pass the code on – the app itself never sends anything on its own.</p>
+       <p><strong>Technical note:</strong> For fonts (Google Fonts) and the image export (html2canvas), the app loads resources from external providers. As with most websites, technical details such as your IP address may be transmitted to these providers. Your answers, name or progress are not transmitted in this process.</p>`})}</div>
+   <div class="modal-actions"><button class="btn" onclick="closeModal()">${t('close')}</button></div>`);}
 function openTeacher(){if(STATE.teacher)return teacherPanel();
   modal(`<h3>${t('teacherTitle')}</h3><p>${t('teacherLead')}</p><input class="field" id="tcode" type="password" placeholder="${t('codePh')}">
     <div class="modal-actions"><button class="btn ghost" onclick="closeModal()">${t('close')}</button><button class="btn" id="tUnlock">${t('unlock')}</button></div>`);
