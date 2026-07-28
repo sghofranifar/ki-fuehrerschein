@@ -300,6 +300,7 @@ const T={
   dragHint:'Tippe ein Element an, dann den passenden Korb.',matchHint:'Tippe links ein Element, dann rechts die passende Antwort.',
   classifyHint:'Ist das KI oder nicht? Entscheide für jedes Beispiel.',isAI:'KI',notAI:'keine KI',of:'/',overview:'Übersicht',errorsNav:'Fehlerspeicher',
   obEy:'Zusatzangebot',obCodeTitle:'Zugangscode für die Oberstufe',obCodeLead:'Dieser Bereich ist für die Qualifikationsphase gedacht. Frag deine Kurslehrkraft nach dem Code.',obCodePh:'Zugangscode',
+  gradeCodeTitle:'Zugangscode für',gradeCodeLead:'Frag deine Lehrkraft nach dem Code für diesen Jahrgang.',
   impressum:'Impressum',privacy:'Datenschutz',privacyNote:'Deine Daten bleiben auf diesem Gerät – nichts wird an einen Server gesendet.',
   foot:'KI-Führerschein · Spiralcurriculum K05–K10 · German Swiss International School'},
  en:{start:'Start now',heroEy:'AI literacy for grades 5–9',heroTitle:['Your ','AI Driving Licence',''],
@@ -320,6 +321,7 @@ const T={
   dragHint:'Tap an item, then the matching bin.',matchHint:'Tap an item on the left, then its match on the right.',
   classifyHint:'Is this AI or not? Decide for each example.',isAI:'AI',notAI:'not AI',of:'/',overview:'Overview',errorsNav:'Mistakes',
   obEy:'Extra',obCodeTitle:'Access code for senior years',obCodeLead:'This section is for the qualification phase. Ask your course teacher for the code.',obCodePh:'Access code',
+  gradeCodeTitle:'Access code for',gradeCodeLead:'Ask your teacher for the code for this grade.',
   impressum:'Legal notice',privacy:'Privacy',privacyNote:'Your data stays on this device – nothing is sent to a server.',
   foot:'AI Driving Licence · Spiral curriculum G5–G10 · German Swiss International School'}
 };
@@ -327,6 +329,7 @@ const L=()=>STATE.lang, t=k=>(T[L()][k]??k), tx=o=>(o&&(o[L()]??o.de))||'';
 /* ===== 4) Konfig ===== */
 const TEACHER_CODE='gsis-ki-2026';
 const SENIOR_CODE='gsis-oberstufe-2026';
+const GRADE_CODES={K05:'gsis-k05-2026',K06:'gsis-k06-2026',K07:'gsis-k07-2026',K08:'gsis-k08-2026',K09:'gsis-k09-2026',K10:'gsis-k10-2026'};
 const PASS=0.7;
 const KOMP={V:{de:'Verstehen',en:'Understand'},A:{de:'Anwenden',en:'Apply'},R:{de:'Reflektieren',en:'Reflect'},M:{de:'Mitgestalten',en:'Co-create'}};
 const RANKS=[{p:0,ic:'🌱',de:'Einsteiger:in',en:'Beginner'},{p:140,ic:'🔍',de:'Entdecker:in',en:'Explorer'},
@@ -1005,7 +1008,7 @@ function renderLanding(){setCrumb([]);const ht=t('heroTitle');
 function beginStart(){if(!STATE.name)openName(()=>go('grades'));else go('grades');}
 function renderGrades(){setCrumb([`<b>${t('chooseGrade')}</b>`]);
   const cards=GRADES.map(g=>{const open=isUnlocked(g.id),prog=gradeProgress(g.id),got=STATE.fuehrerschein[g.id],ms=modulesOf(g.id).length;
-    return `<button class="gcard ${open?'open':'locked'}" style="--accent:${g.accent}" ${open?`onclick="go('overview',{grade:'${g.id}'})"`:'aria-disabled="true"'}>
+    return `<button class="gcard ${open?'open':'locked'}" style="--accent:${g.accent}" onclick="${open?`go('overview',{grade:'${g.id}'})`:`openGradeCode('${g.id}')`}">
       <div class="gcard-top"><span class="gbadge">${g.id}</span><span class="glevel">${t('niveau')} ${g.niveau}</span></div>
       <h3>${tx(g.title)}</h3><p>${tx(g.focus)}</p><div class="gprog"><i style="width:${prog}%"></i></div>
       <div class="gmeta"><span>${ms?`${ms} ${t('modules')}`:'—'}</span>
@@ -1236,6 +1239,11 @@ function openName(after){modal(`<h3>${t('nameTitle')}</h3><p>${t('nameLead')}</p
 function openSenior(){modal(`<h3>${t('obCodeTitle')}</h3><p>${t('obCodeLead')}</p><input class="field" id="obcode" type="password" placeholder="${t('obCodePh')}">
     <div class="modal-actions"><button class="btn ghost" onclick="closeModal()">${t('close')}</button><button class="btn" id="obUnlockBtn">${t('unlock')}</button></div>`);
   document.getElementById('obUnlockBtn').onclick=()=>{if(document.getElementById('obcode').value.trim()===SENIOR_CODE){STATE.seniorUnlocked=true;save();closeModal();go('senior');}else toast(L()==='de'?'Code falsch':'Wrong code');};}
+function openGradeCode(gradeId){modal(`<h3>${t('gradeCodeTitle')} ${gradeId}</h3><p>${t('gradeCodeLead')}</p><input class="field" id="gcode" type="password" placeholder="${t('obCodePh')}">
+    <div class="modal-actions"><button class="btn ghost" onclick="closeModal()">${t('close')}</button><button class="btn" id="gcodeBtn">${t('unlock')}</button></div>`);
+  document.getElementById('gcodeBtn').onclick=()=>{if(document.getElementById('gcode').value.trim()===GRADE_CODES[gradeId]){
+    if(!STATE.unlocked.includes(gradeId))STATE.unlocked.push(gradeId);save();closeModal();go('overview',{grade:gradeId});
+  }else toast(L()==='de'?'Code falsch':'Wrong code');};}
 function openImpressum(){modal(`<h3>${t('impressum')}</h3>
    <div style="max-height:60vh;overflow:auto;font-size:14px;line-height:1.6">${tx({
      de:`<p><strong>Herausgeber:in</strong><br>Sebastian Ghofranifar<br>Koordinator digitale Unterrichtsentwicklung<br>German Swiss International School (GSIS), Hongkong<br>E-Mail: <a href="mailto:sghofranifar@gsis.edu.hk">sghofranifar@gsis.edu.hk</a></p>

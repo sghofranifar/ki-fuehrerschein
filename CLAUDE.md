@@ -38,7 +38,11 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   Abschlussmodul der Mittelstufe (Level III): Auffrischung + KI & Zukunft der Arbeit,
   KI-Workflows gestalten, KI-gestützt vs. klassisch vergleichen, über KI kommunizieren.
 - Freischalt-Logik: nur K05 offen; höhere Stufen öffnen sich mit dem Führerschein der
-  Vorstufe. Lehrkraft-Code öffnet alles.
+  Vorstufe. Lehrkraft-Code öffnet alles. Zusätzlich hat jeder Jahrgang einen eigenen
+  Direktzugangs-Code (`GRADE_CODES`) — Klick auf eine gesperrte Jahrgangskarte öffnet
+  ein Code-Modal (`openGradeCode()`), das genau diesen einen Jahrgang freischaltet,
+  ohne die Kette/andere Jahrgänge zu berühren. **Kein echter Zugriffsschutz** — die
+  App hat keinen Server, jeder Code steht im Klartext im Seitenquelltext.
 - Aufgabentypen: `info | quiz | multi | match | sort | cloze | reflect | classify`.
   `classify` = visuelle „Ist das KI?"-Aufgabe mit eingebetteten SVG-Icons.
 - Pro Jahrgang ein eigener **Abschlusstest** (`EXAM[grade]`) — bündelnde Aufgaben,
@@ -68,6 +72,9 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
 - `TEACHER_CODE = 'gsis-ki-2026'` — **noch auf echten Code ändern**.
 - `SENIOR_CODE = 'gsis-oberstufe-2026'` — Zugangscode für „Oberstufe · Projekttag",
   **noch auf echten Code ändern**.
+- `GRADE_CODES` — je ein Direktzugangs-Code pro Jahrgang (K05–K10), **noch auf echte
+  Codes ändern**: K05 `gsis-k05-2026`, K06 `gsis-k06-2026`, K07 `gsis-k07-2026`,
+  K08 `gsis-k08-2026`, K09 `gsis-k09-2026`, K10 `gsis-k10-2026`.
 - `PASS = 0.7`.
 
 ## Arbeitsweise mit mir
