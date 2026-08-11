@@ -70,6 +70,16 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   Module** (nicht nur den Abschlusstest): Unter 75% richtig wird das Modul nicht als
   „done" gespeichert, die Aufgaben müssen wiederholt werden (siehe `finishRun()`).
 - Zertifikat + Dashboard zeigen **Name und Klasse**.
+- **Zwischenzertifikat „Gemini-Nutzung"** (`renderGeminiCert()`, Route `geminicert`):
+  erscheint als zusätzliche Kachel auf der K08-Jahrgangsübersicht, sobald
+  `geminiEligible()` true ist — prüft **explizit alle vier** Führerscheine
+  K05–K08 (nicht nur K08!), weil die Direktzugangs-Codes K05–K07 übersprungen
+  haben könnten. Muss von Schüler:innen per Browser-Druckfunktion
+  (`window.print()`, `@media print`-Regel blendet Nav/Footer/Buttons aus) als
+  echtes PDF gespeichert und an `GEMINI_CERT_EMAIL` gemailt werden (bewusst
+  keine PDF-Bibliothek — der Zweck ist ja gerade, dass Schüler:innen den
+  PDF-Export+Versand selbst können). Der Druck-Button erscheint aus Konsistenz
+  auch beim normalen Zertifikat (`renderCert()`).
 - Inhalts-Backbone: KI-Kompetenzen (Verstehen/Anwenden/Reflektieren/Mitgestalten) +
   AILit-Framework (OECD/EU): Engage → Create/Manage → Shape.
 - Zusatzbereich **„Oberstufe · Projekttag"** (`CONTENT.OB`): immer sichtbare Kachel,

@@ -245,6 +245,11 @@ footer.foot{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);f
 .footlink:hover{color:var(--ink)}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;background:var(--ink);color:#fff;padding:12px 20px;border-radius:12px;font-size:14px;font-weight:600;z-index:200;transition:.25s;pointer-events:none}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+@media print{
+  .nav,footer.foot,.result-actions,.toast,.modal-bg,.panel{display:none!important}
+  body,main{padding:0;margin:0;background:#fff}
+  .cert-wrap{max-width:100%}
+}
 </style>
 </head>
 <body>
@@ -294,6 +299,13 @@ const T={
   scoreOf:'von',toOverview:'Zur Jahrgangsübersicht',retry:'Nochmal üben',viewCert:'Zertifikat ansehen',yourOverview:'Deine Übersicht',rank:'Rang',badges:'Abzeichen',analytics:'Auswertung deiner Module',
   noData:'Noch keine Daten – leg in einem Modul los!',mistakes:'Fehlerspeicher',noMistakes:'Kein Fehler gespeichert. Stark!',exportPng:'Als PNG speichern',
   certTitle:'KI-Führerschein',awarded:'verliehen an',forGrade:'für den erfolgreichen Abschluss von',date:'Datum',signature:'Lernbegleitung',
+  geminiCertTitle:'Zwischenzertifikat: Gemini-Nutzung',geminiCertBlurb:'Du hast K05–K08 abgeschlossen – hol dir jetzt dein Zwischenzertifikat für die Gemini-Nutzung.',
+  geminiCertLead:'hat die KI-Führerschein-Module K05–K08 erfolgreich abgeschlossen und ist damit berechtigt, das KI-Werkzeug Gemini gemäß der GSIS-KI-Ampel im Unterricht zu nutzen.',
+  geminiCertHowToTitle:'So reichst du es ein',
+  geminiStep1:'Klicke unten auf „Als PDF speichern" und wähle im Druckdialog „Als PDF speichern".',
+  geminiStep2:'Öffne eine neue E-Mail an sghofranifar@gsis.edu.hk (der Button „E-Mail öffnen" hilft dir dabei).',
+  geminiStep3:'Hänge die gespeicherte PDF-Datei an und sende die E-Mail ab.',
+  printPdf:'Als PDF speichern',openMail:'E-Mail öffnen',
   nameTitle:'Erzähl uns kurz von dir',nameLead:'Name und Klasse erscheinen auf deinem Führerschein-Zertifikat.',namePh:'Vorname Nachname',klassePh:'z. B. 5a',klasseLabel:'Deine Klasse',nameLabel:'Dein Name',klasse:'Klasse',
   save:'Speichern',teacherTitle:'Lehrkraft-Bereich',teacherLead:'Mit dem Lehrkraft-Code schaltest du alle Jahrgänge frei und siehst die Auswertung.',
   codePh:'Lehrkraft-Code',unlock:'Freischalten',unlockAll:'Alle Jahrgänge freigeschaltet',exportProg:'Fortschritt exportieren',importProg:'Fortschritt importieren',resetProg:'Fortschritt zurücksetzen',
@@ -315,6 +327,13 @@ const T={
   scoreOf:'of',toOverview:'Back to grade overview',retry:'Practise again',viewCert:'View certificate',yourOverview:'Your overview',rank:'Rank',badges:'Badges',analytics:'Your module results',
   noData:'No data yet – start a module!',mistakes:'Mistakes',noMistakes:'No mistakes stored. Nice!',exportPng:'Save as PNG',
   certTitle:'AI Driving Licence',awarded:'awarded to',forGrade:'for successfully completing',date:'Date',signature:'Teacher',
+  geminiCertTitle:'Interim Certificate: Gemini Use',geminiCertBlurb:'You have completed K05–K08 – get your interim certificate for using Gemini now.',
+  geminiCertLead:'has successfully completed AI Licence modules K05–K08 and is therefore authorised to use the AI tool Gemini in class according to the GSIS AI scale.',
+  geminiCertHowToTitle:'How to submit it',
+  geminiStep1:'Click "Save as PDF" below and choose "Save as PDF" in the print dialog.',
+  geminiStep2:'Open a new email to sghofranifar@gsis.edu.hk (the "Open email" button helps with this).',
+  geminiStep3:'Attach the saved PDF file and send the email.',
+  printPdf:'Save as PDF',openMail:'Open email',
   nameTitle:'Tell us a bit about you',nameLead:'Your name and class appear on your licence certificate.',namePh:'First Last',klassePh:'e.g. 5a',klasseLabel:'Your class',nameLabel:'Your name',klasse:'Class',
   save:'Save',teacherTitle:'Teacher area',teacherLead:'The teacher code unlocks all grades and shows analytics.',
   codePh:'Teacher code',unlock:'Unlock',unlockAll:'All grades unlocked',exportProg:'Export progress',importProg:'Import progress',resetProg:'Reset progress',
@@ -332,6 +351,7 @@ const L=()=>STATE.lang, t=k=>(T[L()][k]??k), tx=o=>(o&&(o[L()]??o.de))||'';
 const TEACHER_CODE='gsis-ki-2026';
 const SENIOR_CODE='gsis-oberstufe-2026';
 const GRADE_CODES={K05:'gsis-k05-2026',K06:'gsis-k06-2026',K07:'gsis-k07-2026',K08:'gsis-k08-2026',K09:'gsis-k09-2026',K10:'gsis-k10-2026'};
+const GEMINI_CERT_EMAIL='sghofranifar@gsis.edu.hk';
 const PASS=0.75;
 const KOMP={V:{de:'Verstehen',en:'Understand'},A:{de:'Anwenden',en:'Apply'},R:{de:'Reflektieren',en:'Reflect'},M:{de:'Mitgestalten',en:'Co-create'}};
 const RANKS=[{p:0,ic:'🌱',de:'Einsteiger:in',en:'Beginner'},{p:140,ic:'🔍',de:'Entdecker:in',en:'Explorer'},
@@ -1066,6 +1086,9 @@ const EXAM={
 };
 function modulesOf(g){return CONTENT[g]||[];}
 function gradeComplete(g){const m=modulesOf(g);return m.length>0&&m.every(x=>STATE.done[x.id]);}
+/* Prueft explizit alle vier Fuehrerscheine K05-K08 statt nur K08, weil Direktzugangs-
+   Codes (GRADE_CODES) K05-K07 uebersprungen haben koennten. */
+function geminiEligible(){return['K05','K06','K07','K08'].every(g=>STATE.fuehrerschein[g]);}
 function gradeProgress(g){const m=modulesOf(g);if(!m.length)return 0;return Math.round(m.filter(x=>STATE.done[x.id]).length/m.length*100);}
 function isUnlocked(g){if(g==='OB')return STATE.teacher||STATE.seniorUnlocked;return STATE.teacher||STATE.unlocked.includes(g);}
 /* ===== 7) Router ===== */
@@ -1076,7 +1099,7 @@ function go(where,o={}){window.scrollTo(0,0);
   else if(where==='overview')renderOverview(o.grade);else if(where==='module')renderRunner(o.grade,o.module,false);
   else if(where==='exam')renderRunner(o.grade,null,true);else if(where==='dashboard')renderDashboard();
   else if(where==='errors')renderErrors();else if(where==='cert')renderCert(o.grade);
-  else if(where==='senior')renderSeniorOverview();updateChrome();}
+  else if(where==='senior')renderSeniorOverview();else if(where==='geminicert')renderGeminiCert();updateChrome();}
 function updateChrome(){
   document.getElementById('lblOverview').textContent=t('overview');
   document.getElementById('lblErrors').textContent=t('errorsNav');
@@ -1127,11 +1150,13 @@ function renderOverview(grade){if(!isUnlocked(grade))return go('grades');
   const examHtml=ms.length?`<div class="exam-card" style="--accent:${g.accent}"><h3>🏁 ${t('exam')} ${grade}</h3><p>${t('examLead')}</p>
       ${got?`<div class="result-actions" style="justify-content:center"><button class="btn sm" onclick="go('cert',{grade:'${grade}'})">${t('viewCert')}</button></div>`
         :`<button class="btn ${complete?'':'ghost'}" ${complete?`onclick="go('exam',{grade:'${grade}'})"`:'disabled'}>${complete?t('startExam'):'🔒 '+t('examLocked')}</button>`}</div>`:'';
+  const geminiHtml=(grade==='K08'&&geminiEligible())?`<div class="exam-card" style="--accent:var(--k08);margin-top:14px"><h3>✨ ${t('geminiCertTitle')}</h3><p>${t('geminiCertBlurb')}</p>
+      <div class="result-actions" style="justify-content:center"><button class="btn sm" onclick="go('geminicert')">${t('geminiCertTitle')}</button></div></div>`:'';
   view().innerHTML=`<section class="view"><div class="ov-head">
     <div class="ov-title"><div class="eyebrow" style="color:${g.accent}">${t('gradeEy')} ${grade} · ${t('niveau')} ${g.niveau}</div><h2>${tx(g.title)}</h2></div>
     <div class="ov-stats"><div class="stat"><b>${gradeProgress(grade)}%</b><span>${t('completed')}</span></div>
       <div class="stat"><b>${STATE.points}</b><span>${t('points')}</span></div><div class="stat"><b>${STATE.bestStreak}</b><span>${t('streak')}</span></div></div>
-    </div><div class="modlist">${modsHtml}</div>${examHtml}
+    </div><div class="modlist">${modsHtml}</div>${examHtml}${geminiHtml}
     <div style="margin-top:22px"><button class="btn ghost sm" onclick="go('grades')">← ${t('back')}</button></div></section>`;}
 function renderSeniorOverview(){if(!isUnlocked('OB'))return go('grades');
   setCrumb([`<b>${tx(OB_META.title)}</b>`]);const ms=modulesOf('OB');
@@ -1328,7 +1353,26 @@ function renderCert(grade){const g=gradeById(grade),fs=STATE.fuehrerschein[grade
     </div>
     <div class="result-actions" style="justify-content:center;margin-top:20px">
       <button class="btn sm" onclick="exportPNG('certCard','KI-Fuehrerschein-${grade}')">⬇️ ${t('exportPng')}</button>
+      <button class="btn ghost sm" onclick="window.print()">🖨️ ${t('printPdf')}</button>
       <button class="btn ghost sm" onclick="go('overview',{grade:'${grade}'})">← ${t('back')}</button></div></section>`;}
+function renderGeminiCert(){if(!geminiEligible())return go('overview',{grade:'K08'});
+  const d=new Date().toLocaleDateString(L()==='de'?'de-DE':'en-GB');setCrumb([`${t('gradeEy')} K08`,`<b>${t('geminiCertTitle')}</b>`]);
+  const mailSubject=encodeURIComponent((L()==='de'?'Gemini-Berechtigung – ':'Gemini authorisation – ')+(STATE.name||''));
+  view().innerHTML=`<section class="view cert-wrap"><div class="cert" id="geminiCertCard" style="--accent:var(--k08)">
+      <div class="cert-head"><img class="cert-logo-img" src="gsis-logo.png" alt="GSIS" style="height:46px" onerror="this.style.display='none'">
+        <div class="cert-school">German Swiss International School<small>German International Stream</small></div></div>
+      <h2>${t('geminiCertTitle')}</h2><div class="cert-seal"><span>✨</span></div>
+      <div class="name">${STATE.name||'—'}</div><div class="klasse">${t('klasse')}: ${STATE.klasse||'—'}</div>
+      <div class="sub">${t('geminiCertLead')}</div>
+      <div class="cert-foot"><div>${t('date')}: <b style="color:var(--ink)">${d}</b></div><div class="sig">${t('signature')}</div></div>
+    </div>
+    <div class="panel" style="margin-top:20px"><h3>${t('geminiCertHowToTitle')}</h3>
+      <ol style="padding-left:20px;font-size:14px;line-height:1.8;color:var(--ink)">
+        <li>${t('geminiStep1')}</li><li>${t('geminiStep2')}</li><li>${t('geminiStep3')}</li></ol></div>
+    <div class="result-actions" style="justify-content:center;margin-top:20px">
+      <button class="btn sm" onclick="window.print()">🖨️ ${t('printPdf')}</button>
+      <a class="btn ghost sm" style="text-decoration:none" href="mailto:${GEMINI_CERT_EMAIL}?subject=${mailSubject}">✉️ ${t('openMail')}</a>
+      <button class="btn ghost sm" onclick="go('overview',{grade:'K08'})">← ${t('back')}</button></div></section>`;}
 function exportPNG(id,fn){const el=document.getElementById(id);if(!el||typeof html2canvas==='undefined'){toast(L()==='de'?'Export nicht verfügbar':'Export unavailable');return;}
   toast(L()==='de'?'Bild wird erstellt …':'Creating image …');
   html2canvas(el,{backgroundColor:'#ffffff',scale:2,useCORS:true}).then(c=>{const a=document.createElement('a');a.download=fn+'.png';a.href=c.toDataURL('image/png');a.click();}).catch(()=>toast(L()==='de'?'Export fehlgeschlagen':'Export failed'));}
