@@ -50,6 +50,11 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   Google ändert die Oberfläche zu oft, deshalb Inline-HTML/CSS-Mockup mit nummerierten
   Erklär-Punkten. Verlinkt die schulweite „GSIS KI-Ampel" (0–4-Skala, Google-Drive-PDF)
   statt die Tabelle im Code zu duplizieren — die Schule pflegt das PDF unabhängig.
+- K08-M6 „KI im Unterricht: Zulässig oder nicht?": vier Alltagsszenarien als Quiz —
+  Entscheidung + Begründung stecken direkt in den Antwortoptionen (nicht Freitext),
+  damit automatisch auswertbar; ein Szenario ist bewusst „knifflig" (Gegenintuitiv
+  richtig: KI-Nutzung beim unbewerteten Üben ist erlaubt). Abschließend eine offene
+  Reflexion, in der Schüler:innen ihre eigene Begründung zu einer Situation aufschreiben.
 - Pro Jahrgang ein eigener **Abschlusstest** (`EXAM[grade]`) — bündelnde Aufgaben,
   **keine** Modul-Kopien. Bestehensschwelle `PASS = 0.75`, gilt **auch für einzelne
   Module** (nicht nur den Abschlusstest): Unter 75% richtig wird das Modul nicht als
