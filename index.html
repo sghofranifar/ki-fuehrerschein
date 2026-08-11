@@ -340,7 +340,7 @@ const GRADES=[
  {id:'K05',accent:'var(--k05)',niveau:'I',title:{de:'Klasse 5',en:'Grade 5'},focus:{de:'Was ist KI? Erste Begriffe, KI im Alltag, Mensch & Maschine, KI braucht Energie.',en:'What is AI? First terms, AI in daily life, humans & machines, AI needs energy.'}},
  {id:'K06',accent:'var(--k06)',niveau:'I→II',title:{de:'Klasse 6',en:'Grade 6'},focus:{de:'Auffrischung + wie KI „lernt", Empfehlungen, gute Prompts, prüfen.',en:'Refresher + how AI "learns", recommendations, good prompts, checking.'}},
  {id:'K07',accent:'var(--k07)',niveau:'II',title:{de:'Klasse 7',en:'Grade 7'},focus:{de:'Auffrischung + Bias & Fairness, Halluzinationen, mit KI gestalten, Quellen.',en:'Refresher + bias & fairness, hallucinations, creating with AI, sources.'}},
- {id:'K08',accent:'var(--k08)',niveau:'II→III',title:{de:'Klasse 8',en:'Grade 8'},focus:{de:'Auffrischung + Aufgaben teilen, ko-konstruieren, Grenzen & Datenschutz.',en:'Refresher + dividing tasks, co-creating, limits & data protection.'}},
+ {id:'K08',accent:'var(--k08)',niveau:'II→III',title:{de:'Klasse 8',en:'Grade 8'},focus:{de:'Auffrischung + Aufgaben teilen, ko-konstruieren, Grenzen & Datenschutz, Gemini kennenlernen.',en:'Refresher + dividing tasks, co-creating, limits & data protection, getting to know Gemini.'}},
  {id:'K09',accent:'var(--k09)',niveau:'III',title:{de:'Klasse 9',en:'Grade 9'},focus:{de:'Auffrischung + KI bewerten, Daten & Bias gestalten, Ethik & eigenes Projekt.',en:'Refresher + evaluating AI, shaping data & bias, ethics & own project.'}},
  {id:'K10',accent:'var(--k10)',niveau:'III',title:{de:'Klasse 10',en:'Grade 10'},focus:{de:'Auffrischung + KI & Zukunft der Arbeit, eigene KI-Workflows gestalten, KI-gestützt vs. klassisch vergleichen, über KI kommunizieren.',en:'Refresher + AI & the future of work, designing your own AI workflows, comparing AI-assisted vs classic approaches, communicating about AI.'}}
 ];
@@ -632,6 +632,50 @@ const CONTENT={
      options:[{de:'Alles der KI überlassen und selbst kaum noch nachdenken',en:'Leaving everything to AI and barely thinking yourself'},
               {de:'KI nur einmal pro Woche nutzen',en:'Using AI only once a week'},{de:'KI gar nicht mögen',en:'Disliking AI'}],
      correct:0,explain:{de:'Wer nicht mehr selbst denkt, lernt weniger – das ist das Risiko.',en:'Stopping your own thinking means learning less – that is the risk.'}}
+  ]},
+  {id:'K08-M5',icon:'✨',komp:'A',niveau:'III',title:{de:'Gemini kennenlernen',en:'Getting to know Gemini'},tasks:[
+    {type:'info',title:{de:'Gemini – ab jetzt für dich freigegeben',en:'Gemini – now unlocked for you'},
+     body:{de:'<p><strong>Gemini</strong> ist der KI-Assistent von Google. Ab Klasse 8 darfst du ihn an der GSIS für den Unterricht nutzen – deshalb schauen wir uns kurz an, wie er aufgebaut ist.</p>'+
+       '<div style="border:1.5px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;margin-top:12px">'+
+       '<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);font-size:13px;font-weight:700;color:var(--muted)">'+
+       '<span>✨ Gemini</span><span style="margin-left:auto;background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:12px">① Modell: Fast ▾</span></div>'+
+       '<div style="padding:16px;font-size:13px;color:var(--muted);min-height:36px">④ Antwortbereich – hier erscheint die Antwort von Gemini.</div>'+
+       '<div style="display:flex;gap:8px;align-items:center;padding:10px 14px;border-top:1px solid var(--line)">'+
+       '<span style="background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:12px">➕ ② Extras</span>'+
+       '<span style="flex:1;border:1px solid var(--line);border-radius:20px;padding:6px 12px;font-size:13px;color:var(--muted)">③ Frag Gemini etwas …</span></div></div>'+
+       '<div style="margin-top:12px;font-size:13.5px;line-height:1.7">'+
+       '<p>① <strong>Modell-Auswahl</strong> – Fast, Thinking oder Pro (mehr dazu gleich).</p>'+
+       '<p>② <strong>Extras</strong> – z. B. Bild hochladen, Deep Research (recherchiert selbstständig), Canvas (erstellt Dokumente/kleine Programme).</p>'+
+       '<p>③ <strong>Eingabefeld</strong> – hier tippst du deinen Prompt.</p>'+
+       '<p>④ <strong>Antwortbereich</strong> – die Antwort, die du wie immer prüfen solltest.</p></div>',
+       en:'<p><strong>Gemini</strong> is Google\'s AI assistant. From Grade 8 you may use it for schoolwork at GSIS – so let\'s look at how it is laid out.</p>'+
+       '<div style="border:1.5px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;margin-top:12px">'+
+       '<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);font-size:13px;font-weight:700;color:var(--muted)">'+
+       '<span>✨ Gemini</span><span style="margin-left:auto;background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:12px">① Model: Fast ▾</span></div>'+
+       '<div style="padding:16px;font-size:13px;color:var(--muted);min-height:36px">④ Response area – Gemini\'s answer appears here.</div>'+
+       '<div style="display:flex;gap:8px;align-items:center;padding:10px 14px;border-top:1px solid var(--line)">'+
+       '<span style="background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:12px">➕ ② Extras</span>'+
+       '<span style="flex:1;border:1px solid var(--line);border-radius:20px;padding:6px 12px;font-size:13px;color:var(--muted)">③ Ask Gemini something …</span></div></div>'+
+       '<div style="margin-top:12px;font-size:13.5px;line-height:1.7">'+
+       '<p>① <strong>Model picker</strong> – Fast, Thinking or Pro (more on this next).</p>'+
+       '<p>② <strong>Extras</strong> – e.g. uploading an image, Deep Research (researches on its own), Canvas (creates documents/small programs).</p>'+
+       '<p>③ <strong>Input field</strong> – this is where you type your prompt.</p>'+
+       '<p>④ <strong>Response area</strong> – the answer, which you should always check.</p></div>'}},
+    {type:'match',q:{de:'Welches Modell passt zu welcher Aufgabe?',en:'Which model fits which task?'},
+     pairs:[{left:{de:'Fast',en:'Fast'},right:{de:'schnelle, einfache Fragen im Alltag',en:'quick, simple everyday questions'}},
+            {left:{de:'Thinking',en:'Thinking'},right:{de:'knifflige Logik- oder Rechenaufgaben, bei denen Genauigkeit wichtiger ist als Tempo',en:'tricky logic or maths problems where accuracy matters more than speed'}},
+            {left:{de:'Pro',en:'Pro'},right:{de:'ein langes Dokument analysieren oder höchste Genauigkeit gefragt',en:'analysing a long document or when top accuracy is needed'}}]},
+    {type:'multi',q:{de:'Wie lässt sich Gemini sinnvoll im Unterricht einsetzen? (Mehrere)',en:'How can Gemini be used sensibly in class? (Several)'},
+     options:[{de:'Erste Ideen oder eine Gliederung für eine Arbeit erstellen lassen',en:'Getting first ideas or an outline for a piece of work'},
+              {de:'Verständnisfragen zu einem Thema stellen',en:'Asking questions to better understand a topic'},
+              {de:'Feedback zu einem eigenen Übungstext einholen',en:'Getting feedback on a practice text you wrote'},
+              {de:'Eine komplette bewertete Arbeit schreiben lassen und unverändert abgeben',en:'Having it write a whole graded assignment and submitting it unchanged'}],
+     correct:[0,1,2],explain:{de:'Ideen, Verständnisfragen und Feedback unterstützen dein Lernen. Eine ganze bewertete Arbeit unverändert abzugeben, ist keine eigene Leistung mehr.',en:'Ideas, questions and feedback support your learning. Submitting a whole graded assignment unchanged is no longer your own work.'}},
+    {type:'info',title:{de:'Wofür darf ich Gemini nutzen?',en:'What am I allowed to use Gemini for?'},
+     body:{de:'<p>Das hängt von der jeweiligen Aufgabe ab. GSIS hat dafür eine Skala von <strong>0</strong> (keine KI erlaubt) bis <strong>4</strong> (volle KI-Nutzung unter deiner eigenen Aufsicht und Verantwortung) – deine Lehrkraft sagt dir, welche Stufe für eine Aufgabe gilt.</p><p><a href="https://drive.google.com/file/d/13atktLu0TtHaTjkcqaVewYRJfTfROUvI/view?usp=sharing" target="_blank" rel="noopener">📄 GSIS KI-Ampel öffnen (PDF) ↗</a></p>',
+           en:'<p>This depends on the specific task. GSIS uses a scale from <strong>0</strong> (no AI allowed) to <strong>4</strong> (full AI use under your own supervision and responsibility) – your teacher will tell you which level applies to a task.</p><p><a href="https://drive.google.com/file/d/13atktLu0TtHaTjkcqaVewYRJfTfROUvI/view?usp=sharing" target="_blank" rel="noopener">📄 Open the GSIS AI traffic-light scale (PDF) ↗</a></p>'}},
+    {type:'reflect',q:{de:'Wähle eine Aufgabe aus deinem aktuellen Unterricht. Schau in der GSIS-KI-Skala nach: Welche Stufe (0–4) passt dazu, und wie dürftest du Gemini dabei einsetzen?',en:'Pick a task from your current lessons. Check the GSIS AI scale: which level (0–4) fits, and how would you be allowed to use Gemini for it?'},
+     placeholder:{de:'Aufgabe … / Stufe (0–4) … / erlaubte Nutzung …',en:'Task … / Level (0–4) … / allowed use …'},prod:true}
   ]}
  ],
  K09:[

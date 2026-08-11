@@ -45,6 +45,11 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   App hat keinen Server, jeder Code steht im Klartext im Seitenquelltext.
 - Aufgabentypen: `info | quiz | multi | match | sort | cloze | reflect | classify`.
   `classify` = visuelle „Ist das KI?"-Aufgabe mit eingebetteten SVG-Icons.
+- K08-M5 „Gemini kennenlernen": Ab Klasse 8 dürfen Schüler:innen Gemini nutzen, daher
+  eigenes Modul mit stilisiertem (nicht echtem!) UI-Diagramm — **keine Screenshots**,
+  Google ändert die Oberfläche zu oft, deshalb Inline-HTML/CSS-Mockup mit nummerierten
+  Erklär-Punkten. Verlinkt die schulweite „GSIS KI-Ampel" (0–4-Skala, Google-Drive-PDF)
+  statt die Tabelle im Code zu duplizieren — die Schule pflegt das PDF unabhängig.
 - Pro Jahrgang ein eigener **Abschlusstest** (`EXAM[grade]`) — bündelnde Aufgaben,
   **keine** Modul-Kopien. Bestehensschwelle `PASS = 0.75`, gilt **auch für einzelne
   Module** (nicht nur den Abschlusstest): Unter 75% richtig wird das Modul nicht als
