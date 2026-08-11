@@ -43,13 +43,20 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   ein Code-Modal (`openGradeCode()`), das genau diesen einen Jahrgang freischaltet,
   ohne die Kette/andere Jahrgänge zu berühren. **Kein echter Zugriffsschutz** — die
   App hat keinen Server, jeder Code steht im Klartext im Seitenquelltext.
-- Aufgabentypen: `info | quiz | multi | match | sort | cloze | reflect | classify`.
-  `classify` = visuelle „Ist das KI?"-Aufgabe mit eingebetteten SVG-Icons.
+- Aufgabentypen: `info | quiz | multi | match | sort | cloze | reflect | classify | input`.
+  `classify` = visuelle „Ist das KI?"-Aufgabe mit eingebetteten SVG-Icons. `input` =
+  freies Textfeld, per `task.accept`-Liste geprüft; `norm()` entfernt beim Vergleich
+  alles außer Ziffern, damit unterschiedliche Schreibweisen (z. B. „17:02"/„17.02 Uhr")
+  als richtig erkannt werden — wichtig, weil KI-Antworten nie exakt gleich formuliert sind.
 - K08-M5 „Gemini kennenlernen": Ab Klasse 8 dürfen Schüler:innen Gemini nutzen, daher
   eigenes Modul mit stilisiertem (nicht echtem!) UI-Diagramm — **keine Screenshots**,
   Google ändert die Oberfläche zu oft, deshalb Inline-HTML/CSS-Mockup mit nummerierten
   Erklär-Punkten. Verlinkt die schulweite „GSIS KI-Ampel" (0–4-Skala, Google-Drive-PDF)
   statt die Tabelle im Code zu duplizieren — die Schule pflegt das PDF unabhängig.
+  Letzte Aufgabe: echte Mini-Challenge auf gemini.google.com/app (neuer Tab) mit
+  `input`-Aufgabentyp — bewusst eine Aufgabe mit eindeutig berechenbarer Antwort
+  (Zeitrechnung), nicht wörtlicher Abgleich von Geminis Antworttext, da KI-Ausgaben
+  nicht deterministisch sind.
 - K08-M6 „KI im Unterricht: Zulässig oder nicht?": vier Alltagsszenarien als Quiz —
   Entscheidung + Begründung stecken direkt in den Antwortoptionen (nicht Freitext),
   damit automatisch auswertbar; ein Szenario ist bewusst „knifflig" (Gegenintuitiv

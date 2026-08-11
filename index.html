@@ -234,6 +234,8 @@ main{flex:1;padding:34px 0 70px}
 .modal p{color:var(--muted);font-size:14px;margin-bottom:18px}
 .field{width:100%;height:48px;border:1.5px solid var(--line);border-radius:11px;padding:0 14px;font-family:inherit;font-size:15px;margin-bottom:14px}
 .field:focus{border-color:var(--gsis-green);outline:none}
+.field.ok{border-color:var(--good);background:var(--good-bg)}
+.field.no{border-color:var(--bad);background:var(--bad-bg)}
 .flabel{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:5px;display:block}
 .modal-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
 .codebox{background:var(--bg);border:1px dashed var(--line-strong);border-radius:10px;padding:12px;font-family:ui-monospace,monospace;font-size:12px;word-break:break-all;margin-bottom:14px;max-height:120px;overflow:auto}
@@ -678,7 +680,17 @@ const CONTENT={
      body:{de:'<p>Das hängt von der jeweiligen Aufgabe ab. GSIS hat dafür eine Skala von <strong>0</strong> (keine KI erlaubt) bis <strong>4</strong> (volle KI-Nutzung unter deiner eigenen Aufsicht und Verantwortung) – deine Lehrkraft sagt dir, welche Stufe für eine Aufgabe gilt.</p><p><a href="https://drive.google.com/file/d/13atktLu0TtHaTjkcqaVewYRJfTfROUvI/view?usp=sharing" target="_blank" rel="noopener">📄 GSIS KI-Ampel öffnen (PDF) ↗</a></p>',
            en:'<p>This depends on the specific task. GSIS uses a scale from <strong>0</strong> (no AI allowed) to <strong>4</strong> (full AI use under your own supervision and responsibility) – your teacher will tell you which level applies to a task.</p><p><a href="https://drive.google.com/file/d/13atktLu0TtHaTjkcqaVewYRJfTfROUvI/view?usp=sharing" target="_blank" rel="noopener">📄 Open the GSIS AI traffic-light scale (PDF) ↗</a></p>'}},
     {type:'reflect',q:{de:'Wähle eine Aufgabe aus deinem aktuellen Unterricht. Schau in der GSIS-KI-Skala nach: Welche Stufe (0–4) passt dazu, und wie dürftest du Gemini dabei einsetzen?',en:'Pick a task from your current lessons. Check the GSIS AI scale: which level (0–4) fits, and how would you be allowed to use Gemini for it?'},
-     placeholder:{de:'Aufgabe … / Stufe (0–4) … / erlaubte Nutzung …',en:'Task … / Level (0–4) … / allowed use …'},prod:true}
+     placeholder:{de:'Aufgabe … / Stufe (0–4) … / erlaubte Nutzung …',en:'Task … / Level (0–4) … / allowed use …'},prod:true},
+    {type:'info',title:{de:'Deine erste Gemini-Challenge',en:'Your first Gemini challenge'},
+     body:{de:'<p>Jetzt bist du dran! Öffne <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a> in einem neuen Tab (mit deinem GSIS-Schulaccount) und gib dort genau diesen Prompt ein:</p>'+
+       '<div class="infobox" style="font-style:italic">„Ein Zug fährt um 14:15 Uhr los und kommt nach 2 Stunden 47 Minuten an. Um wie viel Uhr kommt er an? Antworte nur mit der Uhrzeit im Format HH:MM."</div>'+
+       '<p style="margin-top:10px">Rechne das Ergebnis am besten kurz selbst nach, bevor du zurückkommst – du weißt ja: KI-Antworten immer prüfen!</p>',
+           en:'<p>Now it\'s your turn! Open <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a> in a new tab (with your GSIS school account) and enter exactly this prompt there:</p>'+
+       '<div class="infobox" style="font-style:italic">"A train leaves at 14:15 and arrives after 2 hours 47 minutes. What time does it arrive? Answer only with the time in HH:MM format."</div>'+
+       '<p style="margin-top:10px">Best to quickly work out the answer yourself too before you come back – you know the rule: always check AI answers!</p>'}},
+    {type:'input',q:{de:'Welche Uhrzeit hat Gemini ausgegeben (und deine eigene Rechnung ergeben)?',en:'What time did Gemini give you (and what did your own calculation give)?'},
+     hint:{de:'z. B. 17:02',en:'e.g. 17:02'},accept:['17:02'],
+     explain:{de:'14:15 Uhr + 2 Stunden 47 Minuten = 17:02 Uhr. Falls Gemini etwas anderes geliefert hat: gut, dass du nachgerechnet hast!',en:'14:15 + 2 hours 47 minutes = 17:02. If Gemini gave you something different: good that you checked!'}}
   ]},
   {id:'K08-M6',icon:'🚦',komp:'R',niveau:'III',title:{de:'KI im Unterricht: Zulässig oder nicht?',en:'AI in class: allowed or not?'},tasks:[
     {type:'info',title:{de:'Vier Situationen aus dem Schulalltag',en:'Four situations from everyday school life'},
@@ -1227,6 +1239,18 @@ const RENDERERS={
    bindPrimary(()=>{if(locked)return advance();const sels=[...h.querySelectorAll('select')];if(sels.some(s=>s.value===''))return toast(L()==='de'?'Fülle alle Lücken':'Fill all gaps');
      locked=true;let allOk=true;sels.forEach(s=>{const ok=(+s.value)===task.blanks[+s.dataset.b].correct;if(!ok)allOk=false;s.classList.add(ok?'ok':'no');s.disabled=true;});
      scoreTask(allOk,task);showFeedback(allOk,tx(task.explain||{de:'',en:''}));document.getElementById('primaryBtn').textContent=t('next')+' →';});},
+ /* Freies Eingabefeld statt Auswahl. norm() entfernt alles außer Ziffern, damit
+    "17:02", "17.02" oder "17:02 Uhr" alle als gleich erkannt werden – wichtig,
+    weil KI-Antworten nie exakt gleich formuliert sind. */
+ input(h,task){let locked=false;
+   h.innerHTML=`<div class="ttype">⌨️ ${L()==='de'?'Eingabe':'Input'}</div><h3>${tx(task.q)}</h3>
+     <input class="field" id="inpAns" placeholder="${tx(task.hint||{de:'',en:''})}">
+     ${feedbackEl()}${taskFoot(t('check'))}`;
+   bindPrimary(()=>{const raw=document.getElementById('inpAns').value.trim();if(!raw)return toast(L()==='de'?'Bitte etwas eingeben':'Please enter something');
+     if(locked)return advance();locked=true;
+     const norm=s=>s.replace(/\D/g,'');const ok=task.accept.some(a=>norm(a)===norm(raw));
+     const inp=document.getElementById('inpAns');inp.disabled=true;inp.classList.add(ok?'ok':'no');
+     scoreTask(ok,task);showFeedback(ok,tx(task.explain||{de:'',en:''}));document.getElementById('primaryBtn').textContent=t('next')+' →';});},
  reflect(h,task){const key='reflect_'+(RUN.moduleId||RUN.grade)+'_'+RUN.idx,prev=Store.get(key)||'';
    h.innerHTML=`<div class="ttype">💬 ${tx(KOMP.R)}${task.prod?' · '+(L()==='de'?'Einreichung':'Submission'):''}</div><h3>${tx(task.q)}</h3>
      <div class="reflect"><textarea id="refl" placeholder="${tx(task.placeholder||{de:'',en:''})}">${prev}</textarea><div class="hint">${t('reflectHint')}</div></div>
