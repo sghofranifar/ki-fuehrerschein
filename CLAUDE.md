@@ -57,11 +57,14 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   `input`-Aufgabentyp — bewusst eine Aufgabe mit eindeutig berechenbarer Antwort
   (Zeitrechnung), nicht wörtlicher Abgleich von Geminis Antworttext, da KI-Ausgaben
   nicht deterministisch sind.
-- K08-M6 „KI im Unterricht: Zulässig oder nicht?": vier Alltagsszenarien als Quiz —
+- K08-M6 „KI im Unterricht: Zulässig oder nicht?": fünf Alltagsszenarien als Quiz —
   Entscheidung + Begründung stecken direkt in den Antwortoptionen (nicht Freitext),
-  damit automatisch auswertbar; ein Szenario ist bewusst „knifflig" (Gegenintuitiv
-  richtig: KI-Nutzung beim unbewerteten Üben ist erlaubt). Abschließend eine offene
-  Reflexion, in der Schüler:innen ihre eigene Begründung zu einer Situation aufschreiben.
+  damit automatisch auswertbar; zwei Szenarien sind bewusst „knifflig": (1) Gegenintuitiv
+  richtig erlaubt: KI-Nutzung beim unbewerteten Üben; (2) Erlaubnis zur KI-Nutzung und
+  Offenlegungspflicht sind getrennte Dinge — Verstoß trotz eigentlich erlaubter Nutzung,
+  weil die Kennzeichnung fehlt (spiegelt die echten Offenlegungspflichten der GSIS-Skala).
+  Abschließend eine offene Reflexion, in der Schüler:innen ihre eigene Begründung zu
+  einer Situation aufschreiben.
 - Pro Jahrgang ein eigener **Abschlusstest** (`EXAM[grade]`) — bündelnde Aufgaben,
   **keine** Modul-Kopien. Bestehensschwelle `PASS = 0.75`, gilt **auch für einzelne
   Module** (nicht nur den Abschlusstest): Unter 75% richtig wird das Modul nicht als
