@@ -48,6 +48,13 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   freies Textfeld, per `task.accept`-Liste geprüft; `norm()` entfernt beim Vergleich
   alles außer Ziffern, damit unterschiedliche Schreibweisen (z. B. „17:02"/„17.02 Uhr")
   als richtig erkannt werden — wichtig, weil KI-Antworten nie exakt gleich formuliert sind.
+- K08-M7 „Prompt Engineering mit CRAFT": im Modul-Array bewusst an Position 2 (direkt
+  nach der Auffrischung) eingefügt, hat aber die ID `K08-M7` behalten statt die
+  bestehenden Module M2–M6 umzunummerieren — sonst hätte das bereits gespeicherten
+  Fortschritt von Beta-Tester:innen unter den alten IDs zerstört (Modul-Reihenfolge in
+  der Anzeige kommt aus der Array-Position, nicht aus der ID). CRAFT-Framework nach
+  Vera Cubero/Joscha Falck unter **CC BY-NC-SA 4.0** — abweichend von der App-Lizenz,
+  daher eigener Attributions-Hinweis im Modul selbst UND im Impressum.
 - K08-M5 „Gemini kennenlernen": Ab Klasse 8 dürfen Schüler:innen Gemini nutzen, daher
   eigenes Modul mit stilisiertem (nicht echtem!) UI-Diagramm — **keine Screenshots**,
   Google ändert die Oberfläche zu oft, deshalb Inline-HTML/CSS-Mockup mit nummerierten
