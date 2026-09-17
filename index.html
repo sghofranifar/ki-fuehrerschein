@@ -1165,7 +1165,30 @@ const EXAM={
   {type:'quiz',q:{de:'Worin ist der Mensch der KI voraus?',en:'Where is the human ahead of AI?'},
    options:[{de:'Echte Gefühle und wirklich Neues erfinden',en:'Real feelings and inventing truly new things'},
             {de:'Sehr schnell rechnen',en:'Calculating very fast'},{de:'Ohne Pause arbeiten',en:'Working without breaks'}],
-   correct:0,explain:{de:'Gefühle und echte Kreativität sind menschliche Stärken.',en:'Feelings and true creativity are human strengths.'}}
+   correct:0,explain:{de:'Gefühle und echte Kreativität sind menschliche Stärken.',en:'Feelings and true creativity are human strengths.'}},
+  {type:'info',group:'k05-mia',title:{de:'Fallstudie: Mias Foto-App',en:'Case study: Mia\'s photo app'},
+   body:{de:'<p>Mia nutzt eine Foto-App, die Gesichter erkennt und automatisch Namen vorschlägt. Manchmal liegt die App richtig, manchmal falsch.</p>',
+         en:'<p>Mia uses a photo app that recognises faces and automatically suggests names. Sometimes the app is right, sometimes wrong.</p>'}},
+  {type:'quiz',group:'k05-mia',q:{de:'Die App schlägt bei einem Foto den falschen Namen vor. Was bedeutet das am ehesten?',en:'The app suggests the wrong name for a photo. What does that most likely mean?'},
+   options:[{de:'Die KI hat sich beim Muster-Erkennen geirrt',en:'The AI made a mistake recognising the pattern'},
+            {de:'Das Foto ist kaputt',en:'The photo is broken'},{de:'Die App hat gar keine KI',en:'The app has no AI at all'}],
+   correct:0,explain:{de:'Gesichtserkennung basiert auf Mustern – die kann sich irren.',en:'Face recognition is based on patterns – it can make mistakes.'}},
+  {type:'quiz',group:'k05-mia',q:{de:'In einer Chat-App fragt jemand Mia nach ihrer Adresse, weil er ihr angeblich helfen will. Was macht sie am besten?',en:'In a chat app, someone asks Mia for her address, claiming they want to help her. What is best for her to do?'},
+   options:[{de:'Nicht teilen und einer erwachsenen Vertrauensperson erzählen',en:'Not share it and tell a trusted adult'},
+            {de:'Die Adresse schicken, weil er helfen will',en:'Send the address because they want to help'},{de:'Gar nichts tun',en:'Do nothing at all'}],
+   correct:0,explain:{de:'Persönliche Daten wie die Adresse gehören nicht in einen Chat – und Erwachsene sollten informiert werden.',en:'Personal data like an address does not belong in a chat – and adults should be told.'}},
+  {type:'multi',group:'k05-fehler',q:{de:'Finn hat mit einem Chatbot gechattet. Welche seiner Handlungen waren NICHT klug? (Mehrere)',en:'Finn chatted with a chatbot. Which of his actions were NOT smart? (Several)'},
+   options:[{de:'Er hat dem Chatbot sein Passwort verraten, weil der Bot „vertrauenswürdig" wirkte',en:'He told the chatbot his password because the bot seemed "trustworthy"'},
+            {de:'Er hat eine Chatbot-Antwort sofort für sein Referat übernommen, ohne sie zu prüfen',en:'He immediately used a chatbot answer for his talk without checking it'},
+            {de:'Er hat den Chatbot nach einer Erklärung für ein Schulthema gefragt',en:'He asked the chatbot to explain a school topic'},
+            {de:'Er weiß, dass der Chatbot nur Muster zeigt und keine echten Gefühle hat',en:'He knows the chatbot only shows patterns and has no real feelings'}],
+   correct:[0,1],explain:{de:'Passwort verraten und ungeprüft übernehmen sind riskant. Nachfragen zum Schulthema und das Wissen über KI-Grenzen sind dagegen klug.',en:'Giving away a password and using an answer unchecked are risky. Asking about a school topic and knowing AI\'s limits are smart, though.'}},
+  {type:'order',group:'k05-fehler',q:{de:'Bringe die Schritte in die richtige Reihenfolge, wie Finn beim nächsten Mal vorgehen sollte.',en:'Put the steps in the right order for how Finn should proceed next time.'},
+   items:[{text:{de:'Frage an den Chatbot stellen',en:'Ask the chatbot a question'}},
+          {text:{de:'Die Antwort genau lesen',en:'Read the answer carefully'}},
+          {text:{de:'Die Antwort mit einer zweiten Quelle vergleichen',en:'Compare the answer with a second source'}},
+          {text:{de:'Erst dann für das Referat nutzen',en:'Only then use it for the talk'}}],
+   explain:{de:'Erst fragen, dann lesen, dann prüfen, erst danach nutzen – so übernimmt man keine Fehler ungeprüft.',en:'Ask, then read, then check, only then use – that way you never adopt mistakes unchecked.'}}
  ],
  K06:[
   {type:'quiz',q:{de:'Warum erkennt eine Bild-KI manche Tiere schlecht?',en:'Why does an image AI recognise some animals poorly?'},
@@ -1186,7 +1209,29 @@ const EXAM={
    correct:0,explain:{de:'Regeln vs. Lernen aus Daten – der zentrale Unterschied.',en:'Rules vs learning from data – the key difference.'}},
   {type:'quiz',q:{de:'Die KI antwortet unpassend. Was ist der erste sinnvolle Schritt?',en:'The AI answers off-target. What is the first sensible step?'},
    options:[{de:'Den Prompt klarer formulieren',en:'Make the prompt clearer'},{de:'Die Antwort trotzdem übernehmen',en:'Use the answer anyway'},{de:'Aufgeben',en:'Give up'}],
-   correct:0,explain:{de:'Oft liegt es am Prompt – also zuerst die Frage verbessern.',en:'Often it is the prompt – so improve the question first.'}}
+   correct:0,explain:{de:'Oft liegt es am Prompt – also zuerst die Frage verbessern.',en:'Often it is the prompt – so improve the question first.'}},
+  {type:'info',group:'k06-paul',title:{de:'Fallstudie: Pauls Vulkan-Referat',en:'Case study: Paul\'s volcano talk'},
+   body:{de:'<p>Paul soll ein Referat über Vulkane halten und nutzt dafür einen Chatbot.</p>',en:'<p>Paul has to give a talk about volcanoes and uses a chatbot to help.</p>'}},
+  {type:'quiz',group:'k06-paul',q:{de:'Paul tippt als Prompt nur „Vulkan?". Warum ist das nicht ideal?',en:'Paul types just "Volcano?" as his prompt. Why is that not ideal?'},
+   options:[{de:'Es fehlt Kontext – die KI weiß nicht, was genau Paul wissen will',en:'It lacks context – the AI does not know exactly what Paul wants to know'},
+            {de:'Fragezeichen verwirren die KI technisch',en:'Question marks technically confuse the AI'},{de:'Einzelne Wörter sind für KI verboten',en:'Single words are forbidden for AI'}],
+   correct:0,explain:{de:'Ohne Kontext (welcher Aspekt, welches Ziel) bleibt die Antwort vage.',en:'Without context (which aspect, which goal) the answer stays vague.'}},
+  {type:'quiz',group:'k06-paul',q:{de:'Der Chatbot nennt Paul einen Fakt, der ihm neu vorkommt. Was macht Paul am besten?',en:'The chatbot tells Paul a fact that is new to him. What is best for him to do?'},
+   options:[{de:'Den Fakt mit einer zweiten Quelle vergleichen, bevor er ihn nutzt',en:'Compare the fact with a second source before using it'},
+            {de:'Sofort ins Referat übernehmen, weil es sicher klingt',en:'Use it in the talk right away because it sounds confident'},{de:'Den Chatbot fragen, ob er sich sicher ist',en:'Ask the chatbot if it is sure'}],
+   correct:0,explain:{de:'Eine zweite, unabhängige Quelle zeigt, ob der Fakt stimmt – die KI selbst nochmal zu fragen, hilft dabei nicht.',en:'A second, independent source shows whether the fact is true – asking the AI itself again does not help with that.'}},
+  {type:'multi',group:'k06-fix',q:{de:'Was fehlt bei diesem Prompt: „Erzähl was über Tiere."? (Mehrere)',en:'What is missing from this prompt: "Tell me something about animals."? (Several)'},
+   options:[{de:'Ein klarer Kontext (welches Tier, welcher Aspekt?)',en:'Clear context (which animal, which aspect?)'},
+            {de:'Ein gewünschtes Format (wie lang, welche Form?)',en:'A desired format (how long, what form?)'},
+            {de:'Ein Ausrufezeichen am Ende',en:'An exclamation mark at the end'},
+            {de:'Großbuchstaben am Satzanfang',en:'A capital letter at the start'}],
+   correct:[0,1],explain:{de:'Kontext und Format fehlen und machen die Antwort beliebig – Satzzeichen und Groß-/Kleinschreibung sind für die KI meist nebensächlich.',en:'Context and format are missing and make the answer arbitrary – punctuation and capitalisation barely matter to the AI.'}},
+  {type:'order',group:'k06-fix',q:{de:'Bringe die Schritte in die richtige Reihenfolge, wie du diesen Prompt verbesserst.',en:'Put the steps in the right order for improving this prompt.'},
+   items:[{text:{de:'Überlegen, was genau du wissen willst (z. B. welches Tier)',en:'Think about exactly what you want to know (e.g. which animal)'}},
+          {text:{de:'Kontext ergänzen (für wen, wozu?)',en:'Add context (for whom, for what purpose?)'}},
+          {text:{de:'Gewünschtes Format festlegen (z. B. 3 Sätze)',en:'Decide on the desired format (e.g. 3 sentences)'}},
+          {text:{de:'Den verbesserten Prompt an die KI schicken',en:'Send the improved prompt to the AI'}}],
+   explain:{de:'Erst überlegen, dann Kontext und Format ergänzen, erst dann abschicken – so entsteht ein klarer Prompt.',en:'First think, then add context and format, only then send – that is how a clear prompt is built.'}}
  ],
  K07:[
   {type:'quiz',q:{de:'Eine Gesichtserkennung funktioniert bei einer Gruppe schlecht. Wahrscheinlichste Ursache?',en:'Face recognition works poorly for one group. Most likely cause?'},
@@ -1208,7 +1253,35 @@ const EXAM={
   {type:'quiz',q:{de:'Beste Methode, eine überraschende KI-Behauptung zu prüfen?',en:'Best method to check a surprising AI claim?'},
    options:[{de:'Mit mehreren vertrauenswürdigen Quellen abgleichen',en:'Cross-check with several trusted sources'},
             {de:'Der KI glauben, weil sie sicher klingt',en:'Believe the AI because it sounds sure'},{de:'Dieselbe Frage doppelt stellen',en:'Ask the same question twice'}],
-   correct:0,explain:{de:'Unabhängige Quellen schlagen eine selbstsichere KI.',en:'Independent sources beat a confident AI.'}}
+   correct:0,explain:{de:'Unabhängige Quellen schlagen eine selbstsichere KI.',en:'Independent sources beat a confident AI.'}},
+  {type:'info',group:'k07-plakat',title:{de:'Fallstudie: Leas Klima-Plakat',en:'Case study: Lea\'s climate poster'},
+   body:{de:'<p>Lea gestaltet ein Plakat über den Klimawandel und lässt sich von einer Bild-KI ein passendes Titelbild erzeugen.</p>',en:'<p>Lea is designing a poster about climate change and has an image AI generate a matching cover picture.</p>'}},
+  {type:'quiz',group:'k07-plakat',q:{de:'Was ist beim KI-Bild für ihr Plakat fair?',en:'What is fair regarding the AI image for her poster?'},
+   options:[{de:'Angeben, dass es mit KI erstellt wurde',en:'State that it was created with AI'},
+            {de:'So tun, als hätte sie es selbst gezeichnet',en:'Pretend she drew it herself'},{de:'Es als Foto ausgeben',en:'Claim it is a photo'}],
+   correct:0,explain:{de:'Ehrliche Kennzeichnung ist fair gegenüber allen, die das Plakat sehen.',en:'Honest labelling is fair to everyone who sees the poster.'}},
+  {type:'multi',group:'k07-plakat',q:{de:'Worauf sollte Lea bei den Klima-Fakten auf ihrem Plakat besonders achten? (Mehrere)',en:'What should Lea especially watch out for with the climate facts on her poster? (Several)'},
+   options:[{de:'Zahlen/Fakten gegen eine unabhängige Quelle prüfen',en:'Check numbers/facts against an independent source'},
+            {de:'Darauf achten, ob die KI überzeugend, aber falsch klingende Details erfunden hat',en:'Watch for the AI having invented convincing-sounding but false details'},
+            {de:'Nur die auffälligste Zahl nehmen, egal ob sie stimmt',en:'Just take the most striking number, regardless of accuracy'},
+            {de:'Bei Unsicherheit eine Lehrkraft fragen',en:'Ask a teacher if unsure'}],
+   correct:[0,1,3],explain:{de:'Prüfen, auf Halluzinationen achten und im Zweifel nachfragen – die auffälligste Zahl blind zu nehmen ist keine gute Idee.',en:'Checking, watching for hallucinations and asking when unsure are good – blindly taking the most striking number is not.'}},
+  {type:'info',group:'k07-suche',title:{de:'Fallstudie: Bens Hausaufgabe',en:'Case study: Ben\'s homework'},
+   body:{de:'<p>Ben sucht für seine Hausaufgabe „Welches Land hat die meisten Einwohner?" bei Google. Er liest nur die <strong>KI-Übersicht</strong> ganz oben, schreibt die Zahl in sein Heft und schickt sie sofort in die Klassen-Chatgruppe – ohne weiter nachzuschauen.</p>',
+         en:'<p>Ben searches Google for his homework question "Which country has the most inhabitants?" He only reads the <strong>AI Overview</strong> at the top, writes the number in his notebook, and immediately sends it to the class chat group – without checking any further.</p>'}},
+  {type:'multi',group:'k07-suche',q:{de:'Was hat Ben bei seiner Recherche falsch gemacht? (Mehrere)',en:'What did Ben do wrong in his research? (Several)'},
+   options:[{de:'Er hat nur die KI-Übersicht gelesen, keine zweite Quelle',en:'He only read the AI Overview, no second source'},
+            {de:'Er hat die Information ungeprüft weiterverbreitet',en:'He spread the information without checking it'},
+            {de:'Er hat überhaupt eine Suchmaschine benutzt',en:'He used a search engine at all'},
+            {de:'Er hat sich für seine Hausaufgabe eine klare Frage gestellt',en:'He asked a clear question for his homework'}],
+   correct:[0,1],explain:{de:'Eine Suchmaschine zu nutzen und eine klare Frage zu stellen ist sinnvoll – das Problem ist, nur eine Quelle zu lesen und ungeprüft weiterzugeben.',en:'Using a search engine and asking a clear question are sensible – the problem is reading only one source and passing it on unchecked.'}},
+  {type:'order',group:'k07-suche',q:{de:'Bringe Bens Vorgehen in die richtige, bessere Reihenfolge.',en:'Put Ben\'s approach into the right, better order.'},
+   items:[{text:{de:'Frage bei Google eingeben',en:'Enter the question into Google'}},
+          {text:{de:'KI-Übersicht UND klassische Treffer lesen',en:'Read the AI Overview AND the classic results'}},
+          {text:{de:'Eine unabhängige zweite Quelle suchen',en:'Look for an independent second source'}},
+          {text:{de:'Beide Angaben vergleichen',en:'Compare both pieces of information'}},
+          {text:{de:'Erst dann die geprüfte Information weitergeben',en:'Only then pass on the checked information'}}],
+   explain:{de:'Fragen, lesen, eine zweite Quelle suchen, vergleichen, erst dann teilen – so vermeidet man, Fehler weiterzuverbreiten.',en:'Ask, read, find a second source, compare, only then share – that way you avoid spreading mistakes.'}}
  ],
  K08:[
   {type:'sort',q:{de:'Projekt-Aufsatz: Wo kann KI unterstützen, wo entscheidest du selbst?',en:'Project essay: where can AI support, where do you decide yourself?'},
@@ -1230,7 +1303,34 @@ const EXAM={
   {type:'quiz',q:{de:'Warum kennzeichnest du, was von der KI kam?',en:'Why do you label what came from the AI?'},
    options:[{de:'Ehrlichkeit und Sichtbarkeit deiner Eigenleistung',en:'Honesty and visibility of your own contribution'},
             {de:'Damit es länger aussieht',en:'To make it look longer'},{de:'Aus keinem Grund',en:'For no reason'}],
-   correct:0,explain:{de:'Transparenz ist fair und zeigt deine Leistung.',en:'Transparency is fair and shows your work.'}}
+   correct:0,explain:{de:'Transparenz ist fair und zeigt deine Leistung.',en:'Transparency is fair and shows your work.'}},
+  {type:'info',group:'k08-sara',title:{de:'Fallstudie: Saras Bio-Hausaufgabe',en:'Case study: Sara\'s biology homework'},
+   body:{de:'<p>Für eine Bio-Hausaufgabe ist Stufe 2 erlaubt: „KI-gestützte Bearbeitung". Sara fragt Gemini nach einer Erklärung zur Fotosynthese und bekommt eine Antwort, die gut klingt.</p>',
+         en:'<p>For a biology homework, Level 2 is allowed: "AI-assisted editing". Sara asks Gemini to explain photosynthesis and gets an answer that sounds good.</p>'}},
+  {type:'quiz',group:'k08-sara',q:{de:'Sara ist unsicher, ob die Erklärung wirklich stimmt. Was macht sie am besten?',en:'Sara is unsure whether the explanation is really correct. What is best for her to do?'},
+   options:[{de:'Die Erklärung mit ihrem Lehrbuch oder einer zweiten Quelle abgleichen',en:'Cross-check the explanation with her textbook or a second source'},
+            {de:'Sie trotzdem übernehmen, weil sie gut klingt',en:'Use it anyway because it sounds good'},{de:'Gemini fragen, ob sie sich sicher ist',en:'Ask Gemini if it is sure'}],
+   correct:0,explain:{de:'Eine unabhängige Quelle zeigt, ob die Erklärung stimmt.',en:'An independent source shows whether the explanation is correct.'}},
+  {type:'multi',group:'k08-sara',q:{de:'Was wäre für Sara laut Stufe 2 in Ordnung? (Mehrere)',en:'What would be okay for Sara under Level 2? (Several)'},
+   options:[{de:'Geminis Erklärung als Ausgangspunkt nutzen und in eigenen Worten aufschreiben',en:'Use Gemini\'s explanation as a starting point and write it in her own words'},
+            {de:'Ihre volle Adresse in den Chat eingeben, damit die Antwort persönlicher wird',en:'Enter her full home address in the chat to make the answer more personal'},
+            {de:'Den Einsatz von Gemini bei der Abgabe kennzeichnen',en:'Disclose the use of Gemini when submitting'},
+            {de:'Den Text unverändert kopieren, ohne ihn zu kennzeichnen',en:'Copy the text unchanged, without disclosing it'}],
+   correct:[0,2],explain:{de:'Als Ausgangspunkt nutzen und kennzeichnen ist in Ordnung – private Daten eingeben und unkenntlich gemacht kopieren sind es nicht.',en:'Using it as a starting point and disclosing it is fine – entering private data and copying it undisclosed are not.'}},
+  {type:'info',group:'k08-craft',title:{de:'CRAFT-Check in der Prüfung',en:'CRAFT check in the exam'},
+   body:{de:'<p>Schau dir diesen Prompt an: <em>„Erklär mir was zu Erneuerbaren Energien."</em></p>',en:'<p>Look at this prompt: <em>"Explain something about renewable energy."</em></p>'}},
+  {type:'multi',group:'k08-craft',q:{de:'Welche CRAFT-Elemente fehlen in diesem Prompt am deutlichsten? (Mehrere)',en:'Which CRAFT elements are most clearly missing from this prompt? (Several)'},
+   options:[{de:'Context – Hintergrund/Aspekt fehlt',en:'Context – background/aspect is missing'},
+            {de:'Role – keine Rolle zugewiesen',en:'Role – no role assigned'},
+            {de:'Audience – kein Zielpublikum genannt',en:'Audience – no target audience named'},
+            {de:'Format – keine gewünschte Form genannt',en:'Format – no desired form stated'}],
+   correct:[0,1,2,3],explain:{de:'Nur die Aufgabe (Task = „erklär mir") ist überhaupt vorhanden – Context, Role, Audience und Format fehlen komplett.',en:'Only the task (Task = "explain to me") is present at all – Context, Role, Audience and Format are all missing.'}},
+  {type:'order',group:'k08-craft',q:{de:'Bringe die CRAFT-Buchstaben in die richtige Reihenfolge des Merkworts.',en:'Put the CRAFT letters in the correct order of the mnemonic.'},
+   items:[{text:{de:'Context',en:'Context'}},{text:{de:'Role',en:'Role'}},{text:{de:'Audience',en:'Audience'}},{text:{de:'Format',en:'Format'}},{text:{de:'Task',en:'Task'}}],
+   explain:{de:'C-R-A-F-T: Context, Role, Audience, Format, Task.',en:'C-R-A-F-T: Context, Role, Audience, Format, Task.'}},
+  {type:'promptcheck',graded:true,minHits:4,q:{de:'Verbessere diesen Prompt mit CRAFT: „Erklär mir was zu Erneuerbaren Energien." Schreib deinen neuen Prompt hier hinein und lass ihn prüfen.',en:'Improve this prompt using CRAFT: "Explain something about renewable energy." Write your new prompt here and have it checked.'},
+   placeholder:{de:'Dein verbesserter CRAFT-Prompt …',en:'Your improved CRAFT prompt …'},
+   explain:{de:'Für die Prüfung zählt dieser Baustein als bestanden, wenn dein Prompt mindestens 4 von 5 CRAFT-Elemente enthält.',en:'For the exam, this component counts as passed if your prompt contains at least 4 of the 5 CRAFT elements.'}}
  ],
  K09:[
   {type:'multi',q:{de:'Wonach bewertest du ein KI-System fair? (Mehrere)',en:'By what do you fairly evaluate an AI system? (Several)'},
@@ -1252,7 +1352,35 @@ const EXAM={
   {type:'quiz',q:{de:'Was macht KI grundsätzlich anders als ein Mensch?',en:'What does AI fundamentally do differently from a human?'},
    options:[{de:'Sie erzeugt Ausgaben aus Wahrscheinlichkeiten, ohne echtes Verstehen',en:'It produces outputs from probabilities, without real understanding'},
             {de:'Sie hat ein Gewissen',en:'It has a conscience'},{de:'Sie erlebt die Welt wie wir',en:'It experiences the world like us'}],
-   correct:0,explain:{de:'Statistische Vorhersage statt echtem Verstehen – das bleibt der Kern.',en:'Statistical prediction instead of real understanding – that stays the core.'}}
+   correct:0,explain:{de:'Statistische Vorhersage statt echtem Verstehen – das bleibt der Kern.',en:'Statistical prediction instead of real understanding – that stays the core.'}},
+  {type:'info',group:'k09-tool',title:{de:'Fallstudie: KI-Tool für Stipendien-Bewerbungen',en:'Case study: AI tool for scholarship applications'},
+   body:{de:'<p>Eine Schule überlegt, ein KI-Tool einzusetzen, das Stipendien-Bewerbungen automatisch vorsortiert.</p>',en:'<p>A school is considering using an AI tool that automatically pre-sorts scholarship applications.</p>'}},
+  {type:'quiz',group:'k09-tool',q:{de:'Was ist die wichtigste erste Frage, bevor die Schule das Tool einsetzt?',en:'What is the most important first question before the school uses the tool?'},
+   options:[{de:'Wofür wurde es gemacht, und wo liegen seine Grenzen?',en:'What was it made for, and where are its limits?'},
+            {de:'Wie modern sieht die Oberfläche aus?',en:'How modern does the interface look?'},{de:'Wie viele andere Schulen nutzen es schon?',en:'How many other schools already use it?'}],
+   correct:0,explain:{de:'Zweck und Grenzen entscheiden, ob ein Einsatz überhaupt sinnvoll und fair ist.',en:'Purpose and limits decide whether using it is sensible and fair at all.'}},
+  {type:'multi',group:'k09-tool',q:{de:'Welche Risiken sollte die Schule bedenken? (Mehrere)',en:'What risks should the school consider? (Several)'},
+   options:[{de:'Bias durch einseitige Trainingsdaten (z. B. bestimmte Gruppen benachteiligt)',en:'Bias from one-sided training data (e.g. certain groups disadvantaged)'},
+            {de:'Bewerbungen komplett ohne menschliche Prüfung endgültig entscheiden lassen',en:'Letting it make final decisions on applications with no human review at all'},
+            {de:'Überhaupt ein Softwaretool zur Vorsortierung einzusetzen',en:'Using any software tool for pre-sorting at all'},
+            {de:'Nicht offenlegen, dass ein KI-Tool beteiligt war',en:'Not disclosing that an AI tool was involved'}],
+   correct:[0,1,3],explain:{de:'Bias, fehlende menschliche Kontrolle bei wichtigen Entscheidungen und fehlende Offenlegung sind die echten Risiken – ein Tool zur Vorsortierung an sich ist nicht das Problem.',en:'Bias, no human oversight for important decisions, and no disclosure are the real risks – using a pre-sorting tool itself is not the problem.'}},
+  {type:'info',group:'k09-modell',title:{de:'Fallstudie: Mias Modell-Test',en:'Case study: Mia\'s model test'},
+   body:{de:'<p>Mia testet ein neues KI-Modell mit einer einzigen, leichten Frage. Die Antwort stimmt – daraus schließt sie, das Modell sei für alles zuverlässig.</p>',
+         en:'<p>Mia tests a new AI model with a single, easy question. The answer is correct – she concludes the model is reliable for everything.</p>'}},
+  {type:'multi',group:'k09-modell',q:{de:'Was ist an Mias Vorgehen problematisch? (Mehrere)',en:'What is problematic about Mia\'s approach? (Several)'},
+   options:[{de:'Sie hat nur eine einzige, leichte Frage getestet',en:'She only tested a single, easy question'},
+            {de:'Sie hat aus einem Erfolg auf generelle Zuverlässigkeit geschlossen',en:'She concluded general reliability from one success'},
+            {de:'Sie hat das Modell überhaupt getestet',en:'She tested the model at all'},
+            {de:'Sie hat auf die Antwort gewartet, statt das Fenster zu schließen',en:'She waited for the answer instead of closing the window'}],
+   correct:[0,1],explain:{de:'Testen an sich ist gut – das Problem ist die zu kleine, zu leichte Stichprobe und die voreilige generelle Schlussfolgerung.',en:'Testing itself is good – the problem is the too-small, too-easy sample and the premature general conclusion.'}},
+  {type:'order',group:'k09-modell',q:{de:'Bringe die Schritte einer fairen KI-Modell-Bewertung in die richtige Reihenfolge.',en:'Put the steps of a fair AI model evaluation in the right order.'},
+   items:[{text:{de:'Zweck und Zielgruppe des Modells klären',en:'Clarify the model\'s purpose and target users'}},
+          {text:{de:'Mehrere unterschiedliche Testfragen ausprobieren – leicht und knifflig',en:'Try several different test questions – easy and tricky'}},
+          {text:{de:'Ergebnisse verschiedener Modelle/Modi vergleichen',en:'Compare results across different models/modes'}},
+          {text:{de:'Grenzen und Fehler dokumentieren',en:'Document limits and errors'}},
+          {text:{de:'Erst dann über den Einsatz entscheiden',en:'Only then decide on actual use'}}],
+   explain:{de:'Zweck klären, vielfältig testen, vergleichen, dokumentieren, erst dann entscheiden – eine einzelne leichte Frage reicht nicht.',en:'Clarify purpose, test broadly, compare, document, only then decide – a single easy question is not enough.'}}
  ],
  K10:[
   {type:'quiz',q:{de:'Warum lohnt es sich, eine Aufgabe einmal mit und einmal ohne KI zu lösen und zu vergleichen?',en:'Why is it worth solving a task once with and once without AI, and comparing?'},
@@ -1280,7 +1408,36 @@ const EXAM={
    options:[{de:'KI-Antworten und Ergebnisse kritisch prüfen statt sie blind zu übernehmen',en:'Critically checking AI answers and results instead of blindly copying them'},
             {de:'Möglichst jede Aufgabe komplett der KI überlassen',en:'Leaving as many tasks as possible entirely to AI'},
             {de:'KI nur nutzen, wenn eine Lehrkraft direkt danebensteht',en:'Only using AI when a teacher is standing right next to you'}],
-   correct:0,explain:{de:'Kritisches Prüfen zieht sich durch alle Jahrgänge – vom ersten Beispiel in K05 bis zum Workflow in K10.',en:'Critical checking runs through every grade – from the first example in K05 to the workflow in K10.'}}
+   correct:0,explain:{de:'Kritisches Prüfen zieht sich durch alle Jahrgänge – vom ersten Beispiel in K05 bis zum Workflow in K10.',en:'Critical checking runs through every grade – from the first example in K05 to the workflow in K10.'}},
+  {type:'info',group:'k10-workflow',title:{de:'Fallstudie: Toms Facharbeit',en:'Case study: Tom\'s extended essay'},
+   body:{de:'<p>Tom nutzt für seine Facharbeit einen mehrstufigen Workflow: zuerst Deep Research für eine erste Literaturübersicht, dann eine eigene Gliederung, dann Gemini zum Gegenlesen.</p>',
+         en:'<p>For his extended essay, Tom uses a multi-step workflow: first Deep Research for an initial literature overview, then his own outline, then Gemini to proofread.</p>'}},
+  {type:'quiz',group:'k10-workflow',q:{de:'Tom übernimmt einen Fakt aus dem Deep-Research-Bericht ungeprüft in seine Facharbeit. Was ist das Risiko?',en:'Tom takes a fact from the Deep Research report into his essay unchecked. What is the risk?'},
+   options:[{de:'Auch Deep Research kann fehlerhafte oder veraltete Quellen zitieren',en:'Deep Research can also cite flawed or outdated sources'},
+            {de:'Deep-Research-Berichte sind grundsätzlich urheberrechtlich verboten',en:'Deep Research reports are fundamentally forbidden under copyright law'},
+            {de:'Es gibt kein Risiko, weil Quellen zitiert werden',en:'There is no risk because sources are cited'}],
+   correct:0,explain:{de:'Zitierte Quellen bedeuten nicht automatisch fehlerfrei – wie schon bei der KI-Übersicht in K07 gilt: selbst prüfen.',en:'Cited sources do not automatically mean error-free – as with the AI Overview in Grade 7, checking yourself still matters.'}},
+  {type:'multi',group:'k10-workflow',q:{de:'Was gehört zu einem verantwortungsvollen Abschluss von Toms Workflow? (Mehrere)',en:'What belongs to a responsible conclusion of Tom\'s workflow? (Several)'},
+   options:[{de:'Die zitierten Quellen aus dem Bericht einzeln prüfen',en:'Individually checking the sources cited in the report'},
+            {de:'Den KI-Einsatz in der Facharbeit kennzeichnen',en:'Disclosing the AI use in the essay'},
+            {de:'Die fertige Facharbeit unverändert und ungeprüft abgeben',en:'Submitting the finished essay unchanged and unchecked'},
+            {de:'Eine echte Betreuungsperson gegenlesen lassen',en:'Having a real supervisor proofread it'}],
+   correct:[0,1,3],explain:{de:'Quellen prüfen, kennzeichnen und eine echte Person gegenlesen lassen gehören dazu – unverändert und ungeprüft abgeben ist genau das Gegenteil.',en:'Checking sources, disclosing use, and having a real person proofread belong to it – submitting unchanged and unchecked is the opposite.'}},
+  {type:'info',group:'k10-prozess',title:{de:'Fallstudie: Lenas Bewerbungs-Workflow',en:'Case study: Lena\'s application workflow'},
+   body:{de:'<p>Lena plant einen KI-Workflow für ihre Praktikumsbewerbung. Sie führt ihn aus, prüft die Zwischenergebnisse aber nie kritisch und passt nichts an, obwohl das Ergebnis erkennbare Fehler enthält.</p>',
+         en:'<p>Lena plans an AI workflow for her internship application. She carries it out, but never critically checks the intermediate results and adjusts nothing, even though the result has noticeable mistakes.</p>'}},
+  {type:'multi',group:'k10-prozess',q:{de:'Was fehlt bei Lena am meisten? (Mehrere)',en:'What is Lena missing the most? (Several)'},
+   options:[{de:'Sie hat die Zwischenergebnisse nie kritisch geprüft',en:'She never critically checked the intermediate results'},
+            {de:'Sie hat trotz erkennbarer Fehler nichts angepasst',en:'She adjusted nothing despite noticeable mistakes'},
+            {de:'Sie hat überhaupt einen Workflow geplant',en:'She planned a workflow at all'},
+            {de:'Sie hat KI überhaupt genutzt',en:'She used AI at all'}],
+   correct:[0,1],explain:{de:'Planen und KI nutzen sind sinnvoll – das Fehlen von Prüfen und Anpassen ist das eigentliche Problem.',en:'Planning and using AI are sensible – the missing checking and adjusting is the real problem.'}},
+  {type:'order',group:'k10-prozess',q:{de:'Bringe die vier Workflow-Phasen in die richtige Reihenfolge.',en:'Put the four workflow phases in the right order.'},
+   items:[{text:{de:'Planen',en:'Plan'}},{text:{de:'Ausführen',en:'Do'}},{text:{de:'Prüfen',en:'Check'}},{text:{de:'Anpassen',en:'Adjust'}}],
+   explain:{de:'Planen → Ausführen → Prüfen → Anpassen – und bei Bedarf wieder von vorn.',en:'Plan → Do → Check → Adjust – and back to the start if needed.'}},
+  {type:'promptcheck',graded:true,minHits:4,q:{de:'Formuliere einen CRAFT-Prompt für den ersten Schritt eines Workflows (z. B. Themenfindung für eine Facharbeit). Schreib ihn hier hinein und lass ihn prüfen.',en:'Formulate a CRAFT prompt for the first step of a workflow (e.g. finding a topic for an extended essay). Write it here and have it checked.'},
+   placeholder:{de:'Dein CRAFT-Prompt für den ersten Workflow-Schritt …',en:'Your CRAFT prompt for the first workflow step …'},
+   explain:{de:'Für die Prüfung zählt dieser Baustein als bestanden, wenn dein Prompt mindestens 4 von 5 CRAFT-Elemente enthält.',en:'For the exam, this component counts as passed if your prompt contains at least 4 of the 5 CRAFT elements.'}}
  ]
 };
 function modulesOf(g){return CONTENT[g]||[];}
@@ -1370,8 +1527,15 @@ function renderSeniorOverview(){if(!isUnlocked('OB'))return go('grades');
     <div style="margin-top:22px"><button class="btn ghost sm" onclick="go('grades')">← ${t('back')}</button></div></section>`;}
 /* ===== 8) Runner ===== */
 let RUN=null;
+/* Gruppiert zusammenhängende Aufgaben (z. B. eine Szenario-Fallstudie aus mehreren
+   Teilaufgaben) über task.group, damit sie beim Mischen der Reihenfolge zusammen-
+   bleiben und in sich lesbar bleiben. Aufgaben ohne group werden weiterhin einzeln
+   gemischt wie bisher. */
 function buildExamTasks(grade){const pool=(EXAM[grade]||[]).map(x=>({...x}));
-  for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}return pool;}
+  const groups=[],byKey={};
+  pool.forEach(t=>{if(t.group&&byKey[t.group]){byKey[t.group].push(t);}else{const arr=[t];groups.push(arr);if(t.group)byKey[t.group]=arr;}});
+  for(let i=groups.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[groups[i],groups[j]]=[groups[j],groups[i]];}
+  return groups.flat();}
 function renderRunner(grade,moduleId,exam){if(!isUnlocked(grade))return go('grades');
   const g=gradeById(grade);let tasks,label;
   if(exam){tasks=buildExamTasks(grade);label=`🏁 ${t('exam')}`;CURRENT.exam=true;CURRENT.module=null;}
@@ -1486,6 +1650,23 @@ const RENDERERS={
      ${taskFoot(t('submitWork')+' →',false)}`;
    bindPrimary(()=>{const v=document.getElementById('refl').value.trim();if(v.length<3)return toast(L()==='de'?'Schreib kurz etwas':'Write something short');Store.set(key,v);toast(t('saved'));advance();});}
  ,
+ /* Reihenfolge-Aufgabe: Schritte liegen in task.items in der RICHTIGEN Reihenfolge
+    vor, werden aber gemischt angezeigt. Schüler:innen klicken sie in der Reihenfolge
+    an, die sie für richtig halten. */
+ order(h,task){const items=task.items.map((it,i)=>({...it,i}));
+   for(let k=items.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[items[k],items[j]]=[items[j],items[k]];}
+   let seq=[],locked=false;
+   h.innerHTML=`<div class="ttype">🔢 ${L()==='de'?'Reihenfolge':'Order'}</div><h3>${tx(task.q)}</h3>
+     <p style="font-size:13px;color:var(--muted);margin-bottom:14px">${L()==='de'?'Klicke die Schritte in der richtigen Reihenfolge an.':'Click the steps in the correct order.'}</p>
+     <div class="pool">${items.map(it=>`<button class="chip" data-i="${it.i}">${tx(it.text)}</button>`).join('')}</div>
+     ${feedbackEl()}${taskFoot(t('check'))}`;
+   const chips=()=>h.querySelectorAll('.chip');
+   chips().forEach(c=>c.onclick=()=>{if(locked||c.classList.contains('placed'))return;seq.push(+c.dataset.i);c.classList.add('placed');c.insertAdjacentHTML('afterbegin',`<span class="pairnum" style="background:var(--accent)">${seq.length}</span>`);});
+   bindPrimary(()=>{if(locked)return advance();if(seq.length<items.length)return toast(L()==='de'?'Ordne alle ein':'Order them all');
+     locked=true;const ok=seq.every((idx,pos)=>idx===pos);
+     chips().forEach(c=>{const idx=+c.dataset.i,pos=seq.indexOf(idx);c.classList.add(pos===idx?'ok':'no');});
+     scoreTask(ok,task);showFeedback(ok,tx(task.explain||{de:'',en:''}));document.getElementById('primaryBtn').textContent=t('next')+' →';});}
+ ,
  /* Lokaler, regelbasierter CRAFT-Check: sucht nur nach typischen Signalwörtern
     im eigenen Prompt-Text (kein API-Aufruf, keine KI) – wichtig für Datenschutz
     und weil Hongkong den Zugriff auf manche KI-Dienste einschränkt. */
@@ -1494,7 +1675,7 @@ const RENDERERS={
      ${task.body?`<div class="infobox">${tx(task.body)}</div>`:''}
      <div class="reflect"><textarea id="pcInput" placeholder="${tx(task.placeholder||{de:'',en:''})}"></textarea></div>
      <div id="pcResult"></div>
-     ${taskFoot(t('check'))}`;
+     ${task.graded?feedbackEl():''}${taskFoot(t('check'))}`;
    bindPrimary(()=>{const raw=document.getElementById('pcInput').value.trim();
      if(!raw)return toast(L()==='de'?'Schreib zuerst deinen Prompt':'Write your prompt first');
      if(checked)return advance();checked=true;const low=raw.toLowerCase();
@@ -1507,7 +1688,10 @@ const RENDERERS={
      ];
      const hitCount=letters.filter(x=>x.hit).length;
      document.getElementById('pcResult').innerHTML=letters.map(x=>`<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:6px;background:${x.hit?'#eafbf1':'#fff'}"><span style="font-size:16px">${x.hit?'✅':'⭕'}</span><b style="font-family:var(--font-display);width:20px">${x.k}</b><span>${tx(x.name)}</span></div>`).join('')+
-       `<p style="font-size:12px;color:var(--muted);margin-top:8px">${L()==='de'?`${hitCount} von 5 CRAFT-Elementen gefunden. Das ist ein einfacher Baustein-Check anhand von Signalwörtern (keine echte KI) – er ersetzt nicht dein eigenes Urteil.`:`${hitCount} of 5 CRAFT elements found. This is a simple building-block check based on signal words (not real AI) – it does not replace your own judgement.`}</p>`;
+       (task.graded?'':`<p style="font-size:12px;color:var(--muted);margin-top:8px">${L()==='de'?`${hitCount} von 5 CRAFT-Elementen gefunden. Das ist ein einfacher Baustein-Check anhand von Signalwörtern (keine echte KI) – er ersetzt nicht dein eigenes Urteil.`:`${hitCount} of 5 CRAFT elements found. This is a simple building-block check based on signal words (not real AI) – it does not replace your own judgement.`}</p>`);
+     if(task.graded){const min=task.minHits||4,ok=hitCount>=min;
+       scoreTask(ok,task);
+       showFeedback(ok,tx(task.explain||{de:`${hitCount} von 5 Elementen gefunden (mind. ${min} nötig).`,en:`${hitCount} of 5 elements found (at least ${min} needed).`}));}
      document.getElementById('primaryBtn').textContent=t('next')+' →';});}
 };
 function finishRun(){const{grade,moduleId,exam,score,gradeable,accent}=RUN;

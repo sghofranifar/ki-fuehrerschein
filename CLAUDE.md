@@ -52,8 +52,13 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   pro Buchstabe C/R/A/F/T, reines `RegExp.test()` im Browser) — bewusst **keine**
   externe API/kein Aufruf eines KI-Dienstes zur Bewertung, wegen Datenschutz und weil
   Anthropic/teilweise auch andere KI-Dienste aus Hongkong nicht zuverlässig erreichbar
-  sind. Zählt nicht zu `RUN.gradeable` (wie `info`/`reflect`) — reines Feedback-Tool,
-  kein Auf-Bestehen-Gate.
+  sind. Standardmäßig zählt er nicht zu `RUN.gradeable` (wie `info`/`reflect`) —
+  reines Feedback-Tool, kein Auf-Bestehen-Gate. Mit `task.graded:true` (+ optional
+  `task.minHits`, Standard 4) wird er zum Prüfungsbaustein: `scoreTask()` läuft dann
+  mit `hitCount>=minHits`, genutzt in EXAM.K08/K10 als „Prompt-Apparat".
+  `order` = Reihenfolge-Aufgabe: `task.items` liegt in der RICHTIGEN Reihenfolge vor,
+  wird aber gemischt angezeigt; richtig, wenn Klick-Reihenfolge = Ursprungsindex.
+  Für „Prozess-Aufgaben" in den Abschlusstests (z. B. Workflow-Phasen, CRAFT-Merkwort).
 - **Großer Umbau (Herbst 2026): praktische Hands-on-Aufgaben statt reiner Theorie.**
   Auslöser: Multiple-Choice-only-Module waren für 80-Minuten-Workshops zu dünn. Muster
   pro ergänzter Aufgabe: `info` mit Link zu einem externen KI-Mini-Tool (neuer Tab) +
@@ -128,6 +133,17 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   **keine** Modul-Kopien. Bestehensschwelle `PASS = 0.75`, gilt **auch für einzelne
   Module** (nicht nur den Abschlusstest): Unter 75% richtig wird das Modul nicht als
   „done" gespeichert, die Aufgaben müssen wiederholt werden (siehe `finishRun()`).
+  `buildExamTasks()` mischt die Reihenfolge des Pools zufällig, respektiert dabei aber
+  `task.group`: Aufgaben mit derselben group-Kennung bleiben zusammen und in ihrer
+  Original-Reihenfolge (wichtig für mehrteilige Szenario-Fallstudien). Seit Herbst
+  2026 sind alle sechs Abschlusstests (K05–K10) über reine Multiple-Choice hinaus um
+  differenzierte Formate ergänzt: **Szenario-Fallstudien** (z. B. „Mias Foto-App",
+  „Bens Google-Recherche", „Toms Facharbeit" — durchgehende Geschichte aus mehreren
+  gruppierten Teilaufgaben), **Fehlersuche/Error-Analysis** (ein fehlerhaftes Vorgehen
+  wird gezeigt, `multi` identifiziert die Fehler), **Prozess-Aufgaben** (`order`-Typ,
+  z. B. Workflow-Phasen oder CRAFT-Reihenfolge) und ab K08 ein **Prompt-Apparat**
+  (gradeter `promptcheck`). Diese Formate ergänzen die bestehenden Einzelfragen im
+  selben Pool, ersetzen sie nicht.
 - Zertifikat + Dashboard zeigen **Name und Klasse**.
 - **Zwischenzertifikat „Gemini-Nutzung"** (`renderGeminiCert()`, Route `geminicert`):
   erscheint als zusätzliche Kachel auf der K08-Jahrgangsübersicht, sobald
