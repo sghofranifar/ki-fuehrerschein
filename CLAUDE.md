@@ -43,7 +43,7 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   ein Code-Modal (`openGradeCode()`), das genau diesen einen Jahrgang freischaltet,
   ohne die Kette/andere Jahrgänge zu berühren. **Kein echter Zugriffsschutz** — die
   App hat keinen Server, jeder Code steht im Klartext im Seitenquelltext.
-- Aufgabentypen: `info | quiz | multi | match | sort | cloze | reflect | classify | input | promptcheck`.
+- Aufgabentypen: `info | quiz | multi | match | sort | cloze | clozedrag | reflect | classify | input | promptcheck | order`.
   `classify` = visuelle „Ist das KI?"-Aufgabe mit eingebetteten SVG-Icons. `input` =
   freies Textfeld, per `task.accept`-Liste geprüft; `norm()` entfernt beim Vergleich
   alles außer Ziffern, damit unterschiedliche Schreibweisen (z. B. „17:02"/„17.02 Uhr")
@@ -59,6 +59,18 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   `order` = Reihenfolge-Aufgabe: `task.items` liegt in der RICHTIGEN Reihenfolge vor,
   wird aber gemischt angezeigt; richtig, wenn Klick-Reihenfolge = Ursprungsindex.
   Für „Prozess-Aufgaben" in den Abschlusstests (z. B. Workflow-Phasen, CRAFT-Merkwort).
+  `clozedrag` = Lückentext mit **klick-basierter Wortbank** statt Dropdown (bewusst
+  kein echtes HTML5-Drag&Drop, da das auf iPads/Touch unzuverlässig ist): Wort in der
+  Wortbank anklicken (wird aktiv), dann eine Lücke anklicken zum Platzieren; eine
+  bereits gefüllte Lücke erneut anklicken gibt das Wort zurück in die Wortbank.
+  `task.segments`/`task.words`/`task.answers` (Array, Index = Lücken-Nummer).
+- **Zurücksetzen-Button** (`taskFoot(label,showStreak,reset=true)` + `bindReset()`):
+  bei `match`/`sort`/`order`/`classify`/`clozedrag` kann man eigene Fehlplatzierungen
+  vor dem Prüfen per Klick verwerfen und neu anfangen, statt das ganze Modul neu
+  starten zu müssen. Technisch ruft der Button einfach `drawTask()` erneut auf (baut
+  die Aufgabe mit leerem Zustand + neuer Zufalls-Reihenfolge neu auf); er ist nur vor
+  dem Prüfen aktiv (`bindReset(()=>locked)` sperrt ihn danach), damit nach dem Prüfen
+  bereits vergebene Punkte (`RUN.gradeable`/`RUN.score`) nicht doppelt zählen können.
 - **Großer Umbau (Herbst 2026): praktische Hands-on-Aufgaben statt reiner Theorie.**
   Auslöser: Multiple-Choice-only-Module waren für 80-Minuten-Workshops zu dünn. Muster
   pro ergänzter Aufgabe: `info` mit Link zu einem externen KI-Mini-Tool (neuer Tab) +
@@ -112,6 +124,15 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   der Anzeige kommt aus der Array-Position, nicht aus der ID). CRAFT-Framework nach
   Vera Cubero/Joscha Falck unter **CC BY-NC-SA 4.0** — abweichend von der App-Lizenz,
   daher eigener Attributions-Hinweis im Modul selbst UND im Impressum.
+- K06-M1/M2 vertieft (waren mit 2 bzw. 5 Aufgaben zu kurz für eine Workshop-Einheit):
+  M1 hat jetzt einen langen `clozedrag`-Recap-Lückentext (6 Lücken + 3 Distraktor-
+  Wörter) plus Anschlussfrage zu den Distraktoren. M2s Teachable-Machine-Anleitung
+  war als einzelner Absatz zu knapp und ließ Schüler:innen an der echten Tool-UI
+  hängen — jetzt eine nummerierte Schritt-für-Schritt-Anleitung mit den konkreten
+  Button-Bezeichnungen der Seite (Get Started → Image Project → Standard image model
+  → Klassen umbenennen → Webcam → Hold to Record → Train Model → Preview), plus ein
+  bewusster Schritt 8 (dritten, untrainierten Gegenstand zeigen), der in der
+  Reflexionsfrage aufgegriffen wird.
 - K08-M5 „Gemini kennenlernen": Ab Klasse 8 dürfen Schüler:innen Gemini nutzen, daher
   eigenes Modul mit stilisiertem (nicht echtem!) UI-Diagramm — **keine Screenshots**,
   Google ändert die Oberfläche zu oft, deshalb Inline-HTML/CSS-Mockup mit nummerierten

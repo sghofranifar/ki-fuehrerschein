@@ -152,6 +152,11 @@ main{flex:1;padding:34px 0 70px}
 .cloze{font-size:17px;line-height:2.1}
 .cloze select{font-family:inherit;font-size:15px;padding:6px 8px;border:1.5px solid var(--line-strong);border-radius:8px;background:#fff;color:var(--ink);margin:0 3px}
 .cloze select.ok{border-color:var(--good);background:var(--good-bg)}.cloze select.no{border-color:var(--bad);background:var(--bad-bg)}
+.clozeblank{display:inline-block;min-width:90px;padding:4px 10px;margin:0 3px;border:none;border-bottom:2.5px dashed var(--line-strong);background:transparent;font-family:inherit;font-size:16px;font-weight:600;color:var(--muted);cursor:pointer;transition:.12s}
+.clozeblank:hover{border-color:var(--accent)}
+.clozeblank.filled{border-bottom-style:solid;border-color:var(--accent);color:var(--ink);background:rgba(0,132,69,.06)}
+.clozeblank.ok{border-color:var(--good);background:var(--good-bg);color:var(--ink)}
+.clozeblank.no{border-color:var(--bad);background:var(--bad-bg);color:var(--ink)}
 .reflect textarea{width:100%;min-height:120px;border:1.5px solid var(--line);border-radius:12px;padding:14px;font-family:inherit;font-size:15px;resize:vertical;color:var(--ink)}
 .reflect textarea:focus{border-color:var(--accent);outline:none}
 .reflect .hint{font-size:12px;color:var(--muted);margin-top:8px}
@@ -490,7 +495,30 @@ const CONTENT={
      buckets:[{de:'Mensch',en:'Human'},{de:'KI',en:'AI'}],
      items:[{text:{de:'Mitgefühl zeigen',en:'showing compassion'},bucket:0},
             {text:{de:'riesige Datenmengen durchsuchen',en:'searching huge amounts of data'},bucket:1},
-            {text:{de:'eine eigene Idee entwickeln',en:'developing an own idea'},bucket:0}]}
+            {text:{de:'eine eigene Idee entwickeln',en:'developing an own idea'},bucket:0}]},
+    {type:'clozedrag',q:{de:'Fülle die Lücken mit den passenden Wörtern aus der Wortbank.',en:'Fill the gaps with the matching words from the word bank.'},
+     segments:[{de:'KI ist kein Mensch, sondern ein Programm. Sie lernt nicht aus festen ',en:'AI is not a person, but a program. It does not learn from fixed '},
+               {blank:0},
+               {de:', sondern erkennt Muster in riesigen Mengen an ',en:', but recognises patterns in huge amounts of '},
+               {blank:1},
+               {de:'. Deshalb kann eine KI auch ',en:'. That is why an AI can also make '},
+               {blank:2},
+               {de:' machen – besonders, wenn ihre Trainingsdaten ',en:' – especially if its training data was '},
+               {blank:3},
+               {de:' waren. Echte ',en:'. An AI does not have real '},
+               {blank:4},
+               {de:' hat eine KI nicht, auch wenn ihre Antworten manchmal überzeugend klingen. Private Daten wie deine Adresse oder ein ',en:', even though its answers sometimes sound convincing. You should never enter private data like your address or a '},
+               {blank:5},
+               {de:' solltest du niemals in einen Chatbot eingeben.',en:' into a chatbot.'}],
+     words:[{de:'Regeln',en:'rules'},{de:'Beispielen',en:'examples'},{de:'Fehler',en:'mistakes'},{de:'einseitig',en:'one-sided'},{de:'Gefühle',en:'feelings'},{de:'Passwort',en:'password'},
+            {de:'Zufall',en:'chance'},{de:'Wahrheit',en:'the truth'},{de:'Gewissen',en:'a conscience'}],
+     answers:[0,1,2,3,4,5],
+     explain:{de:'KI lernt aus Beispielen (nicht aus festen Regeln), macht deshalb manchmal Fehler – vor allem bei einseitigen Trainingsdaten –, hat keine echten Gefühle, und private Daten wie ein Passwort gehören nie in einen Chatbot.',en:'AI learns from examples (not fixed rules), so it sometimes makes mistakes – especially with one-sided training data –, has no real feelings, and private data like a password never belongs in a chatbot.'}},
+    {type:'quiz',q:{de:'Warum standen im Lückentext auch die Wörter „Zufall", „Wahrheit" und „Gewissen" in der Wortbank, obwohl sie nirgends hineingehörten?',en:'Why did the word bank also contain "chance", "the truth" and "a conscience", even though they did not fit anywhere?'},
+     options:[{de:'Als Ablenkung – sie klingen plausibel, beschreiben KI aber nicht richtig',en:'As distractors – they sound plausible but do not correctly describe AI'},
+              {de:'Weil man sie eigentlich hätte benutzen müssen',en:'Because they actually should have been used'},
+              {de:'Aus Versehen',en:'By accident'}],
+     correct:0,explain:{de:'Genau wie bei Multiple-Choice-Aufgaben gibt es auch hier bewusste Fehlvorstellungen zum Aussortieren.',en:'Just like in multiple-choice questions, these are deliberate misconceptions to sort out.'}}
   ]},
   {id:'K06-M2',icon:'⚙️',komp:'V',niveau:'I→II',title:{de:'Wie „lernt" eine KI?',en:'How does AI "learn"?'},tasks:[
     {type:'info',title:{de:'Regeln oder Beispiele',en:'Rules or examples'},
@@ -504,10 +532,28 @@ const CONTENT={
      options:[{de:'Die Beispiele waren einseitig – sie hat Katzen kaum gesehen',en:'The examples were one-sided – it barely saw cats'},
               {de:'Katzen sind zu schnell für KI',en:'Cats are too fast for AI'},{de:'KI mag keine Katzen',en:'AI dislikes cats'}],
      correct:0,explain:{de:'KI ist nur so gut wie ihre Beispiele. Fehlen Katzen, kann sie sie kaum erkennen.',en:'AI is only as good as its examples. Without cats, it can barely recognise them.'}},
-    {type:'info',title:{de:'Trainiere deine eigene Mini-KI',en:'Train your own mini AI'},
-     body:{de:'<p>Öffne <a href="https://teachablemachine.withgoogle.com/" target="_blank" rel="noopener">teachablemachine.withgoogle.com ↗</a> (kein Login nötig) und wähle „Get Started" → „Image Project". Zeig deiner Webcam zwei verschiedene Dinge (z. B. deine Hand und eine Tasse) und trainiere ein Mini-Modell, das beide unterscheidet.</p>',
-           en:'<p>Open <a href="https://teachablemachine.withgoogle.com/" target="_blank" rel="noopener">teachablemachine.withgoogle.com ↗</a> (no login needed) and choose "Get Started" → "Image Project". Show your webcam two different things (e.g. your hand and a cup) and train a mini model that tells them apart.</p>'}},
-    {type:'reflect',q:{de:'Wie viele Beispiel-Bilder hast du für jede Kategorie gezeigt? Was passiert, wenn du für eine Kategorie nur ganz wenige zeigst?',en:'How many example images did you show for each category? What happens if you show very few for one category?'},
+    {type:'info',title:{de:'Trainiere deine eigene Mini-KI – Schritt für Schritt',en:'Train your own mini AI – step by step'},
+     body:{de:'<p>Öffne <a href="https://teachablemachine.withgoogle.com/" target="_blank" rel="noopener">teachablemachine.withgoogle.com ↗</a> (kein Login nötig). Gehe dann genau so vor:</p>'+
+       '<ol style="margin:10px 0 0 20px;padding:0;line-height:1.85">'+
+       '<li>Klicke auf <strong>„Get Started"</strong>, dann auf <strong>„Image Project"</strong> → <strong>„Standard image model"</strong>.</li>'+
+       '<li>Du siehst zwei leere Kästen „Class 1" und „Class 2". Klicke auf das <strong>Stift-Symbol</strong> und benenne sie um, z. B. <strong>„Hand"</strong> und <strong>„Tasse"</strong>.</li>'+
+       '<li>Klicke bei „Hand" auf <strong>„Webcam"</strong> und erlaube der Seite den Kamerazugriff.</li>'+
+       '<li>Halte den Button <strong>„Hold to Record"</strong> gedrückt, während du deine Hand zeigst – bewege sie dabei leicht (andere Winkel, andere Entfernung, andere Beleuchtung!). Nimm so <strong>30–50 Bilder</strong> auf.</li>'+
+       '<li>Wiederhole Schritt 3–4 für „Tasse" mit dem zweiten Gegenstand.</li>'+
+       '<li>Klicke in der Mitte auf <strong>„Train Model"</strong> und warte, bis der Fortschrittsbalken fertig ist (ca. 1 Minute).</li>'+
+       '<li>Teste dein Modell rechts im <strong>„Preview"</strong>-Feld live: Halte Hand bzw. Tasse in die Kamera und beobachte die Prozent-Balken.</li>'+
+       '<li>Zeig der Kamera jetzt einen <strong>dritten, ganz anderen Gegenstand</strong> (z. B. einen Stift). Was passiert?</li></ol>',
+           en:'<p>Open <a href="https://teachablemachine.withgoogle.com/" target="_blank" rel="noopener">teachablemachine.withgoogle.com ↗</a> (no login needed). Then follow these exact steps:</p>'+
+       '<ol style="margin:10px 0 0 20px;padding:0;line-height:1.85">'+
+       '<li>Click <strong>"Get Started"</strong>, then <strong>"Image Project"</strong> → <strong>"Standard image model"</strong>.</li>'+
+       '<li>You will see two empty boxes "Class 1" and "Class 2". Click the <strong>pencil icon</strong> and rename them, e.g. <strong>"Hand"</strong> and <strong>"Cup"</strong>.</li>'+
+       '<li>Under "Hand", click <strong>"Webcam"</strong> and allow the site to access your camera.</li>'+
+       '<li>Hold down the <strong>"Hold to Record"</strong> button while showing your hand – move it slightly as you do (different angles, distances, lighting!). Record <strong>30–50 images</strong> this way.</li>'+
+       '<li>Repeat steps 3–4 for "Cup" with the second object.</li>'+
+       '<li>In the middle, click <strong>"Train Model"</strong> and wait until the progress bar finishes (about 1 minute).</li>'+
+       '<li>Test your model live in the <strong>"Preview"</strong> panel on the right: hold up your hand or the cup and watch the percentage bars.</li>'+
+       '<li>Now show the camera a <strong>third, completely different object</strong> (e.g. a pen). What happens?</li></ol>'}},
+    {type:'reflect',q:{de:'Was ist beim dritten, unbekannten Gegenstand (Schritt 8) passiert? Wie viele Beispiel-Bilder hast du für jede Kategorie gezeigt, und was passiert, wenn eine Kategorie nur ganz wenige oder immer nur den gleichen Winkel hat?',en:'What happened with the third, unknown object (step 8)? How many example images did you show for each category, and what happens if a category has very few, or always the same angle?'},
      placeholder:{de:'Kategorie 1: … Beispiele / Kategorie 2: … Beispiele / Beobachtung …',en:'Category 1: … examples / Category 2: … examples / Observation …'}}
   ]},
   {id:'K06-M3',icon:'📱',komp:'R',niveau:'II',title:{de:'Empfehlungen & „Für dich"',en:'Recommendations & "For you"'},tasks:[
@@ -1548,10 +1594,18 @@ function drawTask(){const{tasks,idx,accent,label}=RUN,task=tasks[idx],pct=Math.r
     <div class="run-meta"><span>${label}</span><span>${idx+1} ${t('of')} ${tasks.length}</span></div>
     <div class="task" id="taskCard"></div></section>`;
   RENDERERS[task.type](document.getElementById('taskCard'),task);}
-function taskFoot(label,showStreak=true){return `<div class="task-foot">
+/* reset=true zeigt einen Zurücksetzen-Button für Zuordnungs-Aufgaben (match/sort/
+   order/classify/clozedrag), damit man eigene Fehlplatzierungen vor dem Prüfen
+   nochmal löschen kann, statt das ganze Modul neu starten zu müssen. */
+function taskFoot(label,showStreak=true,reset=false){return `<div class="task-foot">
+  ${reset?`<button class="btn ghost sm" id="resetBtn" type="button">↺ ${L()==='de'?'Zurücksetzen':'Reset'}</button>`:''}
   <span class="streakpill">${showStreak?`${t('yourStreak')} <b>🔥 ${STATE.streak}</b>`:''}</span>
   <button class="btn" id="primaryBtn">${label}</button></div>`;}
 function bindPrimary(fn){document.getElementById('primaryBtn').onclick=fn;}
+/* Reset-Button ruft einfach drawTask() erneut auf – das baut die Aufgabe mit
+   frischem, leerem Zustand neu auf (und mischt Reihenfolgen neu), aber NUR
+   solange noch nicht geprüft wurde (isLocked liefert true nach dem Check-Klick). */
+function bindReset(isLocked){const b=document.getElementById('resetBtn');if(b)b.onclick=()=>{if(isLocked())return;drawTask();};}
 const feedbackEl=()=>`<div class="feedback" id="fb" aria-live="polite"></div>`;
 function showFeedback(ok,msg){const fb=document.getElementById('fb');fb.className='feedback show '+(ok?'good':'bad');fb.innerHTML=`<b>${ok?t('correct'):t('wrong')}</b> ${msg||''}`;}
 function scoreTask(ok,task){RUN.gradeable++;if(ok){RUN.score++;STATE.points+=10;STATE.streak++;STATE.bestStreak=Math.max(STATE.bestStreak,STATE.streak);}else{STATE.streak=0;pushError(task);}save();updateChrome();}
@@ -1586,7 +1640,8 @@ const RENDERERS={
      <p style="font-size:13px;color:var(--muted);margin-bottom:14px">${t('classifyHint')}</p>
      <div class="cl-grid">${task.items.map((it,i)=>`<div class="cl-card" data-i="${i}">${icon(it.ic)}<div class="cl-label">${tx(it.label)}</div>
        <div class="cl-choices"><button data-c="ai">${t('isAI')}</button><button data-c="no">${t('notAI')}</button></div></div>`).join('')}</div>
-     ${feedbackEl()}${taskFoot(t('check'))}`;
+     ${feedbackEl()}${taskFoot(t('check'),true,true)}`;
+   bindReset(()=>locked);
    h.querySelectorAll('.cl-card').forEach((card,i)=>{card.querySelectorAll('.cl-choices button').forEach(btn=>btn.onclick=()=>{if(locked)return;
      const c=btn.dataset.c;st[i]=c;card.querySelectorAll('.cl-choices button').forEach(b=>b.classList.remove('sel','ai','no'));btn.classList.add('sel',c);});});
    bindPrimary(()=>{if(locked)return advance();if(Object.keys(st).length<task.items.length)return toast(L()==='de'?'Entscheide für jedes Beispiel':'Decide for each example');
@@ -1601,7 +1656,8 @@ const RENDERERS={
      <p style="font-size:13px;color:var(--muted);margin-bottom:14px">${t('matchHint')}</p>
      <div class="match-cols"><div class="match-col"><h5>A</h5>${task.pairs.map((p,i)=>`<button class="mitem" data-l="${i}">${tx(p.left)}</button>`).join('')}</div>
      <div class="match-col"><h5>B</h5>${rights.map(r=>`<button class="mitem" data-r="${r.idx}">${tx(r.txt)}</button>`).join('')}</div></div>
-     ${feedbackEl()}${taskFoot(t('check'))}`;
+     ${feedbackEl()}${taskFoot(t('check'),true,true)}`;
+   bindReset(()=>locked);
    const ls=h.querySelectorAll('[data-l]'),rs=h.querySelectorAll('[data-r]');
    ls.forEach(b=>b.onclick=()=>{if(locked||b.classList.contains('matched'))return;ls.forEach(x=>x.classList.remove('active'));b.classList.add('active');act=+b.dataset.l;});
    rs.forEach(b=>b.onclick=()=>{if(locked||act===null||b.classList.contains('matched'))return;const c=cols[act%cols.length],num=act+1;pairs[act]=+b.dataset.r;
@@ -1618,7 +1674,8 @@ const RENDERERS={
      <p style="font-size:13px;color:var(--muted);margin-bottom:14px">${t('dragHint')}</p>
      <div class="pool">${items.map(it=>`<button class="chip" data-i="${it.i}">${tx(it.text)}</button>`).join('')}</div>
      <div class="buckets">${task.buckets.map((b,bi)=>`<div class="bucket" data-b="${bi}"><h5>${tx(b)}</h5><div class="drop"></div></div>`).join('')}</div>
-     ${feedbackEl()}${taskFoot(t('check'))}`;
+     ${feedbackEl()}${taskFoot(t('check'),true,true)}`;
+   bindReset(()=>locked);
    const chips=()=>h.querySelectorAll('.chip');
    chips().forEach(c=>c.onclick=()=>{if(locked||c.classList.contains('placed'))return;chips().forEach(x=>x.classList.remove('active'));c.classList.add('active');act=+c.dataset.i;h.querySelectorAll('.bucket').forEach(b=>b.classList.add('target'));});
    h.querySelectorAll('.bucket').forEach(b=>b.onclick=()=>{if(locked||act===null)return;placed[act]=+b.dataset.b;const chip=h.querySelector(`.chip[data-i="${act}"]`);chip.classList.add('placed');chip.classList.remove('active');b.querySelector('.drop').appendChild(chip);h.querySelectorAll('.bucket').forEach(x=>x.classList.remove('target'));act=null;});
@@ -1659,7 +1716,8 @@ const RENDERERS={
    h.innerHTML=`<div class="ttype">🔢 ${L()==='de'?'Reihenfolge':'Order'}</div><h3>${tx(task.q)}</h3>
      <p style="font-size:13px;color:var(--muted);margin-bottom:14px">${L()==='de'?'Klicke die Schritte in der richtigen Reihenfolge an.':'Click the steps in the correct order.'}</p>
      <div class="pool">${items.map(it=>`<button class="chip" data-i="${it.i}">${tx(it.text)}</button>`).join('')}</div>
-     ${feedbackEl()}${taskFoot(t('check'))}`;
+     ${feedbackEl()}${taskFoot(t('check'),true,true)}`;
+   bindReset(()=>locked);
    const chips=()=>h.querySelectorAll('.chip');
    chips().forEach(c=>c.onclick=()=>{if(locked||c.classList.contains('placed'))return;seq.push(+c.dataset.i);c.classList.add('placed');c.insertAdjacentHTML('afterbegin',`<span class="pairnum" style="background:var(--accent)">${seq.length}</span>`);});
    bindPrimary(()=>{if(locked)return advance();if(seq.length<items.length)return toast(L()==='de'?'Ordne alle ein':'Order them all');
@@ -1693,6 +1751,34 @@ const RENDERERS={
        scoreTask(ok,task);
        showFeedback(ok,tx(task.explain||{de:`${hitCount} von 5 Elementen gefunden (mind. ${min} nötig).`,en:`${hitCount} of 5 elements found (at least ${min} needed).`}));}
      document.getElementById('primaryBtn').textContent=t('next')+' →';});}
+ ,
+ /* Lückentext mit Wortbank statt Dropdown: Wort anklicken (wird aktiv), dann Lücke
+    anklicken zum Platzieren. Eine schon gefüllte Lücke anklicken gibt das Wort
+    zurück in die Wortbank – so kann man Fehler vor dem Prüfen selbst korrigieren.
+    Klick statt echtem HTML5-Drag&Drop, weil das auf iPads zuverlässiger ist. */
+ clozedrag(h,task){let filled={},active=null,locked=false;
+   const order=task.words.map((w,i)=>i);
+   for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+   const render=()=>{
+     h.querySelector('.cloze').innerHTML=task.segments.map(s=>s.blank!==undefined?
+       `<button class="clozeblank${filled[s.blank]!==undefined?' filled':''}" data-b="${s.blank}">${filled[s.blank]!==undefined?tx(task.words[filled[s.blank]]):'…'}</button>`:tx(s)).join('');
+     h.querySelector('.pool').innerHTML=order.map(i=>{const w=task.words[i];return `<button class="chip${Object.values(filled).includes(i)?' placed':''}${active===i?' active':''}" data-w="${i}">${tx(w)}</button>`;}).join('');
+     h.querySelectorAll('.clozeblank').forEach(b=>{b.onclick=()=>{if(locked)return;const bi=+b.dataset.b;
+         if(filled[bi]!==undefined){delete filled[bi];render();return;}
+         if(active===null)return toast(L()==='de'?'Wähle zuerst ein Wort aus der Wortbank':'Pick a word from the bank first');
+         filled[bi]=active;active=null;render();};});
+     h.querySelectorAll('.pool .chip').forEach(c=>{c.onclick=()=>{if(locked||c.classList.contains('placed'))return;active=(active===+c.dataset.w)?null:+c.dataset.w;render();};});};
+   h.innerHTML=`<div class="ttype">✏️ ${L()==='de'?'Lückentext':'Fill the gap'}</div><h3>${tx(task.q)}</h3>
+     <div class="cloze"></div><div class="pool"></div>
+     ${feedbackEl()}${taskFoot(t('check'),true,true)}`;
+   bindReset(()=>locked);render();
+   bindPrimary(()=>{if(locked)return advance();
+     const blanks=task.segments.filter(s=>s.blank!==undefined);
+     if(Object.keys(filled).length<blanks.length)return toast(L()==='de'?'Fülle alle Lücken':'Fill all gaps');
+     locked=true;let allOk=true;
+     blanks.forEach(s=>{const ok=filled[s.blank]===task.answers[s.blank];if(!ok)allOk=false;
+       h.querySelector(`.clozeblank[data-b="${s.blank}"]`).classList.add(ok?'ok':'no');});
+     scoreTask(allOk,task);showFeedback(allOk,tx(task.explain||{de:'',en:''}));document.getElementById('primaryBtn').textContent=t('next')+' →';});}
 };
 function finishRun(){const{grade,moduleId,exam,score,gradeable,accent}=RUN;
   const ratio=gradeable?score/gradeable:1,passed=ratio>=PASS;
