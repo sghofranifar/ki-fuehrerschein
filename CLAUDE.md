@@ -91,8 +91,14 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   AILit-Framework (OECD/EU): Engage → Create/Manage → Shape.
 - Zusatzbereich **„Oberstufe · Projekttag"** (`CONTENT.OB`): immer sichtbare Kachel,
   unabhängig von der K05–K10-Freischalt-Kette, eigener Zugangscode (`SENIOR_CODE`),
-  kein Abschlusstest/Zertifikat. 5 Blöcke zu wissenschaftlichem Arbeiten, Prüfungsregeln,
-  Eigenständigkeit und Quellenkritik/Plagiat für die Qualifikationsphase.
+  kein Abschlusstest/Zertifikat. 7 Blöcke zu wissenschaftlichem Arbeiten, Prüfungsregeln,
+  Eigenständigkeit und Quellenkritik/Plagiat für die Qualifikationsphase, plus OB-6
+  „KI und die Arbeitswelt von morgen" (echte PwC-2026-Zahlen zum Jobmarkt, kritische
+  Reflexion zu Dario Amodeis KI-Tempo-Warnung von Sept. 2026 + Recherche einer
+  Gegenposition, Uni-Workflow-Übung) und OB-7 „AI Agents – Nutzen und Grenzen"
+  (Mehrschritt-Fehlerfortpflanzung, wofür Agenten heute schon taugen vs. riskant sind).
+  Alle Fakten/Zitate recherchiert (WebSearch), nicht erfunden — externe Original-Tabellen
+  (PwC, Elements of AI) werden verlinkt statt kopiert.
 - **Impressum & Datenschutz** über Fußzeile erreichbar (`openImpressum()`/`openPrivacy()`):
   Herausgeber Sebastian Ghofranifar (Koordinator digitale Unterrichtsentwicklung, GSIS
   Hongkong, sghofranifar@gsis.edu.hk), verantwortliche Institution GSIS. Lizenz **CC BY-NC 4.0**.
