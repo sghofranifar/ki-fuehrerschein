@@ -847,7 +847,15 @@ const CONTENT={
               {de:'Grenzen und mögliche Fehler',en:'Limits and possible errors'},
               {de:'Wer profitiert, wer wird benachteiligt',en:'Who benefits, who is disadvantaged'},
               {de:'Nur wie cool es aussieht',en:'Only how cool it looks'}],
-     correct:[0,1,2],explain:{de:'Zweck, Grenzen, Folgen – das zählt. Aussehen allein nicht.',en:'Purpose, limits, impact – that counts. Looks alone do not.'}}
+     correct:[0,1,2],explain:{de:'Zweck, Grenzen, Folgen – das zählt. Aussehen allein nicht.',en:'Purpose, limits, impact – that counts. Looks alone do not.'}},
+    {type:'info',title:{de:'Jetzt du: Modelle live vergleichen',en:'Now you: comparing models live'},
+     body:{de:'<p>Öffne <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a>, wähle das Modell <strong>Fast</strong> und gib genau diesen Prompt ein: <em>„Ein Bauer hat 17 Schafe. Alle außer 9 laufen weg. Wie viele Schafe hat er noch? Antworte nur mit einer Zahl."</em> Notiere die Antwort. Wechsle dann auf <strong>Thinking</strong> (oder Pro) und stelle exakt dieselbe Frage noch einmal.</p>',
+           en:'<p>Open <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a>, choose the <strong>Fast</strong> model and enter exactly this prompt: <em>"A farmer has 17 sheep. All but 9 run away. How many sheep does he have left? Answer with just a number."</em> Note the answer. Then switch to <strong>Thinking</strong> (or Pro) and ask the exact same question again.</p>'}},
+    {type:'input',q:{de:'Rechne selbst: Wie viele Schafe hat der Bauer am Ende wirklich?',en:'Work it out yourself: how many sheep does the farmer really have left?'},
+     hint:{de:'Zahl',en:'Number'},accept:['9'],
+     explain:{de:'„Alle außer 9 laufen weg" bedeutet: 9 Schafe bleiben – die „17" ist eine Ablenkung. Solche Fangfragen zeigen: Ein schnelles Modell erkennt oft nur das Rechenmuster (17−9=8) und antwortet falsch, während ein „denkendes" Modell den Satz genauer prüft.',en:'"All but 9 run away" means: 9 sheep stay – the "17" is a distraction. Trick questions like this show: a fast model often just spots the calculation pattern (17−9=8) and answers wrong, while a "thinking" model checks the sentence more carefully.'}},
+    {type:'reflect',q:{de:'Kamen Fast und Thinking/Pro bei dir auf das gleiche Ergebnis? Welches Modell hat es richtig gelöst? Was sagt dir das über Tempo vs. Genauigkeit?',en:'Did Fast and Thinking/Pro give you the same result? Which model got it right? What does this tell you about speed vs. accuracy?'},
+     placeholder:{de:'Fast antwortete: … / Thinking/Pro antwortete: … / Meine Schlussfolgerung: …',en:'Fast answered: … / Thinking/Pro answered: … / My conclusion: …'},prod:true}
   ]},
   {id:'K09-M3',icon:'🧪',komp:'M',niveau:'III',title:{de:'KI mitgestalten — Daten & Bias',en:'Shaping AI — data & bias'},tasks:[
     {type:'info',title:{de:'Daten formen das Verhalten',en:'Data shapes behaviour'},
@@ -860,7 +868,12 @@ const CONTENT={
     {type:'quiz',q:{de:'Dein Modell verwechselt grüne Äpfel mit Tomaten. Beste Erklärung?',en:'Your model confuses green apples with tomatoes. Best explanation?'},
      options:[{de:'Im Training fehlten grüne Äpfel – die Daten waren einseitig',en:'Green apples were missing in training – the data was one-sided'},
               {de:'Grüne Äpfel sehen Tomaten einfach zu ähnlich, egal welche Daten man nutzt',en:'Green apples simply look too similar to tomatoes, no matter what data you use'},{de:'Tomaten sind klüger',en:'Tomatoes are smarter'}],
-     correct:0,explain:{de:'Lücken in den Daten zeigen sich direkt im Verhalten der KI – nicht die „Ähnlichkeit" der Früchte allein entscheidet.',en:'Gaps in the data show up directly in the AI behaviour – it is not just how similar the fruits look.'},prod:true}
+     correct:0,explain:{de:'Lücken in den Daten zeigen sich direkt im Verhalten der KI – nicht die „Ähnlichkeit" der Früchte allein entscheidet.',en:'Gaps in the data show up directly in the AI behaviour – it is not just how similar the fruits look.'},prod:true},
+    {type:'info',title:{de:'Jetzt du: Bias selbst erzeugen',en:'Now you: creating bias yourself'},
+     body:{de:'<p>Öffne <a href="https://teachablemachine.withgoogle.com/" target="_blank" rel="noopener">teachablemachine.withgoogle.com ↗</a> → „Image Project". Trainiere zwei Kategorien (z. B. „Daumen hoch" / „Daumen runter") aber <strong>absichtlich einseitig</strong>: zeige eine Kategorie nur aus einem Winkel oder bei einer Beleuchtung. Teste das Modell danach mit einem anderen Winkel/Licht.</p>',
+           en:'<p>Open <a href="https://teachablemachine.withgoogle.com/" target="_blank" rel="noopener">teachablemachine.withgoogle.com ↗</a> → "Image Project". Train two categories (e.g. "thumbs up" / "thumbs down") but <strong>deliberately one-sidedly</strong>: show one category from only one angle or lighting. Then test the model with a different angle/light.</p>'}},
+    {type:'reflect',q:{de:'Was hast du absichtlich unausgewogen trainiert, und wie hat sich das im Test gezeigt? Was sagt dir dieses Mini-Experiment über echte KI-Systeme (z. B. Gesichtserkennung)?',en:'What did you deliberately train unevenly, and how did that show up in the test? What does this mini-experiment tell you about real AI systems (e.g. facial recognition)?'},
+     placeholder:{de:'Einseitig trainiert: … / Beobachtung im Test: … / Bezug zu echten Systemen: …',en:'Trained one-sidedly on: … / Observation in the test: … / Link to real systems: …'},prod:true}
   ]},
   {id:'K09-M4',icon:'🌍',komp:'M',niveau:'III',title:{de:'Ethik, Gesellschaft & dein Projekt',en:'Ethics, society & your project'},tasks:[
     {type:'info',title:{de:'KI verantwortungsvoll mitgestalten',en:'Shaping AI responsibly'},
@@ -874,6 +887,11 @@ const CONTENT={
      options:[{de:'Wer profitiert – und wer wird benachteiligt?',en:'Who benefits – and who is disadvantaged?'},
               {de:'Wie werde ich am schnellsten fertig?',en:'How do I finish fastest?'},{de:'Wie sieht es am coolsten aus?',en:'How does it look coolest?'}],
      correct:0,explain:{de:'Nutzen und Schaden für Menschen abwägen – das ist der Kern.',en:'Weighing benefit and harm for people – that is the core.'}},
+    {type:'info',title:{de:'Jetzt du: Erst mit KI diskutieren, dann selbst urteilen',en:'Now you: discuss with AI first, then judge for yourself'},
+     body:{de:'<p>Bilde dir zuerst kurz deine eigene Meinung zu dieser Frage: <em>„Sollte von KI erzeugte Kunst bei Wettbewerben gegen menschliche Kunst antreten dürfen?"</em> Diskutiere sie dann bei <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a> und bitte gezielt um das <strong>stärkste Gegenargument</strong> zu deiner Position.</p>',
+           en:'<p>First briefly form your own opinion on this question: <em>"Should AI-generated art be allowed to compete against human art in competitions?"</em> Then discuss it at <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a> and specifically ask for the <strong>strongest counter-argument</strong> to your position.</p>'}},
+    {type:'reflect',q:{de:'Was war das stärkste Gegenargument, das Gemini gebracht hat? Hat es deine Meinung verändert – warum oder warum nicht?',en:'What was the strongest counter-argument Gemini gave? Did it change your opinion – why or why not?'},
+     placeholder:{de:'Meine Ausgangsmeinung: … / Gegenargument der KI: … / Meine Meinung jetzt: …',en:'My starting opinion: … / AI counter-argument: … / My opinion now: …'},prod:true},
     {type:'reflect',q:{de:'Projekt: Beschreibe kurz eine KI-Idee, die Menschen wirklich helfen würde – und einen Risiko-Punkt, auf den du achten würdest.',en:'Project: briefly describe an AI idea that would truly help people – and one risk you would watch for.'},
      placeholder:{de:'Idee … / Risiko …',en:'Idea … / Risk …'},prod:true}
   ]}
@@ -915,7 +933,12 @@ const CONTENT={
             {left:{de:'Prüfen',en:'Check'},right:{de:'Zwischenergebnisse kritisch bewerten',en:'critically evaluating intermediate results'}},
             {left:{de:'Anpassen',en:'Adjust'},right:{de:'Prompt oder Vorgehen verbessern',en:'improving the prompt or approach'}}]},
     {type:'reflect',q:{de:'Plane einen mehrstufigen KI-Workflow für eine reale Aufgabe (z. B. ein Referat oder Projekt): Welche Schritte, welche Prüfpunkte?',en:'Plan a multi-step AI workflow for a real task (e.g. a presentation or project): what steps, what checkpoints?'},
-     placeholder:{de:'Schritt 1 … / Prüfpunkt … / Schritt 2 …',en:'Step 1 … / Checkpoint … / Step 2 …'},prod:true}
+     placeholder:{de:'Schritt 1 … / Prüfpunkt … / Schritt 2 …',en:'Step 1 … / Checkpoint … / Step 2 …'},prod:true},
+    {type:'info',title:{de:'Jetzt du: den Workflow wirklich ausführen',en:'Now you: actually running the workflow'},
+     body:{de:'<p>Planen war bisher Theorie – jetzt kommt die Praxis. Führe <strong>mindestens zwei Schritte</strong> deines eben geplanten Workflows wirklich mit <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a> aus. Prüfe nach jedem Schritt das Zwischenergebnis kritisch, bevor du weitermachst.</p>',
+           en:'<p>Planning was theory so far – now comes practice. Actually carry out <strong>at least two steps</strong> of the workflow you just planned using <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a>. After each step, critically check the intermediate result before continuing.</p>'}},
+    {type:'reflect',q:{de:'Was hast du in der Praxis tatsächlich ausgeführt (mindestens 2 Schritte)? Wo unterschied sich das reale Ergebnis von deiner Planung – musstest du etwas anpassen?',en:'What did you actually carry out in practice (at least 2 steps)? Where did the real result differ from your plan – did you have to adjust anything?'},
+     placeholder:{de:'Schritt 1 ausgeführt: … / Schritt 2 ausgeführt: … / Anpassung: …',en:'Step 1 executed: … / Step 2 executed: … / Adjustment: …'},prod:true}
   ]},
   {id:'K10-M4',icon:'🆚',komp:'R',niveau:'III',title:{de:'KI-gestützt oder klassisch? Ergebnisse vergleichen',en:'AI-assisted or classic? Comparing results'},tasks:[
     {type:'info',title:{de:'Zwei Wege, ein Ziel',en:'Two paths, one goal'},

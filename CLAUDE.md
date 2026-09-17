@@ -69,7 +69,16 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   zeigt die Tokenisierungs-Schwäche von Sprachmodellen bei Buchstabenzählung an einem
   echten, nachvollziehbaren Beispiel), K08-M7 `promptcheck`-Aufgabe für den eigenen
   CRAFT-Prompt + Live-Vergleichstest (guter vs. schlechter Prompt) auf Gemini.
-  Noch offen: K09-M2/M3/M4, K10-M3 (gleiches Muster, siehe Task-Liste in der Session).
+  K09-M2 Live-Modellvergleich Fast vs. Thinking/Pro an einer Fangfrage (17 Schafe,
+  alle außer 9 laufen weg → richtig 9, Ablenkung durch die 17 — zeigt, dass schnelle
+  Modelle oft nur das Rechenmuster statt den Satz genau lesen), K09-M3 Bias selbst
+  erzeugen mit Teachable Machine (absichtlich einseitiges Training, dann Test unter
+  anderen Bedingungen), K09-M4 Diskussion mit Gemini vor der eigenen ethischen
+  Stellungnahme (bewusst zuerst eigene Meinung bilden, dann stärkstes Gegenargument
+  einholen), K10-M3 Workflow-Ausführung: die vorhandene Planungs-Aufgabe wird um
+  echte Ausführung von mind. 2 Workflow-Schritten mit Gemini + Soll/Ist-Vergleich
+  ergänzt (Planen war bisher nur Theorie). Damit ist der große Umbau (K05–K10)
+  abgeschlossen.
 - K08-M7 „Prompt Engineering mit CRAFT": im Modul-Array bewusst an Position 2 (direkt
   nach der Auffrischung) eingefügt, hat aber die ID `K08-M7` behalten statt die
   bestehenden Module M2–M6 umzunummerieren — sonst hätte das bereits gespeicherten
