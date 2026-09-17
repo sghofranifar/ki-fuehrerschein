@@ -43,11 +43,33 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   ein Code-Modal (`openGradeCode()`), das genau diesen einen Jahrgang freischaltet,
   ohne die Kette/andere Jahrgänge zu berühren. **Kein echter Zugriffsschutz** — die
   App hat keinen Server, jeder Code steht im Klartext im Seitenquelltext.
-- Aufgabentypen: `info | quiz | multi | match | sort | cloze | reflect | classify | input`.
+- Aufgabentypen: `info | quiz | multi | match | sort | cloze | reflect | classify | input | promptcheck`.
   `classify` = visuelle „Ist das KI?"-Aufgabe mit eingebetteten SVG-Icons. `input` =
   freies Textfeld, per `task.accept`-Liste geprüft; `norm()` entfernt beim Vergleich
   alles außer Ziffern, damit unterschiedliche Schreibweisen (z. B. „17:02"/„17.02 Uhr")
   als richtig erkannt werden — wichtig, weil KI-Antworten nie exakt gleich formuliert sind.
+  `promptcheck` = **lokaler, regelbasierter** CRAFT-Prompt-Check (Signalwort-Heuristik
+  pro Buchstabe C/R/A/F/T, reines `RegExp.test()` im Browser) — bewusst **keine**
+  externe API/kein Aufruf eines KI-Dienstes zur Bewertung, wegen Datenschutz und weil
+  Anthropic/teilweise auch andere KI-Dienste aus Hongkong nicht zuverlässig erreichbar
+  sind. Zählt nicht zu `RUN.gradeable` (wie `info`/`reflect`) — reines Feedback-Tool,
+  kein Auf-Bestehen-Gate.
+- **Großer Umbau (Herbst 2026): praktische Hands-on-Aufgaben statt reiner Theorie.**
+  Auslöser: Multiple-Choice-only-Module waren für 80-Minuten-Workshops zu dünn. Muster
+  pro ergänzter Aufgabe: `info` mit Link zu einem externen KI-Mini-Tool (neuer Tab) +
+  `reflect`/`input` zur Auswertung der eigenen Erfahrung — **nie** wörtlicher Abgleich
+  von KI-Antworttext (siehe `input`-Prinzip oben). Bisher ergänzt:
+  K05-M1 Quick, Draw! (quickdraw.withgoogle.com, Mustererkennung), K06-M2 Teachable
+  Machine (teachablemachine.withgoogle.com, eigenes Mini-Modell trainieren), K06-M4
+  Semantris (research.google.com/semantris, Wortbedeutung/Prompting), K07-M4 AutoDraw
+  (autodraw.com, kreative Mensch-KI-Zusammenarbeit + Kennzeichnungsfrage), K08-M2
+  Gemini-Ideen-Brainstorming mit Auswahl/Verwerfen, K08-M3 echte Feedback-Schleife mit
+  Gemini (eigener Text → Gemini-Feedback zu Aufbau/Verständlichkeit → Überarbeitung),
+  K08-M4 Gemini-Grenzen-Test (Buchstaben-Zählaufgabe „Verantwortungsbewusstsein" → 4×„s" —
+  zeigt die Tokenisierungs-Schwäche von Sprachmodellen bei Buchstabenzählung an einem
+  echten, nachvollziehbaren Beispiel), K08-M7 `promptcheck`-Aufgabe für den eigenen
+  CRAFT-Prompt + Live-Vergleichstest (guter vs. schlechter Prompt) auf Gemini.
+  Noch offen: K09-M2/M3/M4, K10-M3 (gleiches Muster, siehe Task-Liste in der Session).
 - K08-M7 „Prompt Engineering mit CRAFT": im Modul-Array bewusst an Position 2 (direkt
   nach der Auffrischung) eingefügt, hat aber die ID `K08-M7` behalten statt die
   bestehenden Module M2–M6 umzunummerieren — sonst hätte das bereits gespeicherten

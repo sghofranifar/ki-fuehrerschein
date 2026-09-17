@@ -401,6 +401,11 @@ const CONTENT={
        {ic:'book',label:{de:'Gedrucktes Buch',en:'Printed book'},ai:false},
        {ic:'bike',label:{de:'Fahrrad',en:'Bicycle'},ai:false}],
      explain:{de:'Ein Taschenrechner folgt festen Regeln – das ist keine KI. KI erkennt Muster und sagt voraus.',en:'A calculator follows fixed rules – that is not AI. AI recognises patterns and predicts.'}},
+    {type:'info',title:{de:'Probier\'s selbst: Quick, Draw!',en:'Try it yourself: Quick, Draw!'},
+     body:{de:'<p>Öffne <a href="https://quickdraw.withgoogle.com/" target="_blank" rel="noopener">quickdraw.withgoogle.com ↗</a> in einem neuen Tab und zeichne ein paar Begriffe. Eine KI versucht in Echtzeit zu erraten, was du zeichnest – genau wie beim Sprachassistenten erkennt sie dabei <strong>Muster</strong>, die sie aus Millionen Zeichnungen anderer Menschen gelernt hat.</p>',
+           en:'<p>Open <a href="https://quickdraw.withgoogle.com/" target="_blank" rel="noopener">quickdraw.withgoogle.com ↗</a> in a new tab and draw a few prompts. An AI tries to guess in real time what you are drawing – just like the voice assistant, it recognises <strong>patterns</strong> it learned from millions of other people\'s drawings.</p>'}},
+    {type:'reflect',q:{de:'Wie lief es? Hat die KI schnell erkannt, was du gezeichnet hast? Woran erkennt sie wohl ein Muster?',en:'How did it go? Did the AI quickly recognise what you drew? What do you think it uses to spot a pattern?'},
+     placeholder:{de:'z. B. Sie hat … erkannt, weil …',en:'e.g. it recognised … because …'}},
     {type:'quiz',q:{de:'Was beschreibt KI am besten?',en:'Which best describes AI?'},
      options:[{de:'Eine Technologie, die schlaues Verhalten nachahmt',en:'Technology that imitates smart behaviour'},
               {de:'Ein Computer, der genau wie ein Mensch denkt und fühlt',en:'A computer that thinks and feels exactly like a human'},
@@ -498,7 +503,12 @@ const CONTENT={
     {type:'quiz',q:{de:'Eine KI erkennt Katzen schlecht, weil sie nur Hunde-Bilder zum Üben hatte. Warum?',en:'An AI recognises cats poorly because it only had dog images to train on. Why?'},
      options:[{de:'Die Beispiele waren einseitig – sie hat Katzen kaum gesehen',en:'The examples were one-sided – it barely saw cats'},
               {de:'Katzen sind zu schnell für KI',en:'Cats are too fast for AI'},{de:'KI mag keine Katzen',en:'AI dislikes cats'}],
-     correct:0,explain:{de:'KI ist nur so gut wie ihre Beispiele. Fehlen Katzen, kann sie sie kaum erkennen.',en:'AI is only as good as its examples. Without cats, it can barely recognise them.'}}
+     correct:0,explain:{de:'KI ist nur so gut wie ihre Beispiele. Fehlen Katzen, kann sie sie kaum erkennen.',en:'AI is only as good as its examples. Without cats, it can barely recognise them.'}},
+    {type:'info',title:{de:'Trainiere deine eigene Mini-KI',en:'Train your own mini AI'},
+     body:{de:'<p>Öffne <a href="https://teachablemachine.withgoogle.com/" target="_blank" rel="noopener">teachablemachine.withgoogle.com ↗</a> (kein Login nötig) und wähle „Get Started" → „Image Project". Zeig deiner Webcam zwei verschiedene Dinge (z. B. deine Hand und eine Tasse) und trainiere ein Mini-Modell, das beide unterscheidet.</p>',
+           en:'<p>Open <a href="https://teachablemachine.withgoogle.com/" target="_blank" rel="noopener">teachablemachine.withgoogle.com ↗</a> (no login needed) and choose "Get Started" → "Image Project". Show your webcam two different things (e.g. your hand and a cup) and train a mini model that tells them apart.</p>'}},
+    {type:'reflect',q:{de:'Wie viele Beispiel-Bilder hast du für jede Kategorie gezeigt? Was passiert, wenn du für eine Kategorie nur ganz wenige zeigst?',en:'How many example images did you show for each category? What happens if you show very few for one category?'},
+     placeholder:{de:'Kategorie 1: … Beispiele / Kategorie 2: … Beispiele / Beobachtung …',en:'Category 1: … examples / Category 2: … examples / Observation …'}}
   ]},
   {id:'K06-M3',icon:'📱',komp:'R',niveau:'II',title:{de:'Empfehlungen & „Für dich"',en:'Recommendations & "For you"'},tasks:[
     {type:'info',title:{de:'Warum dir Apps Dinge vorschlagen',en:'Why apps suggest things to you'},
@@ -519,6 +529,9 @@ const CONTENT={
     {type:'info',title:{de:'Klar fragen, bessere Antwort',en:'Ask clearly, get a better answer'},
      body:{de:'<p>Ein <strong>Prompt</strong> ist deine Eingabe an die KI. Klar + mit <strong>Kontext</strong> = bessere Antwort.</p><p>Vergleiche: „Schreib was über Hunde" vs. „Erkläre einem 10-Jährigen in 3 Sätzen, warum Hunde gut hören."</p>',
            en:'<p>A <strong>prompt</strong> is your input to the AI. Clear + with <strong>context</strong> = better answer.</p><p>Compare: "Write about dogs" vs "Explain to a 10-year-old in 3 sentences why dogs hear well."</p>'}},
+    {type:'info',title:{de:'Probier\'s selbst: Semantris',en:'Try it yourself: Semantris'},
+     body:{de:'<p>Öffne <a href="https://research.google.com/semantris/" target="_blank" rel="noopener">research.google.com/semantris ↗</a> und spiele eine Runde „Blocks" oder „Arcade". Du gibst ein Hinweiswort ein, die KI sucht dazu passende Wörter aus einer Liste – sie „versteht" also, wie Wörter <strong>inhaltlich zusammenhängen</strong>.</p><p>Genau deshalb ist die <strong>Wortwahl</strong> in einem Prompt so wichtig: Die KI reagiert auf Bedeutungen, nicht nur auf einzelne Buchstaben.</p>',
+           en:'<p>Open <a href="https://research.google.com/semantris/" target="_blank" rel="noopener">research.google.com/semantris ↗</a> and play a round of "Blocks" or "Arcade". You type a clue word, and the AI picks matching words from a list – so it "understands" how words are <strong>related in meaning</strong>.</p><p>That is exactly why <strong>word choice</strong> in a prompt matters so much: the AI reacts to meaning, not just individual letters.</p>'}},
     {type:'quiz',q:{de:'Welcher Prompt ist besser?',en:'Which prompt is better?'},
      options:[{de:'„Erkläre mir in 3 einfachen Sätzen, wie Regen entsteht."',en:'"Explain to me in 3 simple sentences how rain forms."'},
               {de:'„Wetter."',en:'"Weather."'},{de:'„Schreib irgendwas."',en:'"Write something."'}],
@@ -585,6 +598,11 @@ const CONTENT={
     {type:'info',title:{de:'KI als Ideen-Partner – ehrlich bleiben',en:'AI as an idea partner – stay honest'},
      body:{de:'<p>KI kann beim <strong>Ideen sammeln</strong> helfen. Gut ist: <strong>erst selbst denken</strong>, dann mit KI vergleichen.</p><p>Wenn du KI nutzt, <strong>kennzeichne es ehrlich</strong> – z. B.: <em>„Erstellt mit Hilfe von [KI-Tool]. Prompt: …"</em></p>',
            en:'<p>AI can help <strong>brainstorm</strong>. Best practice: <strong>think for yourself first</strong>, then compare with AI.</p><p>If you use AI, <strong>label it honestly</strong> – e.g.: <em>"Created with help of [AI tool]. Prompt: …"</em></p>'}},
+    {type:'info',title:{de:'Probier\'s selbst: AutoDraw',en:'Try it yourself: AutoDraw'},
+     body:{de:'<p>Öffne <a href="https://www.autodraw.com/" target="_blank" rel="noopener">autodraw.com ↗</a> und skizziere etwas Krakeliges (z. B. eine Katze oder ein Haus). Die KI schlägt dir passende, saubere Zeichnungen vor – du wählst aus und arbeitest weiter. Genau das ist <strong>kreative Zusammenarbeit</strong> zwischen Mensch und KI: Die Idee bleibt deine, die KI hilft bei der Umsetzung.</p>',
+           en:'<p>Open <a href="https://www.autodraw.com/" target="_blank" rel="noopener">autodraw.com ↗</a> and sketch something rough (e.g. a cat or a house). The AI suggests matching, clean drawings – you pick one and keep working. That is exactly <strong>creative collaboration</strong> between human and AI: the idea stays yours, the AI helps with execution.</p>'}},
+    {type:'reflect',q:{de:'Passten die KI-Vorschläge zu deiner Skizze? Wenn du ein AutoDraw-Bild für ein Schulplakat nutzt – wie würdest du das ehrlich kennzeichnen?',en:'Did the AI suggestions match your sketch? If you used an AutoDraw image for a school poster – how would you label that honestly?'},
+     placeholder:{de:'Passend? … / Kennzeichnung: „Erstellt mit …"',en:'Matching? … / Labelling: "Created with …"'}},
     {type:'quiz',q:{de:'Du sammelst Ideen für ein Plakat. Wie nutzt du KI sinnvoll?',en:'You brainstorm ideas for a poster. How do you use AI well?'},
      options:[{de:'Erst eigene Ideen, dann mit KI-Vorschlägen vergleichen',en:'Own ideas first, then compare with AI suggestions'},
               {de:'Nur die KI machen lassen, ohne eigenes Denken',en:'Let the AI do it all, no own thinking'},
@@ -645,7 +663,16 @@ const CONTENT={
      body:{de:'<p>Schau dir diesen Prompt an: <em>„Schreib was über den Klimawandel."</em></p><p>Das Problem: <strong>kein Kontext</strong> (welcher Aspekt?), <strong>keine Rolle</strong> (aus wessen Sicht?), <strong>kein Publikum</strong> (für wen?), <strong>kein Format</strong> (wie lang, welche Form?) und <strong>keine klare Aufgabe</strong> (nur „schreib was" statt eines echten Aktionsworts).</p><p>Genau hier hilft CRAFT.</p>',
            en:'<p>Look at this prompt: <em>"Write something about climate change."</em></p><p>The problem: <strong>no context</strong> (which aspect?), <strong>no role</strong> (from whose perspective?), <strong>no audience</strong> (for whom?), <strong>no format</strong> (how long, what form?) and <strong>no clear task</strong> (just "write something" instead of a real action verb).</p><p>This is exactly where CRAFT helps.</p>'}},
     {type:'reflect',q:{de:'Verbessere den Prompt „Schreib was über den Klimawandel." mit CRAFT. Trage für jeden Buchstaben eine Idee ein und formuliere daraus deinen vollständigen neuen Prompt.',en:'Improve the prompt "Write something about climate change." using CRAFT. Fill in an idea for each letter, then write your complete new prompt.'},
-     placeholder:{de:'C (Kontext): … / R (Rolle): … / A (Publikum): … / F (Format): … / T (Aufgabe): … / Mein neuer Prompt: …',en:'C (Context): … / R (Role): … / A (Audience): … / F (Format): … / T (Task): … / My new prompt: …'},prod:true}
+     placeholder:{de:'C (Kontext): … / R (Rolle): … / A (Publikum): … / F (Format): … / T (Aufgabe): … / Mein neuer Prompt: …',en:'C (Context): … / R (Role): … / A (Audience): … / F (Format): … / T (Task): … / My new prompt: …'},prod:true},
+    {type:'promptcheck',q:{de:'Prompt-Check: Teste deinen neuen Prompt',en:'Prompt check: test your new prompt'},
+     body:{de:'<p>Kopiere deinen neuen Prompt aus der letzten Aufgabe hier hinein (oder schreib ihn neu). Der Check sucht <strong>lokal, ohne KI</strong> nach typischen Signalwörtern für die 5 CRAFT-Buchstaben.</p>',
+           en:'<p>Paste your new prompt from the last task in here (or write it fresh). The check looks <strong>locally, without AI,</strong> for typical signal words for the 5 CRAFT letters.</p>'},
+     placeholder:{de:'Dein CRAFT-Prompt …',en:'Your CRAFT prompt …'}},
+    {type:'info',title:{de:'Jetzt live testen',en:'Now test it live'},
+     body:{de:'<p>Gib deinen CRAFT-Prompt bei <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a> ein. Probiere danach zum Vergleich den ursprünglichen, schlechten Prompt „Schreib was über den Klimawandel." aus.</p>',
+           en:'<p>Enter your CRAFT prompt at <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a>. For comparison, then also try the original, bad prompt "Write something about climate change."</p>'}},
+    {type:'reflect',q:{de:'Was war der wichtigste Unterschied zwischen den beiden Antworten? War dein CRAFT-Prompt wirklich hilfreicher – oder überraschend nicht?',en:'What was the biggest difference between the two answers? Was your CRAFT prompt really more helpful – or surprisingly not?'},
+     placeholder:{de:'Antwort auf CRAFT-Prompt: … / Antwort auf schlechten Prompt: … / Unterschied: …',en:'Answer to CRAFT prompt: … / Answer to bad prompt: … / Difference: …'},prod:true}
   ]},
   {id:'K08-M2',icon:'🧩',komp:'A',niveau:'II→III',title:{de:'Aufgaben teilen: Mensch oder KI?',en:'Dividing tasks: human or AI?'},tasks:[
     {type:'info',title:{de:'Klug aufteilen',en:'Divide wisely'},
@@ -660,7 +687,12 @@ const CONTENT={
     {type:'quiz',q:{de:'Wofür sollte beim Aufsatz deine eigene Stimme entscheiden?',en:'What in the essay should your own voice decide?'},
      options:[{de:'Meinung, Argumente und Schreibstil',en:'Opinion, arguments and writing style'},
               {de:'Nur die Schriftgröße',en:'Only the font size'},{de:'Gar nichts, das macht alles die KI',en:'Nothing, the AI does it all'}],
-     correct:0,explain:{de:'Das Denken bleibt bei dir – KI hilft nur an passenden Stellen.',en:'The thinking stays yours – AI only helps where it fits.'},prod:true}
+     correct:0,explain:{de:'Das Denken bleibt bei dir – KI hilft nur an passenden Stellen.',en:'The thinking stays yours – AI only helps where it fits.'},prod:true},
+    {type:'info',title:{de:'Jetzt du: Aufgabe teilen mit Gemini',en:'Now you: dividing the task with Gemini'},
+     body:{de:'<p>Wähle ein Thema, zu dem du bald etwas schreiben musst (oder erfinde eins, z. B. „Sollten Handys in der Schule erlaubt sein?"). Öffne <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a> mit deinem GSIS-Account und lass dir <strong>5 Ideen</strong> dazu vorschlagen.</p>',
+           en:'<p>Pick a topic you will soon write about (or invent one, e.g. "Should phones be allowed in school?"). Open <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a> with your GSIS account and have it suggest <strong>5 ideas</strong> on it.</p>'}},
+    {type:'reflect',q:{de:'Welche der 5 KI-Ideen behältst du, welche verwirfst du – und warum? Was hast du selbst ergänzt, das die KI nicht vorgeschlagen hat?',en:'Which of the 5 AI ideas do you keep, which do you discard – and why? What did you add yourself that the AI did not suggest?'},
+     placeholder:{de:'Behalten: … / Verworfen: … weil … / Eigene Ergänzung: …',en:'Kept: … / Discarded: … because … / My own addition: …'},prod:true}
   ]},
   {id:'K08-M3',icon:'🤝',komp:'A',niveau:'III',title:{de:'Mit KI ko-konstruieren',en:'Co-creating with AI'},tasks:[
     {type:'info',title:{de:'In Schleifen besser werden',en:'Improving in loops'},
@@ -673,7 +705,12 @@ const CONTENT={
     {type:'quiz',q:{de:'Warum solltest du markieren, was von der KI stammt?',en:'Why should you mark what came from the AI?'},
      options:[{de:'Ehrlichkeit und um die eigene Leistung zu erkennen',en:'Honesty and to recognise your own contribution'},
               {de:'Damit es schwieriger aussieht',en:'To make it look harder'},{de:'Aus keinem Grund',en:'For no reason'}],
-     correct:0,explain:{de:'Transparenz zeigt, was du selbst geleistet hast.',en:'Transparency shows what you achieved yourself.'},prod:true}
+     correct:0,explain:{de:'Transparenz zeigt, was du selbst geleistet hast.',en:'Transparency shows what you achieved yourself.'},prod:true},
+    {type:'info',title:{de:'Jetzt du: eine Feedback-Schleife',en:'Now you: a feedback loop'},
+     body:{de:'<p>Schreibe zuerst <strong>3–4 eigene Sätze</strong> zu einem Thema deiner Wahl. Gib sie dann bei <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a> ein und bitte gezielt um Feedback zu <strong>Aufbau und Verständlichkeit</strong> (nicht um einen neuen Text!). Überarbeite deine Sätze danach selbst.</p>',
+           en:'<p>First write <strong>3–4 sentences of your own</strong> on a topic of your choice. Then enter them at <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a> and ask specifically for feedback on <strong>structure and clarity</strong> (not for a rewritten text!). Then revise your sentences yourself.</p>'}},
+    {type:'reflect',q:{de:'Was hat Gemini konkret vorgeschlagen? Was hast du davon übernommen, was nicht – und warum?',en:'What did Gemini specifically suggest? What did you keep, what not – and why?'},
+     placeholder:{de:'Vorschlag der KI: … / Übernommen: … / Nicht übernommen, weil: …',en:'AI suggestion: … / Kept: … / Not kept, because: …'},prod:true}
   ]},
   {id:'K08-M4',icon:'🛡️',komp:'R',niveau:'III',title:{de:'Grenzen, Risiken & Datenschutz',en:'Limits, risks & data protection'},tasks:[
     {type:'info',title:{de:'Sicher und überlegt',en:'Safe and considered'},
@@ -688,7 +725,13 @@ const CONTENT={
     {type:'quiz',q:{de:'Was bedeutet „Überabhängigkeit" von KI?',en:'What does "overreliance" on AI mean?'},
      options:[{de:'Alles der KI überlassen und selbst kaum noch nachdenken',en:'Leaving everything to AI and barely thinking yourself'},
               {de:'KI nur einmal pro Woche nutzen',en:'Using AI only once a week'},{de:'KI gar nicht mögen',en:'Disliking AI'}],
-     correct:0,explain:{de:'Wer nicht mehr selbst denkt, lernt weniger – das ist das Risiko.',en:'Stopping your own thinking means learning less – that is the risk.'}}
+     correct:0,explain:{de:'Wer nicht mehr selbst denkt, lernt weniger – das ist das Risiko.',en:'Stopping your own thinking means learning less – that is the risk.'}},
+    {type:'info',title:{de:'Jetzt du: Wo Gemini an Grenzen stößt',en:'Now you: where Gemini hits its limits'},
+     body:{de:'<p>Zähle zuerst <strong>selbst</strong>, wie oft der Buchstabe <strong>„s"</strong> im Wort <strong>„Verantwortungsbewusstsein"</strong> vorkommt. Frag danach genau das bei <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a>.</p>',
+           en:'<p>First count <strong>yourself</strong> how often the letter <strong>"s"</strong> appears in the German word <strong>"Verantwortungsbewusstsein"</strong>. Then ask Gemini exactly that at <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a>.</p>'}},
+    {type:'input',q:{de:'Wie oft kommt „s" in „Verantwortungsbewusstsein" wirklich vor (dein eigenes Nachzählen)?',en:'How often does "s" really appear in "Verantwortungsbewusstsein" (your own count)?'},
+     hint:{de:'Zahl',en:'Number'},accept:['4'],
+     explain:{de:'Richtig sind 4 „s". KI-Sprachmodelle verarbeiten Text nicht Buchstabe für Buchstabe, sondern in größeren Text-Bausteinen (Tokens) – deshalb verzählen sie sich bei solchen Buchstaben-Zählaufgaben erstaunlich oft, auch wenn sie sonst sehr kompetent wirken. Hat Gemini bei dir auch danebengelegen?',en:'The correct count is 4 "s". AI language models do not process text letter by letter but in larger text chunks (tokens) – which is why they surprisingly often miscount in tasks like this, even though they otherwise seem very competent. Did Gemini also get it wrong for you?'}}
   ]},
   {id:'K08-M5',icon:'✨',komp:'A',niveau:'III',title:{de:'Gemini kennenlernen',en:'Getting to know Gemini'},tasks:[
     {type:'info',title:{de:'Bevor du startest',en:'Before you start'},
@@ -1358,6 +1401,30 @@ const RENDERERS={
      <div class="reflect"><textarea id="refl" placeholder="${tx(task.placeholder||{de:'',en:''})}">${prev}</textarea><div class="hint">${t('reflectHint')}</div></div>
      ${taskFoot(t('submitWork')+' →',false)}`;
    bindPrimary(()=>{const v=document.getElementById('refl').value.trim();if(v.length<3)return toast(L()==='de'?'Schreib kurz etwas':'Write something short');Store.set(key,v);toast(t('saved'));advance();});}
+ ,
+ /* Lokaler, regelbasierter CRAFT-Check: sucht nur nach typischen Signalwörtern
+    im eigenen Prompt-Text (kein API-Aufruf, keine KI) – wichtig für Datenschutz
+    und weil Hongkong den Zugriff auf manche KI-Dienste einschränkt. */
+ promptcheck(h,task){let checked=false;
+   h.innerHTML=`<div class="ttype">🎯 ${L()==='de'?'Prompt-Checker':'Prompt checker'}</div><h3>${tx(task.q)}</h3>
+     ${task.body?`<div class="infobox">${tx(task.body)}</div>`:''}
+     <div class="reflect"><textarea id="pcInput" placeholder="${tx(task.placeholder||{de:'',en:''})}"></textarea></div>
+     <div id="pcResult"></div>
+     ${taskFoot(t('check'))}`;
+   bindPrimary(()=>{const raw=document.getElementById('pcInput').value.trim();
+     if(!raw)return toast(L()==='de'?'Schreib zuerst deinen Prompt':'Write your prompt first');
+     if(checked)return advance();checked=true;const low=raw.toLowerCase();
+     const letters=[
+       {k:'C',name:{de:'Context',en:'Context'},hit:/weil|damit|hintergrund|kontext|es geht um|zum thema|because|context/.test(low)||raw.split(/[.!?]/).filter(s=>s.trim()).length>=2},
+       {k:'R',name:{de:'Role',en:'Role'},hit:/\bals\b[^.!?]{0,25}(experte|lehrer|coach|profi|autor|wissenschaftler|journalist|trainer|berater|assistent)|du bist|agiere als|im stil von|as an? \w+/.test(low)},
+       {k:'A',name:{de:'Audience',en:'Audience'},hit:/für (kinder|erwachsene|schüler|anfänger|profis|eltern|jugendliche|einsteiger)|zielgruppe|publikum|verständlich für|for (kids|beginners|adults|students)/.test(low)},
+       {k:'F',name:{de:'Format',en:'Format'},hit:/liste|tabelle|stichpunkte|absatz|in form von|als tabelle|maximal \d+|in \d+ (wörtern|sätzen|worten)|kurzer text|kurze antwort|bullet|table/.test(low)},
+       {k:'T',name:{de:'Task',en:'Task'},hit:/\b(schreibe|erkläre|vergleiche|fasse zusammen|erstelle|liste auf|analysiere|übersetze|gestalte|entwerfe|beschreibe|nenne|write|explain|compare|summarise|summarize|create|list|analyse|analyze|design)\b/.test(low)}
+     ];
+     const hitCount=letters.filter(x=>x.hit).length;
+     document.getElementById('pcResult').innerHTML=letters.map(x=>`<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:6px;background:${x.hit?'#eafbf1':'#fff'}"><span style="font-size:16px">${x.hit?'✅':'⭕'}</span><b style="font-family:var(--font-display);width:20px">${x.k}</b><span>${tx(x.name)}</span></div>`).join('')+
+       `<p style="font-size:12px;color:var(--muted);margin-top:8px">${L()==='de'?`${hitCount} von 5 CRAFT-Elementen gefunden. Das ist ein einfacher Baustein-Check anhand von Signalwörtern (keine echte KI) – er ersetzt nicht dein eigenes Urteil.`:`${hitCount} of 5 CRAFT elements found. This is a simple building-block check based on signal words (not real AI) – it does not replace your own judgement.`}</p>`;
+     document.getElementById('primaryBtn').textContent=t('next')+' →';});}
 };
 function finishRun(){const{grade,moduleId,exam,score,gradeable,accent}=RUN;
   const ratio=gradeable?score/gradeable:1,passed=ratio>=PASS;
