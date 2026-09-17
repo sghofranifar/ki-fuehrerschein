@@ -71,6 +71,13 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   die Aufgabe mit leerem Zustand + neuer Zufalls-Reihenfolge neu auf); er ist nur vor
   dem Prüfen aktiv (`bindReset(()=>locked)` sperrt ihn danach), damit nach dem Prüfen
   bereits vergebene Punkte (`RUN.gradeable`/`RUN.score`) nicht doppelt zählen können.
+- **Zurück-Button im Runner** (`drawTask()`, sichtbar sobald `RUN.idx>0`): geht eine
+  Aufgabe zurück, damit man z. B. die Schritte einer vorherigen `info`-Aufgabe (etwa
+  ein Tutorial) nochmal nachlesen kann, statt sich alles merken zu müssen, bevor man
+  bei der nächsten Aufgabe (z. B. `reflect`) antwortet. `scoreTask()` merkt sich pro
+  Lauf bereits bewertete Aufgaben in `RUN.scoredIdx` (Set) — wird eine Aufgabe nach
+  dem Zurückgehen nochmal bearbeitet und geprüft, zählt das NICHT nochmal zum
+  Punktestand, damit Zurückgehen nicht zum Punkte-Farmen missbraucht werden kann.
 - **Großer Umbau (Herbst 2026): praktische Hands-on-Aufgaben statt reiner Theorie.**
   Auslöser: Multiple-Choice-only-Module waren für 80-Minuten-Workshops zu dünn. Muster
   pro ergänzter Aufgabe: `info` mit Link zu einem externen KI-Mini-Tool (neuer Tab) +
@@ -126,7 +133,10 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   daher eigener Attributions-Hinweis im Modul selbst UND im Impressum.
 - K06-M1/M2 vertieft (waren mit 2 bzw. 5 Aufgaben zu kurz für eine Workshop-Einheit):
   M1 hat jetzt einen langen `clozedrag`-Recap-Lückentext (6 Lücken + 3 Distraktor-
-  Wörter) plus Anschlussfrage zu den Distraktoren. M2s Teachable-Machine-Anleitung
+  Wörter) plus eine echte Reflexionsfrage zu Mensch vs. Maschine (eigenes Alltags-
+  beispiel für „lieber Mensch" und „KI klar im Vorteil", begründet mit dem Gelernten) —
+  ersetzt eine ursprüngliche Meta-Frage zu den Distraktorwörtern selbst, die zu wenig
+  inhaltliche Tiefe hatte. M2s Teachable-Machine-Anleitung
   war als einzelner Absatz zu knapp und ließ Schüler:innen an der echten Tool-UI
   hängen — jetzt eine nummerierte Schritt-für-Schritt-Anleitung mit den konkreten
   Button-Bezeichnungen der Seite (Get Started → Image Project → Standard image model

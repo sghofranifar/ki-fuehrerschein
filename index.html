@@ -514,11 +514,8 @@ const CONTENT={
             {de:'Zufall',en:'chance'},{de:'Wahrheit',en:'the truth'},{de:'Gewissen',en:'a conscience'}],
      answers:[0,1,2,3,4,5],
      explain:{de:'KI lernt aus Beispielen (nicht aus festen Regeln), macht deshalb manchmal Fehler – vor allem bei einseitigen Trainingsdaten –, hat keine echten Gefühle, und private Daten wie ein Passwort gehören nie in einen Chatbot.',en:'AI learns from examples (not fixed rules), so it sometimes makes mistakes – especially with one-sided training data –, has no real feelings, and private data like a password never belongs in a chatbot.'}},
-    {type:'quiz',q:{de:'Warum standen im Lückentext auch die Wörter „Zufall", „Wahrheit" und „Gewissen" in der Wortbank, obwohl sie nirgends hineingehörten?',en:'Why did the word bank also contain "chance", "the truth" and "a conscience", even though they did not fit anywhere?'},
-     options:[{de:'Als Ablenkung – sie klingen plausibel, beschreiben KI aber nicht richtig',en:'As distractors – they sound plausible but do not correctly describe AI'},
-              {de:'Weil man sie eigentlich hätte benutzen müssen',en:'Because they actually should have been used'},
-              {de:'Aus Versehen',en:'By accident'}],
-     correct:0,explain:{de:'Genau wie bei Multiple-Choice-Aufgaben gibt es auch hier bewusste Fehlvorstellungen zum Aussortieren.',en:'Just like in multiple-choice questions, these are deliberate misconceptions to sort out.'}}
+    {type:'reflect',q:{de:'Der Lückentext hat gezeigt: KI lernt aus Beispielen (nicht aus festen Regeln), kann sich irren und hat keine echten Gefühle. Nenne ein eigenes Beispiel aus deinem Alltag, bei dem du lieber einem Menschen als einer KI vertrauen würdest – und eines, bei dem die KI klar im Vorteil ist. Begründe beide mit dem, was du gerade gelernt hast.',en:'The gap-fill text showed: AI learns from examples (not fixed rules), can make mistakes, and has no real feelings. Name one example from your own life where you would rather trust a human than an AI – and one where AI is clearly better suited. Justify both using what you just learned.'},
+     placeholder:{de:'Lieber Mensch vertrauen bei: … weil … / KI klar im Vorteil bei: … weil …',en:'Rather trust a human for: … because … / AI clearly better for: … because …'},prod:true}
   ]},
   {id:'K06-M2',icon:'⚙️',komp:'V',niveau:'I→II',title:{de:'Wie „lernt" eine KI?',en:'How does AI "learn"?'},tasks:[
     {type:'info',title:{de:'Regeln oder Beispiele',en:'Rules or examples'},
@@ -1586,13 +1583,19 @@ function renderRunner(grade,moduleId,exam){if(!isUnlocked(grade))return go('grad
   const g=gradeById(grade);let tasks,label;
   if(exam){tasks=buildExamTasks(grade);label=`🏁 ${t('exam')}`;CURRENT.exam=true;CURRENT.module=null;}
   else{const m=modulesOf(grade).find(x=>x.id===moduleId);tasks=m.tasks;label=tx(m.title);CURRENT.exam=false;CURRENT.module=moduleId;}
-  CURRENT.grade=grade;RUN={grade,moduleId,exam,tasks,idx:0,score:0,gradeable:0,accent:g.accent,label};
+  CURRENT.grade=grade;RUN={grade,moduleId,exam,tasks,idx:0,score:0,gradeable:0,accent:g.accent,label,scoredIdx:new Set()};
   setCrumb([grade==='OB'?tx(OB_META.title):`${t('gradeEy')} ${grade}`,`<b>${label}</b>`]);drawTask();}
+/* idx>0 zeigt einen Zurück-Button, damit man z. B. die Schritte einer vorherigen
+   info-Aufgabe nochmal nachlesen kann, bevor man die aktuelle Aufgabe beantwortet.
+   scoreTask() verhindert per RUN.scoredIdx, dass eine beim Zurückgehen erneut
+   bearbeitete Aufgabe den Punktestand doppelt zählt. */
 function drawTask(){const{tasks,idx,accent,label}=RUN,task=tasks[idx],pct=Math.round(idx/tasks.length*100);
   view().innerHTML=`<section class="view runner" style="--accent:${accent}">
     <div class="progressbar"><i style="width:${pct}%"></i></div>
     <div class="run-meta"><span>${label}</span><span>${idx+1} ${t('of')} ${tasks.length}</span></div>
+    ${idx>0?`<button class="btn ghost sm" id="backBtn" type="button" style="margin-bottom:14px">← ${L()==='de'?'Zurück':'Back'}</button>`:''}
     <div class="task" id="taskCard"></div></section>`;
+  if(idx>0)document.getElementById('backBtn').onclick=()=>{RUN.idx--;drawTask();};
   RENDERERS[task.type](document.getElementById('taskCard'),task);}
 /* reset=true zeigt einen Zurücksetzen-Button für Zuordnungs-Aufgaben (match/sort/
    order/classify/clozedrag), damit man eigene Fehlplatzierungen vor dem Prüfen
@@ -1608,7 +1611,8 @@ function bindPrimary(fn){document.getElementById('primaryBtn').onclick=fn;}
 function bindReset(isLocked){const b=document.getElementById('resetBtn');if(b)b.onclick=()=>{if(isLocked())return;drawTask();};}
 const feedbackEl=()=>`<div class="feedback" id="fb" aria-live="polite"></div>`;
 function showFeedback(ok,msg){const fb=document.getElementById('fb');fb.className='feedback show '+(ok?'good':'bad');fb.innerHTML=`<b>${ok?t('correct'):t('wrong')}</b> ${msg||''}`;}
-function scoreTask(ok,task){RUN.gradeable++;if(ok){RUN.score++;STATE.points+=10;STATE.streak++;STATE.bestStreak=Math.max(STATE.bestStreak,STATE.streak);}else{STATE.streak=0;pushError(task);}save();updateChrome();}
+function scoreTask(ok,task){if(RUN.scoredIdx.has(RUN.idx))return;RUN.scoredIdx.add(RUN.idx);
+  RUN.gradeable++;if(ok){RUN.score++;STATE.points+=10;STATE.streak++;STATE.bestStreak=Math.max(STATE.bestStreak,STATE.streak);}else{STATE.streak=0;pushError(task);}save();updateChrome();}
 function pushError(task){const id=(RUN.moduleId||RUN.grade)+'-'+RUN.idx;if(STATE.errors.some(e=>e.id===id))return;STATE.errors.push({id,q:tx(task.q||task.title||{de:'Aufgabe',en:'Task'}),src:RUN.label});}
 function advance(){RUN.idx++;if(RUN.idx>=RUN.tasks.length)finishRun();else drawTask();}
 const RENDERERS={
