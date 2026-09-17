@@ -77,7 +77,28 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   Stellungnahme (bewusst zuerst eigene Meinung bilden, dann stärkstes Gegenargument
   einholen), K10-M3 Workflow-Ausführung: die vorhandene Planungs-Aufgabe wird um
   echte Ausführung von mind. 2 Workflow-Schritten mit Gemini + Soll/Ist-Vergleich
-  ergänzt (Planen war bisher nur Theorie). Damit ist der große Umbau (K05–K10)
+  ergänzt (Planen war bisher nur Theorie).
+- **Vertiefungsrunde (Herbst 2026, Teil 2): noch mehr Tiefe statt mehr Wiederholung.**
+  K07-M5 „KI erkennen: Google-Suche & KI-Übersicht" (neues, 5. K07-Modul): erklärt AI
+  Overviews (Gemini-generiert, kein einzelner Autor) mit den echten, dokumentierten
+  Fehlerfällen „Klebstoff auf Pizza" / „Steine essen" (Mai 2024), Hands-on-Suche zur
+  Frage nach dem bevölkerungsreichsten Land (Indien überholte China 2023 laut UN –
+  bewusst ein Beispiel, bei dem veraltete KI-Trainingsdaten noch die alte Antwort
+  liefern könnten), plus Pflicht zur unabhängigen Gegenquelle. K09-M2: Schaf-Rätsel um
+  eine zweite Falle erweitert (17 Schafe, alle außer 9 laufen weg, Hälfte der
+  Weggelaufenen kommt zurück → richtig 13, nicht 9 oder 8 – testet zweistufiges
+  Lesen statt Mustererkennung), plus „erfinde eigene Fallen"-Aufgabe (Dokumentation
+  eigener Fast-vs-Thinking-Tests) und eine Halluzinations-Vertiefung mit echten,
+  recherchierten Fällen (Mata v. Avianca: Anwälte reichten von ChatGPT erfundene
+  Gerichtsurteile ein, 2023 sanktioniert; Google-AI-Overview-Fehlantworten 2024) plus
+  eigener Versuch, bei Gemini eine Halluzination zu provozieren. K10-M6 „Deep Research
+  kennenlernen" (neues, 6. K10-Modul): erklärt Geminis Deep-Research-Agent (recherchiert
+  selbstständig über mehrere Minuten, liefert zitierten Bericht), Hands-on mit echter
+  Unterrichtsfrage, Reflexion zu sinnvoller/unsinniger Schulnutzung. OB-7 erweitert:
+  Deep Research als konkretes Agenten-Beispiel + kritische Quellenbewertung an einer
+  echten Facharbeits-/Seminarkursfrage. Alle neuen Fakten via WebSearch verifiziert
+  (Mata v. Avianca, Google-AI-Overview-Fehler 2024, UN-Bevölkerungsdaten 2023,
+  Gemini-Deep-Research-Funktionsweise). Damit ist der große Umbau (K05–K10)
   abgeschlossen.
 - K08-M7 „Prompt Engineering mit CRAFT": im Modul-Array bewusst an Position 2 (direkt
   nach der Auffrischung) eingefügt, hat aber die ID `K08-M7` behalten statt die
