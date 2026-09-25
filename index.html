@@ -294,7 +294,7 @@ function loadState(){try{return Object.assign({},DEFAULT_STATE,JSON.parse(Store.
 function save(){Store.set(SKEY,JSON.stringify(STATE));}
 /* ===== 3) i18n ===== */
 const T={
- de:{start:'Jetzt starten',heroEy:'KI-Kompetenz für die Klassen 5–9',heroTitle:['Dein ','KI-Führerschein',''],
+ de:{start:'Jetzt starten',heroEy:'KI-Kompetenz für die Klassen 5–10',heroTitle:['Dein ','KI-Führerschein',''],
   heroLead:'Verstehen, anwenden, hinterfragen und mitgestalten. Sammle Module, knacke Level und hol dir Stufe für Stufe deinen Führerschein.',
   chooseGrade:'Wähle deinen Jahrgang',chooseGradeLead:'Du arbeitest in deinem Jahrgang. Höhere Jahrgänge öffnen sich, sobald du den Führerschein der Stufe davor hast.',
   gradeEy:'Jahrgang',locked:'Gesperrt',completed:'Geschafft',modules:'Module',module:'Modul',overviewOf:'Übersicht',points:'Punkte',streak:'Serie',
@@ -315,14 +315,14 @@ const T={
   save:'Speichern',teacherTitle:'Lehrkraft-Bereich',teacherLead:'Mit dem Lehrkraft-Code schaltest du alle Jahrgänge frei und siehst die Auswertung.',
   codePh:'Lehrkraft-Code',unlock:'Freischalten',unlockAll:'Alle Jahrgänge freigeschaltet',exportProg:'Fortschritt exportieren',importProg:'Fortschritt importieren',resetProg:'Fortschritt zurücksetzen',
   pastePh:'Fortschritts-Code einfügen',resetConfirm:'Wirklich allen Fortschritt löschen?',close:'Schließen',niveau:'Niveaustufe',
-  reflectHint:'Diese Antwort wird gespeichert und kann von deiner Lehrkraft gesehen werden.',submitWork:'Antwort abgeben',
+  reflectHint:'Diese Antwort wird auf diesem Gerät gespeichert. Deine Lehrkraft kann sie sehen, wenn du deinen Fortschritt mit ihr teilst.',submitWork:'Antwort abgeben',
   dragHint:'Tippe ein Element an, dann den passenden Korb.',matchHint:'Tippe links ein Element, dann rechts die passende Antwort.',
   classifyHint:'Ist das KI oder nicht? Entscheide für jedes Beispiel.',isAI:'KI',notAI:'keine KI',of:'/',overview:'Übersicht',errorsNav:'Fehlerspeicher',
   obEy:'Zusatzangebot',obCodeTitle:'Zugangscode für die Oberstufe',obCodeLead:'Dieser Bereich ist für die Qualifikationsphase gedacht. Frag deine Kurslehrkraft nach dem Code.',obCodePh:'Zugangscode',
   gradeCodeTitle:'Zugangscode für',gradeCodeLead:'Frag deine Lehrkraft nach dem Code für diesen Jahrgang.',
   impressum:'Impressum',privacy:'Datenschutz',privacyNote:'Deine Daten bleiben auf diesem Gerät – nichts wird an einen Server gesendet.',
   foot:'KI-Führerschein · Spiralcurriculum K05–K10 · German Swiss International School'},
- en:{start:'Start now',heroEy:'AI literacy for grades 5–9',heroTitle:['Your ','AI Driving Licence',''],
+ en:{start:'Start now',heroEy:'AI literacy for grades 5–10',heroTitle:['Your ','AI Driving Licence',''],
   heroLead:'Understand, apply, question and co-create. Collect modules, clear levels and earn your licence step by step.',
   chooseGrade:'Choose your grade',chooseGradeLead:'You work in your own grade. Higher grades unlock once you hold the licence of the level before.',
   gradeEy:'Grade',locked:'Locked',completed:'Done',modules:'modules',module:'Module',overviewOf:'Overview',points:'Points',streak:'Streak',
@@ -343,7 +343,7 @@ const T={
   save:'Save',teacherTitle:'Teacher area',teacherLead:'The teacher code unlocks all grades and shows analytics.',
   codePh:'Teacher code',unlock:'Unlock',unlockAll:'All grades unlocked',exportProg:'Export progress',importProg:'Import progress',resetProg:'Reset progress',
   pastePh:'Paste progress code',resetConfirm:'Really delete all progress?',close:'Close',niveau:'Level',
-  reflectHint:'This answer is saved and can be seen by your teacher.',submitWork:'Submit answer',
+  reflectHint:'This answer is saved on this device. Your teacher can see it when you share your progress with them.',submitWork:'Submit answer',
   dragHint:'Tap an item, then the matching bin.',matchHint:'Tap an item on the left, then its match on the right.',
   classifyHint:'Is this AI or not? Decide for each example.',isAI:'AI',notAI:'not AI',of:'/',overview:'Overview',errorsNav:'Mistakes',
   obEy:'Extra',obCodeTitle:'Access code for senior years',obCodeLead:'This section is for the qualification phase. Ask your course teacher for the code.',obCodePh:'Access code',
@@ -703,7 +703,7 @@ const CONTENT={
   ]},
   {id:'K08-M7',icon:'🎯',komp:'A',niveau:'III',title:{de:'Prompt Engineering mit CRAFT',en:'Prompt engineering with CRAFT'},tasks:[
     {type:'info',title:{de:'Das CRAFT-Framework',en:'The CRAFT framework'},
-     body:{de:'<p>In Klasse 6 hast du schon gelernt: klar und mit Kontext prompten wirkt besser. <strong>CRAFT</strong> gibt dir dafür fünf konkrete Stellschrauben:</p>'+
+     body:{de:'<p>Du weißt schon: Klare Prompts mit Kontext führen zu besseren Antworten. <strong>CRAFT</strong> gibt dir dafür fünf konkrete Stellschrauben:</p>'+
        '<div style="display:flex;flex-direction:column;gap:9px;margin-top:12px">'+
        '<div style="display:flex;gap:14px;align-items:flex-start;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff"><span style="font-family:var(--font-display);font-weight:700;font-size:24px;color:var(--k08);flex:none;width:30px">C</span><div><strong>Context</strong> – gib zusätzliche Hintergrundinfos, damit die KI versteht, worum es geht.</div></div>'+
        '<div style="display:flex;gap:14px;align-items:flex-start;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff"><span style="font-family:var(--font-display);font-weight:700;font-size:24px;color:var(--k08);flex:none;width:30px">R</span><div><strong>Role</strong> – weise der KI eine Rolle zu, für eine passendere Antwort.</div></div>'+
@@ -711,7 +711,7 @@ const CONTENT={
        '<div style="display:flex;gap:14px;align-items:flex-start;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff"><span style="font-family:var(--font-display);font-weight:700;font-size:24px;color:var(--k08);flex:none;width:30px">F</span><div><strong>Format</strong> – sag, in welcher Form die Antwort kommen soll (Liste, Tabelle, kurzer Text …).</div></div>'+
        '<div style="display:flex;gap:14px;align-items:flex-start;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff"><span style="font-family:var(--font-display);font-weight:700;font-size:24px;color:var(--k08);flex:none;width:30px">T</span><div><strong>Task</strong> – gib eine klare Aufgabe mit Aktionswort (z. B. „vergleiche", „fasse zusammen").</div></div>'+
        '</div><p style="margin-top:12px;font-size:12px;color:var(--muted)">CRAFT-Framework nach Vera Cubero, übersetzt/gekürzt von <a href="https://joschafalck.de/prompting-verstehen/" target="_blank" rel="noopener">Joscha Falck</a> · Lizenz CC BY-NC-SA 4.0.</p>',
-           en:'<p>In Grade 6 you already learned: clear prompts with context work better. <strong>CRAFT</strong> gives you five concrete levers for that:</p>'+
+           en:'<p>You already know: clear prompts with context lead to better answers. <strong>CRAFT</strong> gives you five concrete levers for that:</p>'+
        '<div style="display:flex;flex-direction:column;gap:9px;margin-top:12px">'+
        '<div style="display:flex;gap:14px;align-items:flex-start;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff"><span style="font-family:var(--font-display);font-weight:700;font-size:24px;color:var(--k08);flex:none;width:30px">C</span><div><strong>Context</strong> – give extra background so the AI understands what it is about.</div></div>'+
        '<div style="display:flex;gap:14px;align-items:flex-start;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff"><span style="font-family:var(--font-display);font-weight:700;font-size:24px;color:var(--k08);flex:none;width:30px">R</span><div><strong>Role</strong> – assign the AI a role for a more fitting answer.</div></div>'+
@@ -806,8 +806,8 @@ const CONTENT={
   ]},
   {id:'K08-M5',icon:'✨',komp:'A',niveau:'III',title:{de:'Gemini kennenlernen',en:'Getting to know Gemini'},tasks:[
     {type:'info',title:{de:'Bevor du startest',en:'Before you start'},
-     body:{de:'<p>Melde dich bei Gemini für den Unterricht <strong>immer mit deinem GSIS-Schulaccount</strong> an – nicht mit einem privaten Google-Konto.</p><p>Über das Schulprofil (Google Workspace for Education) werden deine Eingaben <strong>nicht zum Training</strong> der KI-Modelle verwendet.</p><p><strong>Trotzdem</strong> gilt weiterhin, was du in Klasse 8 schon gelernt hast: Gib niemals private Daten ein – auch nicht über den Schulaccount.</p>',
-           en:'<p>Always log in to Gemini for schoolwork <strong>with your GSIS school account</strong> – not a private Google account.</p><p>Through the school profile (Google Workspace for Education), your input is <strong>not used to train</strong> the AI models.</p><p><strong>Even so</strong>, what you already learned in Grade 8 still applies: never enter private data – not even through the school account.</p>'}},
+     body:{de:'<p>Melde dich bei Gemini für den Unterricht <strong>immer mit deinem GSIS-Schulaccount</strong> an – nicht mit einem privaten Google-Konto.</p><p>Über das Schulprofil (Google Workspace for Education) werden deine Eingaben <strong>nicht zum Training</strong> der KI-Modelle verwendet.</p><p><strong>Trotzdem</strong> gilt weiterhin, was du im Modul „Grenzen, Risiken & Datenschutz“ gelernt hast: Gib niemals private Daten ein – auch nicht über den Schulaccount.</p>',
+           en:'<p>Always log in to Gemini for schoolwork <strong>with your GSIS school account</strong> – not a private Google account.</p><p>Through the school profile (Google Workspace for Education), your input is <strong>not used to train</strong> the AI models.</p><p><strong>Even so</strong>, what you learned in the module “Limits, risks & data protection” still applies: never enter private data – not even through the school account.</p>'}},
     {type:'info',title:{de:'Gemini – ab jetzt für dich freigegeben',en:'Gemini – now unlocked for you'},
      body:{de:'<p><strong>Gemini</strong> ist der KI-Assistent von Google. Ab Klasse 8 darfst du ihn an der GSIS für den Unterricht nutzen – deshalb schauen wir uns kurz an, wie er aufgebaut ist.</p>'+
        '<div style="border:1.5px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;margin-top:12px">'+
@@ -889,7 +889,7 @@ const CONTENT={
      options:[{de:'Nein – die Nutzung selbst war erlaubt, aber ohne Angabe/Kennzeichnung ist es trotzdem ein Verstoß.',en:'No – the use itself was allowed, but without disclosure/labelling it is still a violation.'},
               {de:'Ja, weil KI-Nutzung bei dieser Aufgabe grundsätzlich erlaubt war.',en:'Yes, because AI use was fundamentally allowed for this task.'},
               {de:'Nein, aber nur weil er ein Bild statt eines Textes erzeugt hat.',en:'No, but only because he generated an image instead of a text.'}],
-     correct:0,explain:{de:'Erlaubnis zur Nutzung und Pflicht zur Kennzeichnung sind zwei getrennte Dinge. Jede Stufe der GSIS-Skala verlangt eine Offenlegung – wer die vergisst, verstößt gegen die Regeln, selbst wenn die KI-Nutzung an sich okay war.',en:'Permission to use AI and the duty to disclose it are two separate things. Every level of the GSIS scale requires disclosure – forgetting it breaks the rules, even if the AI use itself was fine.'}},
+     correct:0,explain:{de:'Erlaubnis zur Nutzung und Pflicht zur Kennzeichnung sind zwei getrennte Dinge. Jede Stufe der GSIS-Skala, bei der KI genutzt wird (1–4), verlangt eine Offenlegung – wer die vergisst, verstößt gegen die Regeln, selbst wenn die KI-Nutzung an sich okay war.',en:'Permission to use AI and the duty to disclose it are two separate things. Every level of the GSIS scale where AI is used (1–4) requires disclosure – forgetting it breaks the rules, even if the AI use itself was fine.'}},
     {type:'reflect',q:{de:'Wähle eine der fünf Situationen aus, bei der du dir zuerst nicht sicher warst. Begründe in 2–3 Sätzen, warum du dich am Ende so entschieden hast.',en:'Pick one of the five situations where you were unsure at first. Explain in 2–3 sentences why you decided the way you did in the end.'},
      placeholder:{de:'Situation … / meine Entscheidung … / Begründung …',en:'Situation … / my decision … / reasoning …'},prod:true}
   ]}
@@ -1348,18 +1348,18 @@ const EXAM={
             {de:'Damit es länger aussieht',en:'To make it look longer'},{de:'Aus keinem Grund',en:'For no reason'}],
    correct:0,explain:{de:'Transparenz ist fair und zeigt deine Leistung.',en:'Transparency is fair and shows your work.'}},
   {type:'info',group:'k08-sara',title:{de:'Fallstudie: Saras Bio-Hausaufgabe',en:'Case study: Sara\'s biology homework'},
-   body:{de:'<p>Für eine Bio-Hausaufgabe ist Stufe 2 erlaubt: „KI-gestützte Bearbeitung". Sara fragt Gemini nach einer Erklärung zur Fotosynthese und bekommt eine Antwort, die gut klingt.</p>',
-         en:'<p>For a biology homework, Level 2 is allowed: "AI-assisted editing". Sara asks Gemini to explain photosynthesis and gets an answer that sounds good.</p>'}},
+   body:{de:'<p>Für eine Bio-Hausaufgabe ist Stufe 4 erlaubt: „Volle KI-Nutzung unter menschlicher Aufsicht". Sara fragt Gemini nach einer Erklärung zur Fotosynthese und bekommt eine Antwort, die gut klingt.</p>',
+         en:'<p>For a biology homework, Level 4 is allowed: "Full AI use under human oversight". Sara asks Gemini to explain photosynthesis and gets an answer that sounds good.</p>'}},
   {type:'quiz',group:'k08-sara',q:{de:'Sara ist unsicher, ob die Erklärung wirklich stimmt. Was macht sie am besten?',en:'Sara is unsure whether the explanation is really correct. What is best for her to do?'},
    options:[{de:'Die Erklärung mit ihrem Lehrbuch oder einer zweiten Quelle abgleichen',en:'Cross-check the explanation with her textbook or a second source'},
             {de:'Sie trotzdem übernehmen, weil sie gut klingt',en:'Use it anyway because it sounds good'},{de:'Gemini fragen, ob sie sich sicher ist',en:'Ask Gemini if it is sure'}],
    correct:0,explain:{de:'Eine unabhängige Quelle zeigt, ob die Erklärung stimmt.',en:'An independent source shows whether the explanation is correct.'}},
-  {type:'multi',group:'k08-sara',q:{de:'Was wäre für Sara laut Stufe 2 in Ordnung? (Mehrere)',en:'What would be okay for Sara under Level 2? (Several)'},
+  {type:'multi',group:'k08-sara',q:{de:'Was wäre für Sara laut Stufe 4 in Ordnung? (Mehrere)',en:'What would be okay for Sara under Level 4? (Several)'},
    options:[{de:'Geminis Erklärung als Ausgangspunkt nutzen und in eigenen Worten aufschreiben',en:'Use Gemini\'s explanation as a starting point and write it in her own words'},
             {de:'Ihre volle Adresse in den Chat eingeben, damit die Antwort persönlicher wird',en:'Enter her full home address in the chat to make the answer more personal'},
             {de:'Den Einsatz von Gemini bei der Abgabe kennzeichnen',en:'Disclose the use of Gemini when submitting'},
             {de:'Den Text unverändert kopieren, ohne ihn zu kennzeichnen',en:'Copy the text unchanged, without disclosing it'}],
-   correct:[0,2],explain:{de:'Als Ausgangspunkt nutzen und kennzeichnen ist in Ordnung – private Daten eingeben und unkenntlich gemacht kopieren sind es nicht.',en:'Using it as a starting point and disclosing it is fine – entering private data and copying it undisclosed are not.'}},
+   correct:[0,2],explain:{de:'Stufe 4 erlaubt, sich Grundlagen von KI erklären zu lassen – Sara bleibt aber verantwortlich: prüfen, in eigenen Worten schreiben und den KI-Einsatz angeben (Prompts, Tool). Private Daten eingeben und ungekennzeichnet kopieren sind nie in Ordnung. Achtung: Bei Stufe 2 wäre schon die KI-Erklärung selbst nicht erlaubt – dort darf KI nur deinen eigenen Text sprachlich verbessern.',en:'Level 4 allows having AI explain basic concepts – but Sara stays responsible: check it, write in her own words and disclose the AI use (prompts, tool). Entering private data and copying without disclosure are never okay. Note: under Level 2 the AI explanation itself would not be allowed – there AI may only improve the language of your own text.'}},
   {type:'info',group:'k08-craft',title:{de:'CRAFT-Check in der Prüfung',en:'CRAFT check in the exam'},
    body:{de:'<p>Schau dir diesen Prompt an: <em>„Erklär mir was zu Erneuerbaren Energien."</em></p>',en:'<p>Look at this prompt: <em>"Explain something about renewable energy."</em></p>'}},
   {type:'multi',group:'k08-craft',q:{de:'Welche CRAFT-Elemente fehlen in diesem Prompt am deutlichsten? (Mehrere)',en:'Which CRAFT elements are most clearly missing from this prompt? (Several)'},
@@ -1371,7 +1371,7 @@ const EXAM={
   {type:'order',group:'k08-craft',q:{de:'Bringe die CRAFT-Buchstaben in die richtige Reihenfolge des Merkworts.',en:'Put the CRAFT letters in the correct order of the mnemonic.'},
    items:[{text:{de:'Context',en:'Context'}},{text:{de:'Role',en:'Role'}},{text:{de:'Audience',en:'Audience'}},{text:{de:'Format',en:'Format'}},{text:{de:'Task',en:'Task'}}],
    explain:{de:'C-R-A-F-T: Context, Role, Audience, Format, Task.',en:'C-R-A-F-T: Context, Role, Audience, Format, Task.'}},
-  {type:'promptcheck',graded:true,minHits:4,q:{de:'Verbessere diesen Prompt mit CRAFT: „Erklär mir was zu Erneuerbaren Energien." Schreib deinen neuen Prompt hier hinein und lass ihn prüfen.',en:'Improve this prompt using CRAFT: "Explain something about renewable energy." Write your new prompt here and have it checked.'},
+  {type:'promptcheck',group:'k08-craft',graded:true,minHits:4,q:{de:'Verbessere diesen Prompt mit CRAFT: „Erklär mir was zu Erneuerbaren Energien." Schreib deinen neuen Prompt hier hinein und lass ihn prüfen.',en:'Improve this prompt using CRAFT: "Explain something about renewable energy." Write your new prompt here and have it checked.'},
    placeholder:{de:'Dein verbesserter CRAFT-Prompt …',en:'Your improved CRAFT prompt …'},
    explain:{de:'Für die Prüfung zählt dieser Baustein als bestanden, wenn dein Prompt mindestens 4 von 5 CRAFT-Elemente enthält.',en:'For the exam, this component counts as passed if your prompt contains at least 4 of the 5 CRAFT elements.'}}
  ],
@@ -1490,6 +1490,9 @@ function gradeComplete(g){const m=modulesOf(g);return m.length>0&&m.every(x=>STA
 function geminiEligible(){return['K05','K06','K07','K08'].every(g=>STATE.fuehrerschein[g]);}
 function gradeProgress(g){const m=modulesOf(g);if(!m.length)return 0;return Math.round(m.filter(x=>STATE.done[x.id]).length/m.length*100);}
 function isUnlocked(g){if(g==='OB')return STATE.teacher||STATE.seniorUnlocked;return STATE.teacher||STATE.unlocked.includes(g);}
+/* Mischt eine Kopie des Arrays (Fisher-Yates). Wird genutzt, damit die richtige
+   Antwort bei Quiz/Mehrfachauswahl nicht immer an erster Stelle steht. */
+function shuffled(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 /* ===== 7) Router ===== */
 let CURRENT={grade:null,module:null,exam:false};
 const view=()=>document.getElementById('view');
@@ -1621,21 +1624,21 @@ const RENDERERS={
    ${taskFoot(t('skipInfo')+' →',false)}`;bindPrimary(()=>advance());},
  quiz(h,task){let ch=null,locked=false;
    h.innerHTML=`<div class="ttype">❓ Quiz</div><h3>${tx(task.q)}</h3>
-     <div class="opts">${task.options.map((o,i)=>`<button class="opt" data-i="${i}"><span class="mark"></span><span>${tx(o)}</span></button>`).join('')}</div>
+     <div class="opts">${shuffled(task.options.map((o,i)=>({o,i}))).map(({o,i})=>`<button class="opt" data-i="${i}"><span class="mark"></span><span>${tx(o)}</span></button>`).join('')}</div>
      ${feedbackEl()}${taskFoot(t('check'))}`;
    h.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(locked)return;h.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');ch=+b.dataset.i;});
    bindPrimary(()=>{if(ch===null)return toast(L()==='de'?'Bitte wähle eine Antwort':'Please pick an answer');if(locked)return advance();locked=true;
-     h.querySelectorAll('.opt').forEach((x,i)=>{x.classList.add('locked');
+     h.querySelectorAll('.opt').forEach(x=>{const i=+x.dataset.i;x.classList.add('locked');
        if(i===task.correct){x.classList.add('correct');x.querySelector('.mark').textContent='✓';}
        else if(i===ch){x.classList.add('wrong');x.querySelector('.mark').textContent='✗';}});
      const ok=ch===task.correct;scoreTask(ok,task);showFeedback(ok,tx(task.explain||{de:'',en:''}));document.getElementById('primaryBtn').textContent=t('next')+' →';});},
  multi(h,task){let ch=new Set(),locked=false;
    h.innerHTML=`<div class="ttype">☑️ ${L()==='de'?'Mehrfachauswahl':'Multiple select'}</div><h3>${tx(task.q)}</h3>
-     <div class="opts">${task.options.map((o,i)=>`<button class="opt" data-i="${i}"><span class="mark"></span><span>${tx(o)}</span></button>`).join('')}</div>
+     <div class="opts">${shuffled(task.options.map((o,i)=>({o,i}))).map(({o,i})=>`<button class="opt" data-i="${i}"><span class="mark"></span><span>${tx(o)}</span></button>`).join('')}</div>
      ${feedbackEl()}${taskFoot(t('check'))}`;
    h.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(locked)return;const i=+b.dataset.i;if(ch.has(i)){ch.delete(i);b.classList.remove('sel');}else{ch.add(i);b.classList.add('sel');}});
    bindPrimary(()=>{if(locked)return advance();if(!ch.size)return toast(L()==='de'?'Bitte wähle aus':'Please select');locked=true;
-     const cor=new Set(task.correct);h.querySelectorAll('.opt').forEach((x,i)=>{x.classList.add('locked');
+     const cor=new Set(task.correct);h.querySelectorAll('.opt').forEach(x=>{const i=+x.dataset.i;x.classList.add('locked');
        if(cor.has(i)){x.classList.add('correct');x.querySelector('.mark').textContent='✓';}
        else if(ch.has(i)){x.classList.add('wrong');x.querySelector('.mark').textContent='✗';}});
      const ok=ch.size===cor.size&&[...ch].every(i=>cor.has(i));scoreTask(ok,task);showFeedback(ok,tx(task.explain||{de:'',en:''}));document.getElementById('primaryBtn').textContent=t('next')+' →';});},
@@ -1702,14 +1705,16 @@ const RENDERERS={
      ${feedbackEl()}${taskFoot(t('check'))}`;
    bindPrimary(()=>{const raw=document.getElementById('inpAns').value.trim();if(!raw)return toast(L()==='de'?'Bitte etwas eingeben':'Please enter something');
      if(locked)return advance();locked=true;
-     const norm=s=>s.replace(/\D/g,'');const ok=task.accept.some(a=>norm(a)===norm(raw));
+     /* Zahlwörter (null–zwölf / zero–twelve) werden in Ziffern umgewandelt, damit „vier" als 4 zählt. */
+     const NUMW={null:0,eins:1,ein:1,eine:1,zwei:2,drei:3,vier:4,fünf:5,sechs:6,sieben:7,acht:8,neun:9,zehn:10,elf:11,zwölf:12,zero:0,one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10,eleven:11,twelve:12};
+     const norm=s=>s.toLowerCase().replace(/[a-zäöüß]+/g,w=>w in NUMW?String(NUMW[w]):'').replace(/\D/g,'');const ok=task.accept.some(a=>norm(a)===norm(raw));
      const inp=document.getElementById('inpAns');inp.disabled=true;inp.classList.add(ok?'ok':'no');
      scoreTask(ok,task);showFeedback(ok,tx(task.explain||{de:'',en:''}));document.getElementById('primaryBtn').textContent=t('next')+' →';});},
  reflect(h,task){const key='reflect_'+(RUN.moduleId||RUN.grade)+'_'+RUN.idx,prev=Store.get(key)||'';
    h.innerHTML=`<div class="ttype">💬 ${tx(KOMP.R)}${task.prod?' · '+(L()==='de'?'Einreichung':'Submission'):''}</div><h3>${tx(task.q)}</h3>
      <div class="reflect"><textarea id="refl" placeholder="${tx(task.placeholder||{de:'',en:''})}">${prev}</textarea><div class="hint">${t('reflectHint')}</div></div>
      ${taskFoot(t('submitWork')+' →',false)}`;
-   bindPrimary(()=>{const v=document.getElementById('refl').value.trim();if(v.length<3)return toast(L()==='de'?'Schreib kurz etwas':'Write something short');Store.set(key,v);toast(t('saved'));advance();});}
+   bindPrimary(()=>{const v=document.getElementById('refl').value.trim();if(v.split(/\s+/).filter(w=>w.length>1).length<5)return toast(L()==='de'?'Schreib mindestens einen ganzen Satz (5+ Wörter)':'Write at least one full sentence (5+ words)');Store.set(key,v);toast(t('saved'));advance();});}
  ,
  /* Reihenfolge-Aufgabe: Schritte liegen in task.items in der RICHTIGEN Reihenfolge
     vor, werden aber gemischt angezeigt. Schüler:innen klicken sie in der Reihenfolge
@@ -1741,15 +1746,22 @@ const RENDERERS={
    bindPrimary(()=>{const raw=document.getElementById('pcInput').value.trim();
      if(!raw)return toast(L()==='de'?'Schreib zuerst deinen Prompt':'Write your prompt first');
      if(checked)return advance();checked=true;const low=raw.toLowerCase();
+     /* (?<![a-zäöüß]) statt \b, weil \b in JavaScript Umlaute nicht als Buchstaben kennt. */
+     const B='(?<![a-zäöüß])';
+     const sentences=raw.split(/[.!?\n]/).map(x=>x.trim()).filter(x=>x.split(/\s+/).length>=4);
      const letters=[
-       {k:'C',name:{de:'Context',en:'Context'},hit:/weil|damit|hintergrund|kontext|es geht um|zum thema|because|context/.test(low)||raw.split(/[.!?]/).filter(s=>s.trim()).length>=2},
-       {k:'R',name:{de:'Role',en:'Role'},hit:/\bals\b[^.!?]{0,25}(experte|lehrer|coach|profi|autor|wissenschaftler|journalist|trainer|berater|assistent)|du bist|agiere als|im stil von|as an? \w+/.test(low)},
-       {k:'A',name:{de:'Audience',en:'Audience'},hit:/für (kinder|erwachsene|schüler|anfänger|profis|eltern|jugendliche|einsteiger)|zielgruppe|publikum|verständlich für|for (kids|beginners|adults|students)/.test(low)},
-       {k:'F',name:{de:'Format',en:'Format'},hit:/liste|tabelle|stichpunkte|absatz|in form von|als tabelle|maximal \d+|in \d+ (wörtern|sätzen|worten)|kurzer text|kurze antwort|bullet|table/.test(low)},
-       {k:'T',name:{de:'Task',en:'Task'},hit:/\b(schreibe|erkläre|vergleiche|fasse zusammen|erstelle|liste auf|analysiere|übersetze|gestalte|entwerfe|beschreibe|nenne|write|explain|compare|summarise|summarize|create|list|analyse|analyze|design)\b/.test(low)}
+       {k:'C',name:{de:'Context',en:'Context'},hit:new RegExp('weil|damit|hintergrund|es geht um|zum thema|thema ist|für (ein|eine|mein|meine|unser|unsere)[^.!?]{0,15}(referat|präsentation|hausaufgabe|projekt|aufsatz|test|arbeit|unterricht)|ich (muss|soll|schreibe|halte|bereite|lerne)|because|context|i (need|have to|am writing|am preparing)').test(low)||sentences.length>=2},
+       {k:'R',name:{de:'Role',en:'Role'},hit:new RegExp(B+'als'+B+'[^.!?]{0,25}(experte|expertin|lehrer|coach|profi|autor|wissenschaftler|journalist|trainer|berater|assistent|historiker|tutor)|du bist|sei (ein|eine)'+B+'|agiere als|tu so,? als|stell dir vor,? du bist|im stil von|you are|act as|as an? \\w+').test(low)},
+       {k:'A',name:{de:'Audience',en:'Audience'},hit:new RegExp('für (kinder|erwachsene|schüler|anfänger|profis|eltern|jugendliche|einsteiger|laien|meine|unsere|die|eine|\\d)|zielgruppe|publikum|verständlich für|altersgerecht|\\d+[- ]?jährige|klässler|klassenstufe|(\\d+\\.|meine|unsere) klasse|mitschüler|for (kids|beginners|adults|students|my|a|\\d)|year[- ]?\\d+|grade \\d+').test(low)},
+       {k:'F',name:{de:'Format',en:'Format'},hit:new RegExp('liste|tabelle|stichpunkt|absatz|absätze|in form von|übersicht|gliederung|maximal|höchstens|\\d+ (wörter|wörtern|sätze|sätzen|worte|worten|punkte|punkten|schritte|schritten|beispiele)|kurzer text|kurze antwort|kurz und|bullet|table|words|sentences|paragraph').test(low)},
+       {k:'T',name:{de:'Task',en:'Task'},hit:new RegExp(B+'(schreib|erklär|vergleich|fass\\w*[^.!?]{0,40}zusammen|zusammenfass|erstell|liste\\w* auf|analysier|übersetz|gestalt|entwirf|entwerf|beschreib|nenn|formulier|begründ|bewerte|sammle|finde|gib mir|hilf mir|write|explain|compare|summari[sz]e|create|list|analy[sz]e|design|describe|suggest|give me)').test(low)}
      ];
+     const words=raw.split(/\s+/).filter(Boolean).length;
+     /* Unter 12 Wörtern ist es kein echter Prompt, sondern eine Stichwortliste – dann zählen keine Treffer. */
+     const tooShort=words<12;if(tooShort)letters.forEach(x=>x.hit=false);
      const hitCount=letters.filter(x=>x.hit).length;
      document.getElementById('pcResult').innerHTML=letters.map(x=>`<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:6px;background:${x.hit?'#eafbf1':'#fff'}"><span style="font-size:16px">${x.hit?'✅':'⭕'}</span><b style="font-family:var(--font-display);width:20px">${x.k}</b><span>${tx(x.name)}</span></div>`).join('')+
+       (tooShort?`<p style="font-size:13px;color:var(--bad,#C0563E);margin-top:8px">${L()==='de'?'Dein Prompt ist zu kurz (unter 12 Wörtern). Schreib ganze Sätze statt nur Stichwörter.':'Your prompt is too short (under 12 words). Write full sentences, not just keywords.'}</p>`:'')+
        (task.graded?'':`<p style="font-size:12px;color:var(--muted);margin-top:8px">${L()==='de'?`${hitCount} von 5 CRAFT-Elementen gefunden. Das ist ein einfacher Baustein-Check anhand von Signalwörtern (keine echte KI) – er ersetzt nicht dein eigenes Urteil.`:`${hitCount} of 5 CRAFT elements found. This is a simple building-block check based on signal words (not real AI) – it does not replace your own judgement.`}</p>`);
      if(task.graded){const min=task.minHits||4,ok=hitCount>=min;
        scoreTask(ok,task);
