@@ -124,6 +124,22 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   (Mata v. Avianca, Google-AI-Overview-Fehler 2024, UN-Bevölkerungsdaten 2023,
   Gemini-Deep-Research-Funktionsweise). Damit ist der große Umbau (K05–K10)
   abgeschlossen.
+- **K08-Test-Fixes** (externer Agenten-Testlauf, in dieser Session gegengeprüft und
+  übernommen): `shuffled()`-Helper (Fisher-Yates) mischt jetzt die Antwortreihenfolge
+  bei `quiz`/`multi` — vorher stand die richtige Antwort immer an Position 1 im Array
+  UND in der Anzeige, jetzt nur noch im Array (Scoring läuft über `data-i`, nicht mehr
+  über DOM-Position). `promptcheck`: `(?<![a-zäöüß])` statt `\b` (JS-`\b` kennt Umlaute
+  nicht als Wortzeichen), natürlichere Signalwort-Muster, Mindestlänge 12 Wörter gegen
+  Stichwort-Salat. `input`: Zahlwörter null–zwölf/zero–twelve werden vor dem
+  Ziffern-Vergleich umgewandelt, damit „vier" als 4 zählt. `reflect`: ehrlicherer
+  Speicher-Hinweis (lokal aufs Gerät, nicht automatisch für die Lehrkraft sichtbar –
+  passend zum echten Datenschutzmodell der App) + echte Mindestlänge (5+ Wörter statt
+  3 Zeichen). EXAM.K08 „Sara"-Fallstudie korrigiert von Stufe 2 auf Stufe 4 (eine KI-
+  Erklärung ist neue Inhaltserstellung, kein sprachliches Gegenlesen wie bei Stufe 2);
+  der `promptcheck`-Baustein bekam sein fehlendes `group:'k08-craft'`, damit er beim
+  Mischen bei seiner Fallstudie bleibt. K08-M6 Jonas-Erklärung präzisiert: Offenlegung
+  gilt für Stufe 1–4 (bei denen KI genutzt wird), nicht für Stufe 0. Startseite nennt
+  jetzt korrekt Klassen 5–10 (war noch auf 5–9 stehengeblieben).
 - K08-M7 „Prompt Engineering mit CRAFT": im Modul-Array bewusst an Position 2 (direkt
   nach der Auffrischung) eingefügt, hat aber die ID `K08-M7` behalten statt die
   bestehenden Module M2–M6 umzunummerieren — sonst hätte das bereits gespeicherten
