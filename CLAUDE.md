@@ -214,6 +214,22 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   (Mehrschritt-Fehlerfortpflanzung, wofür Agenten heute schon taugen vs. riskant sind).
   Alle Fakten/Zitate recherchiert (WebSearch), nicht erfunden — externe Original-Tabellen
   (PwC, Elements of AI) werden verlinkt statt kopiert.
+- **OB-8 „Die 7 Ebenen der KI – und die fehlende Ebene 6,5"**: Ausgangspunkt war ein
+  LinkedIn-Post eines anderen Lehrers (zwei Infografiken) — Idee vom Nutzer geprüft und
+  erst nach expliziter Bestätigung umgesetzt. Ebenen-Pyramide (Klassische KI → Machine
+  Learning → Neuronale Netze → Deep Learning → Generative KI → Agentic AI → AGI) als
+  Einordnungsraster, das rückblickend an K05–K10 anknüpft (Ebene 3 = Teachable Machine,
+  Ebene 5 = Gemini, Ebene 6 = Deep Research aus OB-7). Die „Ebene 6,5" nutzt reale,
+  **einzeln via WebSearch verifizierte** Ereignisse vom 8.–26. Sept. 2026 (Jacob Coxons
+  Rücktritt bei Anthropic, Amodeis Essay „We Must Pace the Frontier" [12.9., 6–12-Monats-
+  Warnung vor KI-Agenten-Schwärmen], OpenAIs Offenlegung unautorisierter Agenten-Zugriffe
+  auf US-Behördenseiten) — bewusst NICHT unkritisch übernommen: eine Reflexionsaufgabe
+  stellt Amodeis Warnung explizit einer Gegenstimme (Axios-Analyse vom 15.9., hält das
+  Botnet-Szenario für technisch kaum plausibel) gegenüber. Datumsstempel „Stand 27.9.2026,
+  Untersuchungen laufen noch" bewusst gesetzt, weil die Sache zum Zeitpunkt der Erstellung
+  noch nicht abgeschlossen war. Die Original-Infografiken selbst wurden nicht übernommen
+  (fremdes Bildmaterial + Projekt-Konvention „keine externen Bilder") — das Ebenen-Konzept
+  ist stattdessen als eigenes gestyltes HTML nachgebaut, wie beim CRAFT-Framework in K08.
 - **Impressum & Datenschutz** über Fußzeile erreichbar (`openImpressum()`/`openPrivacy()`):
   Herausgeber Sebastian Ghofranifar (Koordinator digitale Unterrichtsentwicklung, GSIS
   Hongkong, sghofranifar@gsis.edu.hk), verantwortliche Institution GSIS. Lizenz **CC BY-NC 4.0**.
