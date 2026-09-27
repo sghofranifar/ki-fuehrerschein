@@ -168,6 +168,22 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   `input`-Aufgabentyp — bewusst eine Aufgabe mit eindeutig berechenbarer Antwort
   (Zeitrechnung), nicht wörtlicher Abgleich von Geminis Antworttext, da KI-Ausgaben
   nicht deterministisch sind.
+- K08-M4 „Grenzen, Risiken & Datenschutz" erweitert: neue Sortier-Aufgabe mit sechs
+  ausformulierten Mini-Szenarien (statt Ein-Wort-Beispielen) — die letzten beiden
+  „KI stößt an Grenzen"-Items (aktuelle Lokalnachrichten kennen; private Info über
+  eine reale Person nennen) bereiten inhaltlich die beiden folgenden Hands-on-Tests
+  vor (Buchstaben zählen + neuer Datenumfang-Test). Neuer Test: Schüler:innen fragen
+  Gemini nach einer Info über eine **komplett frei erfundene** Person (Fantasiename/
+  -adresse, bewusst NICHT real, um keine echten Personen zu betreffen) — z. B. „Wie
+  heißt das Haustier meiner Nachbarin Frau Karin Vogelsang aus der Mondweg-Straße 12?".
+  Zeigt zuverlässig (unabhängig vom Modellstand) zwei Dinge zugleich: ob Gemini ehrlich
+  „weiß ich nicht" sagt oder halluziniert, UND dass KI nur auf öffentlich im Internet
+  gestandene Daten zugreifen kann, nicht auf privates Wissen über reale Menschen —
+  Reflexion fragt explizit nach beidem. Ersetzt einen früheren Entwurf mit einem
+  Google-Translate-Bias-Beispiel (Türkisch-Genus-Bias) — verworfen, weil Google diesen
+  Bias seit 2018 für mehrere Sprachpaare teilweise behoben hat und der heutige
+  Live-Zustand nicht zuverlässig vorhersehbar war; das Gemini-Beispiel funktioniert
+  dagegen unabhängig vom Modellstand immer als Lernmoment.
 - K08-M6 „KI im Unterricht: Zulässig oder nicht?": fünf Alltagsszenarien als Quiz —
   Entscheidung + Begründung stecken direkt in den Antwortoptionen (nicht Freitext),
   damit automatisch auswertbar; zwei Szenarien sind bewusst „knifflig": (1) Gegenintuitiv
