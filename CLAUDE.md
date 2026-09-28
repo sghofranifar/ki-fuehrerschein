@@ -55,7 +55,12 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   sind. Standardmäßig zählt er nicht zu `RUN.gradeable` (wie `info`/`reflect`) —
   reines Feedback-Tool, kein Auf-Bestehen-Gate. Mit `task.graded:true` (+ optional
   `task.minHits`, Standard 4) wird er zum Prüfungsbaustein: `scoreTask()` läuft dann
-  mit `hitCount>=minHits`, genutzt in EXAM.K08/K10 als „Prompt-Apparat".
+  mit `hitCount>=minHits`, genutzt in EXAM.K08/K10 als „Prompt-Apparat". Hat einen
+  eigenen „🔁 Erneut prüfen"-Button (nutzt den `resetBtn`-Slot aus `taskFoot`, aber mit
+  eigenem Label/Handler statt `bindReset()`): ruft nur die reine Heuristik-Funktion
+  `check()` auf und zeigt das Ergebnis an, ohne zu werten — beliebig oft wiederholbar,
+  während man den Prompt anpasst. Gewertet wird (bei `graded:true`) erst einmalig beim
+  finalen Klick auf „Weiter", mit dem zu dem Zeitpunkt aktuellen Textarea-Inhalt.
   `order` = Reihenfolge-Aufgabe: `task.items` liegt in der RICHTIGEN Reihenfolge vor,
   wird aber gemischt angezeigt; richtig, wenn Klick-Reihenfolge = Ursprungsindex.
   Für „Prozess-Aufgaben" in den Abschlusstests (z. B. Workflow-Phasen, CRAFT-Merkwort).
@@ -88,7 +93,10 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   Semantris (research.google.com/semantris, Wortbedeutung/Prompting), K07-M4 AutoDraw
   (autodraw.com, kreative Mensch-KI-Zusammenarbeit + Kennzeichnungsfrage), K08-M2
   Gemini-Ideen-Brainstorming mit Auswahl/Verwerfen, K08-M3 echte Feedback-Schleife mit
-  Gemini (eigener Text → Gemini-Feedback zu Aufbau/Verständlichkeit → Überarbeitung),
+  Gemini (eigener Text → Gemini-Feedback zu Aufbau/Verständlichkeit → Überarbeitung) —
+  Thema jetzt fest vorgegeben („Sollten Handys in der Schule erlaubt sein?", identisch
+  zu M2, damit Schüler:innen ihre M2-Ideen direkt weiterverwenden können, statt Zeit
+  mit einem neuen Thema zu verlieren),
   K08-M4 Gemini-Grenzen-Test (Buchstaben-Zählaufgabe „Verantwortungsbewusstsein" → 4×„s" —
   zeigt die Tokenisierungs-Schwäche von Sprachmodellen bei Buchstabenzählung an einem
   echten, nachvollziehbaren Beispiel), K08-M7 `promptcheck`-Aufgabe für den eigenen
@@ -159,15 +167,28 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   → Klassen umbenennen → Webcam → Hold to Record → Train Model → Preview), plus ein
   bewusster Schritt 8 (dritten, untrainierten Gegenstand zeigen), der in der
   Reflexionsfrage aufgegriffen wird.
+- **K08-Modulreihenfolge geändert**: `K08-M5` „Gemini kennenlernen" steht im Array jetzt
+  direkt nach `K08-M1` (Auffrischung), **vor** `K08-M7` (CRAFT) — vorher kam M5 ganz am
+  Ende, obwohl M7/M2/M3/M4 alle schon vorher live mit Gemini arbeiten ließen, ohne dass
+  Gemini je eingeführt wurde. Reine Array-Reihenfolge-Änderung (IDs/Fortschritt bleiben
+  unberührt, siehe K08-M7-Hinweis unten zu Array-Position vs. ID). M5s einleitender
+  Datenschutz-Text verweist jetzt **vorausschauend** auf „Grenzen, Risiken &
+  Datenschutz" (kommt jetzt danach) statt rückblickend darauf.
 - K08-M5 „Gemini kennenlernen": Ab Klasse 8 dürfen Schüler:innen Gemini nutzen, daher
   eigenes Modul mit stilisiertem (nicht echtem!) UI-Diagramm — **keine Screenshots**,
   Google ändert die Oberfläche zu oft, deshalb Inline-HTML/CSS-Mockup mit nummerierten
   Erklär-Punkten. Verlinkt die schulweite „GSIS KI-Ampel" (0–4-Skala, Google-Drive-PDF)
-  statt die Tabelle im Code zu duplizieren — die Schule pflegt das PDF unabhängig.
-  Letzte Aufgabe: echte Mini-Challenge auf gemini.google.com/app (neuer Tab) mit
-  `input`-Aufgabentyp — bewusst eine Aufgabe mit eindeutig berechenbarer Antwort
-  (Zeitrechnung), nicht wörtlicher Abgleich von Geminis Antworttext, da KI-Ausgaben
-  nicht deterministisch sind.
+  statt die Tabelle im Code zu duplizieren — die Schule pflegt das PDF unabhängig; die
+  Ampel-Reflexion nennt jetzt ein festes Beispiel (Bio-Plakat zum Wasserkreislauf,
+  Stufe 2), damit niemand Zeit mit der Suche nach einer eigenen Aufgabe verliert.
+  Mini-Challenge auf gemini.google.com/app (neuer Tab) mit `input`-Aufgabentyp —
+  bewusst eine Aufgabe mit eindeutig berechenbarer Antwort (Zeitrechnung), nicht
+  wörtlicher Abgleich von Geminis Antworttext, da KI-Ausgaben nicht deterministisch
+  sind. Direkt danach eine zweite Challenge, bei der die Zeitrechnung bewusst
+  kontrastiert wird: Schüler:innen fragen Gemini etwas sehr Lokales über ihr eigenes
+  Klassenzimmer/Schulgebäude (z. B. Fensterzahl, Stuhlfarbe) — dort haben sie echten
+  Wissensvorsprung, weil das nirgends im Internet steht; offene Reflexion statt
+  `input`, da die „richtige" Antwort je nach echtem Klassenzimmer variiert.
 - K08-M4 „Grenzen, Risiken & Datenschutz" erweitert: neue Sortier-Aufgabe mit sechs
   ausformulierten Mini-Szenarien (statt Ein-Wort-Beispielen) — die letzten beiden
   „KI stößt an Grenzen"-Items (aktuelle Lokalnachrichten kennen; private Info über

@@ -701,6 +701,68 @@ const CONTENT={
               {de:'Als komplett eigene Arbeit ausgeben',en:'Pass it off as fully my own work'},{de:'Quellen verschweigen',en:'Hide the sources'}],
      correct:0,explain:{de:'Kennzeichnen + prüfen = ehrliche Nutzung.',en:'Label + check = honest use.'}}
   ]},
+  {id:'K08-M5',icon:'✨',komp:'A',niveau:'III',title:{de:'Gemini kennenlernen',en:'Getting to know Gemini'},tasks:[
+    {type:'info',title:{de:'Bevor du startest',en:'Before you start'},
+     body:{de:'<p>Melde dich bei Gemini für den Unterricht <strong>immer mit deinem GSIS-Schulaccount</strong> an – nicht mit einem privaten Google-Konto.</p><p>Über das Schulprofil (Google Workspace for Education) werden deine Eingaben <strong>nicht zum Training</strong> der KI-Modelle verwendet.</p><p><strong>Trotzdem</strong> gilt, was du schon kennst: Gib niemals private Daten ein – auch nicht über den Schulaccount. Im Modul „Grenzen, Risiken & Datenschutz" gleich vertiefen wir das noch genauer.</p>',
+           en:'<p>Always log in to Gemini for schoolwork <strong>with your GSIS school account</strong> – not a private Google account.</p><p>Through the school profile (Google Workspace for Education), your input is <strong>not used to train</strong> the AI models.</p><p><strong>Even so</strong>, what you already know still applies: never enter private data – not even through the school account. We will go deeper into this soon in the module "Limits, risks & data protection".</p>'}},
+    {type:'info',title:{de:'Gemini – ab jetzt für dich freigegeben',en:'Gemini – now unlocked for you'},
+     body:{de:'<p><strong>Gemini</strong> ist der KI-Assistent von Google. Ab Klasse 8 darfst du ihn an der GSIS für den Unterricht nutzen – deshalb schauen wir uns kurz an, wie er aufgebaut ist.</p>'+
+       '<div style="border:1.5px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;margin-top:12px">'+
+       '<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);font-size:13px;font-weight:700;color:var(--muted)">'+
+       '<span>✨ Gemini</span><span style="margin-left:auto;background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:12px">① Modell: Fast ▾</span></div>'+
+       '<div style="padding:16px;font-size:13px;color:var(--muted);min-height:36px">④ Antwortbereich – hier erscheint die Antwort von Gemini.</div>'+
+       '<div style="display:flex;gap:8px;align-items:center;padding:10px 14px;border-top:1px solid var(--line)">'+
+       '<span style="background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:12px">➕ ② Extras</span>'+
+       '<span style="flex:1;border:1px solid var(--line);border-radius:20px;padding:6px 12px;font-size:13px;color:var(--muted)">③ Frag Gemini etwas …</span></div></div>'+
+       '<div style="margin-top:12px;font-size:13.5px;line-height:1.7">'+
+       '<p>① <strong>Modell-Auswahl</strong> – Fast, Thinking oder Pro (mehr dazu gleich).</p>'+
+       '<p>② <strong>Extras</strong> – z. B. Bild hochladen, Deep Research (recherchiert selbstständig), Canvas (erstellt Dokumente/kleine Programme).</p>'+
+       '<p>③ <strong>Eingabefeld</strong> – hier tippst du deinen Prompt.</p>'+
+       '<p>④ <strong>Antwortbereich</strong> – die Antwort, die du wie immer prüfen solltest.</p></div>',
+       en:'<p><strong>Gemini</strong> is Google\'s AI assistant. From Grade 8 you may use it for schoolwork at GSIS – so let\'s look at how it is laid out.</p>'+
+       '<div style="border:1.5px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;margin-top:12px">'+
+       '<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);font-size:13px;font-weight:700;color:var(--muted)">'+
+       '<span>✨ Gemini</span><span style="margin-left:auto;background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:12px">① Model: Fast ▾</span></div>'+
+       '<div style="padding:16px;font-size:13px;color:var(--muted);min-height:36px">④ Response area – Gemini\'s answer appears here.</div>'+
+       '<div style="display:flex;gap:8px;align-items:center;padding:10px 14px;border-top:1px solid var(--line)">'+
+       '<span style="background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:12px">➕ ② Extras</span>'+
+       '<span style="flex:1;border:1px solid var(--line);border-radius:20px;padding:6px 12px;font-size:13px;color:var(--muted)">③ Ask Gemini something …</span></div></div>'+
+       '<div style="margin-top:12px;font-size:13.5px;line-height:1.7">'+
+       '<p>① <strong>Model picker</strong> – Fast, Thinking or Pro (more on this next).</p>'+
+       '<p>② <strong>Extras</strong> – e.g. uploading an image, Deep Research (researches on its own), Canvas (creates documents/small programs).</p>'+
+       '<p>③ <strong>Input field</strong> – this is where you type your prompt.</p>'+
+       '<p>④ <strong>Response area</strong> – the answer, which you should always check.</p></div>'}},
+    {type:'match',q:{de:'Welches Modell passt zu welcher Aufgabe?',en:'Which model fits which task?'},
+     pairs:[{left:{de:'Fast',en:'Fast'},right:{de:'schnelle, einfache Fragen im Alltag',en:'quick, simple everyday questions'}},
+            {left:{de:'Thinking',en:'Thinking'},right:{de:'knifflige Logik- oder Rechenaufgaben, bei denen Genauigkeit wichtiger ist als Tempo',en:'tricky logic or maths problems where accuracy matters more than speed'}},
+            {left:{de:'Pro',en:'Pro'},right:{de:'ein langes Dokument analysieren oder höchste Genauigkeit gefragt',en:'analysing a long document or when top accuracy is needed'}}]},
+    {type:'multi',q:{de:'Wie lässt sich Gemini sinnvoll im Unterricht einsetzen? (Mehrere)',en:'How can Gemini be used sensibly in class? (Several)'},
+     options:[{de:'Erste Ideen oder eine Gliederung für eine Arbeit erstellen lassen',en:'Getting first ideas or an outline for a piece of work'},
+              {de:'Verständnisfragen zu einem Thema stellen',en:'Asking questions to better understand a topic'},
+              {de:'Feedback zu einem eigenen Übungstext einholen',en:'Getting feedback on a practice text you wrote'},
+              {de:'Eine komplette bewertete Arbeit schreiben lassen und unverändert abgeben',en:'Having it write a whole graded assignment and submitting it unchanged'}],
+     correct:[0,1,2],explain:{de:'Ideen, Verständnisfragen und Feedback unterstützen dein Lernen. Eine ganze bewertete Arbeit unverändert abzugeben, ist keine eigene Leistung mehr.',en:'Ideas, questions and feedback support your learning. Submitting a whole graded assignment unchanged is no longer your own work.'}},
+    {type:'info',title:{de:'Wofür darf ich Gemini nutzen?',en:'What am I allowed to use Gemini for?'},
+     body:{de:'<p>Das hängt von der jeweiligen Aufgabe ab. GSIS hat dafür eine Skala von <strong>0</strong> (keine KI erlaubt) bis <strong>4</strong> (volle KI-Nutzung unter deiner eigenen Aufsicht und Verantwortung) – deine Lehrkraft sagt dir, welche Stufe für eine Aufgabe gilt.</p><p><a href="https://drive.google.com/file/d/13atktLu0TtHaTjkcqaVewYRJfTfROUvI/view?usp=sharing" target="_blank" rel="noopener">📄 GSIS KI-Ampel öffnen (PDF) ↗</a></p>',
+           en:'<p>This depends on the specific task. GSIS uses a scale from <strong>0</strong> (no AI allowed) to <strong>4</strong> (full AI use under your own supervision and responsibility) – your teacher will tell you which level applies to a task.</p><p><a href="https://drive.google.com/file/d/13atktLu0TtHaTjkcqaVewYRJfTfROUvI/view?usp=sharing" target="_blank" rel="noopener">📄 Open the GSIS AI traffic-light scale (PDF) ↗</a></p>'}},
+    {type:'reflect',q:{de:'Beispiel-Aufgabe: „Erstellt für Biologie ein Plakat über den Wasserkreislauf. Erlaubt ist Stufe 2 (KI-gestützte Bearbeitung)." Wie dürftest du Gemini dabei einsetzen? Nutze gern dieses Beispiel – oder, falls dir spontan eine eigene Aufgabe aus deinem Unterricht einfällt, auch die.',en:'Example task: "Create a poster about the water cycle for biology class. Level 2 (AI-assisted editing) is allowed." How would you be allowed to use Gemini for it? Feel free to use this example – or, if a task from your own lessons comes to mind, that one instead.'},
+     placeholder:{de:'Stufe 2 erlaubt z. B.: … / Nicht erlaubt wäre: …',en:'Level 2 allows e.g.: … / Not allowed would be: …'},prod:true},
+    {type:'info',title:{de:'Deine erste Gemini-Challenge',en:'Your first Gemini challenge'},
+     body:{de:'<p>Jetzt bist du dran! Öffne <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a> in einem neuen Tab (mit deinem GSIS-Schulaccount) und gib dort genau diesen Prompt ein:</p>'+
+       '<div class="infobox" style="font-style:italic">„Ein Zug fährt um 14:15 Uhr los und kommt nach 2 Stunden 47 Minuten an. Um wie viel Uhr kommt er an? Antworte nur mit der Uhrzeit im Format HH:MM."</div>'+
+       '<p style="margin-top:10px">Rechne das Ergebnis am besten kurz selbst nach, bevor du zurückkommst – du weißt ja: KI-Antworten immer prüfen!</p>',
+           en:'<p>Now it\'s your turn! Open <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a> in a new tab (with your GSIS school account) and enter exactly this prompt there:</p>'+
+       '<div class="infobox" style="font-style:italic">"A train leaves at 14:15 and arrives after 2 hours 47 minutes. What time does it arrive? Answer only with the time in HH:MM format."</div>'+
+       '<p style="margin-top:10px">Best to quickly work out the answer yourself too before you come back – you know the rule: always check AI answers!</p>'}},
+    {type:'input',q:{de:'Welche Uhrzeit hat Gemini ausgegeben (und deine eigene Rechnung ergeben)?',en:'What time did Gemini give you (and what did your own calculation give)?'},
+     hint:{de:'Uhrzeit im Format HH:MM',en:'Time in HH:MM format'},accept:['17:02'],
+     explain:{de:'14:15 Uhr + 2 Stunden 47 Minuten = 17:02 Uhr. Falls Gemini etwas anderes geliefert hat: gut, dass du nachgerechnet hast!',en:'14:15 + 2 hours 47 minutes = 17:02. If Gemini gave you something different: good that you checked!'}},
+    {type:'info',title:{de:'Jetzt eine Herausforderung, bei der DU im Vorteil bist',en:'Now a challenge where YOU have the advantage'},
+     body:{de:'<p>Die Zug-Aufgabe eben konnte Gemini leicht lösen – reine Rechenlogik steht überall im Internet. Aber Gemini kennt nur, was irgendwann öffentlich im Internet stand. Bei ganz konkretem, lokalem Alltagswissen über <strong>eure eigene Schule</strong> hat sie keine Chance.</p><p>Frag Gemini etwas ganz Bestimmtes über euer Klassenzimmer oder Schulgebäude, das sicher nirgends im Internet steht, z. B.: <em>„Wie viele Fenster hat unser Klassenzimmer an der GSIS?"</em> oder <em>„Welche Farbe haben die Stühle in unserem Klassenzimmer?"</em> oder <em>„Wie viele Schritte sind es von unserem Klassenzimmer bis zur Cafeteria?"</em> Schau selbst nach (oder du weißt es schon) und vergleiche mit Geminis Antwort.</p>',
+           en:'<p>The train task just now was easy for Gemini – pure calculation logic is all over the internet. But Gemini only knows what was at some point public on the internet. For very concrete, local everyday knowledge about <strong>your own school</strong>, it has no chance.</p><p>Ask Gemini something very specific about your classroom or school building that definitely is not on the internet anywhere, e.g.: <em>"How many windows does our classroom at GSIS have?"</em> or <em>"What colour are the chairs in our classroom?"</em> or <em>"How many steps is it from our classroom to the cafeteria?"</em> Check for yourself (or you already know) and compare with Gemini\'s answer.</p>'}},
+    {type:'reflect',q:{de:'Was hat Gemini geantwortet? Hat sie geraten, ehrlich zugegeben, dass sie es nicht wissen kann, oder sich etwas Falsches ausgedacht? Was zeigt dir dieser Unterschied zwischen „im Internet stehendem Wissen" und deinem eigenen Alltagswissen?',en:'What did Gemini answer? Did it guess, honestly admit it could not know, or make something wrong up? What does this difference between "knowledge that is on the internet" and your own everyday knowledge show you?'},
+     placeholder:{de:'Meine Frage: … / Geminis Antwort: … / Geraten/ehrlich/erfunden? … / Was das zeigt: …',en:'My question: … / Gemini\'s answer: … / Guessed/honest/made up? … / What this shows: …'},prod:true}
+  ]},
   {id:'K08-M7',icon:'🎯',komp:'A',niveau:'III',title:{de:'Prompt Engineering mit CRAFT',en:'Prompt engineering with CRAFT'},tasks:[
     {type:'info',title:{de:'Das CRAFT-Framework',en:'The CRAFT framework'},
      body:{de:'<p>Du weißt schon: Klare Prompts mit Kontext führen zu besseren Antworten. <strong>CRAFT</strong> gibt dir dafür fünf konkrete Stellschrauben:</p>'+
@@ -778,8 +840,8 @@ const CONTENT={
               {de:'Damit es schwieriger aussieht',en:'To make it look harder'},{de:'Aus keinem Grund',en:'For no reason'}],
      correct:0,explain:{de:'Transparenz zeigt, was du selbst geleistet hast.',en:'Transparency shows what you achieved yourself.'},prod:true},
     {type:'info',title:{de:'Jetzt du: eine Feedback-Schleife',en:'Now you: a feedback loop'},
-     body:{de:'<p>Schreibe zuerst <strong>3–4 eigene Sätze</strong> zu einem Thema deiner Wahl. Gib sie dann bei <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a> ein und bitte gezielt um Feedback zu <strong>Aufbau und Verständlichkeit</strong> (nicht um einen neuen Text!). Überarbeite deine Sätze danach selbst.</p>',
-           en:'<p>First write <strong>3–4 sentences of your own</strong> on a topic of your choice. Then enter them at <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a> and ask specifically for feedback on <strong>structure and clarity</strong> (not for a rewritten text!). Then revise your sentences yourself.</p>'}},
+     body:{de:'<p>Schreibe zuerst <strong>3–4 eigene Sätze</strong> zum Thema <strong>„Sollten Handys in der Schule erlaubt sein?"</strong> (nutze gern Ideen aus deinem vorherigen Modul). Gib sie dann bei <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a> ein und bitte gezielt um Feedback zu <strong>Aufbau und Verständlichkeit</strong> (nicht um einen neuen Text!). Überarbeite deine Sätze danach selbst.</p>',
+           en:'<p>First write <strong>3–4 sentences of your own</strong> on the topic <strong>"Should phones be allowed in school?"</strong> (feel free to reuse ideas from the previous module). Then enter them at <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a> and ask specifically for feedback on <strong>structure and clarity</strong> (not for a rewritten text!). Then revise your sentences yourself.</p>'}},
     {type:'reflect',q:{de:'Was hat Gemini konkret vorgeschlagen? Was hast du davon übernommen, was nicht – und warum?',en:'What did Gemini specifically suggest? What did you keep, what not – and why?'},
      placeholder:{de:'Vorschlag der KI: … / Übernommen: … / Nicht übernommen, weil: …',en:'AI suggestion: … / Kept: … / Not kept, because: …'},prod:true}
   ]},
@@ -816,63 +878,6 @@ const CONTENT={
            en:'<p>Gemini\'s "knowledge" only comes from text that was at some point public on the internet (plus, in some modes, live web search). Ordinary people\'s private lives usually are not part of that.</p><p>Think up a <strong>completely made-up</strong> person with a fantasy name and fantasy address (do <strong>not</strong> use real names or addresses of real people!) and ask Gemini something like: <em>"What is the name of my neighbour Mrs Karin Vogelsang\'s pet, from Mondweg-Straße 12?"</em></p>'}},
     {type:'reflect',q:{de:'Was hat Gemini geantwortet? Hat sie ehrlich gesagt, dass sie das nicht wissen kann – oder hat sie sich einfach etwas ausgedacht (halluziniert)? Und ganz grundsätzlich: Welche Art von Daten hat eine KI wie Gemini überhaupt für ihre Antworten zur Verfügung – und welche nicht?',en:'What did Gemini answer? Did it honestly say it could not know that – or did it just make something up (hallucinate)? And more fundamentally: what kind of data does an AI like Gemini actually have available for its answers – and what does it not have?'},
      placeholder:{de:'Geminis Antwort: … / Ehrlich zugegeben oder erfunden? … / Daten, die KI HAT: … / Daten, die KI NICHT hat: …',en:'Gemini\'s answer: … / Honestly admitted or made up? … / Data AI HAS: … / Data AI does NOT have: …'},prod:true}
-  ]},
-  {id:'K08-M5',icon:'✨',komp:'A',niveau:'III',title:{de:'Gemini kennenlernen',en:'Getting to know Gemini'},tasks:[
-    {type:'info',title:{de:'Bevor du startest',en:'Before you start'},
-     body:{de:'<p>Melde dich bei Gemini für den Unterricht <strong>immer mit deinem GSIS-Schulaccount</strong> an – nicht mit einem privaten Google-Konto.</p><p>Über das Schulprofil (Google Workspace for Education) werden deine Eingaben <strong>nicht zum Training</strong> der KI-Modelle verwendet.</p><p><strong>Trotzdem</strong> gilt weiterhin, was du im Modul „Grenzen, Risiken & Datenschutz“ gelernt hast: Gib niemals private Daten ein – auch nicht über den Schulaccount.</p>',
-           en:'<p>Always log in to Gemini for schoolwork <strong>with your GSIS school account</strong> – not a private Google account.</p><p>Through the school profile (Google Workspace for Education), your input is <strong>not used to train</strong> the AI models.</p><p><strong>Even so</strong>, what you learned in the module “Limits, risks & data protection” still applies: never enter private data – not even through the school account.</p>'}},
-    {type:'info',title:{de:'Gemini – ab jetzt für dich freigegeben',en:'Gemini – now unlocked for you'},
-     body:{de:'<p><strong>Gemini</strong> ist der KI-Assistent von Google. Ab Klasse 8 darfst du ihn an der GSIS für den Unterricht nutzen – deshalb schauen wir uns kurz an, wie er aufgebaut ist.</p>'+
-       '<div style="border:1.5px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;margin-top:12px">'+
-       '<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);font-size:13px;font-weight:700;color:var(--muted)">'+
-       '<span>✨ Gemini</span><span style="margin-left:auto;background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:12px">① Modell: Fast ▾</span></div>'+
-       '<div style="padding:16px;font-size:13px;color:var(--muted);min-height:36px">④ Antwortbereich – hier erscheint die Antwort von Gemini.</div>'+
-       '<div style="display:flex;gap:8px;align-items:center;padding:10px 14px;border-top:1px solid var(--line)">'+
-       '<span style="background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:12px">➕ ② Extras</span>'+
-       '<span style="flex:1;border:1px solid var(--line);border-radius:20px;padding:6px 12px;font-size:13px;color:var(--muted)">③ Frag Gemini etwas …</span></div></div>'+
-       '<div style="margin-top:12px;font-size:13.5px;line-height:1.7">'+
-       '<p>① <strong>Modell-Auswahl</strong> – Fast, Thinking oder Pro (mehr dazu gleich).</p>'+
-       '<p>② <strong>Extras</strong> – z. B. Bild hochladen, Deep Research (recherchiert selbstständig), Canvas (erstellt Dokumente/kleine Programme).</p>'+
-       '<p>③ <strong>Eingabefeld</strong> – hier tippst du deinen Prompt.</p>'+
-       '<p>④ <strong>Antwortbereich</strong> – die Antwort, die du wie immer prüfen solltest.</p></div>',
-       en:'<p><strong>Gemini</strong> is Google\'s AI assistant. From Grade 8 you may use it for schoolwork at GSIS – so let\'s look at how it is laid out.</p>'+
-       '<div style="border:1.5px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;margin-top:12px">'+
-       '<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);font-size:13px;font-weight:700;color:var(--muted)">'+
-       '<span>✨ Gemini</span><span style="margin-left:auto;background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:12px">① Model: Fast ▾</span></div>'+
-       '<div style="padding:16px;font-size:13px;color:var(--muted);min-height:36px">④ Response area – Gemini\'s answer appears here.</div>'+
-       '<div style="display:flex;gap:8px;align-items:center;padding:10px 14px;border-top:1px solid var(--line)">'+
-       '<span style="background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:12px">➕ ② Extras</span>'+
-       '<span style="flex:1;border:1px solid var(--line);border-radius:20px;padding:6px 12px;font-size:13px;color:var(--muted)">③ Ask Gemini something …</span></div></div>'+
-       '<div style="margin-top:12px;font-size:13.5px;line-height:1.7">'+
-       '<p>① <strong>Model picker</strong> – Fast, Thinking or Pro (more on this next).</p>'+
-       '<p>② <strong>Extras</strong> – e.g. uploading an image, Deep Research (researches on its own), Canvas (creates documents/small programs).</p>'+
-       '<p>③ <strong>Input field</strong> – this is where you type your prompt.</p>'+
-       '<p>④ <strong>Response area</strong> – the answer, which you should always check.</p></div>'}},
-    {type:'match',q:{de:'Welches Modell passt zu welcher Aufgabe?',en:'Which model fits which task?'},
-     pairs:[{left:{de:'Fast',en:'Fast'},right:{de:'schnelle, einfache Fragen im Alltag',en:'quick, simple everyday questions'}},
-            {left:{de:'Thinking',en:'Thinking'},right:{de:'knifflige Logik- oder Rechenaufgaben, bei denen Genauigkeit wichtiger ist als Tempo',en:'tricky logic or maths problems where accuracy matters more than speed'}},
-            {left:{de:'Pro',en:'Pro'},right:{de:'ein langes Dokument analysieren oder höchste Genauigkeit gefragt',en:'analysing a long document or when top accuracy is needed'}}]},
-    {type:'multi',q:{de:'Wie lässt sich Gemini sinnvoll im Unterricht einsetzen? (Mehrere)',en:'How can Gemini be used sensibly in class? (Several)'},
-     options:[{de:'Erste Ideen oder eine Gliederung für eine Arbeit erstellen lassen',en:'Getting first ideas or an outline for a piece of work'},
-              {de:'Verständnisfragen zu einem Thema stellen',en:'Asking questions to better understand a topic'},
-              {de:'Feedback zu einem eigenen Übungstext einholen',en:'Getting feedback on a practice text you wrote'},
-              {de:'Eine komplette bewertete Arbeit schreiben lassen und unverändert abgeben',en:'Having it write a whole graded assignment and submitting it unchanged'}],
-     correct:[0,1,2],explain:{de:'Ideen, Verständnisfragen und Feedback unterstützen dein Lernen. Eine ganze bewertete Arbeit unverändert abzugeben, ist keine eigene Leistung mehr.',en:'Ideas, questions and feedback support your learning. Submitting a whole graded assignment unchanged is no longer your own work.'}},
-    {type:'info',title:{de:'Wofür darf ich Gemini nutzen?',en:'What am I allowed to use Gemini for?'},
-     body:{de:'<p>Das hängt von der jeweiligen Aufgabe ab. GSIS hat dafür eine Skala von <strong>0</strong> (keine KI erlaubt) bis <strong>4</strong> (volle KI-Nutzung unter deiner eigenen Aufsicht und Verantwortung) – deine Lehrkraft sagt dir, welche Stufe für eine Aufgabe gilt.</p><p><a href="https://drive.google.com/file/d/13atktLu0TtHaTjkcqaVewYRJfTfROUvI/view?usp=sharing" target="_blank" rel="noopener">📄 GSIS KI-Ampel öffnen (PDF) ↗</a></p>',
-           en:'<p>This depends on the specific task. GSIS uses a scale from <strong>0</strong> (no AI allowed) to <strong>4</strong> (full AI use under your own supervision and responsibility) – your teacher will tell you which level applies to a task.</p><p><a href="https://drive.google.com/file/d/13atktLu0TtHaTjkcqaVewYRJfTfROUvI/view?usp=sharing" target="_blank" rel="noopener">📄 Open the GSIS AI traffic-light scale (PDF) ↗</a></p>'}},
-    {type:'reflect',q:{de:'Wähle eine Aufgabe aus deinem aktuellen Unterricht. Schau in der GSIS-KI-Skala nach: Welche Stufe (0–4) passt dazu, und wie dürftest du Gemini dabei einsetzen?',en:'Pick a task from your current lessons. Check the GSIS AI scale: which level (0–4) fits, and how would you be allowed to use Gemini for it?'},
-     placeholder:{de:'Aufgabe … / Stufe (0–4) … / erlaubte Nutzung …',en:'Task … / Level (0–4) … / allowed use …'},prod:true},
-    {type:'info',title:{de:'Deine erste Gemini-Challenge',en:'Your first Gemini challenge'},
-     body:{de:'<p>Jetzt bist du dran! Öffne <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a> in einem neuen Tab (mit deinem GSIS-Schulaccount) und gib dort genau diesen Prompt ein:</p>'+
-       '<div class="infobox" style="font-style:italic">„Ein Zug fährt um 14:15 Uhr los und kommt nach 2 Stunden 47 Minuten an. Um wie viel Uhr kommt er an? Antworte nur mit der Uhrzeit im Format HH:MM."</div>'+
-       '<p style="margin-top:10px">Rechne das Ergebnis am besten kurz selbst nach, bevor du zurückkommst – du weißt ja: KI-Antworten immer prüfen!</p>',
-           en:'<p>Now it\'s your turn! Open <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a> in a new tab (with your GSIS school account) and enter exactly this prompt there:</p>'+
-       '<div class="infobox" style="font-style:italic">"A train leaves at 14:15 and arrives after 2 hours 47 minutes. What time does it arrive? Answer only with the time in HH:MM format."</div>'+
-       '<p style="margin-top:10px">Best to quickly work out the answer yourself too before you come back – you know the rule: always check AI answers!</p>'}},
-    {type:'input',q:{de:'Welche Uhrzeit hat Gemini ausgegeben (und deine eigene Rechnung ergeben)?',en:'What time did Gemini give you (and what did your own calculation give)?'},
-     hint:{de:'Uhrzeit im Format HH:MM',en:'Time in HH:MM format'},accept:['17:02'],
-     explain:{de:'14:15 Uhr + 2 Stunden 47 Minuten = 17:02 Uhr. Falls Gemini etwas anderes geliefert hat: gut, dass du nachgerechnet hast!',en:'14:15 + 2 hours 47 minutes = 17:02. If Gemini gave you something different: good that you checked!'}}
   ]},
   {id:'K08-M6',icon:'🚦',komp:'R',niveau:'III',title:{de:'KI im Unterricht: Zulässig oder nicht?',en:'AI in class: allowed or not?'},tasks:[
     {type:'info',title:{de:'Fünf Situationen aus dem Schulalltag',en:'Five situations from everyday school life'},
@@ -1800,14 +1805,11 @@ const RENDERERS={
     im eigenen Prompt-Text (kein API-Aufruf, keine KI) – wichtig für Datenschutz
     und weil Hongkong den Zugriff auf manche KI-Dienste einschränkt. */
  promptcheck(h,task){let checked=false;
-   h.innerHTML=`<div class="ttype">🎯 ${L()==='de'?'Prompt-Checker':'Prompt checker'}</div><h3>${tx(task.q)}</h3>
-     ${task.body?`<div class="infobox">${tx(task.body)}</div>`:''}
-     <div class="reflect"><textarea id="pcInput" placeholder="${tx(task.placeholder||{de:'',en:''})}"></textarea></div>
-     <div id="pcResult"></div>
-     ${task.graded?feedbackEl():''}${taskFoot(t('check'))}`;
-   bindPrimary(()=>{const raw=document.getElementById('pcInput').value.trim();
-     if(!raw)return toast(L()==='de'?'Schreib zuerst deinen Prompt':'Write your prompt first');
-     if(checked)return advance();checked=true;const low=raw.toLowerCase();
+   /* Reine Heuristik-Funktion, ohne scoreTask-Aufruf – wird sowohl vom "Prüfen"-
+      Vorschau-Button (beliebig oft wiederholbar) als auch beim finalen "Weiter"
+      genutzt. So kann man den Prompt anpassen und beliebig oft neu prüfen, ohne
+      dass das (bei graded:true) den Punktestand mehrfach verändert. */
+   const check=(raw)=>{const low=raw.toLowerCase();
      /* (?<![a-zäöüß]) statt \b, weil \b in JavaScript Umlaute nicht als Buchstaben kennt. */
      const B='(?<![a-zäöüß])';
      const sentences=raw.split(/[.!?\n]/).map(x=>x.trim()).filter(x=>x.split(/\s+/).length>=4);
@@ -1821,13 +1823,27 @@ const RENDERERS={
      const words=raw.split(/\s+/).filter(Boolean).length;
      /* Unter 12 Wörtern ist es kein echter Prompt, sondern eine Stichwortliste – dann zählen keine Treffer. */
      const tooShort=words<12;if(tooShort)letters.forEach(x=>x.hit=false);
-     const hitCount=letters.filter(x=>x.hit).length;
+     return{letters,hitCount:letters.filter(x=>x.hit).length,tooShort};};
+   const renderResult=({letters,hitCount,tooShort})=>{
      document.getElementById('pcResult').innerHTML=letters.map(x=>`<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:6px;background:${x.hit?'#eafbf1':'#fff'}"><span style="font-size:16px">${x.hit?'✅':'⭕'}</span><b style="font-family:var(--font-display);width:20px">${x.k}</b><span>${tx(x.name)}</span></div>`).join('')+
        (tooShort?`<p style="font-size:13px;color:var(--bad,#C0563E);margin-top:8px">${L()==='de'?'Dein Prompt ist zu kurz (unter 12 Wörtern). Schreib ganze Sätze statt nur Stichwörter.':'Your prompt is too short (under 12 words). Write full sentences, not just keywords.'}</p>`:'')+
-       (task.graded?'':`<p style="font-size:12px;color:var(--muted);margin-top:8px">${L()==='de'?`${hitCount} von 5 CRAFT-Elementen gefunden. Das ist ein einfacher Baustein-Check anhand von Signalwörtern (keine echte KI) – er ersetzt nicht dein eigenes Urteil.`:`${hitCount} of 5 CRAFT elements found. This is a simple building-block check based on signal words (not real AI) – it does not replace your own judgement.`}</p>`);
-     if(task.graded){const min=task.minHits||4,ok=hitCount>=min;
+       (task.graded?'':`<p style="font-size:12px;color:var(--muted);margin-top:8px">${L()==='de'?`${hitCount} von 5 CRAFT-Elementen gefunden. Das ist ein einfacher Baustein-Check anhand von Signalwörtern (keine echte KI) – er ersetzt nicht dein eigenes Urteil.`:`${hitCount} of 5 CRAFT elements found. This is a simple building-block check based on signal words (not real AI) – it does not replace your own judgement.`}</p>`);};
+   h.innerHTML=`<div class="ttype">🎯 ${L()==='de'?'Prompt-Checker':'Prompt checker'}</div><h3>${tx(task.q)}</h3>
+     ${task.body?`<div class="infobox">${tx(task.body)}</div>`:''}
+     <div class="reflect"><textarea id="pcInput" placeholder="${tx(task.placeholder||{de:'',en:''})}"></textarea></div>
+     <div id="pcResult"></div>
+     ${task.graded?feedbackEl():''}${taskFoot(t('check'),true,true)}`;
+   document.getElementById('resetBtn').textContent=`🔁 ${L()==='de'?'Erneut prüfen':'Check again'}`;
+   document.getElementById('resetBtn').onclick=()=>{const raw=document.getElementById('pcInput').value.trim();
+     if(!raw)return toast(L()==='de'?'Schreib zuerst deinen Prompt':'Write your prompt first');
+     renderResult(check(raw));};
+   bindPrimary(()=>{const raw=document.getElementById('pcInput').value.trim();
+     if(!raw)return toast(L()==='de'?'Schreib zuerst deinen Prompt':'Write your prompt first');
+     if(checked)return advance();checked=true;
+     const res=check(raw);renderResult(res);
+     if(task.graded){const min=task.minHits||4,ok=res.hitCount>=min;
        scoreTask(ok,task);
-       showFeedback(ok,tx(task.explain||{de:`${hitCount} von 5 Elementen gefunden (mind. ${min} nötig).`,en:`${hitCount} of 5 elements found (at least ${min} needed).`}));}
+       showFeedback(ok,tx(task.explain||{de:`${res.hitCount} von 5 Elementen gefunden (mind. ${min} nötig).`,en:`${res.hitCount} of 5 elements found (at least ${min} needed).`}));}
      document.getElementById('primaryBtn').textContent=t('next')+' →';});}
  ,
  /* Lückentext mit Wortbank statt Dropdown: Wort anklicken (wird aktiv), dann Lücke
