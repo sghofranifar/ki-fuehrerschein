@@ -192,19 +192,23 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
 - K08-M4 „Grenzen, Risiken & Datenschutz" erweitert: neue Sortier-Aufgabe mit sechs
   ausformulierten Mini-Szenarien (statt Ein-Wort-Beispielen) — die letzten beiden
   „KI stößt an Grenzen"-Items (aktuelle Lokalnachrichten kennen; private Info über
-  eine reale Person nennen) bereiten inhaltlich die beiden folgenden Hands-on-Tests
-  vor (Buchstaben zählen + neuer Datenumfang-Test). Neuer Test: Schüler:innen fragen
-  Gemini nach einer Info über eine **komplett frei erfundene** Person (Fantasiename/
-  -adresse, bewusst NICHT real, um keine echten Personen zu betreffen) — z. B. „Wie
-  heißt das Haustier meiner Nachbarin Frau Karin Vogelsang aus der Mondweg-Straße 12?".
-  Zeigt zuverlässig (unabhängig vom Modellstand) zwei Dinge zugleich: ob Gemini ehrlich
-  „weiß ich nicht" sagt oder halluziniert, UND dass KI nur auf öffentlich im Internet
-  gestandene Daten zugreifen kann, nicht auf privates Wissen über reale Menschen —
-  Reflexion fragt explizit nach beidem. Ersetzt einen früheren Entwurf mit einem
-  Google-Translate-Bias-Beispiel (Türkisch-Genus-Bias) — verworfen, weil Google diesen
-  Bias seit 2018 für mehrere Sprachpaare teilweise behoben hat und der heutige
-  Live-Zustand nicht zuverlässig vorhersehbar war; das Gemini-Beispiel funktioniert
-  dagegen unabhängig vom Modellstand immer als Lernmoment.
+  eine reale Person nennen) bereiten inhaltlich den folgenden Hands-on-Test vor.
+  **Buchstaben-Zähl-Demo ersetzt** (Nutzer-Feedback aus echtem Unterrichtstest:
+  Gemini beherrscht die „s"-Zählaufgabe in „Verantwortungsbewusstsein" inzwischen
+  zuverlässig, der Trick funktioniert nicht mehr): neuer Test fragt Gemini stattdessen
+  „Wie viele Fenster hat das Klassenzimmer, in dem ich gerade sitze?" — ganz lokales,
+  nirgends öffentlich stehendes Wissen, bei dem Sprachmodelle oft lieber eine erfundene,
+  selbstsicher klingende Zahl liefern als „weiß ich nicht" zuzugeben; Schüler:innen
+  zählen parallel selbst nach. Die Reflexion fragt zusätzlich (kombiniert aus einem
+  vorherigen, jetzt entfernten Entwurf mit einer frei erfundenen Person/Nachbarin, der
+  zu ähnlich gewesen wäre) allgemein, welche Art von Daten eine KI überhaupt zur
+  Verfügung hat — auch mit Blick auf reale Personen. M5s Beispiel-Liste für die eigene
+  Wissensvorsprung-Challenge wurde um „Fenster" gekürzt (nur noch Stuhlfarbe/Schritte
+  zur Cafeteria), damit beide Module nicht dieselbe Frage stellen. Frühere Version
+  ersetzte bereits einen Google-Translate-Bias-Entwurf (Türkisch-Genus-Bias) — auch
+  der war verworfen worden, weil der heutige Live-Zustand nicht zuverlässig
+  vorhersehbar war; das Gemini-Fenster-Beispiel funktioniert dagegen unabhängig vom
+  Modellstand zuverlässig als Lernmoment (auf lokales Wissen hat kein Modell Zugriff).
 - K08-M6 „KI im Unterricht: Zulässig oder nicht?": fünf Alltagsszenarien als Quiz —
   Entscheidung + Begründung stecken direkt in den Antwortoptionen (nicht Freitext),
   damit automatisch auswertbar; zwei Szenarien sind bewusst „knifflig": (1) Gegenintuitiv
