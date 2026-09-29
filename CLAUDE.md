@@ -276,6 +276,29 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   Hongkong, sghofranifar@gsis.edu.hk), verantwortliche Institution GSIS. Lizenz **CC BY-NC 4.0**.
   Datenschutz-Kernaussage: keine Server-Erhebung, alles nur lokal in `localStorage`;
   kurzer Hinweis dazu auch im Namens-Modal beim ersten Start.
+- **„Meine Einreichungen"-Ansicht** (`renderSubmissions()`, Route `submissions`, neuer
+  Nav-Button 📋 neben Übersicht/Fehlerspeicher): Auslöser war die Frage, wie Lehrkräfte
+  überhaupt an die geschriebenen Reflexionsantworten der Schüler:innen kommen — die App
+  hat **keinen Server**, `reflectHint` sagt korrekt, dass alles nur lokal aufs Gerät
+  gespeichert wird. `collectSubmissions()` sammelt aus allen Jahrgängen + Oberstufe alle
+  `reflect`-Aufgaben mit `prod:true` und liest die passende `Store`-Antwort (Key
+  `reflect_<moduleId>_<idx>`, stabil weil Modul-Task-Arrays nie gemischt werden — anders
+  als EXAM-Pools, die aber ohnehin keine `reflect`-Aufgaben enthalten, siehe
+  `buildExamTasks()`). Zeigt alles gesammelt mit Frage+Antwort an, HTML-escaped über
+  den neuen `esc()`-Helper (Schüler-Freitext wird sonst ungeschützt in HTML eingefügt).
+  Zwei Export-Wege: „📋 Alles kopieren" (Zwischenablage) und „⬇️ Als Textdatei speichern"
+  (Blob+Download-Link, komplett offline, kein Server nötig) — beide über
+  `formatSubmissionsText()`, damit Schüler:innen das z. B. in ein Google Formular
+  einfügen können, das die Lehrkraft dafür einrichtet. Löst **nicht** das grundsätzliche
+  Problem, dass ein rein clientseitiger Zustand ohne Login theoretisch per Browser-
+  Entwicklertools manipulierbar ist (wie schon bei den Zugangscodes) — das ist eine
+  bewusste, dem Nutzer transparent kommunizierte Grenze der Offline-Architektur, keine
+  Sicherheitslücke, die sich clientseitig schließen ließe. Zertifikat/Punkte bleiben
+  Gamification, echte Bewertung sollte auf den gelesenen Einreichungstexten selbst
+  basieren (schwerer glaubhaft zu fälschen als angeklickte Quizfragen). `rerender()`
+  (Sprachumschaltung) erkennt die Ansicht über `.subs-view` auf dem äußeren `<section>` —
+  bewusst NICHT über `.errlist` (wird intern wiederverwendet für den Einreichungs-Look,
+  hätte sonst mit `renderErrors()`s eigener `.errlist`-Prüfung kollidiert).
 
 ## Konventionen (bitte einhalten)
 - Alles **zweisprachig** pflegen: Textobjekte `{de:'…', en:'…'}`.

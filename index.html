@@ -268,6 +268,7 @@ footer.foot{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);f
     <div class="nav-actions">
       <button class="iconbtn" onclick="go('dashboard')"><span>📊</span><span class="label" id="lblOverview">Übersicht</span></button>
       <button class="iconbtn" onclick="go('errors')"><span>🔁</span><span class="label" id="lblErrors">Fehlerspeicher</span><span class="dot" id="errDot" style="display:none">0</span></button>
+      <button class="iconbtn" onclick="go('submissions')"><span>📋</span><span class="label" id="lblSubmissions">Einreichungen</span></button>
       <div class="lang-toggle" role="group" aria-label="Sprache">
         <button id="langDe" class="on" onclick="setLang('de')">DE</button>
         <button id="langEn" onclick="setLang('en')">EN</button>
@@ -303,6 +304,10 @@ const T={
   correct:'Richtig!',wrong:'Noch nicht ganz.',yourStreak:'Serie:',saved:'Gespeichert',moduleDone:'Modul geschafft!',moduleRetry:'Noch nicht ganz – wiederhole das Modul',examPassed:'Führerschein erhalten!',examFailed:'Knapp daneben',needPassHint:'Für den Abschluss sind mindestens 75% richtige Antworten nötig.',
   scoreOf:'von',toOverview:'Zur Jahrgangsübersicht',retry:'Nochmal üben',viewCert:'Zertifikat ansehen',yourOverview:'Deine Übersicht',rank:'Rang',badges:'Abzeichen',analytics:'Auswertung deiner Module',
   noData:'Noch keine Daten – leg in einem Modul los!',mistakes:'Fehlerspeicher',noMistakes:'Kein Fehler gespeichert. Stark!',exportPng:'Als PNG speichern',
+  submissionsNav:'Einreichungen',submissionsTitle:'Meine Einreichungen',
+  submissionsHint:'Hier stehen alle deine geschriebenen Antworten aus den Reflexionsaufgaben gesammelt an einem Ort – zum Durchlesen, Kopieren oder als Textdatei speichern. So kannst du sie z. B. in ein Google Formular oder Classroom einfügen, wenn deine Lehrkraft das möchte.',
+  noSubmissions:'Noch keine Einreichungen – bearbeite Reflexionsaufgaben in den Modulen, dann erscheinen sie hier.',
+  copyAll:'📋 Alles kopieren',downloadTxt:'⬇️ Als Textdatei speichern',copiedMsg:'In die Zwischenablage kopiert!',
   certTitle:'KI-Führerschein',awarded:'verliehen an',forGrade:'für den erfolgreichen Abschluss von',date:'Datum',signature:'Lernbegleitung',
   geminiCertTitle:'Zwischenzertifikat: Gemini-Nutzung',geminiCertBlurb:'Du hast K05–K08 abgeschlossen – hol dir jetzt dein Zwischenzertifikat für die Gemini-Nutzung.',
   geminiCertLead:'hat die KI-Führerschein-Module K05–K08 erfolgreich abgeschlossen und ist damit berechtigt, das KI-Werkzeug Gemini gemäß der GSIS-KI-Ampel im Unterricht zu nutzen.',
@@ -331,6 +336,10 @@ const T={
   correct:'Correct!',wrong:'Not quite yet.',yourStreak:'Streak:',saved:'Saved',moduleDone:'Module complete!',moduleRetry:'Not quite yet – repeat the module',examPassed:'Licence earned!',examFailed:'So close',needPassHint:'You need at least 75% correct answers to complete this.',
   scoreOf:'of',toOverview:'Back to grade overview',retry:'Practise again',viewCert:'View certificate',yourOverview:'Your overview',rank:'Rank',badges:'Badges',analytics:'Your module results',
   noData:'No data yet – start a module!',mistakes:'Mistakes',noMistakes:'No mistakes stored. Nice!',exportPng:'Save as PNG',
+  submissionsNav:'Submissions',submissionsTitle:'My submissions',
+  submissionsHint:'All your written answers from reflection tasks, gathered in one place – to read, copy, or save as a text file. That way you can paste them into a Google Form or Classroom, if your teacher wants that.',
+  noSubmissions:'No submissions yet – complete reflection tasks in the modules and they will appear here.',
+  copyAll:'📋 Copy all',downloadTxt:'⬇️ Save as text file',copiedMsg:'Copied to clipboard!',
   certTitle:'AI Driving Licence',awarded:'awarded to',forGrade:'for successfully completing',date:'Date',signature:'Teacher',
   geminiCertTitle:'Interim Certificate: Gemini Use',geminiCertBlurb:'You have completed K05–K08 – get your interim certificate for using Gemini now.',
   geminiCertLead:'has successfully completed AI Licence modules K05–K08 and is therefore authorised to use the AI tool Gemini in class according to the GSIS AI scale.',
@@ -352,6 +361,9 @@ const T={
   foot:'AI Driving Licence · Spiral curriculum G5–G10 · German Swiss International School'}
 };
 const L=()=>STATE.lang, t=k=>(T[L()][k]??k), tx=o=>(o&&(o[L()]??o.de))||'';
+/* Escaped Freitext von Schüler:innen (z. B. Reflexionsantworten), bevor er als HTML
+   eingefügt wird – sonst könnten Zeichen wie < oder & die Seite zerstören. */
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 /* ===== 4) Konfig ===== */
 const TEACHER_CODE='gsis-ki-2026';
 const SENIOR_CODE='gsis-oberstufe-2026';
@@ -1562,10 +1574,12 @@ function go(where,o={}){window.scrollTo(0,0);
   else if(where==='overview')renderOverview(o.grade);else if(where==='module')renderRunner(o.grade,o.module,false);
   else if(where==='exam')renderRunner(o.grade,null,true);else if(where==='dashboard')renderDashboard();
   else if(where==='errors')renderErrors();else if(where==='cert')renderCert(o.grade);
-  else if(where==='senior')renderSeniorOverview();else if(where==='geminicert')renderGeminiCert();updateChrome();}
+  else if(where==='senior')renderSeniorOverview();else if(where==='geminicert')renderGeminiCert();
+  else if(where==='submissions')renderSubmissions();updateChrome();}
 function updateChrome(){
   document.getElementById('lblOverview').textContent=t('overview');
   document.getElementById('lblErrors').textContent=t('errorsNav');
+  document.getElementById('lblSubmissions').textContent=t('submissionsNav');
   document.getElementById('footLine').innerHTML=`${t('foot')} · <button class="footlink" onclick="openImpressum()">${t('impressum')}</button> · <button class="footlink" onclick="openPrivacy()">${t('privacy')}</button>`;
   const n=STATE.errors.length,dot=document.getElementById('errDot');dot.style.display=n?'grid':'none';dot.textContent=n;
   document.getElementById('langDe').classList.toggle('on',L()==='de');
@@ -1920,6 +1934,44 @@ function renderErrors(){setCrumb([`<b>${t('mistakes')}</b>`]);
   const list=STATE.errors.length?`<div class="errlist">${STATE.errors.map(e=>`<div class="erritem"><span style="font-size:18px">🔁</span><div class="q">${e.q}<div class="src">${e.src}</div></div></div>`).join('')}</div>`:`<div class="empty">${t('noMistakes')}</div>`;
   view().innerHTML=`<section class="view"><div class="section-head"><div class="eyebrow">🔁</div><h2>${t('mistakes')}</h2></div>${list}
     <div style="margin-top:20px"><button class="btn ghost sm" onclick="go('grades')">← ${t('back')}</button></div></section>`;}
+/* ===== 9b) Meine Einreichungen (alle prod:true-Reflexionsantworten an einem Ort) =====
+   Sammelt aus allen Jahrgängen + Oberstufe die Reflexionsaufgaben mit prod:true und
+   liest die zugehörige gespeicherte Antwort aus Store (Key 'reflect_<moduleId>_<idx>',
+   siehe RENDERERS.reflect). Reine Client-Ansicht – es gibt keinen Server, der das von
+   sich aus einsammelt; Kopieren/Textdatei ist der Weg, es an eine Lehrkraft weiterzugeben. */
+function collectSubmissions(){const out=[];
+  GRADES.map(g=>g.id).concat(['OB']).forEach(gid=>{
+    modulesOf(gid).forEach(m=>{m.tasks.forEach((task,idx)=>{
+      if(task.type!=='reflect'||!task.prod)return;
+      const val=Store.get('reflect_'+m.id+'_'+idx);
+      if(val&&val.trim())out.push({grade:gid,gradeLabel:gid==='OB'?tx(OB_META.title):`${t('gradeEy')} ${gid}`,moduleTitle:tx(m.title),q:tx(task.q),a:val.trim()});
+    });});
+  });
+  return out;}
+function formatSubmissionsText(subs){
+  const head=`KI-Führerschein · ${t('submissionsTitle')}\n${STATE.name||'—'} · ${t('klasse')}: ${STATE.klasse||'—'}\n${new Date().toLocaleDateString(L()==='de'?'de-DE':'en-GB')}\n`;
+  return head+subs.map(s=>`\n— ${s.gradeLabel} · ${s.moduleTitle} —\n${s.q}\n${s.a}\n`).join('');}
+function copySubmissions(subs){const txt=formatSubmissionsText(subs);
+  if(navigator.clipboard)navigator.clipboard.writeText(txt).then(()=>toast(t('copiedMsg')),()=>{});}
+function downloadSubmissions(subs){const txt=formatSubmissionsText(subs);
+  const blob=new Blob([txt],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download=`Einreichungen_${(STATE.name||'Schueler').trim().replace(/\s+/g,'_')}.txt`;
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
+function renderSubmissions(){setCrumb([`<b>${t('submissionsTitle')}</b>`]);
+  const subs=collectSubmissions();
+  const list=subs.length?`<div class="errlist">${subs.map(s=>`<div class="erritem" style="align-items:flex-start;flex-direction:column;gap:6px">
+      <div class="src">${esc(s.gradeLabel)} · ${esc(s.moduleTitle)}</div>
+      <div class="q" style="font-weight:600">${esc(s.q)}</div>
+      <div style="white-space:pre-wrap;font-size:14px;color:var(--ink)">${esc(s.a)}</div>
+    </div>`).join('')}</div>`:`<div class="empty">${t('noSubmissions')}</div>`;
+  view().innerHTML=`<section class="view subs-view"><div class="section-head"><div class="eyebrow">📋</div><h2>${t('submissionsTitle')}</h2><p class="lead">${t('submissionsHint')}</p></div>
+    ${list}
+    <div class="result-actions" style="justify-content:flex-start;margin-top:20px">
+      ${subs.length?`<button class="btn sm" id="subsCopyBtn">${t('copyAll')}</button><button class="btn sm ghost" id="subsDlBtn">${t('downloadTxt')}</button>`:''}
+      <button class="btn ghost sm" onclick="go('grades')">← ${t('back')}</button>
+    </div></section>`;
+  if(subs.length){document.getElementById('subsCopyBtn').onclick=()=>copySubmissions(subs);
+    document.getElementById('subsDlBtn').onclick=()=>downloadSubmissions(subs);}}
 /* ===== 10) Zertifikat (Name + Klasse) ===== */
 function renderCert(grade){const g=gradeById(grade),fs=STATE.fuehrerschein[grade];if(!fs)return go('overview',{grade});
   const d=new Date(fs.ts).toLocaleDateString(L()==='de'?'de-DE':'en-GB');setCrumb([`${t('gradeEy')} ${grade}`,`<b>${t('certTitle')}</b>`]);
@@ -2023,6 +2075,7 @@ function rerender(){const v=view();
   else if(v.querySelector('.grades'))renderGrades();
   else if(v.querySelector('.modlist'))renderOverview(CURRENT.grade);
   else if(v.querySelector('.dash-grid'))renderDashboard();
+  else if(v.querySelector('.subs-view'))renderSubmissions();
   else if(v.querySelector('.errlist'))renderErrors();
   else renderGrades();updateChrome();}
 function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),1800);}
