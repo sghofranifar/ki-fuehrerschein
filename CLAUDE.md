@@ -312,9 +312,12 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
 - `TEACHER_CODE = 'gsis-ki-2026'` — **noch auf echten Code ändern**.
 - `SENIOR_CODE = 'gsis-oberstufe-2026'` — Zugangscode für „Oberstufe · Projekttag",
   **noch auf echten Code ändern**.
-- `GRADE_CODES` — je ein Direktzugangs-Code pro Jahrgang (K05–K10), **noch auf echte
-  Codes ändern**: K05 `gsis-k05-2026`, K06 `gsis-k06-2026`, K07 `gsis-k07-2026`,
-  K08 `gsis-k08-2026`, K09 `gsis-k09-2026`, K10 `gsis-k10-2026`.
+- `GRADE_CODES` — je ein Direktzugangs-Code pro Jahrgang (K05–K10). Bewusst **kein
+  gemeinsames Muster** mehr (vorher `gsis-k0X-2026` — ein Schüler hätte durch simples
+  Austauschen einer Ziffer den Code für einen anderen Jahrgang erraten können). Jetzt
+  sechs unabhängige Wort+Zufallszahl-Codes, zufällig aus einer neutralen Wortliste
+  generiert, aber weiterhin leicht laut vorlesbar/teilbar: K05 `pixel-67`, K06
+  `lupine-89`, K07 `atlas-49`, K08 `delta-78`, K09 `koralle-28`, K10 `gletscher-35`.
 - `PASS = 0.75` — gilt einheitlich für Module und Abschlusstests.
 
 ## Arbeitsweise mit mir
