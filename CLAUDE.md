@@ -88,8 +88,9 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   pro ergänzter Aufgabe: `info` mit Link zu einem externen KI-Mini-Tool (neuer Tab) +
   `reflect`/`input` zur Auswertung der eigenen Erfahrung — **nie** wörtlicher Abgleich
   von KI-Antworttext (siehe `input`-Prinzip oben). Bisher ergänzt:
-  K05-M1 Quick, Draw! (quickdraw.withgoogle.com, Mustererkennung), K06-M2 Teachable
-  Machine (teachablemachine.withgoogle.com, eigenes Mini-Modell trainieren), K06-M4
+  K05-M1 Quick, Draw! (quickdraw.withgoogle.com, Mustererkennung), K06-M2 eigenes
+  Mini-Modell trainieren (ursprünglich Teachable Machine, seit Herbst 2026 Machine
+  Learning for Kids — siehe eigener Hinweis unten), K06-M4
   Semantris (research.google.com/semantris, Wortbedeutung/Prompting), K07-M4 AutoDraw
   (autodraw.com, kreative Mensch-KI-Zusammenarbeit + Kennzeichnungsfrage), K08-M2
   Gemini-Ideen-Brainstorming mit Auswahl/Verwerfen, K08-M3 echte Feedback-Schleife mit
@@ -104,8 +105,9 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   K09-M2 Live-Modellvergleich Fast vs. Thinking/Pro an einer Fangfrage (17 Schafe,
   alle außer 9 laufen weg → richtig 9, Ablenkung durch die 17 — zeigt, dass schnelle
   Modelle oft nur das Rechenmuster statt den Satz genau lesen), K09-M3 Bias selbst
-  erzeugen mit Teachable Machine (absichtlich einseitiges Training, dann Test unter
-  anderen Bedingungen), K09-M4 Diskussion mit Gemini vor der eigenen ethischen
+  erzeugen (ursprünglich Teachable Machine, seit Herbst 2026 Machine Learning for
+  Kids; absichtlich einseitiges Training, dann Test unter anderen Bedingungen), K09-M4
+  Diskussion mit Gemini vor der eigenen ethischen
   Stellungnahme (bewusst zuerst eigene Meinung bilden, dann stärkstes Gegenargument
   einholen), K10-M3 Workflow-Ausführung: die vorhandene Planungs-Aufgabe wird um
   echte Ausführung von mind. 2 Workflow-Schritten mit Gemini + Soll/Ist-Vergleich
@@ -177,7 +179,28 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   Button-Bezeichnungen der Seite (Get Started → Image Project → Standard image model
   → Klassen umbenennen → Webcam → Hold to Record → Train Model → Preview), plus ein
   bewusster Schritt 8 (dritten, untrainierten Gegenstand zeigen), der in der
-  Reflexionsfrage aufgegriffen wird.
+  Reflexionsfrage aufgegriffen wird. **Hinweis:** Diese Teachable-Machine-Anleitung
+  wurde im Herbst 2026 durch Machine Learning for Kids ersetzt, siehe nächster Punkt.
+- **Teachable Machine → Machine Learning for Kids** (Herbst 2026, Nutzer-Feedback aus
+  dem Unterricht: Teachable Machine funktioniert auf iPad/iPhone nicht zuverlässig,
+  die Live-Webcam-Inferenz bricht dort ab). Ersatz: **machinelearningforkids.co.uk**
+  (foto- statt stream-basiert, dadurch auf iOS robuster) — in **K06-M2** (Erstkontakt)
+  und **K09-M3** (Bias-Hands-on) umgestellt. Auf der Login-Seite gibt es unten den
+  Bereich „Test ohne Account" → Button „Jetzt testen": damit ist wie bei Teachable
+  Machine **kein Konto und keine Lehrkraft-Vorbereitung** nötig (per Screenshot
+  verifiziert) — das Projekt wird dabei nur nicht dauerhaft gespeichert, für eine
+  Einzelstunde reicht das. Auch im Gast-Modus landet man auf der normalen „Your
+  machine learning projects"-Seite mit „Add a new project"-Button (kein Shortcut, der
+  diesen Schritt überspringt — ebenfalls per Screenshot bestätigt, nachdem eine erste
+  Annahme dazu falsch war). K06-M2 bekam die volle neue Schritt-für-Schritt-Anleitung
+  (10 Schritte: Add a new project → Images → Create → Train → Add new label →
+  Kategorien → Webcam-Fotos → wiederholen → Learn & Test/Train model → Test → dritter
+  unbekannter Gegenstand). K09-M3 bekam bewusst eine **kompakte** Version mit
+  „Wiederholung aus Klasse 6"-Einleitung statt der vollen Schritt-Liste — ersetzt
+  damit zugleich den ursprünglich separat geplanten Wiederholungsmodul-Auftrag am
+  Anfang von K09 (auf Nutzerwunsch zusammengelegt, da K09-M3 ohnehin schon die
+  Hands-on-Trainingsaufgabe ist und ein zusätzliches, separates Modul redundant
+  gewesen wäre). OB-8s Ebenen-Pyramide (Ebene 3-Beispiel) entsprechend mit aktualisiert.
 - **K08-Modulreihenfolge geändert**: `K08-M5` „Gemini kennenlernen" steht im Array jetzt
   direkt nach `K08-M1` (Auffrischung), **vor** `K08-M7` (CRAFT) — vorher kam M5 ganz am
   Ende, obwohl M7/M2/M3/M4 alle schon vorher live mit Gemini arbeiten ließen, ohne dass
@@ -270,8 +293,8 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   LinkedIn-Post eines anderen Lehrers (zwei Infografiken) — Idee vom Nutzer geprüft und
   erst nach expliziter Bestätigung umgesetzt. Ebenen-Pyramide (Klassische KI → Machine
   Learning → Neuronale Netze → Deep Learning → Generative KI → Agentic AI → AGI) als
-  Einordnungsraster, das rückblickend an K05–K10 anknüpft (Ebene 3 = Teachable Machine,
-  Ebene 5 = Gemini, Ebene 6 = Deep Research aus OB-7). Die „Ebene 6,5" nutzt reale,
+  Einordnungsraster, das rückblickend an K05–K10 anknüpft (Ebene 3 = Machine Learning
+  for Kids, Ebene 5 = Gemini, Ebene 6 = Deep Research aus OB-7). Die „Ebene 6,5" nutzt reale,
   **einzeln via WebSearch verifizierte** Ereignisse vom 8.–26. Sept. 2026 (Jacob Coxons
   Rücktritt bei Anthropic, Amodeis Essay „We Must Pace the Frontier" [12.9., 6–12-Monats-
   Warnung vor KI-Agenten-Schwärmen], OpenAIs Offenlegung unautorisierter Agenten-Zugriffe
