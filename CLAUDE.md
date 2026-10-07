@@ -154,7 +154,18 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   Fortschritt von Beta-Tester:innen unter den alten IDs zerstört (Modul-Reihenfolge in
   der Anzeige kommt aus der Array-Position, nicht aus der ID). CRAFT-Framework nach
   Vera Cubero/Joscha Falck unter **CC BY-NC-SA 4.0** — abweichend von der App-Lizenz,
-  daher eigener Attributions-Hinweis im Modul selbst UND im Impressum.
+  daher eigener Attributions-Hinweis im Modul selbst UND im Impressum. Nutzer-Feedback
+  aus dem Unterricht: Schüler:innen struggeln beim CRAFT-Prompt-Umschreiben („Schreib
+  was über den Klimawandel."). Grund laut Analyse der `promptcheck`-Regex: Treffer pro
+  Buchstabe brauchen bestimmte Signalwörter (z. B. „weil"/„für meine Hausaufgabe" für
+  C, „du bist"/„als Experte" für R, „für Schüler"/„Zielgruppe" für A, „Liste"/„maximal
+  X Wörter" für F, ein Aktionsverb wie „erkläre" für T) UND der ganze Prompt muss
+  **mindestens 12 Wörter** haben, sonst zeigt der Check gar keine Treffer, egal wie
+  gut der Inhalt ist — das ist die häufigste stille Ursache fürs Struggeln. Deshalb
+  neue `info`-Aufgabe direkt vor der `reflect`-Umschreib-Aufgabe eingefügt: Lückensatz-
+  Vorlage „Du bist ein/eine [Rolle]. Erkläre [Thema] für [Zielgruppe] als [Format],
+  weil [Grund]." trifft alle 5 CRAFT-Buchstaben gleichzeitig, mit ausgefülltem
+  Klimawandel-Beispiel plus Warnhinweis zur 12-Wörter-Grenze.
 - K06-M1/M2 vertieft (waren mit 2 bzw. 5 Aufgaben zu kurz für eine Workshop-Einheit):
   M1 hat jetzt einen langen `clozedrag`-Recap-Lückentext (6 Lücken + 3 Distraktor-
   Wörter) plus eine echte Reflexionsfrage zu Mensch vs. Maschine (eigenes Alltags-
@@ -307,6 +318,23 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
 - **Keine externen Bilder** für Inhalte — stattdessen die vorhandenen Inline-SVG-Icons.
 - **Keine IB-/MYP-Begriffe** in der Schüler-Ansicht (reiner deutscher Stream).
 - Distraktoren = **plausible Fehlvorstellungen**, keine Witz-Antworten.
+- **Antwortlänge darf nie mit Richtigkeit korrelieren** (Schüler-Feedback: „die längste
+  Antwort ist immer richtig"). Ursache war ein systematisches Autoren-Muster: die
+  richtige Antwort (immer `correct:0` im Array) wurde beim Schreiben meist ausführlich
+  begründet, Distraktoren nur als kurzer Stichpunkt. Die `shuffled()`-Anzeigemischung
+  (siehe K08-Test-Fixes) verhindert nur das Erraten über die **Position**, nicht über
+  die **Textlänge** — beide Signale müssen unabhängig voneinander neutralisiert sein.
+  Bei neuen `quiz`/`multi`-Aufgaben: alle Optionen auf vergleichbare Länge bringen,
+  typischerweise durch Ausbauen der Distraktoren zu ausführlicheren, plausibel
+  klingenden Fehlvorstellungen (nicht durch Kürzen der richtigen Antwort, das schwächt
+  oft die Erklärung). Ausnahme mit Bedacht: Bei Prompt-Qualitäts-Fragen (K06-M4,
+  EXAM-K06) ist ein knapper Distraktor wie „Wetter." absichtlich kurz, weil Kürze dort
+  der Lehrinhalt selbst ist (schlechter Prompt = zu wenig Kontext) — dort wurde
+  stattdessen ein zweiter, bewusst **langer, aber inhaltsleer-schwammiger** Distraktor
+  ergänzt, der zeigt: Länge allein macht einen Prompt nicht gut. Alle 104 `quiz`/`multi`-
+  Aufgaben in Modulen + Abschlusstests wurden im Herbst 2026 per Skript auf „korrekte
+  Antwort ist strikt die längste Option" geprüft (66 von 104 betroffen) und einzeln
+  neu formuliert; Korrektheit jeder Antwort dabei inhaltlich erneut gegengeprüft.
 
 ## Wichtige Konstanten (im JS, oben)
 - `TEACHER_CODE = 'gsis-ki-2026'` — **noch auf echten Code ändern**.
