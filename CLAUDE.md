@@ -89,8 +89,8 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   `reflect`/`input` zur Auswertung der eigenen Erfahrung — **nie** wörtlicher Abgleich
   von KI-Antworttext (siehe `input`-Prinzip oben). Bisher ergänzt:
   K05-M1 Quick, Draw! (quickdraw.withgoogle.com, Mustererkennung), K06-M2 eigenes
-  Mini-Modell trainieren (ursprünglich Teachable Machine, seit Herbst 2026 Machine
-  Learning for Kids — siehe eigener Hinweis unten), K06-M4
+  Mini-Modell trainieren (ursprünglich Teachable Machine, seit Herbst 2026 GenAI
+  Teachable Machine / tm.gen-ai.fi — siehe eigener Hinweis unten), K06-M4
   Semantris (research.google.com/semantris, Wortbedeutung/Prompting), K07-M4 AutoDraw
   (autodraw.com, kreative Mensch-KI-Zusammenarbeit + Kennzeichnungsfrage), K08-M2
   Gemini-Ideen-Brainstorming mit Auswahl/Verwerfen, K08-M3 echte Feedback-Schleife mit
@@ -105,8 +105,9 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   K09-M2 Live-Modellvergleich Fast vs. Thinking/Pro an einer Fangfrage (17 Schafe,
   alle außer 9 laufen weg → richtig 9, Ablenkung durch die 17 — zeigt, dass schnelle
   Modelle oft nur das Rechenmuster statt den Satz genau lesen), K09-M3 Bias selbst
-  erzeugen (ursprünglich Teachable Machine, seit Herbst 2026 Machine Learning for
-  Kids; absichtlich einseitiges Training, dann Test unter anderen Bedingungen), K09-M4
+  erzeugen (ursprünglich Teachable Machine, seit Herbst 2026 GenAI Teachable Machine /
+  tm.gen-ai.fi; absichtlich einseitiges Training, dann Test unter anderen Bedingungen,
+  plus Extra-Herausforderung „Baue eine Falle"), K09-M4
   Diskussion mit Gemini vor der eigenen ethischen
   Stellungnahme (bewusst zuerst eigene Meinung bilden, dann stärkstes Gegenargument
   einholen), K10-M3 Workflow-Ausführung: die vorhandene Planungs-Aufgabe wird um
@@ -180,27 +181,38 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   → Klassen umbenennen → Webcam → Hold to Record → Train Model → Preview), plus ein
   bewusster Schritt 8 (dritten, untrainierten Gegenstand zeigen), der in der
   Reflexionsfrage aufgegriffen wird. **Hinweis:** Diese Teachable-Machine-Anleitung
-  wurde im Herbst 2026 durch Machine Learning for Kids ersetzt, siehe nächster Punkt.
-- **Teachable Machine → Machine Learning for Kids** (Herbst 2026, Nutzer-Feedback aus
-  dem Unterricht: Teachable Machine funktioniert auf iPad/iPhone nicht zuverlässig,
-  die Live-Webcam-Inferenz bricht dort ab). Ersatz: **machinelearningforkids.co.uk**
-  (foto- statt stream-basiert, dadurch auf iOS robuster) — in **K06-M2** (Erstkontakt)
-  und **K09-M3** (Bias-Hands-on) umgestellt. Auf der Login-Seite gibt es unten den
-  Bereich „Test ohne Account" → Button „Jetzt testen": damit ist wie bei Teachable
-  Machine **kein Konto und keine Lehrkraft-Vorbereitung** nötig (per Screenshot
-  verifiziert) — das Projekt wird dabei nur nicht dauerhaft gespeichert, für eine
-  Einzelstunde reicht das. Auch im Gast-Modus landet man auf der normalen „Your
-  machine learning projects"-Seite mit „Add a new project"-Button (kein Shortcut, der
-  diesen Schritt überspringt — ebenfalls per Screenshot bestätigt, nachdem eine erste
-  Annahme dazu falsch war). K06-M2 bekam die volle neue Schritt-für-Schritt-Anleitung
-  (10 Schritte: Add a new project → Images → Create → Train → Add new label →
-  Kategorien → Webcam-Fotos → wiederholen → Learn & Test/Train model → Test → dritter
-  unbekannter Gegenstand). K09-M3 bekam bewusst eine **kompakte** Version mit
-  „Wiederholung aus Klasse 6"-Einleitung statt der vollen Schritt-Liste — ersetzt
-  damit zugleich den ursprünglich separat geplanten Wiederholungsmodul-Auftrag am
-  Anfang von K09 (auf Nutzerwunsch zusammengelegt, da K09-M3 ohnehin schon die
-  Hands-on-Trainingsaufgabe ist und ein zusätzliches, separates Modul redundant
-  gewesen wäre). OB-8s Ebenen-Pyramide (Ebene 3-Beispiel) entsprechend mit aktualisiert.
+  wurde im Herbst 2026 durch GenAI Teachable Machine (tm.gen-ai.fi) ersetzt, siehe
+  nächster Punkt.
+- **Teachable Machine → GenAI Teachable Machine** (Herbst 2026, Nutzer-Feedback aus
+  dem Unterricht: Googles Teachable Machine funktioniert auf iPad/iPhone nicht
+  zuverlässig, die Live-Webcam-Inferenz bricht dort ab). Zwischenschritt: kurz auf
+  Machine Learning for Kids umgestellt — dann hat der Nutzer **tm.gen-ai.fi** gefunden
+  (GenAI Teachable Machine, Uni Ostfinnland, Open Source github.com/knicos/genai-tm),
+  **selbst live auf iPhone UND iPad getestet, funktioniert** — damit finaler Ersatz,
+  Machine-Learning-for-Kids-Zwischenstand wieder verworfen. Vorteile ggü. beiden
+  Vorgängern: **kein Konto/kein Login-Schritt** nötig (direkter Einstieg auf
+  „tm.gen-ai.fi/home"), **100 % lokale Verarbeitung im Browser** (keine
+  Server-Übertragung, keine Cookies/Tracking — passt gut zum Datenschutz-Prinzip der
+  App), und die UI ist fast identisch zur echten Google Teachable Machine (Class 1/
+  Class 2, Webcam/Upload, „Train classifier") — eingesetzt in **K06-M2** (Erstkontakt)
+  und **K09-M3** (Bias-Hands-on, als „Wiederholung aus Klasse 6" kompakt gehalten).
+  **Bewusst kein echter Screenshot** (Konvention „keine externen Bilder" + Oberflächen
+  ändern sich) — stattdessen ein **detailgetreues HTML/CSS-Mockup** (auf Nutzerwunsch,
+  „soll Schülern helfen") im selben Stil wie das Gemini-Mockup in K08-M5: Training-
+  Data-Karte mit Class-1/Class-2-Boxen (Umbenennen-Stift, Webcam/Upload-Buttons, „Add a
+  class") + Train-classifier-Button, mit nummerierten Kreis-Labels ①–④, die im Text
+  darunter erklärt werden — die eigentliche Schritt-Liste darunter ist dadurch kürzer
+  geworden (5 statt vorher 10 Schritte), weil das Mockup schon viel visuell zeigt.
+  K09-M3 übernimmt weiterhin auch die vom Nutzer gewünschte Wiederholung zu Beginn von
+  K09 (kein separates, redundantes Modul). Zusätzlich neue Aufgabe in K09-M3: **„⭐
+  Extra-Herausforderung: Baue eine Falle"** — Schüler:innen versuchen, ihr eigenes
+  trainiertes Modell auszutricksen (z. B. Gegenstand, der zu keiner Klasse passt; beide
+  Gegenstände gleichzeitig zeigen; Dunkelheit; nur Ausschnitt zeigen), mit einem
+  **„💡 Hilfe"-Button** für Ideen, falls jemand nicht weiterkommt — technisch ein
+  natives HTML `<details>/<summary>`-Element (kein neuer Task-Typ/JS nötig, da reine
+  Auf-/Zuklapp-Funktion), gefolgt von einer `reflect`-Frage zu Ergebnis und Lernmoment
+  über Grenzen/Möglichkeiten des Trainings. OB-8s Ebenen-Pyramide (Ebene-3-Beispiel)
+  entsprechend final auf „GenAI Teachable Machine" aktualisiert.
 - **K08-Modulreihenfolge geändert**: `K08-M5` „Gemini kennenlernen" steht im Array jetzt
   direkt nach `K08-M1` (Auffrischung), **vor** `K08-M7` (CRAFT) — vorher kam M5 ganz am
   Ende, obwohl M7/M2/M3/M4 alle schon vorher live mit Gemini arbeiten ließen, ohne dass
@@ -293,8 +305,8 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   LinkedIn-Post eines anderen Lehrers (zwei Infografiken) — Idee vom Nutzer geprüft und
   erst nach expliziter Bestätigung umgesetzt. Ebenen-Pyramide (Klassische KI → Machine
   Learning → Neuronale Netze → Deep Learning → Generative KI → Agentic AI → AGI) als
-  Einordnungsraster, das rückblickend an K05–K10 anknüpft (Ebene 3 = Machine Learning
-  for Kids, Ebene 5 = Gemini, Ebene 6 = Deep Research aus OB-7). Die „Ebene 6,5" nutzt reale,
+  Einordnungsraster, das rückblickend an K05–K10 anknüpft (Ebene 3 = GenAI Teachable
+  Machine, Ebene 5 = Gemini, Ebene 6 = Deep Research aus OB-7). Die „Ebene 6,5" nutzt reale,
   **einzeln via WebSearch verifizierte** Ereignisse vom 8.–26. Sept. 2026 (Jacob Coxons
   Rücktritt bei Anthropic, Amodeis Essay „We Must Pace the Frontier" [12.9., 6–12-Monats-
   Warnung vor KI-Agenten-Schwärmen], OpenAIs Offenlegung unautorisierter Agenten-Zugriffe

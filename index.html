@@ -544,41 +544,77 @@ const CONTENT={
      options:[{de:'Die Beispiele waren einseitig – sie hat Katzen kaum gesehen',en:'The examples were one-sided – it barely saw cats'},
               {de:'Katzen bewegen sich einfach zu schnell, damit KI sie erkennen kann',en:'Cats simply move too fast for AI to ever recognise them'},{de:'KI mag einfach keine Katzen besonders gern',en:'AI simply does not like cats very much'}],
      correct:0,explain:{de:'KI ist nur so gut wie ihre Beispiele. Fehlen Katzen, kann sie sie kaum erkennen.',en:'AI is only as good as its examples. Without cats, it can barely recognise them.'}},
-    /* Teachable Machine funktioniert auf iPad/iPhone nicht zuverlässig (Webcam-Live-
-       Inferenz bricht ab) – deshalb Machine Learning for Kids (foto- statt stream-
-       basiert, dadurch auf iOS robuster). Auf der Login-Seite gibt es unten den
-       Bereich „Test ohne Account" / „Jetzt testen" – damit braucht es wie bei
-       Teachable Machine KEIN Konto und keine Lehrkraft-Vorbereitung (Projekt wird
-       dabei nicht dauerhaft gespeichert, für eine Einzelstunde reicht das). Auch im
-       Gast-Modus landet man auf der normalen „Your machine learning projects"-Seite
-       mit „Add a new project"-Button (per Screenshot bestätigt) – kein Shortcut, der
-       diesen Schritt überspringt. */
+    /* Teachable Machine (Google) funktioniert auf iPad/iPhone nicht zuverlässig
+       (Webcam-Live-Inferenz bricht ab). Zwischenzeitlich kurz auf Machine Learning
+       for Kids umgestellt, dann auf GenAI Teachable Machine (Uni Ostfinnland,
+       tm.gen-ai.fi, Open Source github.com/knicos/genai-tm) gewechselt: vom Nutzer
+       selbst live auf iPhone UND iPad getestet, funktioniert. Kein Konto nötig,
+       100% lokale Verarbeitung im Browser (keine Server-Übertragung, keine Cookies).
+       UI fast identisch zur echten Google Teachable Machine (Class 1/2, Webcam/
+       Upload, Train classifier) – deshalb bewusst KEIN echter Screenshot (Konvention:
+       keine externen Bilder, Oberflächen ändern sich), sondern ein detailgetreu
+       nachgebautes HTML/CSS-Mockup mit nummerierten Erklär-Punkten, wie beim
+       Gemini-Mockup in K08-M5. */
     {type:'info',title:{de:'Trainiere deine eigene Mini-KI – Schritt für Schritt',en:'Train your own mini AI – step by step'},
-     body:{de:'<p>Öffne <a href="https://machinelearningforkids.co.uk/#!/login" target="_blank" rel="noopener">machinelearningforkids.co.uk/#!/login ↗</a>. Du brauchst <strong>kein Konto</strong> – klicke ganz unten bei „Test ohne Account" auf <strong>„Jetzt testen"</strong>. Gehe dann genau so vor:</p>'+
-       '<ol style="margin:10px 0 0 20px;padding:0;line-height:1.85">'+
-       '<li>Klicke auf <strong>„Add a new project"</strong> (+-Symbol).</li>'+
-       '<li>Gib dem Projekt einen Namen (z. B. <strong>„Hand oder Tasse"</strong>) und wähle bei der Frage, was es erkennen soll, <strong>„Images"</strong>. Klicke auf <strong>„Create"</strong>.</li>'+
-       '<li>Klicke auf dein neues Projekt und dann auf <strong>„Train"</strong>.</li>'+
-       '<li>Klicke auf <strong>„Add new label"</strong> und lege zwei Kategorien an, z. B. <strong>„Hand"</strong> und <strong>„Tasse"</strong>.</li>'+
-       '<li>Klicke bei „Hand" in das Kästchen und dann auf das <strong>Kamera-Symbol (Webcam)</strong>; erlaube der Seite den Kamerazugriff.</li>'+
-       '<li>Nimm so <strong>mindestens 15–20 Fotos</strong> deiner Hand auf – bewege sie dabei leicht (andere Winkel, andere Entfernung, andere Beleuchtung!).</li>'+
-       '<li>Wiederhole Schritt 5–6 für „Tasse" mit dem zweiten Gegenstand.</li>'+
-       '<li>Klicke oben auf <strong>„Back to project"</strong>, dann auf <strong>„Learn & Test"</strong> und auf <strong>„Train new machine learning model"</strong>. Warte, bis das Training fertig ist (ca. 1 Minute).</li>'+
-       '<li>Teste dein Modell: Halte Hand bzw. Tasse in die Kamera und klicke auf <strong>„Test"</strong> – beobachte die Prozent-Werte.</li>'+
+     body:{de:'<p>Öffne <a href="https://tm.gen-ai.fi/home" target="_blank" rel="noopener">tm.gen-ai.fi/home ↗</a> – <strong>kein Konto nötig</strong>, alles läuft lokal in deinem Browser. Du landest direkt auf der Trainingsseite:</p>'+
+       '<div style="border:1.5px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;margin-top:12px">'+
+       '<div style="padding:10px 14px;border-bottom:1px solid var(--line);font-size:13px;font-weight:700;color:var(--muted)">Training Data</div>'+
+       '<div style="padding:14px;display:flex;flex-direction:column;gap:10px">'+
+       '<div style="border:1px solid var(--line);border-radius:10px;padding:10px 12px">'+
+       '<div style="display:flex;align-items:center;flex-wrap:wrap;gap:6px;font-weight:700;font-size:13px">Class 1 <span style="background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:2px 8px;font-size:11px;color:var(--muted)">① ✏️ umbenennen</span></div>'+
+       '<div style="font-size:12px;color:var(--muted);margin:6px 0">Add image samples</div>'+
+       '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span style="border:1px solid var(--line);border-radius:8px;padding:5px 10px;font-size:12px">📷 Webcam</span><span style="border:1px solid var(--line);border-radius:8px;padding:5px 10px;font-size:12px">⬆️ Upload</span><span style="background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:2px 8px;font-size:11px;color:var(--muted)">②</span></div></div>'+
+       '<div style="border:1px solid var(--line);border-radius:10px;padding:10px 12px">'+
+       '<div style="font-weight:700;font-size:13px">Class 2</div>'+
+       '<div style="font-size:12px;color:var(--muted);margin:6px 0">Add image samples</div>'+
+       '<div style="display:flex;flex-wrap:wrap;gap:8px"><span style="border:1px solid var(--line);border-radius:8px;padding:5px 10px;font-size:12px">📷 Webcam</span><span style="border:1px solid var(--line);border-radius:8px;padding:5px 10px;font-size:12px">⬆️ Upload</span></div></div>'+
+       '<div style="border:1px dashed var(--line);border-radius:10px;padding:8px 12px;text-align:center;font-size:12px;color:var(--muted)">➕ Add a class</div></div>'+
+       '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:12px 14px;border-top:1px solid var(--line)">'+
+       '<span style="background:var(--ink);color:#fff;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700">Train classifier</span>'+
+       '<span style="background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:2px 8px;font-size:11px;color:var(--muted)">③</span>'+
+       '<span style="font-size:12px;color:var(--muted)">→ Input: 📷 Webcam-Test · Classifier zeigt Ergebnis in %</span>'+
+       '<span style="background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:2px 8px;font-size:11px;color:var(--muted);margin-left:auto">④</span></div></div>'+
+       '<div style="margin-top:12px;font-size:13.5px;line-height:1.7">'+
+       '<p>① <strong>Umbenennen</strong> – Stift-Symbol anklicken, z. B. „Hand" statt „Class 1". Über „Add a class" kannst du weitere Kategorien anlegen.</p>'+
+       '<p>② <strong>Fotos hinzufügen</strong> – „Webcam" zum Aufnehmen oder „Upload" für eigene Bilder.</p>'+
+       '<p>③ <strong>Trainieren</strong> – „Train classifier" klicken, sobald beide Klassen genug Fotos haben.</p>'+
+       '<p>④ <strong>Testen</strong> – im Input-Bereich die Webcam zeigen, der Classifier zeigt live die Prozent-Werte.</p></div>'+
+       '<ol style="margin:14px 0 0 20px;padding:0;line-height:1.85">'+
+       '<li>Benenne <strong>Class 1</strong> und <strong>Class 2</strong> um (①), z. B. <strong>„Hand"</strong> und <strong>„Tasse"</strong>.</li>'+
+       '<li>Nimm pro Klasse <strong>mindestens 15–20 Fotos</strong> per „Webcam" auf (②) – bewege den Gegenstand dabei leicht (andere Winkel, andere Entfernung, andere Beleuchtung!).</li>'+
+       '<li>Klicke <strong>„Train classifier"</strong> (③) und warte, bis das Training fertig ist.</li>'+
+       '<li>Teste im Input-Bereich (④) mit der Webcam – beobachte die Prozent-Werte beim Classifier.</li>'+
        '<li>Zeig der Kamera jetzt einen <strong>dritten, ganz anderen Gegenstand</strong> (z. B. einen Stift). Was passiert?</li></ol>',
-           en:'<p>Open <a href="https://machinelearningforkids.co.uk/#!/login" target="_blank" rel="noopener">machinelearningforkids.co.uk/#!/login ↗</a>. You need <strong>no account</strong> – at the bottom under "Test without account", click <strong>"Try it now"</strong>. Then follow these exact steps:</p>'+
-       '<ol style="margin:10px 0 0 20px;padding:0;line-height:1.85">'+
-       '<li>Click <strong>"Add a new project"</strong> (+ icon).</li>'+
-       '<li>Give the project a name (e.g. <strong>"Hand or cup"</strong>) and choose <strong>"Images"</strong> for what it should recognise. Click <strong>"Create"</strong>.</li>'+
-       '<li>Click your new project, then click <strong>"Train"</strong>.</li>'+
-       '<li>Click <strong>"Add new label"</strong> and create two categories, e.g. <strong>"Hand"</strong> and <strong>"Cup"</strong>.</li>'+
-       '<li>Click into the "Hand" box, then the <strong>camera icon (webcam)</strong>; allow the site to access your camera.</li>'+
-       '<li>Take <strong>at least 15–20 photos</strong> of your hand this way – move it slightly as you do (different angles, distances, lighting!).</li>'+
-       '<li>Repeat steps 5–6 for "Cup" with the second object.</li>'+
-       '<li>Click <strong>"Back to project"</strong> at the top, then <strong>"Learn & Test"</strong>, then <strong>"Train new machine learning model"</strong>. Wait until training finishes (about 1 minute).</li>'+
-       '<li>Test your model: hold your hand or the cup up to the camera and click <strong>"Test"</strong> – watch the percentage values.</li>'+
+           en:'<p>Open <a href="https://tm.gen-ai.fi/home" target="_blank" rel="noopener">tm.gen-ai.fi/home ↗</a> – <strong>no account needed</strong>, everything runs locally in your browser. You land directly on the training page:</p>'+
+       '<div style="border:1.5px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;margin-top:12px">'+
+       '<div style="padding:10px 14px;border-bottom:1px solid var(--line);font-size:13px;font-weight:700;color:var(--muted)">Training Data</div>'+
+       '<div style="padding:14px;display:flex;flex-direction:column;gap:10px">'+
+       '<div style="border:1px solid var(--line);border-radius:10px;padding:10px 12px">'+
+       '<div style="display:flex;align-items:center;flex-wrap:wrap;gap:6px;font-weight:700;font-size:13px">Class 1 <span style="background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:2px 8px;font-size:11px;color:var(--muted)">① ✏️ rename</span></div>'+
+       '<div style="font-size:12px;color:var(--muted);margin:6px 0">Add image samples</div>'+
+       '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span style="border:1px solid var(--line);border-radius:8px;padding:5px 10px;font-size:12px">📷 Webcam</span><span style="border:1px solid var(--line);border-radius:8px;padding:5px 10px;font-size:12px">⬆️ Upload</span><span style="background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:2px 8px;font-size:11px;color:var(--muted)">②</span></div></div>'+
+       '<div style="border:1px solid var(--line);border-radius:10px;padding:10px 12px">'+
+       '<div style="font-weight:700;font-size:13px">Class 2</div>'+
+       '<div style="font-size:12px;color:var(--muted);margin:6px 0">Add image samples</div>'+
+       '<div style="display:flex;flex-wrap:wrap;gap:8px"><span style="border:1px solid var(--line);border-radius:8px;padding:5px 10px;font-size:12px">📷 Webcam</span><span style="border:1px solid var(--line);border-radius:8px;padding:5px 10px;font-size:12px">⬆️ Upload</span></div></div>'+
+       '<div style="border:1px dashed var(--line);border-radius:10px;padding:8px 12px;text-align:center;font-size:12px;color:var(--muted)">➕ Add a class</div></div>'+
+       '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:12px 14px;border-top:1px solid var(--line)">'+
+       '<span style="background:var(--ink);color:#fff;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700">Train classifier</span>'+
+       '<span style="background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:2px 8px;font-size:11px;color:var(--muted)">③</span>'+
+       '<span style="font-size:12px;color:var(--muted)">→ Input: 📷 webcam test · Classifier shows result in %</span>'+
+       '<span style="background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:2px 8px;font-size:11px;color:var(--muted);margin-left:auto">④</span></div></div>'+
+       '<div style="margin-top:12px;font-size:13.5px;line-height:1.7">'+
+       '<p>① <strong>Rename</strong> – click the pencil icon, e.g. "Hand" instead of "Class 1". Use "Add a class" for more categories.</p>'+
+       '<p>② <strong>Add photos</strong> – "Webcam" to capture, or "Upload" for your own images.</p>'+
+       '<p>③ <strong>Train</strong> – click "Train classifier" once both classes have enough photos.</p>'+
+       '<p>④ <strong>Test</strong> – show the webcam in the input area, the classifier shows live percentage values.</p></div>'+
+       '<ol style="margin:14px 0 0 20px;padding:0;line-height:1.85">'+
+       '<li>Rename <strong>Class 1</strong> and <strong>Class 2</strong> (①), e.g. <strong>"Hand"</strong> and <strong>"Cup"</strong>.</li>'+
+       '<li>Take <strong>at least 15–20 photos</strong> per class via "Webcam" (②) – move the object slightly as you do (different angles, distances, lighting!).</li>'+
+       '<li>Click <strong>"Train classifier"</strong> (③) and wait until training finishes.</li>'+
+       '<li>Test in the input area (④) with the webcam – watch the classifier\'s percentage values.</li>'+
        '<li>Now show the camera a <strong>third, completely different object</strong> (e.g. a pen). What happens?</li></ol>'}},
-    {type:'reflect',q:{de:'Was ist beim dritten, unbekannten Gegenstand (Schritt 10) passiert? Wie viele Beispiel-Fotos hast du für jede Kategorie aufgenommen, und was passiert, wenn eine Kategorie nur ganz wenige oder immer nur den gleichen Winkel hat?',en:'What happened with the third, unknown object (step 10)? How many example photos did you take for each category, and what happens if a category has very few, or always the same angle?'},
+    {type:'reflect',q:{de:'Was ist beim dritten, unbekannten Gegenstand (Schritt 5) passiert? Wie viele Beispiel-Fotos hast du für jede Kategorie aufgenommen, und was passiert, wenn eine Kategorie nur ganz wenige oder immer nur den gleichen Winkel hat?',en:'What happened with the third, unknown object (step 5)? How many example photos did you take for each category, and what happens if a category has very few, or always the same angle?'},
      placeholder:{de:'Kategorie 1: … Beispiele / Kategorie 2: … Beispiele / Beobachtung …',en:'Category 1: … examples / Category 2: … examples / Observation …'}}
   ]},
   {id:'K06-M3',icon:'📱',komp:'R',niveau:'II',title:{de:'Empfehlungen & „Für dich"',en:'Recommendations & "For you"'},tasks:[
@@ -1003,10 +1039,29 @@ const CONTENT={
               {de:'Grüne Äpfel sehen Tomaten einfach zu ähnlich, egal welche Daten man nutzt',en:'Green apples simply look too similar to tomatoes, no matter what data you use'},{de:'Tomaten sind klüger',en:'Tomatoes are smarter'}],
      correct:0,explain:{de:'Lücken in den Daten zeigen sich direkt im Verhalten der KI – nicht die „Ähnlichkeit" der Früchte allein entscheidet.',en:'Gaps in the data show up directly in the AI behaviour – it is not just how similar the fruits look.'},prod:true},
     {type:'info',title:{de:'Jetzt du: Bias selbst erzeugen',en:'Now you: creating bias yourself'},
-     body:{de:'<p><strong>Wiederholung aus Klasse 6:</strong> Öffne <a href="https://machinelearningforkids.co.uk/#!/login" target="_blank" rel="noopener">machinelearningforkids.co.uk/#!/login ↗</a> und klicke wieder ganz unten bei „Test ohne Account" auf <strong>„Jetzt testen"</strong> (kein Konto nötig). Lege über <strong>„Add a new project"</strong> ein neues Bild-Projekt an und trainiere über <strong>„Train"</strong> zwei Kategorien (z. B. „Daumen hoch" / „Daumen runter") – aber diesmal <strong>absichtlich einseitig</strong>: Nimm bei einer Kategorie die Fotos nur aus einem einzigen Winkel oder nur bei einer Beleuchtung auf. Trainiere danach über <strong>„Learn & Test"</strong> → <strong>„Train new machine learning model"</strong> und teste es mit einem anderen Winkel/Licht als beim Training.</p>',
-           en:'<p><strong>Refresher from Grade 6:</strong> Open <a href="https://machinelearningforkids.co.uk/#!/login" target="_blank" rel="noopener">machinelearningforkids.co.uk/#!/login ↗</a> and again click <strong>"Try it now"</strong> at the bottom under "Test without account" (no account needed). Create a new image project via <strong>"Add a new project"</strong> and train two categories via <strong>"Train"</strong> (e.g. "thumbs up" / "thumbs down") – but this time <strong>deliberately one-sidedly</strong>: take photos for one category from only one angle or lighting. Then train via <strong>"Learn & Test"</strong> → <strong>"Train new machine learning model"</strong> and test it with a different angle/light than you trained with.</p>'}},
+     body:{de:'<p><strong>Wiederholung aus Klasse 6:</strong> Öffne <a href="https://tm.gen-ai.fi/home" target="_blank" rel="noopener">tm.gen-ai.fi/home ↗</a> (kein Konto nötig). Benenne „Class 1"/„Class 2" um, z. B. <strong>„Daumen hoch"</strong> / <strong>„Daumen runter"</strong>, und nimm wie gehabt per „Webcam" Trainingsfotos auf – aber diesmal <strong>absichtlich einseitig</strong>: Nimm bei einer Kategorie die Fotos nur aus einem einzigen Winkel oder nur bei einer Beleuchtung auf. Klicke <strong>„Train classifier"</strong> und teste danach mit einem anderen Winkel/Licht als beim Training.</p>',
+           en:'<p><strong>Refresher from Grade 6:</strong> Open <a href="https://tm.gen-ai.fi/home" target="_blank" rel="noopener">tm.gen-ai.fi/home ↗</a> (no account needed). Rename "Class 1"/"Class 2", e.g. <strong>"thumbs up"</strong> / <strong>"thumbs down"</strong>, and take training photos via "Webcam" as before – but this time <strong>deliberately one-sidedly</strong>: take photos for one category from only one angle or lighting. Click <strong>"Train classifier"</strong> and then test it with a different angle/light than you trained with.</p>'}},
     {type:'reflect',q:{de:'Was hast du absichtlich unausgewogen trainiert, und wie hat sich das im Test gezeigt? Was sagt dir dieses Mini-Experiment über echte KI-Systeme (z. B. Gesichtserkennung)?',en:'What did you deliberately train unevenly, and how did that show up in the test? What does this mini-experiment tell you about real AI systems (e.g. facial recognition)?'},
-     placeholder:{de:'Einseitig trainiert: … / Beobachtung im Test: … / Bezug zu echten Systemen: …',en:'Trained one-sidedly on: … / Observation in the test: … / Link to real systems: …'},prod:true}
+     placeholder:{de:'Einseitig trainiert: … / Beobachtung im Test: … / Bezug zu echten Systemen: …',en:'Trained one-sidedly on: … / Observation in the test: … / Link to real systems: …'},prod:true},
+    {type:'info',title:{de:'⭐ Extra-Herausforderung: Baue eine Falle',en:'⭐ Extra challenge: build a trap'},
+     body:{de:'<p>Versuche jetzt, dein eigenes trainiertes Modell <strong>auszutricksen</strong> – finde eine Eingabe, bei der es sich sicher irrt oder gar nicht weiß, was es sieht. Das zeigt dir ganz praktisch, wo die Grenzen einer so trainierten KI liegen.</p>'+
+       '<details style="margin-top:10px"><summary style="cursor:pointer;display:inline-block;padding:8px 14px;border-radius:8px;background:var(--bg);border:1px solid var(--line);font-weight:600;font-size:13px">💡 Hilfe: Ideen für Fallen</summary>'+
+       '<ul style="margin:10px 0 0 20px;padding:0;line-height:1.8;font-size:13px;color:var(--muted)">'+
+       '<li>Zeig einen Gegenstand, der zu keiner der beiden Klassen so richtig passt</li>'+
+       '<li>Zeig beide trainierten Gegenstände gleichzeitig im Bild</li>'+
+       '<li>Teste bei sehr schlechtem Licht oder fast im Dunkeln</li>'+
+       '<li>Zeig nur einen winzigen Ausschnitt des Gegenstands, nicht das Ganze</li>'+
+       '<li>Halte den Gegenstand sehr weit weg oder ganz nah an die Kamera</li></ul></details>',
+           en:'<p>Now try to <strong>trick</strong> your own trained model – find an input where it confidently gets it wrong, or has no idea what it is looking at. This shows you very practically where the limits of an AI trained this way lie.</p>'+
+       '<details style="margin-top:10px"><summary style="cursor:pointer;display:inline-block;padding:8px 14px;border-radius:8px;background:var(--bg);border:1px solid var(--line);font-weight:600;font-size:13px">💡 Help: ideas for traps</summary>'+
+       '<ul style="margin:10px 0 0 20px;padding:0;line-height:1.8;font-size:13px;color:var(--muted)">'+
+       '<li>Show an object that does not really fit either trained class</li>'+
+       '<li>Show both trained objects in the frame at the same time</li>'+
+       '<li>Test it in very poor light or almost total darkness</li>'+
+       '<li>Show only a tiny part of the object, not the whole thing</li>'+
+       '<li>Hold the object very far away or right up against the camera</li></ul></details>'}},
+    {type:'reflect',q:{de:'Welche Falle hast du dir überlegt, und hat sie funktioniert? Was sagt dir das über die Grenzen und Möglichkeiten, wie eine KI wie diese lernt?',en:'What trap did you come up with, and did it work? What does this tell you about the limits and possibilities of how an AI like this learns?'},
+     placeholder:{de:'Meine Falle: … / Hat es geklappt? … / Was das über KI-Training zeigt: …',en:'My trap: … / Did it work? … / What this shows about AI training: …'},prod:true}
   ]},
   {id:'K09-M4',icon:'🌍',komp:'M',niveau:'III',title:{de:'Ethik, Gesellschaft & dein Projekt',en:'Ethics, society & your project'},tasks:[
     {type:'info',title:{de:'KI verantwortungsvoll mitgestalten',en:'Shaping AI responsibly'},
@@ -1235,7 +1290,7 @@ CONTENT.OB=[
       '<div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">'+
       '<div style="padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:#fff"><strong>1 · Klassische KI</strong> – feste Regeln, Wenn-Dann-Logik (Schachcomputer, Expertensysteme)</div>'+
       '<div style="padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:#fff"><strong>2 · Machine Learning</strong> – lernt Muster aus Daten statt aus festen Regeln (Empfehlungen, Spamfilter)</div>'+
-      '<div style="padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:#fff"><strong>3 · Neuronale Netze</strong> – vernetzte künstliche „Neuronen"-Schichten (Mustererkennung, z. B. Machine Learning for Kids)</div>'+
+      '<div style="padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:#fff"><strong>3 · Neuronale Netze</strong> – vernetzte künstliche „Neuronen"-Schichten (Mustererkennung, z. B. GenAI Teachable Machine)</div>'+
       '<div style="padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:#fff"><strong>4 · Deep Learning</strong> – viele Netz-Schichten für Bilder, Sprache, Text (Gesichts-/Spracherkennung)</div>'+
       '<div style="padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:#fff"><strong>5 · Generative KI</strong> – erzeugt neue Texte, Bilder, Audio (Gemini, ChatGPT, Claude)</div>'+
       '<div style="padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:#fff"><strong>6 · Agentic AI</strong> – plant, handelt, nutzt selbstständig Werkzeuge (z. B. Deep Research)</div>'+
@@ -1245,7 +1300,7 @@ CONTENT.OB=[
       '<div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">'+
       '<div style="padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:#fff"><strong>1 · Classical AI</strong> – fixed rules, if-then logic (chess engines, expert systems)</div>'+
       '<div style="padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:#fff"><strong>2 · Machine Learning</strong> – learns patterns from data instead of fixed rules (recommendations, spam filters)</div>'+
-      '<div style="padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:#fff"><strong>3 · Neural Networks</strong> – connected layers of artificial "neurons" (pattern recognition, e.g. Machine Learning for Kids)</div>'+
+      '<div style="padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:#fff"><strong>3 · Neural Networks</strong> – connected layers of artificial "neurons" (pattern recognition, e.g. GenAI Teachable Machine)</div>'+
       '<div style="padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:#fff"><strong>4 · Deep Learning</strong> – many network layers for images, speech, text (face/speech recognition)</div>'+
       '<div style="padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:#fff"><strong>5 · Generative AI</strong> – creates new text, images, audio (Gemini, ChatGPT, Claude)</div>'+
       '<div style="padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:#fff"><strong>6 · Agentic AI</strong> – plans, acts, autonomously uses tools (e.g. Deep Research)</div>'+
