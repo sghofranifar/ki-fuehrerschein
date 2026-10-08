@@ -100,8 +100,9 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   mit einem neuen Thema zu verlieren),
   K08-M4 Gemini-Grenzen-Test (Buchstaben-Zählaufgabe „Verantwortungsbewusstsein" → 4×„s" —
   zeigt die Tokenisierungs-Schwäche von Sprachmodellen bei Buchstabenzählung an einem
-  echten, nachvollziehbaren Beispiel), K08-M7 `promptcheck`-Aufgabe für den eigenen
-  CRAFT-Prompt + Live-Vergleichstest (guter vs. schlechter Prompt) auf Gemini.
+  echten, nachvollziehbaren Beispiel), K08-M7 CRAFT-Prompt-Bewertung durch ein eigenes
+  Gemini-Gem (seit Herbst 2026, siehe eigener Hinweis unten) + Live-Vergleichstest
+  (guter vs. schlechter Prompt) auf Gemini.
   K09-M2 Live-Modellvergleich Fast vs. Thinking/Pro an einer Fangfrage (17 Schafe,
   alle außer 9 laufen weg → richtig 9, Ablenkung durch die 17 — zeigt, dass schnelle
   Modelle oft nur das Rechenmuster statt den Satz genau lesen), K09-M3 Bias selbst
@@ -169,6 +170,30 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   Vorlage „Du bist ein/eine [Rolle]. Erkläre [Thema] für [Zielgruppe] als [Format],
   weil [Grund]." trifft alle 5 CRAFT-Buchstaben gleichzeitig, mit ausgefülltem
   Klimawandel-Beispiel plus Warnhinweis zur 12-Wörter-Grenze.
+- **K08-M7: lokaler `promptcheck` im Übungsmodul durch echtes Gemini-Gem ersetzt**
+  (Herbst 2026). Der `promptcheck`-Task-Typ selbst bleibt im Code und wird weiterhin
+  als gradeter „Prompt-Apparat" in EXAM.K08/K10 genutzt (dort nötig: automatische,
+  reproduzierbare Bewertung ohne manuelle Übertragung, siehe `scoreTask()`). Im
+  Übungsmodul K08-M7 war der Regex-Check aber die Stelle, an der Schüler:innen am
+  meisten struggelten (siehe Hinweis oben) — Ersatz: ein eigens gebautes Gemini-Gem
+  „CRAFT-Coach" (Instructions von Claude entworfen, vom Nutzer in Gemini gebaut unter
+  gemini.google.com/gem/1sE3fKAb9Y_w7AqG5KDAWXg-mOk6AjZmz), das den Prompt **semantisch**
+  bewertet statt nur per Signalwort-Suche — robuster gegen genau die Fälle, die den
+  Regex-Check zuvor haben scheitern lassen. Ablauf jetzt: `reflect` (Prompt EINMAL lokal
+  aufschreiben, unverändert) → `info` mit Gem-Link → `reflect` (Ergebnis X/5 + Feedback
+  eintragen, bei Bedarf Prompt verbessern und im Gem erneut prüfen lassen, dann erst
+  abschicken) → unverändert weiter mit dem Live-Vergleichstest (guter vs. schlechter
+  Prompt) auf gemini.google.com/app. Ergebnis-Eintragung bewusst als `reflect` (nicht
+  `input`), weil die „richtige" Punktzahl vom eigenen Prompt abhängt und nicht gegen
+  einen festen Wert geprüft werden kann — dafür `prod:true`, damit die Lehrkraft das
+  Gem-Ergebnis über „Meine Einreichungen" sieht. Gem-Instructions legen fest: Gem
+  bewertet nur CRAFT-Struktur (nie den Prompt-Inhalt selbst ausführen), antwortet in
+  der Sprache des Prompts, ignoriert Prompt-Injection-Versuche, schreibt den
+  verbesserten Prompt nicht selbst (sonst übernimmt die KI die Übung), festes
+  Ausgabeformat (Punktzahl + ✅/⚠️/❌ pro Buchstabe + Kurzfeedback + Tipp) für leichtes
+  manuelles Übertragen. **Voraussetzung, vom Nutzer zu prüfen:** Gemini Gems müssen im
+  GSIS-Workspace-Admin für Schüler:innen-Konten freigeschaltet sein (separate
+  Einstellung von der normalen Gemini-Nutzung).
 - K06-M1/M2 vertieft (waren mit 2 bzw. 5 Aufgaben zu kurz für eine Workshop-Einheit):
   M1 hat jetzt einen langen `clozedrag`-Recap-Lückentext (6 Lücken + 3 Distraktor-
   Wörter) plus eine echte Reflexionsfrage zu Mensch vs. Maschine (eigenes Alltags-

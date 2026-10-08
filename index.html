@@ -870,10 +870,19 @@ const CONTENT={
        '<p style="margin-top:10px;font-size:12.5px;color:var(--muted)">⚠️ Your prompt needs to be at least <strong>12 words</strong> long – below that the check shows no hits at all, even if the content is right.</p>'}},
     {type:'reflect',q:{de:'Verbessere den Prompt „Schreib was über den Klimawandel." mit CRAFT. Trage für jeden Buchstaben eine Idee ein und formuliere daraus deinen vollständigen neuen Prompt.',en:'Improve the prompt "Write something about climate change." using CRAFT. Fill in an idea for each letter, then write your complete new prompt.'},
      placeholder:{de:'C (Kontext): … / R (Rolle): … / A (Publikum): … / F (Format): … / T (Aufgabe): … / Mein neuer Prompt: …',en:'C (Context): … / R (Role): … / A (Audience): … / F (Format): … / T (Task): … / My new prompt: …'},prod:true},
-    {type:'promptcheck',q:{de:'Prompt-Check: Teste deinen neuen Prompt',en:'Prompt check: test your new prompt'},
-     body:{de:'<p>Kopiere deinen neuen Prompt aus der letzten Aufgabe hier hinein (oder schreib ihn neu). Der Check sucht <strong>lokal, ohne KI</strong> nach typischen Signalwörtern für die 5 CRAFT-Buchstaben.</p>',
-           en:'<p>Paste your new prompt from the last task in here (or write it fresh). The check looks <strong>locally, without AI,</strong> for typical signal words for the 5 CRAFT letters.</p>'},
-     placeholder:{de:'Dein CRAFT-Prompt …',en:'Your CRAFT prompt …'}},
+    /* Vorher: lokaler promptcheck-Regex-Check (bleibt als Task-Typ erhalten, wird
+       weiter in EXAM.K08/K10 als gradeter "Prompt-Apparat" genutzt, wo automatische,
+       reproduzierbare Bewertung ohne manuelle Übertragung nötig ist). Hier im
+       Übungsmodul seit Herbst 2026 durch ein echtes Gemini-Gem ersetzt (vom Nutzer
+       gebaut, Prompt/Instructions von Claude entworfen): bewertet semantisch statt
+       nur per Signalwort-Suche, daher genauer. Ergebnis wird manuell übertragen statt
+       automatisch ausgewertet – das ist hier okay, weil die Aufgabe ungradet ist und
+       über `prod:true` ohnehin für die Lehrkraft einsehbar bleibt. */
+    {type:'info',title:{de:'Jetzt dein Prompt vom CRAFT-Coach bewerten lassen',en:'Now have the CRAFT Coach evaluate your prompt'},
+     body:{de:'<p>Öffne den <strong>CRAFT-Coach</strong> – ein eigens für dieses Modul gebautes Gemini-Gem – und füge dort deinen CRAFT-Prompt aus der letzten Aufgabe ein. Der Coach bewertet <strong>nicht den Inhalt</strong> deines Prompts, sondern nur, wie gut er CRAFT umsetzt: Du bekommst eine Punktzahl (X von 5), eine Einschätzung pro Buchstabe (✅/⚠️/❌) und einen konkreten Tipp.</p><p><a href="https://gemini.google.com/gem/1sE3fKAb9Y_w7AqG5KDAWXg-mOk6AjZmz?usp=sharing" target="_blank" rel="noopener">CRAFT-Coach öffnen ↗</a></p>',
+           en:'<p>Open the <strong>CRAFT Coach</strong> – a Gemini Gem built specifically for this module – and paste in your CRAFT prompt from the last task. The Coach does <strong>not evaluate the content</strong> of your prompt, only how well it implements CRAFT: you will get a score (X out of 5), a rating per letter (✅/⚠️/❌) and a concrete tip.</p><p><a href="https://gemini.google.com/gem/1sE3fKAb9Y_w7AqG5KDAWXg-mOk6AjZmz?usp=sharing" target="_blank" rel="noopener">Open the CRAFT Coach ↗</a></p>'}},
+    {type:'reflect',q:{de:'Trage das Ergebnis vom CRAFT-Coach ein. Wurden nicht alle 5 Elemente mit ✅ bestätigt? Dann verbessere deinen Prompt mit dem Tipp aus dem Feedback und lass ihn im Gem noch einmal prüfen, bevor du hier abschickst.',en:'Enter the result from the CRAFT Coach. Were not all 5 elements confirmed with a ✅? Then improve your prompt using the tip from the feedback and have the Gem check it once more before you submit here.'},
+     placeholder:{de:'Ergebnis: X von 5 / Feedback: … / Verbessert (falls nötig): … / Ergebnis danach: …',en:'Result: X out of 5 / Feedback: … / Improved (if needed): … / Result after: …'},prod:true},
     {type:'info',title:{de:'Jetzt live testen',en:'Now test it live'},
      body:{de:'<p>Gib deinen CRAFT-Prompt bei <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a> ein. Probiere danach zum Vergleich den ursprünglichen, schlechten Prompt „Schreib was über den Klimawandel." aus.</p>',
            en:'<p>Enter your CRAFT prompt at <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a>. For comparison, then also try the original, bad prompt "Write something about climate change."</p>'}},
