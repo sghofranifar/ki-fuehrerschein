@@ -989,7 +989,7 @@ const CONTENT={
   ]}
  ],
  K09:[
-  {id:'K09-M1',icon:'🔄',komp:'V',niveau:'III',title:{de:'Auffrischung Klasse 8',en:'Refresher Grade 8'},tasks:[
+  {id:'K09-M1',icon:'🔄',komp:'V',niveau:'III',title:{de:'Auffrischung & wie KI wirklich schreibt',en:'Refresher & how AI really writes'},tasks:[
     {type:'quiz',q:{de:'Was ist beim Teilen von Aufgaben mit KI klug?',en:'What is smart when dividing tasks with AI?'},
      options:[{de:'KI für Passendes nutzen, eigenes Urteil behalten',en:'Use AI where it fits, keep your own judgement'},
               {de:'Immer einfach wirklich alles komplett der KI überlassen',en:'Always just leave absolutely everything completely to AI'},{de:'KI grundsätzlich überhaupt niemals nutzen',en:'Fundamentally never use AI under any circumstances'}],
@@ -997,7 +997,32 @@ const CONTENT={
     {type:'quiz',q:{de:'Was gehört NICHT in eine KI?',en:'What does NOT belong in an AI?'},
      options:[{de:'Private Daten, Passwörter oder Adressen',en:'Private data, passwords or addresses'},
               {de:'Eine ganz normale Frage zum Unterricht',en:'A completely normal question about the lesson'},{de:'Eine kreative Idee zum freien Brainstorming',en:'A creative idea for free brainstorming'}],
-     correct:0,explain:{de:'Private Daten schützt man immer.',en:'Always protect private data.'}}
+     correct:0,explain:{de:'Private Daten schützt man immer.',en:'Always protect private data.'}},
+    {type:'info',title:{de:'Wie schreibt eine KI eigentlich?',en:'How does an AI actually write?'},
+     body:{de:'<p>Du kennst aus Klasse 8 schon die Buchstaben-Zählaufgabe mit „Verantwortungsbewusstsein" – KI sieht Text nicht in Buchstaben, sondern in <strong>Tokens</strong> (Wort-Stücken). Jetzt schauen wir uns an, was eine KI mit diesen Tokens eigentlich macht, wenn sie schreibt.</p><p>Eine KI schreibt nicht am Stück, sondern <strong>Token für Token</strong>. Bei jedem einzelnen Schritt berechnet sie, wie wahrscheinlich jedes mögliche nächste Wort ist – und wählt dann meist eins der wahrscheinlichsten aus. Aber: <strong>nicht immer stur das allerwahrscheinlichste</strong> – sie würfelt dabei, gewichtet nach den Wahrscheinlichkeiten. Genau das probieren wir gleich live aus.</p>',
+           en:'<p>You already know the letter-counting task with "Verantwortungsbewusstsein" from Grade 8 – AI does not see text in letters, but in <strong>tokens</strong> (word pieces). Now let\'s look at what an AI actually does with these tokens when it writes.</p><p>An AI does not write all at once, but <strong>token by token</strong>. At every single step, it calculates how likely each possible next word is – and then usually picks one of the most likely ones. But: <strong>not always rigidly the single most likely one</strong> – it rolls the dice a little, weighted by the probabilities. We will try that out live in a moment.</p>'}},
+    {type:'info',title:{de:'Jetzt du: Wörter-Wahrscheinlichkeiten live sehen',en:'Now you: see word probabilities live'},
+     body:{de:'<p>Öffne <a href="https://alonsosilva-nexttokenprediction.hf.space/" target="_blank" rel="noopener">alonsosilva-nexttokenprediction.hf.space ↗</a> (kein Login nötig). Das Tool wurde vor allem mit <strong>englischen</strong> Texten trainiert – nimm deshalb am besten einen englischen Satzanfang, sonst wirken die Vorschläge seltsam.</p>'+
+       '<ol style="margin:10px 0 0 20px;padding:0;line-height:1.85">'+
+       '<li>Gib einen Satzanfang ein, z. B. <strong>„The capital of France is"</strong>.</li>'+
+       '<li>Du siehst die 10 wahrscheinlichsten nächsten Wörter mit ihren Prozentwerten.</li>'+
+       '<li>Klicke „Select" bei einem Wort, um es anzuhängen – baue so Satz für Satz weiter.</li>'+
+       '<li>Probiere danach einen Satzanfang, bei dem du selbst unsicher bist, wie es weitergeht, z. B. <strong>„My favourite animal is a"</strong>.</li></ol>',
+           en:'<p>Open <a href="https://alonsosilva-nexttokenprediction.hf.space/" target="_blank" rel="noopener">alonsosilva-nexttokenprediction.hf.space ↗</a> (no login needed). The tool was trained mainly on <strong>English</strong> text – so use an English sentence start, otherwise the suggestions will look odd.</p>'+
+       '<ol style="margin:10px 0 0 20px;padding:0;line-height:1.85">'+
+       '<li>Enter a sentence start, e.g. <strong>"The capital of France is"</strong>.</li>'+
+       '<li>You will see the 10 most likely next words with their percentage values.</li>'+
+       '<li>Click "Select" on a word to add it – build the sentence further, word by word.</li>'+
+       '<li>Then try a sentence start where you yourself are unsure how it continues, e.g. <strong>"My favourite animal is a"</strong>.</li></ol>'}},
+    {type:'reflect',q:{de:'Welches Wort war bei deinem ersten Satzanfang am wahrscheinlichsten – und wie hoch war der Prozentwert? Gab es Fälle, in denen ein Wort sehr klar vorne lag, und Fälle, in denen mehrere Wörter ähnlich wahrscheinlich waren?',en:'Which word was most likely for your first sentence start – and how high was the percentage? Were there cases where one word was clearly in the lead, and cases where several words were similarly likely?'},
+     placeholder:{de:'Satzanfang: … / wahrscheinlichstes Wort: … % / Beobachtung klar vs. unklar: …',en:'Sentence start: … / most likely word: … % / Observation clear vs. unclear: …'}},
+    {type:'info',title:{de:'Jetzt du: Zeigt sich das auch bei Gemini?',en:'Now you: does this show up in Gemini too?'},
+     body:{de:'<p>Jetzt testen wir, wie sich diese „Würfelei" bei einer echten Chat-KI zeigt. Öffne <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a> und stelle in <strong>10 neuen, separaten Chats</strong> genau dieselbe Frage, z. B. <em>„Nenne ein Tier."</em> Notiere dir alle 10 Antworten.</p>',
+           en:'<p>Now let\'s test how this "dice-rolling" shows up in a real chat AI. Open <a href="https://gemini.google.com/app" target="_blank" rel="noopener">gemini.google.com/app ↗</a> and ask the exact same question in <strong>10 new, separate chats</strong>, e.g. <em>"Name an animal."</em> Note down all 10 answers.</p>'}},
+    {type:'reflect',q:{de:'Waren die 10 Antworten gleich oder unterschiedlich? Wie erklärst du dir das mit dem, was du gerade über Wahrscheinlichkeiten gelernt hast?',en:'Were the 10 answers the same or different? How do you explain this using what you just learned about probabilities?'},
+     placeholder:{de:'Meine 10 Antworten: … / gleich/unterschiedlich: … / Erklärung: …',en:'My 10 answers: … / same/different: … / Explanation: …'},prod:true},
+    {type:'reflect',q:{de:'Was kann ein Mensch beim Schreiben/Entscheiden besser als ein System, das nur das wahrscheinlichste nächste Wort schätzt? Denk z. B. an echtes Verstehen, Verantwortung für eine Entscheidung, oder eigene Erfahrung.',en:'What can a human do better than a system that only estimates the most likely next word, when it comes to writing or deciding? Think e.g. about genuine understanding, responsibility for a decision, or lived experience.'},
+     placeholder:{de:'Menschen können besser: … / Beispiel: …',en:'Humans are better at: … / Example: …'},prod:true}
   ]},
   {id:'K09-M2',icon:'🔬',komp:'R',niveau:'III',title:{de:'KI bewerten & vergleichen',en:'Evaluating & comparing AI'},tasks:[
     {type:'info',title:{de:'Nicht jede KI passt zu jeder Aufgabe',en:'Not every AI fits every task'},

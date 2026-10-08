@@ -194,6 +194,32 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   manuelles Übertragen. **Voraussetzung, vom Nutzer zu prüfen:** Gemini Gems müssen im
   GSIS-Workspace-Admin für Schüler:innen-Konten freigeschaltet sein (separate
   Einstellung von der normalen Gemini-Nutzung).
+- **K09-M1 erweitert: „Wie KI wirklich schreibt" (Token-Wahrscheinlichkeiten)** (Herbst
+  2026). Auslöser: K09-M1 war mit nur 2 Quizfragen das mit Abstand dünnste Modul im
+  Jahrgang (ungleiche Belastung ggü. M2–M4). Titel geändert von „Auffrischung Klasse 8"
+  zu „Auffrischung & wie KI wirklich schreibt" (die 2 bestehenden Quizfragen bleiben als
+  kurzer Einstieg erhalten, IDs/Fortschritt unberührt). Neuer Inhalt erklärt
+  Next-Token-Prediction: KI schreibt nicht am Stück, sondern Token für Token, berechnet
+  bei jedem Schritt eine Wahrscheinlichkeit pro möglichem nächsten Wort und würfelt
+  **gewichtet** daraus — bewusst **nicht** „schreibt immer stur das wahrscheinlichste
+  Wort" formuliert, weil das der nachfolgenden Aufgabe (dieselbe Frage 10× in neuen
+  Gemini-Chats stellen, unterschiedliche Antworten beobachten) widersprochen hätte; nur
+  die gewürfelte Auswahl erklärt, warum Wiederholungen überhaupt variieren können.
+  Hands-on-Tool: <a href="https://alonsosilva-nexttokenprediction.hf.space/">alonsosilva-nexttokenprediction.hf.space</a>
+  (kostenlose Hugging-Face-Space, GPT-2-basiert, kein Login, zeigt Top-10-Wort-
+  Kandidaten mit Prozentwerten, „Select" hängt ein Wort an und baut Satz für Satz
+  auf) — bewusst englische Beispiel-Satzanfänge, da das Tool vor allem mit englischen
+  Texten trainiert wurde und deutsche Eingaben seltsame Vorschläge liefern. Knüpft
+  explizit an K08-M4 an (Tokens statt Buchstaben, Buchstaben-Zählaufgabe als Vorwissen).
+  Abschließende Reflexion bewusst **ethisch** gerahmt (was kann ein Mensch besser:
+  echtes Verstehen, Verantwortung, eigene Erfahrung), nicht nur technisch. Vom Nutzer
+  verifiziert: Cold-Start-Verzögerung der kostenlosen HF-Space (schläft bei Inaktivität
+  ein, ~30–60 Sek. Aufwachzeit) funktioniert in der Praxis unproblematisch.
+  **Spiralcurriculum-Idee, noch nicht umgesetzt:** gleiche thematische Lücke besteht bei
+  K10-M1 („Auffrischung Klasse 9", ebenfalls nur 2 Quizfragen) — als vertiefte
+  Wiederholung geplant (Konfidenz/Unsicherheit über die Prozent-Verteilung im selben
+  Tool, Verbindung zu Halluzination aus K07-M3/K09-M2, gesellschaftliche statt nur
+  individuelle Vertrauens-Frage in der Abschlussreflexion), siehe Chat-Verlauf.
 - K06-M1/M2 vertieft (waren mit 2 bzw. 5 Aufgaben zu kurz für eine Workshop-Einheit):
   M1 hat jetzt einen langen `clozedrag`-Recap-Lückentext (6 Lücken + 3 Distraktor-
   Wörter) plus eine echte Reflexionsfrage zu Mensch vs. Maschine (eigenes Alltags-
