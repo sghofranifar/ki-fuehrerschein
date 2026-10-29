@@ -241,6 +241,20 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   `quiz`-Aufgabe zum selben Vergleichs-Gedanken (Vorteil, Deep Research UND Perplexity
   zu nutzen: unterschiedliche Tools finden oft unterschiedliche Quellen, deckt blinde
   Flecken auf) — ergänzt die bestehende Fallstudie, ersetzt sie nicht.
+- **„Deep Research" als Name wieder entfernt — Nutzer-Feedback per Screenshot**: Der
+  Name „Deep Research" ist auf dem Schulaccount irreführend, weil er dort **keine
+  separat benannte Extra-Funktion** ist (anders als im freien Consumer-Gemini) —
+  erreichbar ist die gründliche, agentenartige Recherche schlicht über die **Auswahl
+  des Modells „Pro"**. Alle ~27 Fundstellen in **K08-M5** (Extras-Legende im Gemini-
+  Mockup — „Deep Research" dort ganz gestrichen, da es kein eigener Menüpunkt neben
+  Canvas ist, sondern zur Modellauswahl gehört), **K10-M6** (Modultitel „Deep Research
+  kennenlernen" → „Gründlich recherchieren mit Gemini Pro", alle Aufgabentexte:
+  „wähle in den Extras Deep Research" → „wähle das Modell Pro"), **OB-7** und
+  **EXAM.K10** umbenannt auf **„Pro-Recherche"/„Pro research"** als Begriff (DE/EN,
+  konsistent). OB-8s Ebenen-Pyramide (Agentic-AI-Beispiel) ebenfalls angepasst. Nach
+  jeder Umbenennung die betroffenen `quiz`-Optionslängen neu geprüft (Konvention:
+  Antwortlänge darf nicht mit Richtigkeit korrelieren, siehe oben) — zwei Fälle waren
+  durch die Umbenennung leicht verschoben und wurden nachjustiert.
 - K06-M1/M2 vertieft (waren mit 2 bzw. 5 Aufgaben zu kurz für eine Workshop-Einheit):
   M1 hat jetzt einen langen `clozedrag`-Recap-Lückentext (6 Lücken + 3 Distraktor-
   Wörter) plus eine echte Reflexionsfrage zu Mensch vs. Maschine (eigenes Alltags-
