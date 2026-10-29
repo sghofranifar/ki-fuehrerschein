@@ -255,6 +255,33 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   jeder Umbenennung die betroffenen `quiz`-Optionslängen neu geprüft (Konvention:
   Antwortlänge darf nicht mit Richtigkeit korrelieren, siehe oben) — zwei Fälle waren
   durch die Umbenennung leicht verschoben und wurden nachjustiert.
+- **CSS-Bug gefunden und behoben: Nummern-Badges bei `order`-Aufgaben unleserlich**
+  (Nutzer-Feedback: „die Wörter sind nicht wirklich leicht zu lesen" bei K10s
+  Abschlusstest-Reihenfolge-Aufgabe). Ursache: `.pairnum` (der kleine runde
+  Nummern-Kreis, der beim Anklicken eines Elements eingefügt wird) war als
+  `.mitem .pairnum{...}` nur für den `match`-Aufgabentyp gestylt (20×20px-Kreis,
+  weiße Schrift). Der `order`-Renderer (`RENDERERS.order`, `taskFoot`-Bereich)
+  fügt denselben `<span class="pairnum">` aber in `.chip`-Elemente ein (nicht
+  `.mitem`) — die CSS-Regel griff dort nie, der Badge erschien als unformatierter
+  Inline-Text direkt vor dem Wort, ohne Kreisform/Abstand/weiße Schrift. Fix: Regel
+  von `.mitem .pairnum` auf generelles `.pairnum{...}` geändert (keine Ancestor-
+  Einschränkung mehr) — behebt das Problem **für alle `order`-Aufgaben app-weit**
+  (nicht nur K10, auch K05/K06/K07/K08/K09-Abschlusstests), `match` bleibt
+  unverändert korrekt. Keine JS-Änderung nötig, reiner CSS-Scoping-Fehler.
+- **K09-M2 gestrafft: Fast-vs-Thinking-Fallen-Teil gekürzt, Halluzinations-Teil
+  vertieft** (Nutzer-Feedback: zu viele „finde die falsche Antwort"-Aufgaben, dafür
+  mehr Fokus auf das eigene Provozieren von KI-Lügen/Halluzinationen gewünscht).
+  Modul war mit 11 Aufgaben das längste im Jahrgang. Entfernt: das „Jetzt du:
+  erfinde eigene Fallen"-Aufgabenpaar (`info`+`reflect`, 2 eigene Fast-vs-Thinking-
+  Testfragen erfinden und dokumentieren) — inhaltlich zu ähnlich zum bereits sehr
+  ausführlichen doppelten Schaf-Rätsel direkt davor, daher verzichtbare Wiederholung.
+  Im Gegenzug die bestehende „Jetzt du: provoziere selbst eine Halluzination"-Aufgabe
+  von einem vagen Einzeiler zu **vier konkreten, auswählbaren Szenarien** ausgebaut
+  (erfundenes Zitat / erfundene Quelle-Studie / erfundener Gesetzesparagraf /
+  erfundene Statistik) — Schüler:innen wählen eines, die nachfolgende `reflect`-Frage
+  fragt zusätzlich ab, welches Szenario gewählt wurde. Modul jetzt 9 statt 11
+  Aufgaben, inhaltlich fokussierter auf das eigentliche Lernziel (Halluzinationen
+  selbst erfahrbar machen) statt auf Modellvergleichs-Wiederholung.
 - K06-M1/M2 vertieft (waren mit 2 bzw. 5 Aufgaben zu kurz für eine Workshop-Einheit):
   M1 hat jetzt einen langen `clozedrag`-Recap-Lückentext (6 Lücken + 3 Distraktor-
   Wörter) plus eine echte Reflexionsfrage zu Mensch vs. Maschine (eigenes Alltags-
