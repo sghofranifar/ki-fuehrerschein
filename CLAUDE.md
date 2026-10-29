@@ -220,6 +220,27 @@ Klassen **K05–K10** (German International Stream, DIA/Abitur-Pfad) an der
   Wiederholung geplant (Konfidenz/Unsicherheit über die Prozent-Verteilung im selben
   Tool, Verbindung zu Halluzination aus K07-M3/K09-M2, gesellschaftliche statt nur
   individuelle Vertrauens-Frage in der Abschlussreflexion), siehe Chat-Verlauf.
+- **Deep Research doch nutzbar + Perplexity-Vergleich ergänzt** (Herbst 2026). Zunächst
+  Meldung, dass Schüler:innen-Konten keinen Deep-Research-Zugriff hätten — deshalb kurz
+  ein Umbauplan auf Canvas erstellt (verworfen, siehe unten). Dann Klärung: Die Schule
+  hat **Gemini Pro**, Deep Research funktioniert mit dem Schulaccount doch. K10-M6
+  bleibt daher bei Deep Research, bekommt aber zwei Ergänzungen: (1) der bisher offene
+  „wähle eine beliebige Frage"-Prompt wurde durch einen **konkreten, vorgegebenen
+  Prompt** ersetzt („Suche Zeitungsartikel zum Thema Luftverschmutzung in Hongkong für
+  ein Referat im Fach Geographie" — Zeitersparnis, gleiches Prinzip wie bei K08-M5s
+  Bio-Plakat-Beispiel); (2) neue `info`+`reflect`-Aufgabe, dieselbe Frage zusätzlich bei
+  **Perplexity** (perplexity.ai, kein Login für Basisnutzung) zu stellen und beide
+  Ergebnisse zu vergleichen (Quellenqualität, Tiefe, Aktualität, Zitierweise) — knüpft an
+  K10-M1s bestehende Quizfrage „warum lohnt sich ein Vergleich mehrerer KI-Werkzeuge" an
+  und an Perplexity als Konzept aus OB-1. **OB-7** bekam dieselbe Perplexity-Vergleichs-
+  Ergänzung (dort mit der je eigenen, bereits für Deep Research genutzten Facharbeits-/
+  Seminarkurs-Frage statt eines vorgegebenen Prompts, da Oberstufen-Themen individuell
+  sind) — explizit als Vorbereitung auf die P5-Prüfung im DIA/Abitur gedacht, wo
+  selbstständiges Vergleichen und Bewerten mehrerer RechercheQuellen verlangt wird.
+  **EXAM.K10** („Toms Facharbeit"-Fallstudie, `group:'k10-workflow'`) bekam eine neue
+  `quiz`-Aufgabe zum selben Vergleichs-Gedanken (Vorteil, Deep Research UND Perplexity
+  zu nutzen: unterschiedliche Tools finden oft unterschiedliche Quellen, deckt blinde
+  Flecken auf) — ergänzt die bestehende Fallstudie, ersetzt sie nicht.
 - K06-M1/M2 vertieft (waren mit 2 bzw. 5 Aufgaben zu kurz für eine Workshop-Einheit):
   M1 hat jetzt einen langen `clozedrag`-Recap-Lückentext (6 Lücken + 3 Distraktor-
   Wörter) plus eine echte Reflexionsfrage zu Mensch vs. Maschine (eigenes Alltags-
